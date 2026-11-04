@@ -25,32 +25,8 @@ let selectedDate = '';
 const expandedMovies = new Set();
 let favorites = loadFavorites();
 
-// Dynamic cinematic palettes for lively, distinct cards
-const FILM_PALETTES = [
-  { color: '#e63946', tint: 'rgba(230, 57, 70, 0.08)', border: '#fca5a5' }, // Crimson
-  { color: '#0284c7', tint: 'rgba(2, 132, 199, 0.08)', border: '#93c5fd' }, // Sky Blue
-  { color: '#d97706', tint: 'rgba(217, 119, 6, 0.08)', border: '#fcd34d' }, // Amber
-  { color: '#7c3aed', tint: 'rgba(124, 58, 237, 0.08)', border: '#c4b5fd' }, // Purple
-  { color: '#059669', tint: 'rgba(5, 150, 105, 0.08)', border: '#6ee7b7' }, // Emerald
-  { color: '#e11d48', tint: 'rgba(225, 29, 72, 0.08)', border: '#fda4af' }, // Rose
-  { color: '#4f46e5', tint: 'rgba(79, 70, 229, 0.08)', border: '#a5b4fc' }, // Indigo
-  { color: '#ea580c', tint: 'rgba(234, 88, 12, 0.08)', border: '#fdba74' }, // Orange
-];
+// Dynamic cinematic palettes removed for clean, professional editorial typography
 
-const getFilmPalette = (title) => {
-  let hash = 0;
-  for (let i = 0; i < title.length; i++) {
-    hash = (hash * 31 + title.charCodeAt(i)) >>> 0;
-  }
-  return FILM_PALETTES[hash % FILM_PALETTES.length];
-};
-
-const VENUE_COLORS = {
-  'andromeda-river': '#2563eb', // Blue
-  'citrigno': '#059669',        // Emerald
-  'garden': '#d97706',          // Amber
-  'unical': '#7c3aed',          // Purple
-};
 
 // --- Date & String Utilities ---
 const italianDate = (date) => new Intl.DateTimeFormat('it-IT', { weekday: 'short', day: 'numeric', month: 'short' }).format(date).replace('.', '');
@@ -185,7 +161,7 @@ function renderDaysStrip() {
     const dayNumber = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'short' }).format(dObj).replace('.', '');
 
     return `
-      <button type="button" class="day-strip-pill ${isSelected ? 'active' : ''} ${isToday ? 'is-today' : ''}" data-date="${d}" role="tab" aria-selected="${isSelected ? 'true' : 'false'}">
+      <button type="button" class="day-strip-pill ${isSelected ? 'active' : ''}" data-date="${d}" role="tab" aria-selected="${isSelected ? 'true' : 'false'}">
         <span class="pill-day-name">${escapeHtml(dayName)}</span>
         <span class="pill-day-num">${escapeHtml(dayNumber)}</span>
       </button>
@@ -259,7 +235,6 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
   moviesGrid.innerHTML = movies.map((movie) => {
     const isFav = favorites.has(movie.id);
     const isExpanded = expandedMovies.has(movie.id);
-    const palette = getFilmPalette(movie.title);
 
     const relevantShows = movie.shows.filter((s) => {
       if (selectedVenue !== 'all' && s.venue !== selectedVenue) return false;
@@ -276,17 +251,10 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
     const isOnlyToday = allMovieDates.length === 1 && allMovieDates[0] === todayString;
 
     return `
-      <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''} ${isOnlyToday ? 'is-only-today-card' : ''}" data-movie-id="${escapeHtml(movie.id)}" style="--film-color: ${palette.color}; --film-tint: ${palette.tint}; --film-border: ${palette.border};">
+      <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}">
         <div class="movie-card-topline">
           <div class="topline-left">
-            ${isOnlyToday ? `
-              <span class="badge-last-chance" title="Attenzione: ultima occasione! In programmazione solo oggi.">
-                <svg class="badge-fire-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
-                </svg>
-                Solo oggi
-              </span>
-            ` : ''}
+            ${isOnlyToday ? `<span class="badge-last-chance">Solo oggi</span>` : ''}
             ${movie.tags && movie.tags.length ? movie.tags.map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('') : ''}
             ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
           </div>
@@ -315,22 +283,17 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
               <div class="venues-summary-block">
                 <span class="meta-label">CINEMA</span>
                 <div class="venue-pill-list">
-                  ${venuesPlaying.length ? venuesPlaying.map((v) => {
-                    const dotColor = VENUE_COLORS[v.id] || '#64748b';
-                    return `<span class="cinema-pill"><span class="cinema-dot" style="background:${dotColor}"></span>${escapeHtml(v.name)} <small>(${escapeHtml(v.location)})</small></span>`;
-                  }).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
+                  ${venuesPlaying.length ? venuesPlaying.map((v) => `
+                    <span class="cinema-pill">${escapeHtml(v.name)} <small>(${escapeHtml(v.location)})</small></span>
+                  `).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
                 </div>
               </div>
 
-              <!-- Date disponibili -->
+              <!-- Date disponibili: tutte con stile neutro uniforme -->
               <div class="days-summary-block">
                 <span class="meta-label">DATE</span>
                 <div class="days-chip-list">
-                  ${datesAvailable.map((d) => {
-                    const isToday = d === todayString;
-                    const dateClass = isToday ? (isOnlyToday ? 'is-today is-last-chance-date' : 'is-today') : '';
-                    return `<span class="date-chip ${dateClass}">${formatDayLabel(d)}</span>`;
-                  }).join('')}
+                  ${datesAvailable.map((d) => `<span class="date-chip">${escapeHtml(formatDayLabel(d))}</span>`).join('')}
                 </div>
               </div>
             </div>
@@ -353,10 +316,10 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
                   const dShows = relevantShows.filter((s) => s.date === dateStr);
                   const isToday = dateStr === todayString;
                   return `
-                    <div class="date-schedule-group ${isToday ? 'is-today-group' : ''}">
+                    <div class="date-schedule-group">
                       <div class="date-group-header">
-                        <span class="date-badge ${isToday ? 'today-badge' : ''}">${isToday ? 'Oggi' : italianDate(parseDate(dateStr))}</span>
-                        ${!isToday ? `<span class="date-full-text">${dateStr}</span>` : ''}
+                        <span class="date-badge">${isToday ? 'Oggi' : italianDate(parseDate(dateStr))}</span>
+                        <span class="date-full-text">${dateStr}</span>
                       </div>
                       <div class="date-venues-grid">
                         ${dShows.map((s) => {
@@ -419,10 +382,9 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
   filmList.innerHTML = visible.map((movie) => {
     const isFav = favorites.has(movie.id);
     const durationText = cleanDuration(movie.duration);
-    const palette = getFilmPalette(movie.title);
 
     return `
-      <article class="film-card" data-movie-id="${escapeHtml(movie.id)}" style="--film-color: ${palette.color}; --film-tint: ${palette.tint};">
+      <article class="film-card" data-movie-id="${escapeHtml(movie.id)}">
         <div class="movie-topline">
           <div class="topline-left">
             ${movie.tags && movie.tags.length ? movie.tags.map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('') : ''}
@@ -446,11 +408,9 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
         <div class="showtime-groups">
           ${movie.shows.map((show) => {
             const cinema = venuesMap[show.venue] || { name: show.venue, location: '' };
-            const dotColor = VENUE_COLORS[show.venue] || '#64748b';
             return `
               <div class="showtime-group">
                 <div class="venue-line">
-                  <span class="cinema-dot" style="background:${dotColor}"></span>
                   <strong>${escapeHtml(cinema.name)}</strong>
                   <span class="venue-location-inline">${escapeHtml(cinema.location)}</span>
                 </div>
