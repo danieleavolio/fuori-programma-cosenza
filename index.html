@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f7f3e8" />
-    <meta name="description" content="Programmazione e orari dei cinema di Cosenza e Rende: Andromeda River, Citrigno, Garden e Unical Cinema." />
+    <meta name="description" content="Programmazione e orari dei cinema a Cosenza e Rende: Andromeda River, Citrigno, Garden e Cinema Unical." />
     <title>Fuori programma — Cinema a Cosenza e Rende</title>
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
@@ -14,154 +14,111 @@
     <a class="skip-link" href="#programmazione">Vai alla programmazione</a>
     
     <header class="masthead">
-      <a class="wordmark" href="./" aria-label="Fuori programma, home">
-        <span class="mark">fp</span>
-        <span class="wordmark-text">fuori<br />programma</span>
-      </a>
-      <div class="masthead-center">
+      <div class="masthead-brand">
+        <a class="wordmark" href="./" aria-label="Fuori programma, home">
+          <span class="mark">fp</span>
+          <span class="wordmark-text">fuori<br />programma</span>
+        </a>
         <span class="masthead-location">Cosenza e Rende</span>
       </div>
+
+      <!-- Selettore modalità di navigazione (2 sole viste essenziali) -->
+      <nav class="view-switcher" role="tablist" aria-label="Modalità di visualizzazione">
+        <button class="view-pill active" id="btn-view-movies" role="tab" aria-selected="true" data-view="movies">Per Film</button>
+        <button class="view-pill" id="btn-view-schedule" role="tab" aria-selected="false" data-view="schedule">Per Giorno</button>
+      </nav>
+
       <div class="masthead-actions">
         <button class="fav-badge-btn" id="fav-toggle-btn" type="button" aria-label="Mostra film salvati">
           <svg class="icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
           <span class="fav-label">Salvati</span>
           <span class="fav-count" id="fav-count">0</span>
         </button>
-        <a class="top-link" href="#cinema">Le sale &rarr;</a>
+        <a class="top-link" href="#cinema">Sale &rarr;</a>
       </div>
     </header>
 
-    <main>
-      <section class="intro" aria-labelledby="page-title">
-        <div class="intro-copy">
-          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> PROGRAMMAZIONE AGGIORNATA</p>
-          <h1 id="page-title">Tutti i cinema in un unico posto.</h1>
-          <p class="lede">Andromeda River, Citrigno, Garden e Cinema Unical. Scegli il film, confronta gli orari tra le diverse sale e prenota direttamente.</p>
-        </div>
-        <div class="date-panel">
-          <span class="date-label">OGGI</span>
-          <time id="today-date"></time>
-          <span class="date-rule"></span>
-          <span class="venue-count"><strong id="venue-count">4</strong> sale collegate</span>
-        </div>
-      </section>
-
-      <section class="schedule" id="programmazione" aria-label="Programmazione cinema">
-        <!-- Section Header with View Mode Switcher -->
-        <div class="schedule-heading">
-          <div class="heading-text">
-            <p class="eyebrow" id="section-eyebrow">CATALOGO</p>
-            <h2 id="section-title">Film in programmazione</h2>
-          </div>
-          
-          <!-- View switcher tabs -->
-          <div class="view-switch-container">
-            <span class="switch-label">VISTA</span>
-            <div class="view-switcher" role="tablist" aria-label="Modalità di visualizzazione">
-              <button class="view-pill active" id="btn-view-movies" role="tab" aria-selected="true" data-view="movies">Per Film</button>
-              <button class="view-pill" id="btn-view-schedule" role="tab" aria-selected="false" data-view="schedule">Per Giorno</button>
-              <button class="view-pill" id="btn-view-venues" role="tab" aria-selected="false" data-view="venues">Per Cinema</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick filter chips -->
-        <div class="quick-chips" id="quick-chips">
-          <span class="chips-label">FILTRA</span>
-          <button type="button" class="chip active" data-chip="all">Tutti i film</button>
-          <button type="button" class="chip" data-chip="today">In sala oggi</button>
-          <button type="button" class="chip" data-chip="weekend">Nel weekend</button>
-          <button type="button" class="chip chip-fav" data-chip="favorites">
-            Salvati (<span id="chip-fav-count">0</span>)
-          </button>
-        </div>
-
-        <!-- Toolbar with search, filters and refresh -->
-        <div class="toolbar" aria-label="Filtri programmazione">
+    <main id="programmazione">
+      <!-- Barra filtri contestuale e non-ridondante -->
+      <section class="schedule-controls" aria-label="Filtri programmazione">
+        <!-- Controlli VISTA 1: Per Film -->
+        <div class="controls-view" id="controls-per-film">
           <div class="search-box">
             <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input id="search" type="search" placeholder="Cerca film o cinema..." autocomplete="off" aria-label="Cerca un film" />
+            <input id="search" type="search" placeholder="Cerca un film o un cinema..." autocomplete="off" aria-label="Cerca un film" />
           </div>
 
-          <div class="filters">
-            <!-- Day Filter -->
-            <div class="filter-group" id="filter-group-day">
-              <label class="filter-label" for="day-filter">GIORNO</label>
-              <select id="day-filter" aria-label="Filtra per giorno"></select>
-            </div>
-
-            <!-- Venue Filter -->
-            <div class="filter-group" id="filter-group-venue">
-              <label class="filter-label" for="venue-filter">CINEMA</label>
-              <select id="venue-filter" aria-label="Filtra per cinema">
-                <option value="all">Tutti i cinema</option>
-              </select>
-            </div>
-
-            <!-- Time slot filter -->
-            <div class="filter-group" id="filter-group-time">
-              <label class="filter-label" for="time-filter">FASCIA</label>
-              <select id="time-filter" aria-label="Filtra per fascia oraria">
-                <option value="all">Tutti gli orari</option>
-                <option value="afternoon">Pomeriggio (fino alle 19:00)</option>
-                <option value="evening">Serale (19:00 - 21:30)</option>
-                <option value="night">Notturno (dopo le 21:30)</option>
-              </select>
-            </div>
+          <div class="quick-chips">
+            <button type="button" class="chip active" data-chip="all">Tutti</button>
+            <button type="button" class="chip chip-today" data-chip="today">Solo oggi</button>
+            <button type="button" class="chip chip-fav" data-chip="favorites">
+              Salvati (<span id="chip-fav-count">0</span>)
+            </button>
           </div>
 
-          <button class="refresh" id="refresh" type="button" aria-label="Aggiorna dati">
-            <svg class="refresh-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-            <span class="refresh-text">Aggiorna</span>
-          </button>
+          <div class="filter-dropdown">
+            <select id="venue-filter" aria-label="Filtra per cinema">
+              <option value="all">Tutte le sale</option>
+            </select>
+          </div>
         </div>
 
-        <!-- Results metadata counter -->
-        <div class="results-meta">
-          <p id="result-summary" aria-live="polite">Caricamento programmazione...</p>
-          <p id="updated-at"></p>
-        </div>
-
-        <!-- Dynamic views container -->
-        <div id="view-container">
-          <!-- 1. Movies Catalog View -->
-          <section class="movies-catalog-grid" id="movies-grid" aria-label="Catalogo film con tutti i giorni e cinema"></section>
-
-          <!-- 2. Day Schedule View -->
-          <section class="film-list" id="film-list" aria-label="Programmazione orari per giorno" hidden></section>
-
-          <!-- 3. Venues View -->
-          <section class="venues-view" id="venues-view" aria-label="Programmazione per cinema" hidden></section>
+        <!-- Controlli VISTA 2: Per Giorno (barra orizzontale delle date, senza filtri ridondanti) -->
+        <div class="controls-view" id="controls-per-day" hidden>
+          <div class="days-strip-container">
+            <span class="days-strip-label">Scegli la data:</span>
+            <div class="days-nav-strip" id="days-nav-strip" role="tablist" aria-label="Seleziona giorno di programmazione"></div>
+          </div>
         </div>
       </section>
+
+      <!-- Risultati e orario di aggiornamento -->
+      <div class="schedule-meta-bar">
+        <p id="result-summary" class="result-summary" aria-live="polite">Caricamento programmazione...</p>
+        <div class="meta-right">
+          <span id="updated-at" class="updated-at"></span>
+          <button class="refresh-btn" id="refresh" type="button" title="Ricarica orari aggiornati" aria-label="Ricarica orari aggiornati">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Ricarica</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contenitori Viste -->
+      <div id="view-container">
+        <!-- VISTA 1: Catalogo per Film (Card espandibili in orizzontale) -->
+        <section class="movies-catalog-grid" id="movies-grid" aria-label="Catalogo film in programmazione"></section>
+
+        <!-- VISTA 2: Programmazione per Giorno (Orari del giorno scelto) -->
+        <section class="film-list" id="film-list" aria-label="Programmazione orari per giorno" hidden></section>
+      </div>
 
       <!-- Empty State -->
       <section class="empty-state" id="empty-state" hidden>
-        <span class="empty-index">0</span>
         <h2>Nessun film trovato</h2>
         <p id="empty-msg">Nessuna proiezione corrisponde ai filtri selezionati.</p>
-        <button type="button" id="clear-filters">Azzera i filtri</button>
+        <button type="button" id="clear-filters">Azzera ricerca</button>
       </section>
 
-      <!-- Cinemas Info Section -->
+      <!-- Informazioni Sale e Biglietterie Ufficiali -->
       <section class="cinema-section" id="cinema">
         <div class="section-heading">
           <div>
             <p class="eyebrow">SALE CINEMATOGRAFICHE</p>
-            <h2>I cinema della zona</h2>
+            <h2>I cinema di Cosenza e Rende</h2>
           </div>
-          <p>Orari e link diretti d'acquisto per ogni sala.<br />Verifica sempre la disponibilità prima di partire.</p>
+          <p>Link diretti alle biglietterie ufficiali per acquistare i biglietti in sicurezza.</p>
         </div>
         <div class="cinema-list" id="cinema-list"></div>
       </section>
     </main>
 
-    <!-- Clean toast notification -->
+    <!-- Toast di notifica -->
     <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
     <footer>
       <span class="footer-mark">fuori programma</span>
-      <p>Programmazione cinema per Cosenza, Rende e Zumpano.</p>
+      <p>Guida cinema per Cosenza, Rende e Zumpano.</p>
       <a href="mailto:?subject=Segnalazione%20Fuori%20Programma">Segnala un errore &rarr;</a>
     </footer>
     <noscript>Per visualizzare gli orari è necessario attivare JavaScript.</noscript>
