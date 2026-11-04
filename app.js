@@ -22,6 +22,33 @@ let activeChip = 'all'; // 'all' | 'today' | 'weekend' | 'favorites'
 const expandedMovies = new Set();
 let favorites = loadFavorites();
 
+// Dynamic cinematic palettes for a playful, vibrant look
+const FILM_PALETTES = [
+  { color: '#e63946', tint: 'rgba(230, 57, 70, 0.08)', border: '#fca5a5' }, // Crimson
+  { color: '#0284c7', tint: 'rgba(2, 132, 199, 0.08)', border: '#93c5fd' }, // Sky Blue
+  { color: '#d97706', tint: 'rgba(217, 119, 6, 0.08)', border: '#fcd34d' }, // Amber
+  { color: '#7c3aed', tint: 'rgba(124, 58, 237, 0.08)', border: '#c4b5fd' }, // Purple
+  { color: '#059669', tint: 'rgba(5, 150, 105, 0.08)', border: '#6ee7b7' }, // Emerald
+  { color: '#e11d48', tint: 'rgba(225, 29, 72, 0.08)', border: '#fda4af' }, // Rose
+  { color: '#4f46e5', tint: 'rgba(79, 70, 229, 0.08)', border: '#a5b4fc' }, // Indigo
+  { color: '#ea580c', tint: 'rgba(234, 88, 12, 0.08)', border: '#fdba74' }, // Orange
+];
+
+const getFilmPalette = (title) => {
+  let hash = 0;
+  for (let i = 0; i < title.length; i++) {
+    hash = (hash * 31 + title.charCodeAt(i)) >>> 0;
+  }
+  return FILM_PALETTES[hash % FILM_PALETTES.length];
+};
+
+const VENUE_COLORS = {
+  'andromeda-river': '#2563eb', // Blue
+  'citrigno': '#059669',        // Emerald
+  'garden': '#d97706',          // Amber
+  'unical': '#7c3aed',          // Purple
+};
+
 // --- Date & String Utilities ---
 const italianDate = (date) => new Intl.DateTimeFormat('it-IT', { weekday: 'short', day: 'numeric', month: 'short' }).format(date).replace('.', '');
 const italianFullDate = (date) => new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }).format(date);
@@ -251,6 +278,7 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
   moviesGrid.innerHTML = movies.map((movie, index) => {
     const isFav = favorites.has(movie.id);
     const isExpanded = expandedMovies.has(movie.id);
+    const palette = getFilmPalette(movie.title);
 
     const relevantShows = movie.shows.filter((s) => {
       if (selectedVenue !== 'all' && s.venue !== selectedVenue) return false;
@@ -265,16 +293,35 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
     const datesAvailable = [...new Set(relevantShows.map((s) => s.date))].sort((a, b) => parseDate(a) - parseDate(b));
     const durationText = cleanDuration(movie.duration);
 
+    // Film che sono proiettati SOLO OGGI e poi non ci sono più
+    const allMovieDates = [...new Set(movie.shows.map((s) => s.date))];
+    const isOnlyToday = allMovieDates.length === 1 && allMovieDates[0] === todayString;
+
     return `
-      <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}">
+      <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''} ${isOnlyToday ? 'is-only-today-card' : ''}" data-movie-id="${escapeHtml(movie.id)}" style="--film-color: ${palette.color}; --film-tint: ${palette.tint}; --film-border: ${palette.border};">
         <div class="movie-card-topline">
           <div class="topline-left">
-            <span class="movie-rank">${String(index + 1).padStart(2, '0')}</span>
+            ${isOnlyToday ? `
+              <span class="badge-last-chance" title="Attenzione: ultima occasione! In programmazione solo oggi.">
+                <svg class="badge-fire-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                </svg>
+                Solo oggi
+              </span>
+            ` : ''}
+            ${movie.tags && movie.tags.length ? movie.tags.map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('') : ''}
             ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
           </div>
-          <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
-            <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-          </button>
+
+          <div class="topline-right">
+            <div class="expand-cue" aria-hidden="true">
+              <span class="cue-text">${isExpanded ? 'Chiudi' : 'Orari'}</span>
+              <svg class="cue-chevron ${isExpanded ? 'is-rotated' : ''}" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
+              <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </button>
+          </div>
         </div>
 
         <div class="movie-card-body">
@@ -286,28 +333,33 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
             <div class="details-top">
               <h3 class="movie-title">${escapeHtml(movie.title)}</h3>
 
-              <!-- Sale dove viene proiettato -->
+              <!-- Sale dove viene proiettato con dot cromatici -->
               <div class="venues-summary-block">
                 <span class="meta-label">CINEMA</span>
                 <div class="venue-pill-list">
-                  ${venuesPlaying.length ? venuesPlaying.map((v) => `<span class="cinema-pill">${escapeHtml(v.name)} <small>(${escapeHtml(v.location)})</small></span>`).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
+                  ${venuesPlaying.length ? venuesPlaying.map((v) => {
+                    const dotColor = VENUE_COLORS[v.id] || '#64748b';
+                    return `<span class="cinema-pill"><span class="cinema-dot" style="background:${dotColor}"></span>${escapeHtml(v.name)} <small>(${escapeHtml(v.location)})</small></span>`;
+                  }).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
                 </div>
               </div>
 
-              <!-- Date disponibili (scrive 'Oggi' se è oggi) -->
+              <!-- Date disponibili -->
               <div class="days-summary-block">
                 <span class="meta-label">DATE</span>
                 <div class="days-chip-list">
-                  ${datesAvailable.map((d) => `<span class="date-chip ${d === todayString ? 'is-today' : ''}">${formatDayLabel(d)}</span>`).join('')}
+                  ${datesAvailable.map((d) => {
+                    const isToday = d === todayString;
+                    const dateClass = isToday ? (isOnlyToday ? 'is-today is-last-chance-date' : 'is-today') : '';
+                    return `<span class="date-chip ${dateClass}">${formatDayLabel(d)}</span>`;
+                  }).join('')}
                 </div>
               </div>
             </div>
 
-            <!-- Pulsante toggle raffinato -->
-            <button class="toggle-schedule-btn" type="button" data-toggle-movie="${escapeHtml(movie.id)}" aria-expanded="${isExpanded}">
-              <span class="toggle-text">${isExpanded ? 'Chiudi' : 'Orari e sale'}</span>
-              <svg class="toggle-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
+            <div class="card-footer-hint">
+              <span class="hint-text">${isExpanded ? 'Tocca la card per chiudere' : 'Tocca la card per orari e sale'}</span>
+            </div>
           </div>
         </div>
 
@@ -638,7 +690,7 @@ document.addEventListener('click', (e) => {
       } else {
         favorites.add(movieId);
         favBtn.classList.add('is-favorite');
-        showToast('Film salvato');
+        showToast('Film salvato nei preferiti');
       }
       saveFavorites();
       if (activeChip === 'favorites') {
@@ -648,7 +700,12 @@ document.addEventListener('click', (e) => {
     return;
   }
 
-  // Check if clicking inside a movie card or its toggle button
+  // Do NOT toggle if clicking inside the schedule panel (so clicking showtimes or selecting text doesn't collapse the card)
+  if (e.target.closest('.movie-full-schedule-panel')) {
+    return;
+  }
+
+  // Check if clicking on a movie card (triggers smooth in-place toggle)
   const card = e.target.closest('.movie-catalog-card');
   if (card) {
     const movieId = card.dataset.movieId;
@@ -657,18 +714,26 @@ document.addEventListener('click', (e) => {
     // Toggle state class on the card
     card.classList.toggle('is-expanded', willExpand);
     
-    // Update button text and state
-    const toggleBtn = card.querySelector('.toggle-schedule-btn');
-    if (toggleBtn) {
-      toggleBtn.setAttribute('aria-expanded', willExpand ? 'true' : 'false');
-      const textSpan = toggleBtn.querySelector('.toggle-text');
-      if (textSpan) {
-        textSpan.textContent = willExpand ? 'Chiudi' : 'Orari e sale';
-      }
-    }
+    // Update cue indicator
+    const cueText = card.querySelector('.cue-text');
+    const cueChevron = card.querySelector('.cue-chevron');
+    const hintText = card.querySelector('.hint-text');
+    if (cueText) cueText.textContent = willExpand ? 'Chiudi' : 'Orari';
+    if (cueChevron) cueChevron.classList.toggle('is-rotated', willExpand);
+    if (hintText) hintText.textContent = willExpand ? 'Tocca la card per chiudere' : 'Tocca la card per orari e sale';
 
     if (willExpand) {
       expandedMovies.add(movieId);
+      // Smoothly scroll the card into view so the user stays perfectly focused on it
+      requestAnimationFrame(() => {
+        const headerOffset = 95;
+        const rect = card.getBoundingClientRect();
+        const targetScrollY = window.pageYOffset + rect.top - headerOffset;
+        window.scrollTo({
+          top: Math.max(0, targetScrollY),
+          behavior: 'smooth'
+        });
+      });
     } else {
       expandedMovies.delete(movieId);
     }
