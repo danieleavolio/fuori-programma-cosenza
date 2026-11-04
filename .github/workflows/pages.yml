@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Aggiorna i dati da Andromeda River
+      - name: Aggiorna la programmazione dei cinema
         run: python scripts/update_schedule.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
