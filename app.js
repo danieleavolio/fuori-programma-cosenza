@@ -39,8 +39,7 @@ const getTodayString = () => {
 
 const isWeekend = (dateObj) => {
   const day = dateObj.getDay();
-  // 5 = Venerdì, 6 = Sabato, 0 = Domenica
-  return day === 5 || day === 6 || day === 0;
+  return day === 5 || day === 6 || day === 0; // Venerdì, Sabato, Domenica
 };
 
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({
@@ -50,6 +49,11 @@ const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (char) => (
   '"': '&quot;',
   "'": '&#39;',
 })[char]);
+
+const cleanDuration = (raw) => {
+  if (!raw) return '';
+  return String(raw).replace(/H/i, 'h ').replace(/['’]/g, 'm').trim();
+};
 
 const matchesTimeSlot = (timeStr, slot) => {
   if (!slot || slot === 'all') return true;
@@ -78,18 +82,6 @@ function saveFavorites() {
   updateFavoritesBadge();
 }
 
-function toggleFavorite(movieId) {
-  if (favorites.has(movieId)) {
-    favorites.delete(movieId);
-    showToast('Film rimosso dai promemoria');
-  } else {
-    favorites.add(movieId);
-    showToast('Film salvato nei tuoi promemoria ★');
-  }
-  saveFavorites();
-  render();
-}
-
 function updateFavoritesBadge() {
   const count = favorites.size;
   $('#fav-count').textContent = count;
@@ -105,20 +97,20 @@ function showToast(message) {
   clearTimeout(showToast._timeout);
   showToast._timeout = setTimeout(() => {
     toastEl.classList.remove('visible');
-    setTimeout(() => { toastEl.hidden = true; }, 300);
-  }, 2600);
+    setTimeout(() => { toastEl.hidden = true; }, 250);
+  }, 2200);
 }
 
 function shareShowtime({ title, venueName, dateStr, timeStr, url }) {
   const dObj = parseDate(dateStr);
   const formattedDay = (dateStr === getTodayString()) ? 'Oggi' : italianDate(dObj);
-  const text = `🍿 Andiamo al cinema a vedere "${title}"?\n📍 ${venueName}\n🗓 ${formattedDay} (${dateStr}) alle ${timeStr}\n🎟 Info e biglietti: ${url}`;
+  const text = `Cinema: andiamo a vedere "${title}"?\nSala: ${venueName}\nData: ${formattedDay} (${dateStr}), ore ${timeStr}\nBiglietti: ${url}`;
 
   if (navigator.share && window.isSecureContext) {
     navigator.share({ title: `Cinema: ${title}`, text: text, url: url }).catch(() => {});
   } else if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
-      showToast('Invito copiato! Incollalo su WhatsApp o Telegram 🍿');
+      showToast('Dettagli dello spettacolo copiati negli appunti');
     }).catch(() => {
       prompt('Copia il testo dell’invito:', text);
     });
@@ -140,9 +132,9 @@ function renderVenuesInfo(venues) {
       </div>
       <div>
         <span class="cinema-status ${venue.status === 'available' ? 'available' : ''}">
-          ${venue.status === 'available' ? '● Programmazione online' : '○ In aggiornamento'}
+          ${venue.status === 'available' ? 'Programmazione disponibile' : 'In aggiornamento'}
         </span>
-        ${venue.source ? `<a class="cinema-source" href="${escapeHtml(venue.source)}" target="_blank" rel="noreferrer">${escapeHtml(venue.sourceName || 'Biglietteria')} ↗</a>` : ''}
+        ${venue.source ? `<a class="cinema-source" href="${escapeHtml(venue.source)}" target="_blank" rel="noreferrer">${escapeHtml(venue.sourceName || 'Biglietteria')} &rarr;</a>` : ''}
       </div>
     </article>
   `).join('');
@@ -176,24 +168,23 @@ function render() {
   const venuesMap = Object.fromEntries(scheduleData.venues.map((v) => [v.id, v]));
   const todayString = getTodayString();
 
-  // Update Section Headers and Filter Visibility based on view mode
   if (currentView === 'movies') {
-    sectionEyebrow.textContent = 'CATALOGO FILM';
-    sectionTitle.textContent = 'Tutti i film in sala';
+    sectionEyebrow.textContent = 'CATALOGO';
+    sectionTitle.textContent = 'Film in programmazione';
     filterGroupDay.style.display = 'none';
   } else if (currentView === 'schedule') {
-    sectionEyebrow.textContent = 'ORARI DEL GIORNO';
-    sectionTitle.textContent = 'Che si guarda stasera?';
-    filterGroupDay.style.display = 'block';
+    sectionEyebrow.textContent = 'ORARI GIORNALIERI';
+    sectionTitle.textContent = 'Programmazione per data';
+    filterGroupDay.style.display = 'flex';
   } else if (currentView === 'venues') {
-    sectionEyebrow.textContent = 'LE SALE';
+    sectionEyebrow.textContent = 'SALE';
     sectionTitle.textContent = 'Programmazione per cinema';
     filterGroupDay.style.display = 'none';
   }
 
   // Filter movies
-  let filteredMovies = scheduleData.movies.filter((movie) => {
-    // 1. Text Search (title or matching venue)
+  const filteredMovies = scheduleData.movies.filter((movie) => {
+    // 1. Text Search
     const matchesTitle = movie.title.toLocaleLowerCase('it').includes(query);
     const matchesAnyVenue = movie.shows.some((s) => (venuesMap[s.venue]?.name || '').toLocaleLowerCase('it').includes(query));
     if (!matchesTitle && !matchesAnyVenue) return false;
@@ -221,7 +212,6 @@ function render() {
     return true;
   });
 
-  // Render specific view
   if (currentView === 'movies') {
     renderMoviesCatalogView(filteredMovies, venuesMap, selectedVenue, selectedTime);
   } else if (currentView === 'schedule') {
@@ -240,7 +230,7 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
   venuesView.hidden = true;
 
   const totalShows = movies.reduce((sum, m) => sum + m.shows.reduce((t, s) => t + s.shows.length, 0), 0);
-  $('#result-summary').innerHTML = `<strong>${movies.length}</strong> ${movies.length === 1 ? 'film in cartellone' : 'film in cartellone'} <span>·</span> <strong>${totalShows}</strong> proiezioni disponibili`;
+  $('#result-summary').innerHTML = `<strong>${movies.length}</strong> ${movies.length === 1 ? 'film in cartellone' : 'film in cartellone'} <span>&middot;</span> <strong>${totalShows}</strong> spettacoli`;
 
   if (movies.length === 0) {
     $('#empty-state').hidden = false;
@@ -255,7 +245,6 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
     const isFav = favorites.has(movie.id);
     const isExpanded = expandedMovies.has(movie.id);
 
-    // Filter movie shows by selected venue / time if applied
     const relevantShows = movie.shows.filter((s) => {
       if (selectedVenue !== 'all' && s.venue !== selectedVenue) return false;
       if (selectedTime !== 'all') {
@@ -264,28 +253,25 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
       return true;
     });
 
-    // Extract unique venues screening this film
     const venueIds = [...new Set(relevantShows.map((s) => s.venue))];
     const venuesPlaying = venueIds.map((id) => venuesMap[id] || { id, name: id, location: '' });
-
-    // Group dates for this movie
     const datesAvailable = [...new Set(relevantShows.map((s) => s.date))].sort((a, b) => parseDate(a) - parseDate(b));
+    const durationText = cleanDuration(movie.duration);
 
     return `
-      <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}" style="--card-index:${index}">
+      <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}">
         <div class="movie-card-topline">
           <div class="topline-left">
-            <span class="movie-rank">#${String(index + 1).padStart(2, '0')}</span>
-            ${movie.duration ? `<span class="film-duration">⏱ ${escapeHtml(movie.duration)}</span>` : ''}
+            <span class="movie-rank">${String(index + 1).padStart(2, '0')}</span>
+            ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
           </div>
-          <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva nei promemoria'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva nei promemoria'}">
-            ★
+          <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
+            <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
           </button>
         </div>
 
         <div class="movie-card-body">
           <a class="poster-link" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer" aria-label="Locandina di ${escapeHtml(movie.title)}">
-            <span class="poster-sticker">AL CINEMA</span>
             ${movie.poster ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="Locandina di ${escapeHtml(movie.title)}" loading="lazy" />` : `<span class="poster poster-missing">${escapeHtml(movie.title.slice(0, 1))}</span>`}
           </a>
 
@@ -294,24 +280,24 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
 
             <!-- Sale dove viene proiettato -->
             <div class="venues-summary-block">
-              <span class="meta-label">IN SALA A:</span>
+              <span class="meta-label">CINEMA</span>
               <div class="venue-pill-list">
-                ${venuesPlaying.length ? venuesPlaying.map((v) => `<span class="cinema-pill" title="${escapeHtml(v.location)}">📍 <strong>${escapeHtml(v.name)}</strong> <small>(${escapeHtml(v.location)})</small></span>`).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
+                ${venuesPlaying.length ? venuesPlaying.map((v) => `<span class="cinema-pill">${escapeHtml(v.name)} <small>(${escapeHtml(v.location)})</small></span>`).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
               </div>
             </div>
 
             <!-- Date disponibili -->
             <div class="days-summary-block">
-              <span class="meta-label">DISPONIBILITÀ:</span>
+              <span class="meta-label">DATE</span>
               <div class="days-chip-list">
                 ${datesAvailable.map((d) => `<span class="date-chip ${d === todayString ? 'is-today' : ''}">${d === todayString ? 'Oggi' : italianDate(parseDate(d))}</span>`).join('')}
               </div>
             </div>
 
-            <!-- Pulsante espansione orari completi -->
+            <!-- Pulsante espansione orari -->
             <button class="toggle-schedule-btn" type="button" data-toggle-movie="${escapeHtml(movie.id)}" aria-expanded="${isExpanded}">
-              <span>${isExpanded ? 'Nascondi orari completi' : 'Vedi tutti i giorni, sale e orari'}</span>
-              <span class="toggle-icon">${isExpanded ? '▲' : '▼'}</span>
+              <span class="toggle-text">${isExpanded ? 'Chiudi orari' : 'Vedi orari e sale'}</span>
+              <span class="toggle-indicator">${isExpanded ? '&minus;' : '&#43;'}</span>
             </button>
           </div>
         </div>
@@ -319,46 +305,51 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
         <!-- Sezione orari dettagliata (giorno per giorno) -->
         <div class="movie-full-schedule-panel" ${isExpanded ? '' : 'hidden'}>
           <div class="schedule-panel-inner">
-            <h4 class="schedule-panel-title">TUTTI GLI ORARI PER DATA E CINEMA:</h4>
-            ${datesAvailable.length ? datesAvailable.map((dateStr) => {
-              const dShows = relevantShows.filter((s) => s.date === dateStr);
-              return `
-                <div class="date-schedule-group">
-                  <div class="date-group-header">
-                    <span class="date-badge ${dateStr === todayString ? 'today-badge' : ''}">${dateStr === todayString ? 'OGGI' : italianDate(parseDate(dateStr)).toUpperCase()}</span>
-                    <span class="date-full-text">${dateStr}</span>
-                  </div>
-                  <div class="date-venues-grid">
-                    ${dShows.map((s) => {
-                      const cinema = venuesMap[s.venue] || { name: s.venue, location: '' };
-                      const matchingTimes = selectedTime === 'all' ? s.shows : s.shows.filter((entry) => matchesTimeSlot(entry.time, selectedTime));
-                      return `
-                        <div class="venue-time-block">
-                          <div class="venue-time-header">
-                            <span class="venue-dot">●</span>
-                            <span class="venue-name">${escapeHtml(cinema.name)}</span>
-                            <small class="venue-loc">${escapeHtml(cinema.location)}</small>
-                          </div>
-                          <div class="times-buttons">
-                            ${matchingTimes.map((entry) => `
-                              <div class="time-item-wrapper">
-                                <a class="showtime-btn" href="${escapeHtml(entry.url || movie.url)}" target="_blank" rel="noreferrer" title="Acquista biglietto per ${escapeHtml(movie.title)} alle ${escapeHtml(entry.time)} al ${escapeHtml(cinema.name)}">
-                                  <strong>${escapeHtml(entry.time)}</strong>
-                                  <small>${entry.room ? 'Sala ' + escapeHtml(entry.room) : 'Biglietti'}</small>
-                                </a>
-                                <button class="btn-share-icon" type="button" title="Condividi spettacolo con amici" data-share-title="${escapeHtml(movie.title)}" data-share-venue="${escapeHtml(cinema.name)}" data-share-date="${escapeHtml(dateStr)}" data-share-time="${escapeHtml(entry.time)}" data-share-url="${escapeHtml(entry.url || movie.url)}">
-                                  ↗
-                                </button>
+            <div class="panel-header-line">
+              <span class="schedule-panel-title">ORARI DISPONIBILI</span>
+            </div>
+            ${datesAvailable.length ? `
+              <div class="dates-horizontal-grid">
+                ${datesAvailable.map((dateStr) => {
+                  const dShows = relevantShows.filter((s) => s.date === dateStr);
+                  return `
+                    <div class="date-schedule-group">
+                      <div class="date-group-header">
+                        <span class="date-badge ${dateStr === todayString ? 'today-badge' : ''}">${dateStr === todayString ? 'Oggi' : italianDate(parseDate(dateStr))}</span>
+                        <span class="date-full-text">${dateStr}</span>
+                      </div>
+                      <div class="date-venues-grid">
+                        ${dShows.map((s) => {
+                          const cinema = venuesMap[s.venue] || { name: s.venue, location: '' };
+                          const matchingTimes = selectedTime === 'all' ? s.shows : s.shows.filter((entry) => matchesTimeSlot(entry.time, selectedTime));
+                          return `
+                            <div class="venue-time-block">
+                              <div class="venue-time-header">
+                                <span class="venue-name">${escapeHtml(cinema.name)}</span>
+                                <span class="venue-loc">${escapeHtml(cinema.location)}</span>
                               </div>
-                            `).join('')}
-                          </div>
-                        </div>
-                      `;
-                    }).join('')}
-                  </div>
-                </div>
-              `;
-            }).join('') : '<p class="no-times-note">Nessuno spettacolo corrisponde ai filtri selezionati.</p>'}
+                              <div class="times-buttons">
+                                ${matchingTimes.map((entry) => `
+                                  <div class="time-item-wrapper">
+                                    <a class="showtime-btn" href="${escapeHtml(entry.url || movie.url)}" target="_blank" rel="noreferrer" title="Acquista biglietto per ${escapeHtml(movie.title)} alle ${escapeHtml(entry.time)} al ${escapeHtml(cinema.name)}">
+                                      <strong>${escapeHtml(entry.time)}</strong>
+                                      <small>${entry.room ? 'Sala ' + escapeHtml(entry.room) : 'Biglietti'}</small>
+                                    </a>
+                                    <button class="btn-share-icon" type="button" title="Condividi spettacolo con amici" data-share-title="${escapeHtml(movie.title)}" data-share-venue="${escapeHtml(cinema.name)}" data-share-date="${escapeHtml(dateStr)}" data-share-time="${escapeHtml(entry.time)}" data-share-url="${escapeHtml(entry.url || movie.url)}">
+                                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                                    </button>
+                                  </div>
+                                `).join('')}
+                              </div>
+                            </div>
+                          `;
+                        }).join('')}
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            ` : '<p class="no-times-note">Nessuno spettacolo corrisponde ai filtri selezionati.</p>'}
           </div>
         </div>
       </article>
@@ -367,14 +358,13 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
 }
 
 // ==========================================
-// VIEW 2: Programmazione per Giorno e Orari
+// VIEW 2: Programmazione per Giorno
 // ==========================================
 function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, selectedTime) {
   moviesGrid.hidden = true;
   filmList.hidden = false;
   venuesView.hidden = true;
 
-  // Filter shows to selected date
   const visible = movies.map((movie) => {
     const matchingShows = movie.shows.filter((show) => {
       if (show.date !== selectedDate) return false;
@@ -389,7 +379,7 @@ function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, s
   }).filter((movie) => movie.shows.length > 0);
 
   const showCount = visible.reduce((sum, movie) => sum + movie.shows.reduce((total, show) => total + show.shows.length, 0), 0);
-  $('#result-summary').innerHTML = `<strong>${visible.length}</strong> ${visible.length === 1 ? 'film' : 'film'} <span>·</span> <strong>${showCount}</strong> orari <span>·</span> ${selectedDate ? italianDate(parseDate(selectedDate)) : 'nessuna data'}`;
+  $('#result-summary').innerHTML = `<strong>${visible.length}</strong> ${visible.length === 1 ? 'film' : 'film'} <span>&middot;</span> <strong>${showCount}</strong> orari <span>&middot;</span> ${selectedDate ? italianDate(parseDate(selectedDate)) : 'nessuna data'}`;
 
   if (visible.length === 0) {
     $('#empty-state').hidden = false;
@@ -400,26 +390,26 @@ function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, s
 
   filmList.innerHTML = visible.map((movie, index) => {
     const isFav = favorites.has(movie.id);
+    const durationText = cleanDuration(movie.duration);
     return `
-      <article class="film-card" style="--card-index:${index}">
+      <article class="film-card" data-movie-id="${escapeHtml(movie.id)}">
         <div class="movie-topline">
           <div class="topline-left">
-            <span class="movie-number">#${String(index + 1).padStart(2, '0')}</span>
-            <span class="movie-category">${movie.tag ? escapeHtml(movie.tag) : 'IN SALA'}</span>
+            <span class="movie-number">${String(index + 1).padStart(2, '0')}</span>
+            <span class="movie-category">${movie.tag ? escapeHtml(movie.tag) : 'IN PROGRAMMAZIONE'}</span>
           </div>
-          <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva nei promemoria'}" aria-label="Salva preferito">
-            ★
+          <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="Salva preferito">
+            <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
           </button>
         </div>
         <div class="movie-main">
           <a class="poster-link" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer" aria-label="Locandina di ${escapeHtml(movie.title)}">
-            <span class="poster-sticker">AL CINEMA</span>
             ${movie.poster ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="Locandina di ${escapeHtml(movie.title)}" loading="lazy" />` : `<span class="poster poster-missing">${escapeHtml(movie.title.slice(0, 1))}</span>`}
           </a>
           <div class="movie-info">
             <h3>${escapeHtml(movie.title)}</h3>
-            ${movie.duration ? `<span class="film-duration">⏱ ${escapeHtml(movie.duration)}</span>` : ''}
-            <p class="movie-prompt">Scegli orario e cinema:</p>
+            ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
+            <p class="movie-prompt">Orari e cinema:</p>
           </div>
         </div>
         <div class="showtime-groups">
@@ -428,9 +418,9 @@ function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, s
             return `
               <div class="showtime-group">
                 <div class="venue-line">
-                  <span class="venue-pin" aria-hidden="true">●</span>
-                  <span>${escapeHtml(cinema.name)}</span>
-                  <small>${escapeHtml(cinema.location)}</small>
+                  <span class="venue-pin" aria-hidden="true"></span>
+                  <strong>${escapeHtml(cinema.name)}</strong>
+                  <span class="venue-location-inline">${escapeHtml(cinema.location)}</span>
                 </div>
                 <div class="times">
                   ${show.shows.map((entry) => `
@@ -440,7 +430,7 @@ function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, s
                         <small>${entry.room ? 'Sala ' + escapeHtml(entry.room) : 'Biglietti'}</small>
                       </a>
                       <button class="btn-share-icon" type="button" title="Condividi spettacolo con amici" data-share-title="${escapeHtml(movie.title)}" data-share-venue="${escapeHtml(cinema.name)}" data-share-date="${escapeHtml(show.date)}" data-share-time="${escapeHtml(entry.time)}" data-share-url="${escapeHtml(entry.url || movie.url)}">
-                        ↗
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                       </button>
                     </div>
                   `).join('')}
@@ -450,7 +440,7 @@ function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, s
           }).join('')}
         </div>
         <a class="card-more" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer">
-          Biglietti e dettagli ufficiali <span aria-hidden="true">↗</span>
+          Dettagli e biglietti ufficiali &rarr;
         </a>
       </article>
     `;
@@ -466,10 +456,9 @@ function renderVenuesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
   venuesView.hidden = false;
 
   const targetVenues = selectedVenue === 'all' ? scheduleData.venues : scheduleData.venues.filter((v) => v.id === selectedVenue);
-  $('#result-summary').innerHTML = `<strong>${targetVenues.length}</strong> cinema attivi <span>·</span> Esplora la programmazione per ciascuna sala`;
+  $('#result-summary').innerHTML = `<strong>${targetVenues.length}</strong> sale cinematografiche attive <span>&middot;</span> Consulta la programmazione per cinema`;
 
   venuesView.innerHTML = targetVenues.map((venue) => {
-    // Collect all movies screening in this venue
     const venueMovies = movies.filter((m) => m.shows.some((s) => s.venue === venue.id)).map((m) => {
       const vShows = m.shows.filter((s) => s.venue === venue.id).map((s) => ({
         ...s,
@@ -484,49 +473,52 @@ function renderVenuesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
           <div>
             <span class="venue-pill-badge">${escapeHtml(venue.location)}</span>
             <h3 class="venue-block-name">${escapeHtml(venue.name)}</h3>
-            <p class="venue-block-meta">${venue.status === 'available' ? '● Programmazione verificata e online' : '○ In fase di collegamento'}</p>
+            <p class="venue-block-meta">${venue.status === 'available' ? 'Programmazione online' : 'In aggiornamento'}</p>
           </div>
           ${venue.source ? `
             <a class="venue-official-btn" href="${escapeHtml(venue.source)}" target="_blank" rel="noreferrer">
-              Cassa e Biglietti ${escapeHtml(venue.sourceName || '')} ↗
+              Biglietteria ${escapeHtml(venue.sourceName || '')} &rarr;
             </a>
           ` : ''}
         </div>
 
         <div class="venue-movies-list">
-          ${venueMovies.length ? venueMovies.map((movie) => `
-            <article class="venue-movie-row">
-              <a class="row-poster-thumb" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer">
-                ${movie.poster ? `<img src="${escapeHtml(movie.poster)}" alt="${escapeHtml(movie.title)}" loading="lazy" />` : `<span>${escapeHtml(movie.title.slice(0, 1))}</span>`}
-              </a>
-              <div class="row-info">
-                <div class="row-headline">
-                  <h4>${escapeHtml(movie.title)}</h4>
-                  ${movie.duration ? `<span class="film-duration">⏱ ${escapeHtml(movie.duration)}</span>` : ''}
-                </div>
-                <div class="row-dates">
-                  ${movie.venueShows.map((vShow) => `
-                    <div class="row-day-times">
-                      <span class="row-day-badge">${vShow.date === getTodayString() ? 'Oggi' : italianDate(parseDate(vShow.date))}</span>
-                      <div class="times">
-                        ${vShow.shows.map((entry) => `
-                          <div class="time-item-wrapper">
-                            <a class="showtime" href="${escapeHtml(entry.url || movie.url)}" target="_blank" rel="noreferrer">
-                              <strong>${escapeHtml(entry.time)}</strong>
-                              <small>${entry.room ? 'Sala ' + escapeHtml(entry.room) : 'Biglietti'}</small>
-                            </a>
-                            <button class="btn-share-icon" type="button" title="Condividi spettacolo con amici" data-share-title="${escapeHtml(movie.title)}" data-share-venue="${escapeHtml(venue.name)}" data-share-date="${escapeHtml(vShow.date)}" data-share-time="${escapeHtml(entry.time)}" data-share-url="${escapeHtml(entry.url || movie.url)}">
-                              ↗
-                            </button>
-                          </div>
-                        `).join('')}
+          ${venueMovies.length ? venueMovies.map((movie) => {
+            const durationText = cleanDuration(movie.duration);
+            return `
+              <article class="venue-movie-row">
+                <a class="row-poster-thumb" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer">
+                  ${movie.poster ? `<img src="${escapeHtml(movie.poster)}" alt="${escapeHtml(movie.title)}" loading="lazy" />` : `<span>${escapeHtml(movie.title.slice(0, 1))}</span>`}
+                </a>
+                <div class="row-info">
+                  <div class="row-headline">
+                    <h4>${escapeHtml(movie.title)}</h4>
+                    ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
+                  </div>
+                  <div class="row-dates">
+                    ${movie.venueShows.map((vShow) => `
+                      <div class="row-day-times">
+                        <span class="row-day-badge">${vShow.date === getTodayString() ? 'Oggi' : italianDate(parseDate(vShow.date))}</span>
+                        <div class="times">
+                          ${vShow.shows.map((entry) => `
+                            <div class="time-item-wrapper">
+                              <a class="showtime" href="${escapeHtml(entry.url || movie.url)}" target="_blank" rel="noreferrer">
+                                <strong>${escapeHtml(entry.time)}</strong>
+                                <small>${entry.room ? 'Sala ' + escapeHtml(entry.room) : 'Biglietti'}</small>
+                              </a>
+                              <button class="btn-share-icon" type="button" title="Condividi spettacolo con amici" data-share-title="${escapeHtml(movie.title)}" data-share-venue="${escapeHtml(venue.name)}" data-share-date="${escapeHtml(vShow.date)}" data-share-time="${escapeHtml(entry.time)}" data-share-url="${escapeHtml(entry.url || movie.url)}">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                              </button>
+                            </div>
+                          `).join('')}
+                        </div>
                       </div>
-                    </div>
-                  `).join('')}
+                    `).join('')}
+                  </div>
                 </div>
-              </div>
-            </article>
-          `).join('') : '<p class="empty-venue-note">Nessun film in programmazione per questa sala con i filtri attuali.</p>'}
+              </article>
+            `;
+          }).join('') : '<p class="empty-venue-note">Nessun film in programmazione per questa sala con i filtri attuali.</p>'}
         </div>
       </section>
     `;
@@ -548,7 +540,7 @@ async function loadSchedule({ fresh = false } = {}) {
     scheduleData = await response.json();
     renderVenuesInfo(scheduleData.venues);
     renderDaysFilter(scheduleData.movies);
-    $('#updated-at').textContent = `AGGIORNATO IL ${new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(scheduleData.updatedAt))}`;
+    $('#updated-at').textContent = `Aggiornato il ${new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(scheduleData.updatedAt))}`;
     render();
   } catch (error) {
     $('#result-summary').textContent = error.message;
@@ -556,8 +548,8 @@ async function loadSchedule({ fresh = false } = {}) {
     filmList.hidden = true;
     venuesView.hidden = true;
     $('#empty-state').hidden = false;
-    $('#empty-state h2').textContent = 'Programmazione temporaneamente non disponibile';
-    $('#empty-msg').textContent = 'Controlla la connessione e riprova tra pochi istanti.';
+    $('#empty-state h2').textContent = 'Programmazione non disponibile';
+    $('#empty-msg').textContent = 'Si è verificato un errore durante il caricamento dei dati. Riprova tra poco.';
   } finally {
     button.disabled = false;
     button.removeAttribute('aria-busy');
@@ -620,26 +612,62 @@ $('#clear-filters').addEventListener('click', () => {
   render();
 });
 
-// Delegated Clicks for Accordion Toggle, Favorites, and Share
+// Delegated Clicks - IN-PLACE INTERACTION (NO FULL RE-RENDER, NO ANIMATION RESTART)
 document.addEventListener('click', (e) => {
-  // 1. Toggle Movie Schedule Accordion
+  // 1. Toggle Movie Schedule Accordion (PURE IN-PLACE TOGGLE)
   const toggleBtn = e.target.closest('[data-toggle-movie]');
   if (toggleBtn) {
+    e.preventDefault();
     const movieId = toggleBtn.dataset.toggleMovie;
-    if (expandedMovies.has(movieId)) {
-      expandedMovies.delete(movieId);
-    } else {
-      expandedMovies.add(movieId);
+    const card = toggleBtn.closest('.movie-catalog-card');
+    if (!card) return;
+
+    const willExpand = !card.classList.contains('is-expanded');
+    card.classList.toggle('is-expanded', willExpand);
+    toggleBtn.setAttribute('aria-expanded', willExpand ? 'true' : 'false');
+
+    const panel = card.querySelector('.movie-full-schedule-panel');
+    if (panel) {
+      panel.hidden = !willExpand;
     }
-    render();
+
+    const textSpan = toggleBtn.querySelector('.toggle-text');
+    const indicatorSpan = toggleBtn.querySelector('.toggle-indicator');
+    if (textSpan) {
+      textSpan.textContent = willExpand ? 'Chiudi orari' : 'Vedi orari e sale';
+    }
+    if (indicatorSpan) {
+      indicatorSpan.innerHTML = willExpand ? '&minus;' : '&#43;';
+    }
+
+    if (willExpand) {
+      expandedMovies.add(movieId);
+    } else {
+      expandedMovies.delete(movieId);
+    }
     return;
   }
 
-  // 2. Favorite Star Button
+  // 2. Favorite Star Button (IN-PLACE TOGGLE, NO RE-RENDER)
   const favBtn = e.target.closest('[data-fav-id]');
   if (favBtn) {
     e.stopPropagation();
-    toggleFavorite(favBtn.dataset.favId);
+    const movieId = favBtn.dataset.favId;
+    if (favorites.has(movieId)) {
+      favorites.delete(movieId);
+      favBtn.classList.remove('is-favorite');
+      showToast('Film rimosso dai salvati');
+    } else {
+      favorites.add(movieId);
+      favBtn.classList.add('is-favorite');
+      showToast('Film salvato');
+    }
+    saveFavorites();
+
+    // If currently filtered by favorites, refresh the list
+    if (activeChip === 'favorites') {
+      render();
+    }
     return;
   }
 
