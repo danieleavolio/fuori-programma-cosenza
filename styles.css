@@ -5,11 +5,12 @@
   --paper: #f7f3e8;
   --white: #ffffff;
   --ink: #1c202a;
-  --muted: #6b707b;
+  --muted: #656b77;
   --line: #ded8c7;
   --accent: #d6452f;
   --yellow: #f4d068;
-  --light-bg: #efece1;
+  --light-bg: #eeeae0;
+  --card-hover: #faf8f2;
   --display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -23,7 +24,7 @@ body {
   color: var(--ink);
   font-family: var(--body);
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -51,7 +52,7 @@ button, input, select { font: inherit; color: inherit; }
 /* Header / Masthead                                         */
 /* ========================================================= */
 .masthead {
-  height: 78px;
+  height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -68,7 +69,7 @@ button, input, select { font: inherit; color: inherit; }
 .mark {
   font-family: var(--display);
   font-weight: 800;
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--accent);
@@ -154,7 +155,7 @@ main {
   grid-template-columns: minmax(0, 1.6fr) minmax(230px, 0.7fr);
   align-items: center;
   gap: 40px;
-  padding: 56px 0 48px;
+  padding: 48px 0 40px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -171,7 +172,7 @@ main {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 .live-dot {
   width: 7px;
@@ -182,42 +183,42 @@ main {
 
 .intro h1 {
   font-family: var(--display);
-  font-size: clamp(36px, 5vw, 58px);
-  line-height: 1.08;
+  font-size: clamp(34px, 4.6vw, 54px);
+  line-height: 1.1;
   letter-spacing: -0.04em;
   font-weight: 800;
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 
 .lede {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.6;
-  color: #3e4450;
-  max-width: 600px;
+  color: #424855;
+  max-width: 620px;
 }
 
 .date-panel {
   justify-self: end;
   width: 100%;
-  max-width: 250px;
-  padding: 24px;
+  max-width: 240px;
+  padding: 22px;
   background: var(--white);
   border: 1px solid var(--ink);
   border-radius: 4px;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
 }
 .date-label {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--muted);
   text-transform: uppercase;
 }
 .date-panel time {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   font-family: var(--display);
   font-size: 22px;
   font-weight: 700;
@@ -226,13 +227,13 @@ main {
 }
 .date-rule {
   display: block;
-  width: 32px;
+  width: 28px;
   height: 2px;
   background: var(--accent);
-  margin: 16px 0 12px;
+  margin: 14px 0 10px;
 }
 .venue-count {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
 }
 .venue-count strong {
@@ -244,14 +245,14 @@ main {
 /* Schedule Section Header & View Switcher                   */
 /* ========================================================= */
 .schedule {
-  padding-top: 48px;
+  padding-top: 44px;
 }
 
 .schedule-heading {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   flex-wrap: wrap;
   gap: 16px;
 }
@@ -260,7 +261,7 @@ main {
 }
 .schedule-heading h2 {
   font-family: var(--display);
-  font-size: 34px;
+  font-size: 32px;
   letter-spacing: -0.04em;
   line-height: 1.1;
   margin: 0;
@@ -293,7 +294,6 @@ main {
   border: 0;
   background: transparent;
   border-radius: 99px;
-  font-family: var(--body);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -470,13 +470,13 @@ select {
 }
 
 /* ========================================================= */
-/* VIEW 1: Catalogo Film (Card per Film)                     */
+/* VIEW 1: Catalogo Film (EQUAL HEIGHT, ALIGNED CARDS)       */
 /* ========================================================= */
 .movies-catalog-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  align-items: start; /* Prevents adjacent cards from vertically stretching! */
+  align-items: stretch; /* Cards in the same row share the exact same height! */
 }
 
 .movie-catalog-card {
@@ -486,19 +486,26 @@ select {
   border-radius: 4px;
   padding: 22px;
   box-shadow: 2px 2px 0 var(--line);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.15s ease;
 }
 .movie-catalog-card:hover {
   border-color: var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  background: var(--card-hover);
 }
 
-/* EXPANDED FULL-WIDTH STATE */
+/* FULL-WIDTH HORIZONTAL BANNER ON EXPAND */
 .movie-catalog-card.is-expanded {
-  grid-column: 1 / -1; /* Spans full width across all columns */
+  grid-column: 1 / -1; /* Spans across all columns in the grid */
   width: 100%;
   border-color: var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
+  background: var(--white);
 }
 
 .movie-card-topline {
@@ -546,25 +553,28 @@ select {
 
 .movie-card-body {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
+  grid-template-columns: 100px minmax(0, 1fr);
   gap: 18px;
+  flex: 1; /* Pushes bottom toggle button to the baseline */
 }
 .movie-catalog-card.is-expanded .movie-card-body {
-  grid-template-columns: 130px minmax(0, 1fr);
+  grid-template-columns: 120px minmax(0, 1fr);
   gap: 24px;
 }
 
 .poster-link {
   display: block;
-  width: 100%;
-  height: 155px;
+  width: 100px;
+  height: 145px;
   background: var(--light-bg);
   border: 1px solid var(--line);
   border-radius: 3px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 .movie-catalog-card.is-expanded .poster-link {
-  height: 185px;
+  width: 120px;
+  height: 175px;
 }
 .poster {
   width: 100%;
@@ -579,7 +589,7 @@ select {
   height: 100%;
   font-family: var(--display);
   font-weight: 800;
-  font-size: 40px;
+  font-size: 36px;
   color: var(--muted);
   background: var(--light-bg);
 }
@@ -587,12 +597,18 @@ select {
 .movie-card-details {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  justify-content: center;
+  justify-content: space-between;
+  height: 100%;
 }
+.details-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .movie-title {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 21px;
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin: 0;
@@ -606,10 +622,10 @@ select {
 .days-summary-block {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 .meta-label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--muted);
@@ -622,17 +638,17 @@ select {
 }
 .cinema-pill {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 3px 8px;
   background: var(--light-bg);
   border-radius: 3px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--ink);
 }
 .cinema-pill small {
   font-weight: 400;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
 }
 .cinema-pill.none {
   color: var(--muted);
@@ -642,55 +658,82 @@ select {
 .days-chip-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 .date-chip {
   display: inline-block;
-  padding: 3px 8px;
+  padding: 2px 7px;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 3px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
 }
 .date-chip.is-today {
-  background: var(--yellow);
-  border-color: var(--yellow);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
   font-weight: 700;
 }
 
+/* REFINED SUBTLE ACCORDION TOGGLE */
 .toggle-schedule-btn {
-  margin-top: 6px;
+  margin-top: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 14px;
+  padding: 8px 14px;
   background: var(--paper);
-  border: 1px solid var(--ink);
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 700;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 .toggle-schedule-btn:hover {
   background: var(--light-bg);
+  border-color: var(--ink);
 }
-.toggle-indicator {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
+.toggle-chevron {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--muted);
+}
+.movie-catalog-card.is-expanded .toggle-chevron {
+  transform: rotate(180deg);
+  color: var(--ink);
 }
 
-/* Accordion Full Schedule: Smooth In-Place Expansion */
+/* SMOOTH PURE CSS HEIGHT TRANSITION (NO ANIMATION PIPELINE FLASH) */
 .movie-full-schedule-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease,
+              margin-top 0.35s ease,
+              padding-top 0.35s ease;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0 solid transparent;
+}
+.movie-catalog-card.is-expanded .movie-full-schedule-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
   margin-top: 20px;
-  padding-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid var(--line);
 }
+.schedule-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
 .panel-header-line {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .schedule-panel-title {
   font-size: 12px;
@@ -710,6 +753,10 @@ select {
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 14px;
+}
+.date-schedule-group.is-today-group {
+  border-color: #d1c8b3;
+  background: #fbf9f2;
 }
 .date-group-header {
   display: flex;
@@ -844,7 +891,7 @@ select {
 }
 .film-card:hover {
   border-color: var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
 }
 
 .movie-topline {
@@ -869,12 +916,12 @@ select {
 
 .movie-main {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
+  grid-template-columns: 100px minmax(0, 1fr);
   gap: 18px;
 }
 .movie-info h3 {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 21px;
   letter-spacing: -0.03em;
   margin: 0;
   font-weight: 700;
@@ -1260,7 +1307,7 @@ noscript { display: block; padding: 20px; text-align: center; }
     padding: 32px 0 36px;
   }
   .intro h1 {
-    font-size: 32px;
+    font-size: 30px;
   }
   .date-panel {
     justify-self: start;
@@ -1284,15 +1331,16 @@ noscript { display: block; padding: 20px; text-align: center; }
 
   .movie-card-body,
   .movie-main {
-    grid-template-columns: 90px minmax(0, 1fr);
+    grid-template-columns: 85px minmax(0, 1fr);
     gap: 14px;
   }
   .poster-link {
-    height: 130px;
+    width: 85px;
+    height: 125px;
   }
   .movie-title,
   .movie-info h3 {
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .cinema-list {

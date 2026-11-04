@@ -37,6 +37,14 @@ const getTodayString = () => {
   return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
 };
 
+// Returns strictly "Oggi" if date is today, otherwise clean day name
+const formatDayLabel = (dateStr) => {
+  if (dateStr === getTodayString()) {
+    return 'Oggi';
+  }
+  return italianDate(parseDate(dateStr));
+};
+
 const isWeekend = (dateObj) => {
   const day = dateObj.getDay();
   return day === 5 || day === 6 || day === 0; // Venerdì, Sabato, Domenica
@@ -102,9 +110,8 @@ function showToast(message) {
 }
 
 function shareShowtime({ title, venueName, dateStr, timeStr, url }) {
-  const dObj = parseDate(dateStr);
-  const formattedDay = (dateStr === getTodayString()) ? 'Oggi' : italianDate(dObj);
-  const text = `Cinema: andiamo a vedere "${title}"?\nSala: ${venueName}\nData: ${formattedDay} (${dateStr}), ore ${timeStr}\nBiglietti: ${url}`;
+  const dayText = formatDayLabel(dateStr);
+  const text = `Cinema: andiamo a vedere "${title}"?\nSala: ${venueName}\nData: ${dayText} (${dateStr}), ore ${timeStr}\nBiglietti: ${url}`;
 
   if (navigator.share && window.isSecureContext) {
     navigator.share({ title: `Cinema: ${title}`, text: text, url: url }).catch(() => {});
@@ -147,7 +154,7 @@ function renderDaysFilter(movies) {
   
   dayFilter.innerHTML = dates.map((date) => `
     <option value="${date}" ${date === selected ? 'selected' : ''}>
-      ${date === todayString ? 'Oggi (' + date.slice(0, 5) + ')' : italianDate(parseDate(date)) + ' (' + date.slice(0, 5) + ')'}
+      ${date === todayString ? 'Oggi' : italianDate(parseDate(date))}
     </option>
   `).join('');
   
@@ -276,47 +283,50 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
           </a>
 
           <div class="movie-card-details">
-            <h3 class="movie-title">${escapeHtml(movie.title)}</h3>
+            <div class="details-top">
+              <h3 class="movie-title">${escapeHtml(movie.title)}</h3>
 
-            <!-- Sale dove viene proiettato -->
-            <div class="venues-summary-block">
-              <span class="meta-label">CINEMA</span>
-              <div class="venue-pill-list">
-                ${venuesPlaying.length ? venuesPlaying.map((v) => `<span class="cinema-pill">${escapeHtml(v.name)} <small>(${escapeHtml(v.location)})</small></span>`).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
+              <!-- Sale dove viene proiettato -->
+              <div class="venues-summary-block">
+                <span class="meta-label">CINEMA</span>
+                <div class="venue-pill-list">
+                  ${venuesPlaying.length ? venuesPlaying.map((v) => `<span class="cinema-pill">${escapeHtml(v.name)} <small>(${escapeHtml(v.location)})</small></span>`).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
+                </div>
+              </div>
+
+              <!-- Date disponibili (scrive 'Oggi' se è oggi) -->
+              <div class="days-summary-block">
+                <span class="meta-label">DATE</span>
+                <div class="days-chip-list">
+                  ${datesAvailable.map((d) => `<span class="date-chip ${d === todayString ? 'is-today' : ''}">${formatDayLabel(d)}</span>`).join('')}
+                </div>
               </div>
             </div>
 
-            <!-- Date disponibili -->
-            <div class="days-summary-block">
-              <span class="meta-label">DATE</span>
-              <div class="days-chip-list">
-                ${datesAvailable.map((d) => `<span class="date-chip ${d === todayString ? 'is-today' : ''}">${d === todayString ? 'Oggi' : italianDate(parseDate(d))}</span>`).join('')}
-              </div>
-            </div>
-
-            <!-- Pulsante espansione orari -->
+            <!-- Pulsante toggle raffinato -->
             <button class="toggle-schedule-btn" type="button" data-toggle-movie="${escapeHtml(movie.id)}" aria-expanded="${isExpanded}">
-              <span class="toggle-text">${isExpanded ? 'Chiudi orari' : 'Vedi orari e sale'}</span>
-              <span class="toggle-indicator">${isExpanded ? '&minus;' : '&#43;'}</span>
+              <span class="toggle-text">${isExpanded ? 'Chiudi' : 'Orari e sale'}</span>
+              <svg class="toggle-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
           </div>
         </div>
 
-        <!-- Sezione orari dettagliata (giorno per giorno) -->
-        <div class="movie-full-schedule-panel" ${isExpanded ? '' : 'hidden'}>
+        <!-- Sezione orari dettagliata con animazione fluida in CSS Grid -->
+        <div class="movie-full-schedule-panel">
           <div class="schedule-panel-inner">
             <div class="panel-header-line">
-              <span class="schedule-panel-title">ORARI DISPONIBILI</span>
+              <span class="schedule-panel-title">TUTTI GLI ORARI DISPONIBILI</span>
             </div>
             ${datesAvailable.length ? `
               <div class="dates-horizontal-grid">
                 ${datesAvailable.map((dateStr) => {
                   const dShows = relevantShows.filter((s) => s.date === dateStr);
+                  const isToday = dateStr === todayString;
                   return `
-                    <div class="date-schedule-group">
+                    <div class="date-schedule-group ${isToday ? 'is-today-group' : ''}">
                       <div class="date-group-header">
-                        <span class="date-badge ${dateStr === todayString ? 'today-badge' : ''}">${dateStr === todayString ? 'Oggi' : italianDate(parseDate(dateStr))}</span>
-                        <span class="date-full-text">${dateStr}</span>
+                        <span class="date-badge ${isToday ? 'today-badge' : ''}">${isToday ? 'Oggi' : italianDate(parseDate(dateStr))}</span>
+                        ${!isToday ? `<span class="date-full-text">${dateStr}</span>` : ''}
                       </div>
                       <div class="date-venues-grid">
                         ${dShows.map((s) => {
@@ -379,7 +389,8 @@ function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, s
   }).filter((movie) => movie.shows.length > 0);
 
   const showCount = visible.reduce((sum, movie) => sum + movie.shows.reduce((total, show) => total + show.shows.length, 0), 0);
-  $('#result-summary').innerHTML = `<strong>${visible.length}</strong> ${visible.length === 1 ? 'film' : 'film'} <span>&middot;</span> <strong>${showCount}</strong> orari <span>&middot;</span> ${selectedDate ? italianDate(parseDate(selectedDate)) : 'nessuna data'}`;
+  const dayDisplay = formatDayLabel(selectedDate);
+  $('#result-summary').innerHTML = `<strong>${visible.length}</strong> ${visible.length === 1 ? 'film' : 'film'} <span>&middot;</span> <strong>${showCount}</strong> orari <span>&middot;</span> ${dayDisplay}`;
 
   if (visible.length === 0) {
     $('#empty-state').hidden = false;
@@ -418,7 +429,6 @@ function renderScheduleDayView(movies, venuesMap, selectedDate, selectedVenue, s
             return `
               <div class="showtime-group">
                 <div class="venue-line">
-                  <span class="venue-pin" aria-hidden="true"></span>
                   <strong>${escapeHtml(cinema.name)}</strong>
                   <span class="venue-location-inline">${escapeHtml(cinema.location)}</span>
                 </div>
@@ -498,7 +508,7 @@ function renderVenuesCatalogView(movies, venuesMap, selectedVenue, selectedTime)
                   <div class="row-dates">
                     ${movie.venueShows.map((vShow) => `
                       <div class="row-day-times">
-                        <span class="row-day-badge">${vShow.date === getTodayString() ? 'Oggi' : italianDate(parseDate(vShow.date))}</span>
+                        <span class="row-day-badge">${formatDayLabel(vShow.date)}</span>
                         <div class="times">
                           ${vShow.shows.map((entry) => `
                             <div class="time-item-wrapper">
@@ -612,32 +622,49 @@ $('#clear-filters').addEventListener('click', () => {
   render();
 });
 
-// Delegated Clicks - IN-PLACE INTERACTION (NO FULL RE-RENDER, NO ANIMATION RESTART)
+// IN-PLACE CARD TOGGLE: Click anywhere on card (or button) to expand/collapse smoothly
 document.addEventListener('click', (e) => {
-  // 1. Toggle Movie Schedule Accordion (PURE IN-PLACE TOGGLE)
-  const toggleBtn = e.target.closest('[data-toggle-movie]');
-  if (toggleBtn) {
-    e.preventDefault();
-    const movieId = toggleBtn.dataset.toggleMovie;
-    const card = toggleBtn.closest('.movie-catalog-card');
-    if (!card) return;
+  // If clicking on an anchor, share button, or favorite button, let that action happen normally
+  if (e.target.closest('a') || e.target.closest('.btn-share-icon') || e.target.closest('.fav-star-btn')) {
+    // Check if favorite star clicked
+    const favBtn = e.target.closest('.fav-star-btn');
+    if (favBtn) {
+      e.stopPropagation();
+      const movieId = favBtn.dataset.favId;
+      if (favorites.has(movieId)) {
+        favorites.delete(movieId);
+        favBtn.classList.remove('is-favorite');
+        showToast('Film rimosso dai salvati');
+      } else {
+        favorites.add(movieId);
+        favBtn.classList.add('is-favorite');
+        showToast('Film salvato');
+      }
+      saveFavorites();
+      if (activeChip === 'favorites') {
+        render();
+      }
+    }
+    return;
+  }
 
+  // Check if clicking inside a movie card or its toggle button
+  const card = e.target.closest('.movie-catalog-card');
+  if (card) {
+    const movieId = card.dataset.movieId;
     const willExpand = !card.classList.contains('is-expanded');
+    
+    // Toggle state class on the card
     card.classList.toggle('is-expanded', willExpand);
-    toggleBtn.setAttribute('aria-expanded', willExpand ? 'true' : 'false');
-
-    const panel = card.querySelector('.movie-full-schedule-panel');
-    if (panel) {
-      panel.hidden = !willExpand;
-    }
-
-    const textSpan = toggleBtn.querySelector('.toggle-text');
-    const indicatorSpan = toggleBtn.querySelector('.toggle-indicator');
-    if (textSpan) {
-      textSpan.textContent = willExpand ? 'Chiudi orari' : 'Vedi orari e sale';
-    }
-    if (indicatorSpan) {
-      indicatorSpan.innerHTML = willExpand ? '&minus;' : '&#43;';
+    
+    // Update button text and state
+    const toggleBtn = card.querySelector('.toggle-schedule-btn');
+    if (toggleBtn) {
+      toggleBtn.setAttribute('aria-expanded', willExpand ? 'true' : 'false');
+      const textSpan = toggleBtn.querySelector('.toggle-text');
+      if (textSpan) {
+        textSpan.textContent = willExpand ? 'Chiudi' : 'Orari e sale';
+      }
     }
 
     if (willExpand) {
@@ -648,30 +675,7 @@ document.addEventListener('click', (e) => {
     return;
   }
 
-  // 2. Favorite Star Button (IN-PLACE TOGGLE, NO RE-RENDER)
-  const favBtn = e.target.closest('[data-fav-id]');
-  if (favBtn) {
-    e.stopPropagation();
-    const movieId = favBtn.dataset.favId;
-    if (favorites.has(movieId)) {
-      favorites.delete(movieId);
-      favBtn.classList.remove('is-favorite');
-      showToast('Film rimosso dai salvati');
-    } else {
-      favorites.add(movieId);
-      favBtn.classList.add('is-favorite');
-      showToast('Film salvato');
-    }
-    saveFavorites();
-
-    // If currently filtered by favorites, refresh the list
-    if (activeChip === 'favorites') {
-      render();
-    }
-    return;
-  }
-
-  // 3. Share Button
+  // Share Button
   const shareBtn = e.target.closest('[data-share-title]');
   if (shareBtn) {
     e.stopPropagation();
