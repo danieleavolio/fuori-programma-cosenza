@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f3ef" />
+    <meta name="description" content="Programmazione e orari dei cinema di Cosenza e Rende, in un solo posto." />
+    <title>Fuori programma — Cinema a Cosenza</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#programmazione">Vai alla programmazione</a>
+    <header class="masthead">
+      <a class="wordmark" href="./" aria-label="Fuori programma, home"><span class="mark">fp<span>!</span></span><span>fuori<br />programma</span></a>
+      <div class="masthead-note"><span class="tiny-star">✳</span> LA GUIDA PER USCIRE</div>
+      <a class="top-link" href="#cinema">Le sale <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="live-dot"></span> COSENZA & DINTORNI · PROGRAMMAZIONE CINEMA</p>
+          <h1 id="page-title">Il film c’è.<br /><em>La serata pure.</em></h1>
+          <p class="lede">Locandine, orari e sale: scegli cosa vedere e dove. Tutto il resto può aspettare domani.</p>
+        </div>
+        <div class="date-panel"><span class="date-label">IL CALENDARIO SEGNA</span><time id="today-date"></time><span class="date-rule"></span><span class="venue-count"><b id="venue-count">—</b> sale da consultare</span><span class="hero-doodle" aria-hidden="true">✳</span></div>
+        <div class="hero-ribbon"><span>POPCORN FACOLTATIVI</span><span>BIGLIETTO CONSIGLIATO</span><span>DIVANO, UN’ALTRA VOLTA</span></div>
+      </section>
+
+      <section class="schedule" id="programmazione" aria-label="Programmazione cinema">
+        <div class="schedule-heading"><div><p class="eyebrow">IL CARTELLONE</p><h2>Che si guarda?</h2></div><p class="heading-aside">La scelta difficile la facciamo noi.<br />Tu devi solo decidere a che ora.</p></div>
+        <div class="toolbar" aria-label="Filtri programmazione">
+          <label class="search-box"><span class="search-icon" aria-hidden="true">⌕</span><span class="sr-only">Cerca un film</span><input id="search" type="search" placeholder="Cerca un film…" autocomplete="off" /></label>
+          <div class="filters"><label class="filter-label" for="day-filter">QUANDO</label><select id="day-filter" aria-label="Filtra per giorno"></select><label class="filter-label venue-filter-label" for="venue-filter">DOVE</label><select id="venue-filter" aria-label="Filtra per cinema"><option value="all">Tutti i cinema</option></select></div>
+          <button class="refresh" id="refresh" type="button" aria-label="Aggiorna programmazione"><span aria-hidden="true">↻</span><span class="refresh-text">Aggiorna</span></button>
+        </div>
+        <div class="results-meta"><p id="result-summary" aria-live="polite">Caricamento programmazione…</p><p id="updated-at"></p></div>
+        <section class="film-list" id="film-list" aria-label="Film in programmazione"></section>
+      </section>
+      <section class="empty-state" id="empty-state" hidden><span class="empty-index">—</span><h2>Nessun film trovato</h2><p>Prova un altro giorno o rimuovi un filtro.</p><button type="button" id="clear-filters">Azzera i filtri</button></section>
+
+      <section class="cinema-section" id="cinema">
+        <div class="section-heading"><div><p class="eyebrow">LE SALE</p><h2>Cinema della zona</h2></div><p>Dove disponibile, orari dalla programmazione del cinema.<br />Dati e orari possono cambiare: verifica prima di partire.</p></div>
+        <div class="cinema-list" id="cinema-list"></div>
+      </section>
+    </main>
+
+    <footer><a class="footer-mark" href="./">fp<span>·</span></a><p>Un’unica vista per il cinema vicino casa.</p><a href="mailto:?subject=Fuori%20programma">Segnala un errore <span aria-hidden="true">↗</span></a></footer>
+    <noscript>Per visualizzare gli orari è necessario attivare JavaScript.</noscript>
+  </body>
+</html>

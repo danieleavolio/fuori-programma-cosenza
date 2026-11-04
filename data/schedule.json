@@ -1,0 +1,1115 @@
+{
+  "updatedAt": "2026-11-04T15:11:13.874288+00:00",
+  "source": "https://zumpano.andromeda.18tickets.it/",
+  "venues": [
+    {
+      "id": "andromeda-river",
+      "name": "Andromeda River",
+      "location": "Zumpano",
+      "source": "https://zumpano.andromeda.18tickets.it/",
+      "status": "available"
+    },
+    {
+      "id": "citrigno",
+      "name": "Citrigno",
+      "location": "Cosenza",
+      "source": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "garden",
+      "name": "Garden",
+      "location": "Rende",
+      "source": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "unical",
+      "name": "Unical Cinema",
+      "location": "Arcavacata di Rende",
+      "source": null,
+      "status": "unavailable"
+    }
+  ],
+  "movies": [
+    {
+      "title": "\nAVENGERS: DOOMSDAY\n\n\n",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/81401/standard_6d4e3fc6-2371-43e3-9942-b9e5c1a2fa80.jpeg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/81401",
+      "shows": [
+        {
+          "date": "16/12/2026",
+          "shows": [
+            {
+              "time": "16:00",
+              "room": "1"
+            },
+            {
+              "time": "18:00",
+              "room": "3"
+            },
+            {
+              "time": "18:30",
+              "room": "2"
+            },
+            {
+              "time": "21:30",
+              "room": "3"
+            },
+            {
+              "time": "21:30",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "17/12/2026",
+          "shows": [
+            {
+              "time": "16:00",
+              "room": "1"
+            },
+            {
+              "time": "18:30",
+              "room": "2"
+            },
+            {
+              "time": "21:30",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        },
+        {
+          "date": "18/12/2026",
+          "shows": [
+            {
+              "time": "16:00",
+              "room": "1"
+            },
+            {
+              "time": "18:30",
+              "room": "2"
+            },
+            {
+              "time": "21:30",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "19/12/2026",
+          "shows": [
+            {
+              "time": "16:00",
+              "room": "1"
+            },
+            {
+              "time": "18:30",
+              "room": "2"
+            },
+            {
+              "time": "21:30",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "20/12/2026",
+          "shows": [
+            {
+              "time": "16:00",
+              "room": "1"
+            },
+            {
+              "time": "18:30",
+              "room": "2"
+            },
+            {
+              "time": "21:30",
+              "room": "3"
+            }
+          ]
+        }
+      ],
+      "id": "1",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "\nSHAUN VITA DA PECORA - OPERAZIONE Z.U.C.C.A\n\n\n",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86813/standard_5124ddee-8c1e-417f-baf5-7a7556dd14e1.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86813",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "2"
+            }
+          ]
+        }
+      ],
+      "id": "2",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "DIO RIDE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88991/standard_16e4e33a-dbe0-49a8-941c-d40cbae05dab.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/88991",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "5"
+            }
+          ]
+        },
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "3"
+            },
+            {
+              "time": "18:45",
+              "room": "2"
+            },
+            {
+              "time": "22:00",
+              "room": "5"
+            }
+          ]
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "5"
+            },
+            {
+              "time": "18:45",
+              "room": "2"
+            },
+            {
+              "time": "22:00",
+              "room": "5"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "5"
+            },
+            {
+              "time": "18:45",
+              "room": "2"
+            },
+            {
+              "time": "22:00",
+              "room": "5"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "5"
+            },
+            {
+              "time": "18:45",
+              "room": "2"
+            },
+            {
+              "time": "22:00",
+              "room": "5"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "5"
+            },
+            {
+              "time": "18:45",
+              "room": "2"
+            },
+            {
+              "time": "22:00",
+              "room": "5"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "5"
+            },
+            {
+              "time": "18:45",
+              "room": "2"
+            },
+            {
+              "time": "22:00",
+              "room": "5"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "5"
+            },
+            {
+              "time": "18:45",
+              "room": "2"
+            },
+            {
+              "time": "22:00",
+              "room": "5"
+            }
+          ]
+        }
+      ],
+      "duration": "1H54’",
+      "id": "3",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "RAGIONE E SENTIMENTO",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86021/standard_71812bfb-d6fd-472c-8850-8fafb89ceb06.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86021",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "3"
+            }
+          ]
+        }
+      ],
+      "duration": "2H13’",
+      "id": "4",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "UN TRANQUILLO FUNERALE DI FAMIGLIA",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86054/standard_d9b2b6d4-1b90-4813-9ad8-ceff62e7342d.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86054",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "1"
+            },
+            {
+              "time": "19:45",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "5"
+            },
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "1"
+            },
+            {
+              "time": "21:45",
+              "room": "4"
+            }
+          ]
+        }
+      ],
+      "duration": "1H38’",
+      "id": "5",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "JE SO' PAZZO",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/82094/standard_565e0ccb-7410-41c8-8ad0-d6243b4dd2ff.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/82094",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "5"
+            },
+            {
+              "time": "19:30",
+              "room": "5"
+            }
+          ]
+        }
+      ],
+      "duration": "1H44’",
+      "id": "6",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "WILDWOOD - I SEGRETI DEL BOSCO PROIBITO",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86023/standard_c0445320-bf5b-4ba6-ae06-fef7591768f9.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86023",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "2"
+            }
+          ]
+        }
+      ],
+      "duration": "2H13’",
+      "id": "7",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "IT ENDS",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/82161/standard_4aca3f3f-703b-4e22-8e3a-dda86af0a3b0.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/82161",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "20:00",
+              "room": "3"
+            }
+          ]
+        }
+      ],
+      "duration": "1H30’",
+      "id": "8",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "CLAYFACE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/87572/standard_8629648c-189d-4d4b-8514-0f5f4b413b9f.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/87572",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "22:00",
+              "room": "3"
+            }
+          ]
+        }
+      ],
+      "duration": "1H45’",
+      "id": "9",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "\nFAST & FURIOUS – 25TH ANNIVERSARY\n\n\n",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86582/standard_85e9f6e5-cd7f-4187-b988-bc8dcd1f66fd.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86582",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "22:00",
+              "room": "1"
+            }
+          ]
+        }
+      ],
+      "id": "10",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "ICE CREAM MAN",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86648/standard_7768b392-09aa-4fff-bd4b-5a9eeab4c035.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86648",
+      "shows": [
+        {
+          "date": "04/11/2026",
+          "shows": [
+            {
+              "time": "22:00",
+              "room": "4"
+            }
+          ]
+        }
+      ],
+      "duration": "1H26’",
+      "id": "11",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "SE DOMANI NON TORNO",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_2d0dc9ff-2023-4fa5-8bf8-2f43391e1232.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86088",
+      "shows": [
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "4"
+            },
+            {
+              "time": "19:30",
+              "room": "3"
+            }
+          ]
+        }
+      ],
+      "duration": "1H46’",
+      "id": "12",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "IL GATTO COL CAPPELLO",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86057",
+      "shows": [
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "1"
+            }
+          ]
+        }
+      ],
+      "duration": "1H45’",
+      "id": "13",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "\nHOPE ( 2H45')\n\n\n",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88925/standard_0da4a5df-4290-42a6-9e4f-7c3247aeffac.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/88925",
+      "shows": [
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "5"
+            },
+            {
+              "time": "21:15",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "5"
+            },
+            {
+              "time": "21:15",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "5"
+            },
+            {
+              "time": "21:15",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "5"
+            },
+            {
+              "time": "21:15",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "5"
+            },
+            {
+              "time": "21:15",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "5"
+            },
+            {
+              "time": "21:15",
+              "room": "2"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "5"
+            },
+            {
+              "time": "21:15",
+              "room": "2"
+            }
+          ]
+        }
+      ],
+      "id": "14",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "WILD HORSE NINE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89717/standard_00638d12-91e6-4278-83b9-575bebc26d5a.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/89717",
+      "shows": [
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "1"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "4"
+            },
+            {
+              "time": "21:45",
+              "room": "1"
+            }
+          ]
+        }
+      ],
+      "duration": "1H57’",
+      "id": "15",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "\nGEORGE MICHAEL: THE FAITH TOUR\n\n\n\nV.O. SOTT.\n\n",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/83218/standard_3c5705d7-f46c-4a54-94a0-f1f865056603.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/83218",
+      "shows": [
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "3"
+            }
+          ]
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "3"
+            },
+            {
+              "time": "21:45",
+              "room": "3"
+            }
+          ]
+        }
+      ],
+      "id": "16",
+      "venue": "andromeda-river"
+    },
+    {
+      "title": "\nDUNE – PARTE TRE\n\n\n\n#ANTEPRIMA\n\n",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
+      "url": "https://zumpano.andromeda.18tickets.it/film/76088",
+      "shows": [
+        {
+          "date": "15/12/2026",
+          "shows": [
+            {
+              "time": "21:30",
+              "room": "2"
+            }
+          ]
+        }
+      ],
+      "id": "17",
+      "venue": "andromeda-river"
+    }
+  ]
+}
