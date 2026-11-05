@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T17:42:26.315001+00:00",
+  "updatedAt": "2026-11-05T02:58:51.357622+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -73,163 +73,6 @@
     },
     {
       "id": "2",
-      "title": "DIO RIDE",
-      "poster": "https://cdn.cinemagarden.net/DIO%20RIDE.jpg",
-      "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26830",
-      "duration": "",
-      "tags": [],
-      "shows": [
-        {
-          "date": "04/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26830"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26830"
-            },
-            {
-              "time": "20:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26830"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            }
-          ],
-          "venue": "garden"
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "title": "CLAYFACE",
-      "poster": "https://cdn.cinemagarden.net/Clayface.jpg",
-      "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26841",
-      "duration": "",
-      "tags": [],
-      "shows": [
-        {
-          "date": "04/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26841"
-            }
-          ],
-          "venue": "garden"
-        }
-      ]
-    },
-    {
-      "id": "4",
-      "title": "IT ENDS",
-      "poster": "https://cdn.cinemagarden.net/it%20ends.jpg",
-      "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26832",
-      "duration": "",
-      "tags": [],
-      "shows": [
-        {
-          "date": "04/11/2026",
-          "shows": [
-            {
-              "time": "20:00",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26832"
-            }
-          ],
-          "venue": "garden"
-        }
-      ]
-    },
-    {
-      "id": "5",
-      "title": "RAGIONE E SENTIMENTO",
-      "poster": "https://cdn.cinemagarden.net/RAGIONE%20E%20SENTIMENTO.jpg",
-      "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963",
-      "duration": "",
-      "tags": [],
-      "shows": [
-        {
-          "date": "04/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            }
-          ],
-          "venue": "garden"
-        }
-      ]
-    },
-    {
-      "id": "6",
-      "title": "FAST & FURIOUS",
-      "poster": "https://cdn.cinemagarden.net/fast1.jpg",
-      "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26840",
-      "duration": "",
-      "tags": [],
-      "shows": [
-        {
-          "date": "04/11/2026",
-          "shows": [
-            {
-              "time": "17:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26840"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26840"
-            }
-          ],
-          "venue": "garden"
-        }
-      ]
-    },
-    {
-      "id": "7",
       "title": "SE DOMANI NON TORNO",
       "poster": "https://cdn.cinemagarden.net/se%20do.jpg",
       "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963",
@@ -331,11 +174,174 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "18:20",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
+            },
+            {
+              "time": "21:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
+            }
+          ],
+          "venue": "garden"
         }
       ]
     },
     {
-      "id": "8",
+      "id": "3",
+      "title": "DIO RIDE",
+      "poster": "https://cdn.cinemagarden.net/DIO%20RIDE.jpg",
+      "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834",
+      "duration": "",
+      "tags": [],
+      "shows": [
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "21:00",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "21:00",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "09/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "21:00",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "21:00",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "21:00",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            }
+          ],
+          "venue": "garden"
+        }
+      ]
+    },
+    {
+      "id": "4",
       "title": "IL GATTO COL CAPPELLO",
       "poster": "https://cdn.cinemagarden.net/il%20gatto%20col%20cappello.jpg",
       "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26960",
@@ -427,11 +433,27 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
+            },
+            {
+              "time": "18:20",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
+            }
+          ],
+          "venue": "garden"
         }
       ]
     },
     {
-      "id": "9",
+      "id": "5",
       "title": "WILD HORSE NINE",
       "poster": "https://cdn.cinemagarden.net/WILD%20HORSE.jpg",
       "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26964",
@@ -523,11 +545,27 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+            },
+            {
+              "time": "22:10",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+            }
+          ],
+          "venue": "garden"
         }
       ]
     },
     {
-      "id": "10",
+      "id": "6",
       "title": "GEORGE MICHAEL - THE FAITH TOUR",
       "poster": "https://cdn.cinemagarden.net/george%20mic.jpg",
       "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26962",
@@ -591,6 +629,17 @@
         },
         {
           "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "20:10",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "11/11/2026",
           "shows": [
             {
               "time": "20:10",
