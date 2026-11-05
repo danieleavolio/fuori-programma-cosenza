@@ -99,22 +99,10 @@ function showToast(message) {
 }
 
 function renderShareMenu(movie) {
-  const filmUrl = movie.url;
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(formatFilmShareMessage(movie))}`;
-  const canShareImage = Boolean(navigator.share && navigator.canShare
-    && navigator.canShare({ files: [new File([], 'poster.jpg', { type: 'image/jpeg' })] }));
-
   return `
-    <details class="share-menu">
-      <summary class="btn-share-icon" aria-label="Condividi ${escapeHtml(movie.title)}">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-      </summary>
-      <div class="share-menu-options">
-        ${canShareImage ? `<button class="share-option" type="button" data-share-film="${escapeHtml(movie.id)}">Condividi locandina</button>` : ''}
-        <a class="share-option" href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        <button class="share-option" type="button" data-copy-film-url="${escapeHtml(filmUrl)}">Copia link del film</button>
-      </div>
-    </details>
+    <button class="btn-share-icon" type="button" aria-label="Condividi ${escapeHtml(movie.title)} con locandina e orari" data-share-film="${escapeHtml(movie.id)}">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+    </button>
   `;
 }
 
@@ -145,16 +133,6 @@ function formatFilmShareMessage(movie) {
   return lines.join('\n');
 }
 
-async function copyFilmUrl(url) {
-  try {
-    if (!navigator.clipboard?.writeText) throw new Error('Clipboard non disponibile');
-    await navigator.clipboard.writeText(url);
-    showToast('Link del film copiato');
-  } catch {
-    window.prompt('Copia il link del film:', url);
-  }
-}
-
 async function getPosterFile(movie) {
   if (!movie.poster) throw new Error('Locandina non disponibile');
   const response = await fetch(movie.poster);
@@ -167,7 +145,11 @@ async function getPosterFile(movie) {
 async function shareFilmPoster(movie) {
   try {
     const file = await getPosterFile(movie);
-    const text = formatFilmShareMessage(movie).replace(/^\*FILM:/, '*Film:');
+    if (!navigator.share || !navigator.canShare?.({ files: [file] })) {
+      showToast('La condivisione di immagini non è supportata da questo browser');
+      return;
+    }
+    const text = formatFilmShareMessage(movie);
     await navigator.share({ title: movie.title, text, files: [file] });
   } catch (error) {
     if (error.name !== 'AbortError') showToast('Impossibile condividere la locandina');
@@ -607,11 +589,6 @@ $('#clear-filters').addEventListener('click', () => {
 
 // In-place accordion card toggle (con scroll fluido centrato)
 document.addEventListener('click', (e) => {
-  const activeShareMenu = e.target.closest('.share-menu');
-  document.querySelectorAll('.share-menu[open]').forEach((menu) => {
-    if (menu !== activeShareMenu) menu.open = false;
-  });
-
   // 1. Gestione stella preferiti
   const favBtn = e.target.closest('.fav-star-btn');
   if (favBtn) {
@@ -633,22 +610,13 @@ document.addEventListener('click', (e) => {
     return;
   }
 
-  // 2. Copia il link della scheda del film
-  const copyLinkBtn = e.target.closest('[data-copy-film-url]');
-  if (copyLinkBtn) {
-    e.stopPropagation();
-    copyFilmUrl(copyLinkBtn.dataset.copyFilmUrl);
-    copyLinkBtn.closest('.share-menu').open = false;
-    return;
-  }
-
+  // 2. Condivide la locandina insieme al riepilogo
   const shareFilmBtn = e.target.closest('[data-share-film]');
   if (shareFilmBtn) {
     e.stopPropagation();
     const movieId = shareFilmBtn.dataset.shareFilm;
     const movie = scheduleData.movies.find((item) => item.id === movieId);
-    shareFilmPoster(movie);
-    shareFilmBtn.closest('.share-menu').open = false;
+    if (movie) shareFilmPoster(movie);
     return;
   }
 
