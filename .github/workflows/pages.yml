@@ -33,9 +33,16 @@ jobs:
           python-version: '3.12'
 
       - name: Aggiorna la programmazione dei cinema
+        id: update
+        continue-on-error: true
         run: python scripts/update_schedule.py
 
+      - name: Segnala l'uso della programmazione completa precedente
+        if: steps.update.outcome == 'failure'
+        run: echo "::warning::Aggiornamento incompleto; pubblico i dati completi già presenti nel repository."
+
       - name: Salva programmazione aggiornata nel repository
+        if: steps.update.outcome == 'success'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
