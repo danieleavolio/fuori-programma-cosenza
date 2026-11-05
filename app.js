@@ -101,6 +101,8 @@ function showToast(message) {
 function renderShareMenu(movie) {
   const filmUrl = movie.url;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(formatFilmShareMessage(movie))}`;
+  const canShareImage = Boolean(navigator.share && navigator.canShare
+    && navigator.canShare({ files: [new File([], 'poster.jpg', { type: 'image/jpeg' })] }));
 
   return `
     <details class="share-menu">
@@ -108,8 +110,10 @@ function renderShareMenu(movie) {
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
       </summary>
       <div class="share-menu-options">
-        <button class="share-option" type="button" data-copy-film-url="${escapeHtml(filmUrl)}">Copia link del film</button>
+        ${canShareImage ? `<button class="share-option" type="button" data-share-film="${escapeHtml(movie.id)}">Condividi locandina</button>` : ''}
+        <button class="share-option" type="button" data-download-poster="${escapeHtml(movie.id)}">Scarica locandina</button>
         <a class="share-option" href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <button class="share-option" type="button" data-copy-film-url="${escapeHtml(filmUrl)}">Copia link del film</button>
       </div>
     </details>
   `;
@@ -149,6 +153,41 @@ async function copyFilmUrl(url) {
     showToast('Link del film copiato');
   } catch {
     window.prompt('Copia il link del film:', url);
+  }
+}
+
+async function getPosterFile(movie) {
+  if (!movie.poster) throw new Error('Locandina non disponibile');
+  const response = await fetch(movie.poster);
+  if (!response.ok) throw new Error(`Download locandina non riuscito (${response.status})`);
+  const blob = await response.blob();
+  const extension = blob.type === 'image/png' ? 'png' : 'jpg';
+  return new File([blob], `${movie.title.replace(/[^\p{L}\p{N}-]+/gu, '-').replace(/^-|-$/g, '')}.${extension}`, { type: blob.type || 'image/jpeg' });
+}
+
+async function shareFilmPoster(movie) {
+  try {
+    const file = await getPosterFile(movie);
+    const text = formatFilmShareMessage(movie).replace(/^\*FILM:/, '*Film:');
+    await navigator.share({ title: movie.title, text, files: [file] });
+  } catch (error) {
+    if (error.name !== 'AbortError') showToast('Impossibile condividere la locandina');
+  }
+}
+
+async function downloadFilmPoster(movie) {
+  try {
+    const file = await getPosterFile(movie);
+    const objectUrl = URL.createObjectURL(file);
+    const link = document.createElement('a');
+    link.href = objectUrl;
+    link.download = file.name;
+    link.click();
+    URL.revokeObjectURL(objectUrl);
+    showToast('Locandina scaricata');
+  } catch {
+    window.open(movie.poster, '_blank', 'noopener,noreferrer');
+    showToast('Aperta la locandina: tienila premuta per salvarla');
   }
 }
 
@@ -617,6 +656,17 @@ document.addEventListener('click', (e) => {
     e.stopPropagation();
     copyFilmUrl(copyLinkBtn.dataset.copyFilmUrl);
     copyLinkBtn.closest('.share-menu').open = false;
+    return;
+  }
+
+  const shareFilmBtn = e.target.closest('[data-share-film]');
+  const downloadPosterBtn = e.target.closest('[data-download-poster]');
+  if (shareFilmBtn || downloadPosterBtn) {
+    e.stopPropagation();
+    const movieId = (shareFilmBtn || downloadPosterBtn).dataset[shareFilmBtn ? 'shareFilm' : 'downloadPoster'];
+    const movie = scheduleData.movies.find((item) => item.id === movieId);
+    (shareFilmBtn ? shareFilmPoster(movie) : downloadFilmPoster(movie));
+    (shareFilmBtn || downloadPosterBtn).closest('.share-menu').open = false;
     return;
   }
 
