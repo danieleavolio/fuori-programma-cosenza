@@ -275,7 +275,14 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato."
+      "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato.",
+      "genres": [
+        "Avventura",
+        "Fantascienza",
+        "Azione"
+      ],
+      "director": "Joe Russo, Anthony Russo",
+      "year": "2026"
     },
     {
       "id": "2",
@@ -363,7 +370,16 @@
           "venue": "andromeda-river"
         }
       ],
-      "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia."
+      "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia.",
+      "genres": [
+        "Animazione",
+        "Avventura",
+        "Commedia",
+        "Horror",
+        "Famiglia"
+      ],
+      "director": "Steve Cox, Matthew Walker",
+      "year": "2026"
     },
     {
       "id": "3",
@@ -617,7 +633,16 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima."
+      "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima.",
+      "genres": [
+        "Animazione",
+        "Avventura",
+        "Commedia",
+        "Fantasy",
+        "Famiglia"
+      ],
+      "director": "Erica Rivinoja, Alessandro Carloni",
+      "year": "2026"
     },
     {
       "id": "4",
@@ -1047,7 +1072,12 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco."
+      "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
+      "genres": [
+        "Dramma"
+      ],
+      "director": "Paola Randi",
+      "year": "2026"
     },
     {
       "id": "5",
@@ -1239,7 +1269,12 @@
           "venue": "citrigno"
         }
       ],
-      "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
+      "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta.",
+      "genres": [
+        "Commedia"
+      ],
+      "director": "Massimiliano Bruno",
+      "year": "2026"
     },
     {
       "id": "6",
@@ -1534,7 +1569,12 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADEDUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE."
+      "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADEDUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
+      "genres": [
+        "Commedia"
+      ],
+      "director": "G. Veronesi",
+      "year": "2026"
     },
     {
       "id": "7",
@@ -1657,7 +1697,14 @@
           "venue": "andromeda-river"
         }
       ],
-      "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede."
+      "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede.",
+      "genres": [
+        "Fantascienza",
+        "Mistero",
+        "Azione"
+      ],
+      "director": "Na Hong Jin.",
+      "year": "2026"
     },
     {
       "id": "8",
@@ -1966,7 +2013,14 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca."
+      "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca.",
+      "genres": [
+        "Commedia",
+        "Thriller",
+        "Crime"
+      ],
+      "director": "Martin Mc Donagh",
+      "year": "2026"
     },
     {
       "id": "9",
@@ -2152,7 +2206,13 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E"
+      "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E",
+      "genres": [
+        "Documentario",
+        "Musica"
+      ],
+      "director": "Andy Morahan, David Austin",
+      "year": "2026"
     },
     {
       "id": "10",
@@ -2176,7 +2236,12 @@
           "venue": "andromeda-river"
         }
       ],
-      "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO"
+      "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO",
+      "genres": [
+        "Fantascienza"
+      ],
+      "director": "D. Villeneuve",
+      "year": "2026"
     }
   ]
 }

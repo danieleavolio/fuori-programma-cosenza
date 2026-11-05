@@ -98,14 +98,63 @@ class SynopsisParser(HTMLParser):
             self.parts.append(data)
 
 
-def get_synopsis(url: str) -> str:
+class MovieMetadataParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.in_option = False
+        self.in_label = False
+        self.label_parts: list[str] = []
+        self.value_parts: list[str] = []
+        self.metadata: dict[str, str | list[str]] = {
+            "genres": [],
+            "director": "",
+            "year": "",
+        }
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if tag == "p" and "movie__option" in (attributes.get("class") or "").split():
+            self.in_option = True
+            self.label_parts = []
+            self.value_parts = []
+        elif self.in_option and tag == "strong":
+            self.in_label = True
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "strong":
+            self.in_label = False
+        elif tag == "p" and self.in_option:
+            label = " ".join("".join(self.label_parts).split()).rstrip(":").casefold()
+            value = " ".join("".join(self.value_parts).split())
+            if label in {"genre", "genres", "genere", "generi"}:
+                self.metadata["genres"] = [
+                    item.strip() for item in re.split(r"[,;]", value) if item.strip()
+                ]
+            elif label in {"director", "directors", "regia", "regista"}:
+                self.metadata["director"] = value
+            elif label in {"year", "anno"} and re.fullmatch(r"\d{4}", value):
+                self.metadata["year"] = value
+            self.in_option = False
+
+    def handle_data(self, data: str) -> None:
+        if self.in_option:
+            (self.label_parts if self.in_label else self.value_parts).append(data)
+
+
+def get_movie_details(url: str) -> dict:
     try:
+        html = fetch(url)
         parser = SynopsisParser()
-        parser.feed(fetch(url))
+        metadata_parser = MovieMetadataParser()
+        parser.feed(html)
+        metadata_parser.feed(html)
     except Exception as error:
-        print(f"Sinossi non recuperata da {url}: {error}")
-        return ""
-    return " ".join(" ".join(parser.parts).split())
+        print(f"Dettagli film non recuperati da {url}: {error}")
+        return {"synopsis": "", "genres": [], "director": "", "year": ""}
+    return {
+        "synopsis": " ".join(" ".join(parser.parts).split()),
+        **metadata_parser.metadata,
+    }
 
 
 def clean_title_for_display(raw: str) -> tuple[str, str]:
@@ -488,6 +537,9 @@ def main() -> None:
                     "url": movie.get("url", source["url"]),
                     "duration": dur or movie.get("duration", ""),
                     "tags": list(movie.get("tags", [])),
+                    "genres": [],
+                    "director": "",
+                    "year": "",
                     "shows": [],
                 }
             target = combined[key]
@@ -498,12 +550,18 @@ def main() -> None:
             for tag in movie.get("tags", []):
                 if tag not in target["tags"]:
                     target["tags"].append(tag)
+            for genre in movie.get("genres", []):
+                if genre not in target["genres"]:
+                    target["genres"].append(genre)
+            for field in ("director", "year"):
+                if not target[field] and movie.get(field):
+                    target[field] = movie[field]
             for show in movie["shows"]:
                 target["shows"].append({**show, "venue": source["id"]})
 
     movies_output = list(combined.values())
     for movie in movies_output:
-        movie["synopsis"] = get_synopsis(movie["url"])
+        movie.update(get_movie_details(movie["url"]))
 
     venues_output = [
         {

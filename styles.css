@@ -118,6 +118,7 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .movie-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 2px; }
 .movie-title, .movie-info h3 { margin: 0; font: 700 clamp(19px, 3vw, 27px)/1.08 var(--display); letter-spacing: -.035em; overflow-wrap: anywhere; }
 .movie-synopsis { margin: 9px 0 12px; color: #34343a; font-size: 13px; line-height: 1.55; }
+.movie-credits { margin: -5px 0 12px; color: var(--muted); font-size: 12px; line-height: 1.4; }
 .movie-facts { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 18px; }
 .venues-summary-block, .days-summary-block { margin-top: 8px; }
 .meta-label { display: block; margin-bottom: 5px; color: var(--muted); font: 700 9px/1.3 var(--mono); letter-spacing: .08em; }
@@ -237,7 +238,8 @@ noscript { display: block; padding: 20px; text-align: center; }
   .search-box { width: 100%; max-width: none; min-width: 0; }
   .quick-chips { gap: 7px; }
   .chip { min-height: 44px; padding-inline: 12px; }
-  .filter-dropdown select { width: 100%; }
+  .filter-dropdown { flex: 1 1 145px; }
+  .filter-dropdown select { width: 100%; min-width: 0; }
   .days-strip-container { align-items: flex-start; flex-direction: column; gap: 5px; }
   .days-nav-strip { width: 100%; }
   .schedule-meta-bar { align-items: flex-start; padding: 8px 0; }
@@ -254,10 +256,11 @@ noscript { display: block; padding: 20px; text-align: center; }
   .movie-synopsis { grid-area: synopsis; }
   .movie-facts { grid-area: facts; }
   .schedule-toggle { grid-area: toggle; }
-  .movie-main { grid-template-areas: "poster title" "synopsis synopsis" "prompt prompt"; gap: 0 12px; }
+  .movie-main { grid-template-areas: "poster title" "synopsis synopsis" "credits credits" "prompt prompt"; gap: 0 12px; }
   .movie-info { display: contents; }
   .movie-info .movie-title-row { grid-area: title; display: block; }
   .movie-info .movie-synopsis { grid-area: synopsis; margin: 7px 0 9px; }
+  .movie-info .movie-credits { grid-area: credits; margin: 0 0 9px; }
   .movie-info .movie-prompt { grid-area: prompt; margin: 0 0 10px; }
   .movie-info .movie-title-row .movie-actions { position: static; margin: 2px -4px 0 0; }
   .movie-title, .movie-info h3 { font-size: 20px; }

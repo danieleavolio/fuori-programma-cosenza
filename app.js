@@ -8,6 +8,7 @@ const controlsPerFilm = $('#controls-per-film');
 const controlsPerDay = $('#controls-per-day');
 const searchInput = $('#search');
 const venueFilter = $('#venue-filter');
+const genreFilter = $('#genre-filter');
 const daysNavStrip = $('#days-nav-strip');
 const resultSummary = $('#result-summary');
 const updatedAtEl = $('#updated-at');
@@ -182,6 +183,23 @@ function renderVenuesInfo(venues) {
   }
 }
 
+function renderGenreOptions(movies) {
+  if (!genreFilter) return;
+  const selectedGenre = genreFilter.value || 'all';
+  const genres = [...new Set(movies.flatMap((movie) => movie.genres || []))]
+    .sort((a, b) => a.localeCompare(b, 'it'));
+  genreFilter.innerHTML = '<option value="all">Tutti i generi</option>'
+    + genres.map((genre) => `<option value="${escapeHtml(genre)}">${escapeHtml(genre)}</option>`).join('');
+  genreFilter.value = genres.includes(selectedGenre) ? selectedGenre : 'all';
+}
+
+function renderMovieMetadata(movie) {
+  const details = [];
+  if (movie.director) details.push(`Regia: ${escapeHtml(movie.director)}`);
+  if (movie.year) details.push(escapeHtml(movie.year));
+  return details.length ? `<p class="movie-credits">${details.join(' · ')}</p>` : '';
+}
+
 function getSortedDates() {
   return [...new Set(scheduleData.movies.flatMap((m) => m.shows.map((s) => s.date)))].sort((a, b) => parseDate(a) - parseDate(b));
 }
@@ -214,6 +232,7 @@ function renderDaysStrip() {
 function render() {
   const query = (searchInput?.value || '').trim().toLocaleLowerCase('it');
   const selectedVenue = venueFilter?.value || 'all';
+  const selectedGenre = genreFilter?.value || 'all';
   const venuesMap = Object.fromEntries(scheduleData.venues.map((v) => [v.id, v]));
   const todayString = getTodayString();
 
@@ -228,11 +247,17 @@ function render() {
       // 1. Text Search
       const matchesTitle = movie.title.toLocaleLowerCase('it').includes(query);
       const matchesSynopsis = (movie.synopsis || '').toLocaleLowerCase('it').includes(query);
+      const matchesMetadata = [movie.director, movie.year, ...(movie.genres || [])]
+        .some((value) => (value || '').toLocaleLowerCase('it').includes(query));
       const matchesAnyVenue = movie.shows.some((s) => (venuesMap[s.venue]?.name || '').toLocaleLowerCase('it').includes(query));
-      if (!matchesTitle && !matchesSynopsis && !matchesAnyVenue) return false;
+      if (!matchesTitle && !matchesSynopsis && !matchesMetadata && !matchesAnyVenue) return false;
 
       // 2. Venue Filter
       if (selectedVenue !== 'all' && !movie.shows.some((s) => s.venue === selectedVenue)) {
+        return false;
+      }
+
+      if (selectedGenre !== 'all' && !(movie.genres || []).includes(selectedGenre)) {
         return false;
       }
 
@@ -306,6 +331,7 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
               <div class="movie-badges">
                 ${isOnlyToday ? `<span class="badge-last-chance">Solo oggi</span>` : ''}
                 ${movie.tags && movie.tags.length ? movie.tags.map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('') : ''}
+                ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
                 ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
               </div>
             </div>
@@ -319,6 +345,7 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
               </div>
             </div>
             <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
+            ${renderMovieMetadata(movie)}
 
             <div class="movie-facts">
               <div class="venues-summary-block">
@@ -426,6 +453,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
         <div class="movie-topline">
           <div class="topline-left">
             ${movie.tags && movie.tags.length ? movie.tags.map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('') : ''}
+            ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
             ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
           </div>
         </div>
@@ -445,6 +473,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
               </div>
             </div>
             <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
+            ${renderMovieMetadata(movie)}
             <p class="movie-prompt">Orari per ${dayDisplay}:</p>
           </div>
         </div>
@@ -500,6 +529,7 @@ async function loadSchedule({ fresh = false } = {}) {
       throw new Error(`Programmazione incompleta: ${inactiveVenues.map((id) => venuesById[id]?.name || id).join(', ')} non risponde. Riprova più tardi.`);
     }
     renderVenuesInfo(scheduleData.venues);
+    renderGenreOptions(scheduleData.movies);
     if (updatedAtEl) {
       updatedAtEl.textContent = `Aggiornato il ${new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(scheduleData.updatedAt))}`;
     }
@@ -576,12 +606,14 @@ if (favToggleBtn) {
 // Input filtri
 if (searchInput) searchInput.addEventListener('input', render);
 if (venueFilter) venueFilter.addEventListener('change', render);
+if (genreFilter) genreFilter.addEventListener('change', render);
 
 $('#refresh').addEventListener('click', () => loadSchedule({ fresh: true }));
 
 $('#clear-filters').addEventListener('click', () => {
   if (searchInput) searchInput.value = '';
   if (venueFilter) venueFilter.value = 'all';
+  if (genreFilter) genreFilter.value = 'all';
   $$('.chip').forEach((c) => c.classList.remove('active'));
   $('[data-chip="all"]').classList.add('active');
   activeChip = 'all';
