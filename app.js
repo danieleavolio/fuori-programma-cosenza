@@ -111,7 +111,6 @@ function renderShareMenu(movie) {
       </summary>
       <div class="share-menu-options">
         ${canShareImage ? `<button class="share-option" type="button" data-share-film="${escapeHtml(movie.id)}">Condividi locandina</button>` : ''}
-        <button class="share-option" type="button" data-download-poster="${escapeHtml(movie.id)}">Scarica locandina</button>
         <a class="share-option" href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <button class="share-option" type="button" data-copy-film-url="${escapeHtml(filmUrl)}">Copia link del film</button>
       </div>
@@ -120,7 +119,7 @@ function renderShareMenu(movie) {
 }
 
 function formatFilmShareMessage(movie) {
-  const lines = [`*FILM: ${movie.title}*`, '', 'Dove e quando:'];
+  const lines = [`*Film: ${movie.title}*`, '', '*Dove e quando?*'];
   const venuesMap = Object.fromEntries(scheduleData.venues.map((venue) => [venue.id, venue]));
   const showsByDate = new Map();
 
@@ -135,13 +134,17 @@ function formatFilmShareMessage(movie) {
   }
 
   const sortedDates = [...showsByDate.keys()].sort((a, b) => parseDate(a) - parseDate(b));
+  const venues = new Map();
   for (const date of sortedDates) {
-    lines.push('', `• ${italianFullDate(parseDate(date))}`);
     for (const [venueName, times] of showsByDate.get(date)) {
-      lines.push(`  - ${venueName}: ${[...times].join(', ')}`);
+      if (!venues.has(venueName)) venues.set(venueName, []);
+      venues.get(venueName).push(`• ${italianFullDate(parseDate(date))}: ${[...times].join(' · ')}`);
     }
   }
 
+  for (const [venueName, days] of venues) {
+    lines.push('', `*${venueName}*`, ...days);
+  }
   lines.push('', movie.url);
   return lines.join('\n');
 }
@@ -172,22 +175,6 @@ async function shareFilmPoster(movie) {
     await navigator.share({ title: movie.title, text, files: [file] });
   } catch (error) {
     if (error.name !== 'AbortError') showToast('Impossibile condividere la locandina');
-  }
-}
-
-async function downloadFilmPoster(movie) {
-  try {
-    const file = await getPosterFile(movie);
-    const objectUrl = URL.createObjectURL(file);
-    const link = document.createElement('a');
-    link.href = objectUrl;
-    link.download = file.name;
-    link.click();
-    URL.revokeObjectURL(objectUrl);
-    showToast('Locandina scaricata');
-  } catch {
-    window.open(movie.poster, '_blank', 'noopener,noreferrer');
-    showToast('Aperta la locandina: tienila premuta per salvarla');
   }
 }
 
@@ -660,13 +647,12 @@ document.addEventListener('click', (e) => {
   }
 
   const shareFilmBtn = e.target.closest('[data-share-film]');
-  const downloadPosterBtn = e.target.closest('[data-download-poster]');
-  if (shareFilmBtn || downloadPosterBtn) {
+  if (shareFilmBtn) {
     e.stopPropagation();
-    const movieId = (shareFilmBtn || downloadPosterBtn).dataset[shareFilmBtn ? 'shareFilm' : 'downloadPoster'];
+    const movieId = shareFilmBtn.dataset.shareFilm;
     const movie = scheduleData.movies.find((item) => item.id === movieId);
-    (shareFilmBtn ? shareFilmPoster(movie) : downloadFilmPoster(movie));
-    (shareFilmBtn || downloadPosterBtn).closest('.share-menu').open = false;
+    shareFilmPoster(movie);
+    shareFilmBtn.closest('.share-menu').open = false;
     return;
   }
 
