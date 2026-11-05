@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f5efdf" />
+    <meta name="theme-color" content="#f5f5f5" />
     <meta name="description" content="Programmazione e orari dei cinema a Cosenza e Rende: Andromeda River, Citrigno, Garden e Cinema Unical." />
     <title>Fuori programma — Cinema a Cosenza e Rende</title>
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
@@ -39,14 +39,9 @@
     </header>
 
     <main id="programmazione">
-      <section class="hero" aria-labelledby="page-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="live-mark" aria-hidden="true"></span> COSENZA · RENDE · ZUMPANO</p>
-          <h1 id="page-title">Stacca tutto.<br /><span>Si va al cinema.</span></h1>
-          <p class="hero-note">I film in sala, le locandine e gli orari di quattro cinema. Tu porta solo la voglia di uscire.</p>
-        </div>
-        <div class="hero-ticket" aria-hidden="true"><span>FUORI</span><strong>programma</strong><i>✳</i></div>
-        <div class="hero-foot"><span>QUATTRO SALE, UNA SOLA SERATA</span><span>AGGIORNATO DALLE BIGLIETTERIE UFFICIALI</span></div>
+      <section class="page-heading" aria-labelledby="page-title">
+        <h1 id="page-title">Programmazione cinema</h1>
+        <p>Cosenza, Rende e Zumpano</p>
       </section>
 
       <!-- Barra filtri contestuale e non-ridondante -->
@@ -111,13 +106,9 @@
       </section>
 
       <!-- Informazioni Sale e Biglietterie Ufficiali -->
-      <section class="cinema-section" id="cinema">
+      <section class="cinema-section" id="cinema" aria-labelledby="cinema-title">
         <div class="section-heading">
-          <div>
-            <p class="eyebrow">SALE CINEMATOGRAFICHE</p>
-            <h2>I cinema di Cosenza e Rende</h2>
-          </div>
-          <p>Link diretti alle biglietterie ufficiali per acquistare i biglietti in sicurezza.</p>
+          <h2 id="cinema-title">Cinema</h2>
         </div>
         <div class="cinema-list" id="cinema-list"></div>
       </section>
@@ -128,7 +119,6 @@
 
     <footer>
       <span class="footer-mark">fuori programma</span>
-      <p>Guida cinema per Cosenza, Rende e Zumpano.</p>
       <a href="mailto:?subject=Segnalazione%20Fuori%20Programma">Segnala un errore &rarr;</a>
     </footer>
     <noscript>Per visualizzare gli orari è necessario attivare JavaScript.</noscript>

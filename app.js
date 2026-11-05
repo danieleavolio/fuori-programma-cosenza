@@ -26,9 +26,6 @@ let selectedDate = '';
 const expandedMovies = new Set();
 let favorites = loadFavorites();
 
-// Dynamic cinematic palettes removed for clean, professional editorial typography
-
-
 // --- Date & String Utilities ---
 const italianDate = (date) => new Intl.DateTimeFormat('it-IT', { weekday: 'short', day: 'numeric', month: 'short' }).format(date).replace('.', '');
 const italianFullDate = (date) => new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }).format(date);
@@ -89,7 +86,7 @@ function updateFavoritesBadge() {
   if (favToggleBtn) favToggleBtn.classList.toggle('has-favorites', count > 0);
 }
 
-// --- Toast & Social Share ---
+// --- Toast & Share ---
 function showToast(message) {
   toastEl.textContent = message;
   toastEl.hidden = false;
@@ -101,20 +98,57 @@ function showToast(message) {
   }, 2200);
 }
 
-function shareShowtime({ title, venueName, dateStr, timeStr, url }) {
-  const dayText = formatDayLabel(dateStr);
-  const text = `Cinema: andiamo a vedere "${title}"?\nSala: ${venueName}\nData: ${dayText} (${dateStr}), ore ${timeStr}\nBiglietti: ${url}`;
+function renderShareMenu(movie) {
+  const filmUrl = movie.url;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(formatFilmShareMessage(movie))}`;
 
-  if (navigator.share && window.isSecureContext) {
-    navigator.share({ title: `Cinema: ${title}`, text: text, url: url }).catch(() => {});
-  } else if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(() => {
-      showToast('Dettagli dello spettacolo copiati negli appunti');
-    }).catch(() => {
-      prompt('Copia il testo dell’invito:', text);
-    });
-  } else {
-    prompt('Copia il testo dell’invito:', text);
+  return `
+    <details class="share-menu">
+      <summary class="btn-share-icon" aria-label="Condividi ${escapeHtml(movie.title)}">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      </summary>
+      <div class="share-menu-options">
+        <button class="share-option" type="button" data-copy-film-url="${escapeHtml(filmUrl)}">Copia link del film</button>
+        <a class="share-option" href="${escapeHtml(whatsappUrl)}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+    </details>
+  `;
+}
+
+function formatFilmShareMessage(movie) {
+  const lines = [`*FILM: ${movie.title}*`, '', 'Dove e quando:'];
+  const venuesMap = Object.fromEntries(scheduleData.venues.map((venue) => [venue.id, venue]));
+  const showsByDate = new Map();
+
+  for (const venueDay of movie.shows) {
+    if (!showsByDate.has(venueDay.date)) showsByDate.set(venueDay.date, new Map());
+    const showsByVenue = showsByDate.get(venueDay.date);
+    const venueName = venuesMap[venueDay.venue]?.name || venueDay.venue;
+    if (!showsByVenue.has(venueName)) showsByVenue.set(venueName, new Set());
+    for (const show of venueDay.shows) {
+      showsByVenue.get(venueName).add(show.time);
+    }
+  }
+
+  const sortedDates = [...showsByDate.keys()].sort((a, b) => parseDate(a) - parseDate(b));
+  for (const date of sortedDates) {
+    lines.push('', `• ${italianFullDate(parseDate(date))}`);
+    for (const [venueName, times] of showsByDate.get(date)) {
+      lines.push(`  - ${venueName}: ${[...times].join(', ')}`);
+    }
+  }
+
+  lines.push('', movie.url);
+  return lines.join('\n');
+}
+
+async function copyFilmUrl(url) {
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard non disponibile');
+    await navigator.clipboard.writeText(url);
+    showToast('Link del film copiato');
+  } catch {
+    window.prompt('Copia il link del film:', url);
   }
 }
 
@@ -269,11 +303,16 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
                 ${movie.tags && movie.tags.length ? movie.tags.map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('') : ''}
                 ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
               </div>
-              <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
-                <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-              </button>
             </div>
-            <h3 class="movie-title">${escapeHtml(movie.title)}</h3>
+            <div class="movie-title-row">
+              <h3 class="movie-title">${escapeHtml(movie.title)}</h3>
+              <div class="movie-actions">
+                ${renderShareMenu(movie)}
+                <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
+                  <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                </button>
+              </div>
+            </div>
             <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
 
             <div class="movie-facts">
@@ -334,9 +373,6 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
                                       <strong>${escapeHtml(entry.time)}</strong>
                                       <small>${entry.room ? escapeHtml(roomLabel(entry.room)) : 'Biglietti'}</small>
                                     </a>
-                                    <button class="btn-share-icon" type="button" title="Condividi spettacolo con amici" data-share-title="${escapeHtml(movie.title)}" data-share-venue="${escapeHtml(cinema.name)}" data-share-date="${escapeHtml(dateStr)}" data-share-time="${escapeHtml(entry.time)}" data-share-url="${escapeHtml(entry.url || movie.url)}">
-                                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-                                    </button>
                                   </div>
                                 `).join('')}
                               </div>
@@ -387,9 +423,6 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
             ${movie.tags && movie.tags.length ? movie.tags.map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('') : ''}
             ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
           </div>
-          <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="Salva preferito">
-            <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-          </button>
         </div>
 
         <div class="movie-main">
@@ -397,7 +430,15 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
             ${movie.poster ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="Locandina di ${escapeHtml(movie.title)}" loading="lazy" />` : `<span class="poster poster-missing">${escapeHtml(movie.title.slice(0, 1))}</span>`}
           </a>
           <div class="movie-info">
-            <h3>${escapeHtml(movie.title)}</h3>
+            <div class="movie-title-row">
+              <h3>${escapeHtml(movie.title)}</h3>
+              <div class="movie-actions">
+                ${renderShareMenu(movie)}
+                <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
+                  <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                </button>
+              </div>
+            </div>
             <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
             <p class="movie-prompt">Orari per ${dayDisplay}:</p>
           </div>
@@ -419,9 +460,6 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
                         <strong>${escapeHtml(entry.time)}</strong>
                         <small>${entry.room ? escapeHtml(roomLabel(entry.room)) : 'Biglietti'}</small>
                       </a>
-                      <button class="btn-share-icon" type="button" title="Condividi spettacolo con amici" data-share-title="${escapeHtml(movie.title)}" data-share-venue="${escapeHtml(cinema.name)}" data-share-date="${escapeHtml(show.date)}" data-share-time="${escapeHtml(entry.time)}" data-share-url="${escapeHtml(entry.url || movie.url)}">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-                      </button>
                     </div>
                   `).join('')}
                 </div>
@@ -547,6 +585,11 @@ $('#clear-filters').addEventListener('click', () => {
 
 // In-place accordion card toggle (con scroll fluido centrato)
 document.addEventListener('click', (e) => {
+  const activeShareMenu = e.target.closest('.share-menu');
+  document.querySelectorAll('.share-menu[open]').forEach((menu) => {
+    if (menu !== activeShareMenu) menu.open = false;
+  });
+
   // 1. Gestione stella preferiti
   const favBtn = e.target.closest('.fav-star-btn');
   if (favBtn) {
@@ -568,17 +611,12 @@ document.addEventListener('click', (e) => {
     return;
   }
 
-  // 2. Gestione pulsante condivisione
-  const shareBtn = e.target.closest('[data-share-title]');
-  if (shareBtn) {
+  // 2. Copia il link della scheda del film
+  const copyLinkBtn = e.target.closest('[data-copy-film-url]');
+  if (copyLinkBtn) {
     e.stopPropagation();
-    shareShowtime({
-      title: shareBtn.dataset.shareTitle,
-      venueName: shareBtn.dataset.shareVenue,
-      dateStr: shareBtn.dataset.shareDate,
-      timeStr: shareBtn.dataset.shareTime,
-      url: shareBtn.dataset.shareUrl,
-    });
+    copyFilmUrl(copyLinkBtn.dataset.copyFilmUrl);
+    copyLinkBtn.closest('.share-menu').open = false;
     return;
   }
 
