@@ -238,7 +238,7 @@ noscript { display: block; padding: 20px; text-align: center; }
   .search-box { width: 100%; max-width: none; min-width: 0; }
   .quick-chips { gap: 7px; }
   .chip { min-height: 44px; padding-inline: 12px; }
-  .filter-dropdown { flex: 1 1 145px; }
+  .filter-dropdown { width: 100%; flex: 0 0 auto; }
   .filter-dropdown select { width: 100%; min-width: 0; }
   .days-strip-container { align-items: flex-start; flex-direction: column; gap: 5px; }
   .days-nav-strip { width: 100%; }
