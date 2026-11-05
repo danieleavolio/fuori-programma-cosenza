@@ -143,6 +143,12 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .movie-card-body, .movie-main { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 14px 12px 12px; }
 .movie-main { grid-template-areas: "poster info"; }
 .poster-link { position: relative; display: block; width: 96px; aspect-ratio: 2 / 3; overflow: hidden; border: 1px solid var(--ink); background: var(--blue); }
+.poster-venue-menu { position: relative; z-index: 3; width: 96px; aspect-ratio: 2 / 3; }
+.poster-venue-menu > summary { width: 100%; height: 100%; cursor: pointer; list-style: none; }
+.poster-venue-menu > summary::-webkit-details-marker { display: none; }
+.poster-venue-options { position: absolute; z-index: 20; top: 8px; left: calc(100% + 8px); width: min(210px, calc(100vw - 150px)); padding: 4px; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 2px 8px #0003; }
+.poster-venue-options a { min-height: 44px; display: flex; align-items: center; padding: 8px 10px; color: var(--ink); font-size: 12px; }
+.poster-venue-options a:hover { background: var(--green); }
 .poster { display: block; width: 100%; height: 100%; object-fit: cover; }
 .poster-missing { display: grid; width: 100%; height: 100%; place-items: center; color: var(--on-blue); font: 800 40px/1 var(--display); }
 .movie-card-details { min-width: 0; display: flex; flex-direction: column; }
@@ -249,6 +255,7 @@ noscript { display: block; padding: 20px; text-align: center; }
   .movie-card-body { grid-template-columns: 132px minmax(0, 1fr); gap: 22px; padding: 20px 18px; }
   .movie-main { grid-template-columns: 132px minmax(0, 1fr); gap: 22px; }
   .poster-link { width: 132px; }
+  .poster-venue-menu { width: 132px; }
   .movie-synopsis { max-width: 78ch; font-size: 14px; }
   .movie-title { font-size: clamp(23px, 2.6vw, 32px); }
   .cinema-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -260,6 +267,7 @@ noscript { display: block; padding: 20px; text-align: center; }
   .movie-card-body { grid-template-columns: 148px minmax(0, 1fr); gap: 26px; padding: 22px 20px; }
   .movie-main { grid-template-columns: 148px minmax(0, 1fr); gap: 26px; }
   .poster-link { width: 148px; }
+  .poster-venue-menu { width: 148px; }
   .movie-facts { grid-template-columns: minmax(240px, .9fr) minmax(0, 1.1fr); gap: 24px; }
 }
 @media (max-width: 699px) {
@@ -295,6 +303,7 @@ noscript { display: block; padding: 20px; text-align: center; }
   .movie-card-body { grid-template-columns: 90px minmax(0, 1fr); grid-template-areas: "poster details" "synopsis synopsis" "facts facts" "toggle toggle"; gap: 0 12px; padding: 12px 10px; }
   .movie-card-details { grid-area: details; min-width: 0; display: flex; flex-direction: column; }
   .poster-link { grid-area: poster; width: 90px; }
+  .poster-venue-menu { grid-area: poster; width: 90px; }
   .movie-title { align-self: start; }
   .movie-synopsis { grid-area: synopsis; }
   .movie-facts { grid-area: facts; }

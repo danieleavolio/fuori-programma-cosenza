@@ -200,6 +200,42 @@ function renderMovieMetadata(movie) {
   return details.length ? `<p class="movie-credits">${details.join(' · ')}</p>` : '';
 }
 
+function movieUrlForVenue(movie, venueId) {
+  return movie.venueUrls?.[venueId] || movie.url;
+}
+
+function renderPosterLink(movie, venueIds, venuesMap, selectedVenue = 'all') {
+  const availableVenues = [...new Set(venueIds)].filter((venueId) => movie.venueUrls?.[venueId]);
+  const targetVenue = selectedVenue !== 'all' && availableVenues.includes(selectedVenue)
+    ? selectedVenue
+    : availableVenues.length === 1 ? availableVenues[0] : '';
+  const image = movie.poster
+    ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="" loading="lazy" />`
+    : `<span class="poster poster-missing" aria-hidden="true">${escapeHtml(movie.title.slice(0, 1))}</span>`;
+
+  if (targetVenue) {
+    const venueName = venuesMap[targetVenue]?.name || 'il cinema';
+    return `<a class="poster-link" href="${escapeHtml(movieUrlForVenue(movie, targetVenue))}" target="_blank" rel="noreferrer" aria-label="Apri la scheda di ${escapeHtml(movie.title)} presso ${escapeHtml(venueName)} in una nuova scheda">${image}</a>`;
+  }
+
+  if (!availableVenues.length) {
+    return `<a class="poster-link" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer" aria-label="Apri la scheda ufficiale di ${escapeHtml(movie.title)} in una nuova scheda">${image}</a>`;
+  }
+
+  return `
+    <details class="poster-venue-menu">
+      <summary class="poster-link" aria-label="Scegli il cinema per aprire la scheda di ${escapeHtml(movie.title)}">${image}</summary>
+      <div class="poster-venue-options">
+        ${availableVenues.map((venueId) => `
+          <a href="${escapeHtml(movieUrlForVenue(movie, venueId))}" target="_blank" rel="noreferrer">
+            ${escapeHtml(venuesMap[venueId]?.name || venueId)}
+          </a>
+        `).join('')}
+      </div>
+    </details>
+  `;
+}
+
 function getSortedDates() {
   return [...new Set(scheduleData.movies.flatMap((m) => m.shows.map((s) => s.date)))].sort((a, b) => parseDate(a) - parseDate(b));
 }
@@ -322,9 +358,7 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
     return `
       <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}">
         <div class="movie-card-body">
-          <a class="poster-link" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer" aria-label="Locandina di ${escapeHtml(movie.title)}">
-            ${movie.poster ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="Locandina di ${escapeHtml(movie.title)}" loading="lazy" />` : `<span class="poster poster-missing">${escapeHtml(movie.title.slice(0, 1))}</span>`}
-          </a>
+          ${renderPosterLink(movie, venueIds, venuesMap, selectedVenue)}
 
           <div class="movie-card-details">
             <div class="movie-card-meta">
@@ -447,6 +481,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
   filmList.innerHTML = visible.map((movie) => {
     const isFav = favorites.has(movie.id);
     const durationText = cleanDuration(movie.duration);
+    const detailsUrl = movieUrlForVenue(movie, movie.shows[0]?.venue);
 
     return `
       <article class="film-card" data-movie-id="${escapeHtml(movie.id)}">
@@ -459,9 +494,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
         </div>
 
         <div class="movie-main">
-          <a class="poster-link" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer" aria-label="Locandina di ${escapeHtml(movie.title)}">
-            ${movie.poster ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="Locandina di ${escapeHtml(movie.title)}" loading="lazy" />` : `<span class="poster poster-missing">${escapeHtml(movie.title.slice(0, 1))}</span>`}
-          </a>
+          ${renderPosterLink(movie, movie.shows.map((show) => show.venue), venuesMap)}
           <div class="movie-info">
             <div class="movie-title-row">
               <h3>${escapeHtml(movie.title)}</h3>
@@ -501,7 +534,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
             `;
           }).join('')}
         </div>
-        <a class="card-more" href="${escapeHtml(movie.url)}" target="_blank" rel="noreferrer">
+        <a class="card-more" href="${escapeHtml(detailsUrl)}" target="_blank" rel="noreferrer">
           Dettagli e scheda ufficiale &rarr;
         </a>
       </article>

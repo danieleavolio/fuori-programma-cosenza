@@ -545,12 +545,14 @@ def main() -> None:
                     "url": movie.get("url", source["url"]),
                     "duration": dur or movie.get("duration", ""),
                     "tags": list(movie.get("tags", [])),
+                    "venueUrls": {},
                     "genres": [],
                     "director": "",
                     "year": "",
                     "shows": [],
                 }
             target = combined[key]
+            target["venueUrls"][source["id"]] = movie.get("url", source["url"])
             if not target.get("poster") and movie.get("poster"):
                 target["poster"] = movie["poster"]
             if not target.get("duration") and (dur or movie.get("duration")):
