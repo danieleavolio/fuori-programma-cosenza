@@ -29,6 +29,14 @@ SOURCES = [
         "source_name": "18Tickets",
     },
     {
+        "id": "cinema-teatro-italia",
+        "name": "Cinema Teatro Italia A. Tieri",
+        "location": "Cosenza",
+        "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/",
+        "kind": "18tickets",
+        "source_name": "18Tickets",
+    },
+    {
         "id": "unical",
         "name": "Unical Cinema",
         "location": "Arcavacata di Rende",

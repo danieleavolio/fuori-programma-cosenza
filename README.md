@@ -6,6 +6,7 @@ Web app statica per confrontare la programmazione dei cinema di Cosenza e Rende 
 
 - **Andromeda River** (Zumpano) — `https://zumpano.andromeda.18tickets.it/`
 - **Cinema Citrigno** (Cosenza) — `https://citrigno.cosenzacinema.18tickets.it/`
+- **Cinema Teatro Italia A. Tieri** (Cosenza) — `https://cinemateatroitalia.cosenzacinema.18tickets.it/`
 - **Cinema Garden** (Rende) — `https://www.cinemagarden.net/`
 - **Unical Cinema** (Arcavacata di Rende) — `https://unical.cosenzacinema.18tickets.it/`
 

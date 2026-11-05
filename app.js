@@ -17,7 +17,7 @@ const favCountEl = $('#fav-count');
 const chipFavCountEl = $('#chip-fav-count');
 const toastEl = $('#toast');
 const emptyState = $('#empty-state');
-const requiredVenues = ['andromeda-river', 'citrigno', 'unical', 'garden'];
+const requiredVenues = ['andromeda-river', 'citrigno', 'cinema-teatro-italia', 'unical', 'garden'];
 
 // State
 let scheduleData = { venues: [], movies: [], updatedAt: '' };

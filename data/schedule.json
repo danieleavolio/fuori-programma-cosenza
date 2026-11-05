@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T09:05:59.177105+00:00",
+  "updatedAt": "2026-11-05T11:12:15.411888+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -14,6 +14,14 @@
       "name": "Citrigno",
       "location": "Cosenza",
       "source": "https://citrigno.cosenzacinema.18tickets.it/",
+      "sourceName": "18Tickets",
+      "status": "available"
+    },
+    {
+      "id": "cinema-teatro-italia",
+      "name": "Cinema Teatro Italia A. Tieri",
+      "location": "Cosenza",
+      "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/",
       "sourceName": "18Tickets",
       "status": "available"
     },
@@ -42,6 +50,13 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/81401",
       "duration": "",
       "tags": [],
+      "genres": [
+        "Avventura",
+        "Fantascienza",
+        "Azione"
+      ],
+      "director": "Joe Russo, Anthony Russo",
+      "year": "2026",
       "shows": [
         {
           "date": "16/12/2026",
@@ -275,14 +290,7 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato.",
-      "genres": [
-        "Avventura",
-        "Fantascienza",
-        "Azione"
-      ],
-      "director": "Joe Russo, Anthony Russo",
-      "year": "2026"
+      "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato."
     },
     {
       "id": "2",
@@ -291,6 +299,15 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/86813",
       "duration": "",
       "tags": [],
+      "genres": [
+        "Animazione",
+        "Avventura",
+        "Commedia",
+        "Horror",
+        "Famiglia"
+      ],
+      "director": "Steve Cox, Matthew Walker",
+      "year": "2026",
       "shows": [
         {
           "date": "05/11/2026",
@@ -370,16 +387,7 @@
           "venue": "andromeda-river"
         }
       ],
-      "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia.",
-      "genres": [
-        "Animazione",
-        "Avventura",
-        "Commedia",
-        "Horror",
-        "Famiglia"
-      ],
-      "director": "Steve Cox, Matthew Walker",
-      "year": "2026"
+      "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia."
     },
     {
       "id": "3",
@@ -388,6 +396,15 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/86057",
       "duration": "1h 45m",
       "tags": [],
+      "genres": [
+        "Animazione",
+        "Avventura",
+        "Commedia",
+        "Fantasy",
+        "Famiglia"
+      ],
+      "director": "Erica Rivinoja, Alessandro Carloni",
+      "year": "2026",
       "shows": [
         {
           "date": "05/11/2026",
@@ -633,16 +650,7 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima.",
-      "genres": [
-        "Animazione",
-        "Avventura",
-        "Commedia",
-        "Fantasy",
-        "Famiglia"
-      ],
-      "director": "Erica Rivinoja, Alessandro Carloni",
-      "year": "2026"
+      "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima."
     },
     {
       "id": "4",
@@ -651,6 +659,11 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/86088",
       "duration": "1h 46m",
       "tags": [],
+      "genres": [
+        "Dramma"
+      ],
+      "director": "Paola Randi",
+      "year": "2026",
       "shows": [
         {
           "date": "05/11/2026",
@@ -1072,12 +1085,7 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
-      "genres": [
-        "Dramma"
-      ],
-      "director": "Paola Randi",
-      "year": "2026"
+      "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco."
     },
     {
       "id": "5",
@@ -1086,6 +1094,11 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/86054",
       "duration": "1h 38m",
       "tags": [],
+      "genres": [
+        "Commedia"
+      ],
+      "director": "Massimiliano Bruno",
+      "year": "2026",
       "shows": [
         {
           "date": "05/11/2026",
@@ -1269,12 +1282,7 @@
           "venue": "citrigno"
         }
       ],
-      "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta.",
-      "genres": [
-        "Commedia"
-      ],
-      "director": "Massimiliano Bruno",
-      "year": "2026"
+      "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
     },
     {
       "id": "6",
@@ -1283,6 +1291,11 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/88991",
       "duration": "1h 54m",
       "tags": [],
+      "genres": [
+        "Commedia"
+      ],
+      "director": "G. Veronesi",
+      "year": "2026",
       "shows": [
         {
           "date": "05/11/2026",
@@ -1317,11 +1330,6 @@
               "time": "18:45",
               "room": "Sala 2",
               "url": "https://zumpano.andromeda.18tickets.it/film/88991/8e2ecf7c-850a-40a1-a11b-ad02089b01a9#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/d97015cf-a73e-44c3-9d48-f579443f67fc#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1338,11 +1346,6 @@
               "time": "18:45",
               "room": "Sala 2",
               "url": "https://zumpano.andromeda.18tickets.it/film/88991/6c22bc2d-50d8-4738-939b-56de60870774#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/53ac7700-b52d-46f5-8696-b9bb83dfd13e#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1359,11 +1362,6 @@
               "time": "18:45",
               "room": "Sala 2",
               "url": "https://zumpano.andromeda.18tickets.it/film/88991/132ed156-f6ad-4915-a6f6-385904ab1af7#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/e04a490f-5a93-4368-8a3f-8997f3af351e#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1380,11 +1378,6 @@
               "time": "18:45",
               "room": "Sala 2",
               "url": "https://zumpano.andromeda.18tickets.it/film/88991/f4c5d993-0221-4122-b398-99445536ef5b#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/67242d70-7476-42bb-bc8c-5f5c1f589831#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1401,11 +1394,6 @@
               "time": "18:45",
               "room": "Sala 2",
               "url": "https://zumpano.andromeda.18tickets.it/film/88991/c98e2ee6-b911-45ce-bb60-5b6cdb61f136#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/68c282eb-6b4f-464d-a6c0-eff2df76c54e#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1430,6 +1418,90 @@
             }
           ],
           "venue": "andromeda-river"
+        },
+        {
+          "date": "05/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/e414466b-c902-48d9-ae16-f959645062cf#theater-init"
+            },
+            {
+              "time": "19:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/6fa2bc45-5dc4-4142-b12c-b3445a8c99a5#theater-init"
+            },
+            {
+              "time": "21:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/bf0196a9-8aff-4cb1-831b-daec517684eb#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "06/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/1259c20c-4cb3-451b-badb-3e82bd070bdd#theater-init"
+            },
+            {
+              "time": "19:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/0d1c6ef1-e4c4-4181-be82-a1a4f76eea1c#theater-init"
+            },
+            {
+              "time": "21:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/27198eb6-b00b-4633-81f2-7cd1a59e3ec8#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "07/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/377f5485-388c-40c5-b8ab-5669c32eb532#theater-init"
+            },
+            {
+              "time": "19:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/5634503f-4b78-4c7a-84f5-ac8b83bc760e#theater-init"
+            },
+            {
+              "time": "21:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/8a4c1569-e45c-4bf6-a566-a9ee36cfa631#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "08/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/c57a2b38-d82b-401d-887c-96bb3cc9fad3#theater-init"
+            },
+            {
+              "time": "19:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/bb20fed5-b763-4f0d-b9b3-238cc089cffa#theater-init"
+            },
+            {
+              "time": "21:15",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/57529e96-c01f-4f48-aa23-0189950084fc#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
         },
         {
           "date": "05/11/2026",
@@ -1569,12 +1641,7 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADEDUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
-      "genres": [
-        "Commedia"
-      ],
-      "director": "G. Veronesi",
-      "year": "2026"
+      "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADEDUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE."
     },
     {
       "id": "7",
@@ -1583,6 +1650,13 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/88925",
       "duration": "2h 45m",
       "tags": [],
+      "genres": [
+        "Fantascienza",
+        "Mistero",
+        "Azione"
+      ],
+      "director": "Na Hong Jin.",
+      "year": "2026",
       "shows": [
         {
           "date": "05/11/2026",
@@ -1697,14 +1771,7 @@
           "venue": "andromeda-river"
         }
       ],
-      "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede.",
-      "genres": [
-        "Fantascienza",
-        "Mistero",
-        "Azione"
-      ],
-      "director": "Na Hong Jin.",
-      "year": "2026"
+      "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede."
     },
     {
       "id": "8",
@@ -1713,6 +1780,13 @@
       "url": "https://zumpano.andromeda.18tickets.it/film/89717",
       "duration": "1h 57m",
       "tags": [],
+      "genres": [
+        "Commedia",
+        "Thriller",
+        "Crime"
+      ],
+      "director": "Martin Mc Donagh",
+      "year": "2026",
       "shows": [
         {
           "date": "05/11/2026",
@@ -2013,14 +2087,7 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca.",
-      "genres": [
-        "Commedia",
-        "Thriller",
-        "Crime"
-      ],
-      "director": "Martin Mc Donagh",
-      "year": "2026"
+      "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca."
     },
     {
       "id": "9",
@@ -2031,6 +2098,12 @@
       "tags": [
         "V.O. SOTT."
       ],
+      "genres": [
+        "Documentario",
+        "Musica"
+      ],
+      "director": "Andy Morahan, David Austin",
+      "year": "2026",
       "shows": [
         {
           "date": "06/11/2026",
@@ -2206,13 +2279,7 @@
           "venue": "garden"
         }
       ],
-      "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E",
-      "genres": [
-        "Documentario",
-        "Musica"
-      ],
-      "director": "Andy Morahan, David Austin",
-      "year": "2026"
+      "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E"
     },
     {
       "id": "10",
@@ -2223,6 +2290,11 @@
       "tags": [
         "#ANTEPRIMA"
       ],
+      "genres": [
+        "Fantascienza"
+      ],
+      "director": "D. Villeneuve",
+      "year": "2026",
       "shows": [
         {
           "date": "15/12/2026",
@@ -2236,12 +2308,7 @@
           "venue": "andromeda-river"
         }
       ],
-      "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO",
-      "genres": [
-        "Fantascienza"
-      ],
-      "director": "D. Villeneuve",
-      "year": "2026"
+      "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO"
     }
   ]
 }
