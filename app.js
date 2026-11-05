@@ -125,7 +125,8 @@ function formatFilmShareMessage(movie) {
   for (const date of sortedDates) {
     lines.push('', `> ${italianFullDate(parseDate(date))}`);
     for (const [venueName, times] of showsByDate.get(date)) {
-      lines.push(`* ${venueName}: \`${[...times].join(' | ')}\``);
+      const formattedTimes = [...times].map((time) => `\`${time}\``).join(' | ');
+      lines.push(`* ${venueName}: ${formattedTimes}`);
     }
   }
 
