@@ -206,6 +206,7 @@ noscript { display: block; padding: 20px; text-align: center; }
   .movies-catalog-grid, .film-list { grid-template-columns: 1fr; }
   .movie-catalog-card, .film-card { align-self: start; }
   .movie-card-body { grid-template-columns: 132px minmax(0, 1fr); gap: 22px; padding: 20px 18px; }
+  .movie-main { grid-template-columns: 132px minmax(0, 1fr); gap: 22px; }
   .poster-link { width: 132px; }
   .movie-synopsis { max-width: 78ch; font-size: 14px; }
   .movie-title { font-size: clamp(23px, 2.6vw, 32px); }
@@ -216,6 +217,7 @@ noscript { display: block; padding: 20px; text-align: center; }
 @media (min-width: 1050px) {
   main { padding-top: 28px; }
   .movie-card-body { grid-template-columns: 148px minmax(0, 1fr); gap: 26px; padding: 22px 20px; }
+  .movie-main { grid-template-columns: 148px minmax(0, 1fr); gap: 26px; }
   .poster-link { width: 148px; }
   .movie-facts { grid-template-columns: minmax(240px, .9fr) minmax(0, 1.1fr); gap: 24px; }
 }
