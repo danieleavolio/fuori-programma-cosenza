@@ -54,6 +54,11 @@ SOURCES = [
     },
 ]
 
+ANNOUNCED_SCHEDULES = {
+    "cinema-teatro-italia": "https://cosenzacinema.it/programmazione-cinema-italia-tieri/",
+    "unical": "https://cosenzacinema.it/programmazione-sale-unical/",
+}
+
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -200,6 +205,38 @@ def title_key(title: str) -> str:
     t = re.sub(r"[–—\-]", " ", t)
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode().casefold()
     return re.sub(r"[^a-z0-9]+", " ", t).strip()
+
+
+def parse_announced_dates(url: str, venue_id: str) -> list[dict]:
+    """Reads announced dates from Citrigno Group's official movie listing."""
+    html = fetch(url)
+    cards = re.split(r'(?=<div class="amy-movie-item row")', html)
+    announced = []
+    for card in cards:
+        title_match = re.search(
+            r'class="amy-movie-field-title"><a[^>]*>(.*?)</a>', card, re.S
+        )
+        if not title_match or 'class="timelist"' not in card:
+            continue
+        title = " ".join(re.sub(r"<[^>]+>", "", title_match.group(1)).split())
+        detail_match = re.search(
+            r'class="amy-movie-field-title"><a[^>]*href="([^"]+)"', card
+        )
+        detail_url = detail_match.group(1) if detail_match else url
+        dates = re.findall(r'<option value="(\d{4}-\d{2}-\d{2})"', card)
+        for date in dates:
+            year, month, day = date.split("-")
+            announced.append(
+                {
+                    "title": title,
+                    "date": f"{day}/{month}/{year}",
+                    "venue": venue_id,
+                    "url": detail_url,
+                }
+            )
+    if not announced:
+        raise RuntimeError(f"Nessuna data annunciata valida trovata su {url}")
+    return announced
 
 
 class TicketsParser(HTMLParser):
@@ -527,6 +564,11 @@ def parse_source(source: dict) -> list[dict]:
 
 def main() -> None:
     venue_movies = [(source, parse_source(source)) for source in SOURCES]
+    announced_dates = [
+        date
+        for venue_id, url in ANNOUNCED_SCHEDULES.items()
+        for date in parse_announced_dates(url, venue_id)
+    ]
     schedule_file = ROOT / "data" / "schedule.json"
 
     combined: dict[str, dict] = {}
@@ -550,6 +592,7 @@ def main() -> None:
                     "director": "",
                     "year": "",
                     "shows": [],
+                    "announcedDates": [],
                 }
             target = combined[key]
             target["venueUrls"][source["id"]] = movie.get("url", source["url"])
@@ -568,6 +611,30 @@ def main() -> None:
                     target[field] = movie[field]
             for show in movie["shows"]:
                 target["shows"].append({**show, "venue": source["id"]})
+
+    for item in announced_dates:
+        key = title_key(item["title"])
+        target = combined.get(key)
+        if target is None:
+            target = {
+                "id": str(len(combined) + 1),
+                "title": item["title"],
+                "poster": "",
+                "url": item["url"],
+                "duration": "",
+                "tags": [],
+                "venueUrls": {},
+                "genres": [],
+                "director": "",
+                "year": "",
+                "shows": [],
+                "announcedDates": [],
+                "synopsis": "",
+            }
+            combined[key] = target
+        entry = {"date": item["date"], "venue": item["venue"]}
+        if entry not in target["announcedDates"]:
+            target["announcedDates"].append(entry)
 
     movies_output = list(combined.values())
     for movie in movies_output:

@@ -73,6 +73,11 @@
               <option value="all">Tutti i generi</option>
             </select>
           </div>
+
+          <div class="schedule-layout-switch movie-layout-switch" role="group" aria-label="Visualizzazione dei film">
+            <button class="layout-button active" id="movie-layout-grid" type="button" aria-pressed="true" data-movie-layout="grid">Griglia</button>
+            <button class="layout-button" id="movie-layout-list" type="button" aria-pressed="false" data-movie-layout="list">Lista</button>
+          </div>
         </div>
 
         <!-- Controlli VISTA 2: Per Giorno (barra orizzontale delle date, senza filtri ridondanti) -->
@@ -80,6 +85,10 @@
           <div class="days-strip-container">
             <span class="days-strip-label">Scegli la data:</span>
             <div class="days-nav-strip" id="days-nav-strip" role="tablist" aria-label="Seleziona giorno di programmazione"></div>
+            <div class="schedule-layout-switch" role="group" aria-label="Visualizzazione della programmazione">
+              <button class="layout-button active" id="day-layout-grid" type="button" aria-pressed="true" data-layout="grid">Griglia</button>
+              <button class="layout-button" id="day-layout-list" type="button" aria-pressed="false" data-layout="list">Lista</button>
+            </div>
           </div>
         </div>
       </section>
