@@ -134,17 +134,13 @@ function formatFilmShareMessage(movie) {
   }
 
   const sortedDates = [...showsByDate.keys()].sort((a, b) => parseDate(a) - parseDate(b));
-  const venues = new Map();
   for (const date of sortedDates) {
+    lines.push('', `> ${italianFullDate(parseDate(date))}`);
     for (const [venueName, times] of showsByDate.get(date)) {
-      if (!venues.has(venueName)) venues.set(venueName, []);
-      venues.get(venueName).push(`• ${italianFullDate(parseDate(date))}: ${[...times].join(' · ')}`);
+      lines.push(`* ${venueName}: \`${[...times].join(' | ')}\``);
     }
   }
 
-  for (const [venueName, days] of venues) {
-    lines.push('', `*${venueName}*`, ...days);
-  }
   lines.push('', movie.url);
   return lines.join('\n');
 }
