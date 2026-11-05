@@ -60,13 +60,63 @@ HEADERS = {
 def fetch(url: str) -> str:
     request = Request(url, headers=HEADERS)
     with urlopen(request, timeout=25) as response:
-        return response.read().decode("utf-8", errors="replace")
+        payload = response.read()
+        charset = response.headers.get_content_charset() or "utf-8"
+    html = payload.decode(charset, errors="replace")
+    if "\ufffd" in html:
+        html = payload.decode("cp1252", errors="replace")
+    return html
+
+
+class SynopsisParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.in_plot = False
+        self.plot_depth = 0
+        self.seen_plot = False
+        self.parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if tag == "div" and attributes.get("id") == "plotPanel" and not self.seen_plot:
+            self.in_plot = True
+            self.plot_depth = 1
+        elif self.in_plot and tag == "div":
+            self.plot_depth += 1
+        elif self.in_plot and tag == "br":
+            self.parts.append(" ")
+
+    def handle_endtag(self, tag: str) -> None:
+        if self.in_plot and tag == "div":
+            self.plot_depth -= 1
+            if self.plot_depth == 0:
+                self.in_plot = False
+                self.seen_plot = True
+
+    def handle_data(self, data: str) -> None:
+        if self.in_plot:
+            self.parts.append(data)
+
+
+def get_synopsis(url: str) -> str:
+    try:
+        parser = SynopsisParser()
+        parser.feed(fetch(url))
+    except Exception as error:
+        print(f"Sinossi non recuperata da {url}: {error}")
+        return ""
+    return " ".join(" ".join(parser.parts).split())
 
 
 def clean_title_for_display(raw: str) -> tuple[str, str]:
     """Returns (cleaned_title, duration) without labels or trailing tags."""
     title = re.sub(r"<[^>]+>", "", raw)
-    title = title.replace("\u2013", "-").replace("\u2014", "-").replace("–", "-").replace("—", "-")
+    title = (
+        title.replace("\u2013", "-")
+        .replace("\u2014", "-")
+        .replace("–", "-")
+        .replace("—", "-")
+    )
     title = " ".join(title.split()).strip()
 
     # Extract duration like (1H45') or ( 2H45')
@@ -160,7 +210,11 @@ class TicketsParser(HTMLParser):
                     self.current_movie["duration"] = dur
 
         # Movie detail URL
-        if tag == "a" and "movie__title" in classes and not self.current_movie.get("url_set"):
+        if (
+            tag == "a"
+            and "movie__title" in classes
+            and not self.current_movie.get("url_set")
+        ):
             href = a.get("href", "")
             if href:
                 self.current_movie["url"] = urljoin(self.base_url, href)
@@ -174,7 +228,9 @@ class TicketsParser(HTMLParser):
         if tag == "a" and a.get("data-time") and self.in_schedule:
             self.capture_showtime_a = True
             href = a.get("href", "")
-            self.show_url = urljoin(self.base_url, href) if href else self.current_movie["url"]
+            self.show_url = (
+                urljoin(self.base_url, href) if href else self.current_movie["url"]
+            )
             self.show_text_parts = []
 
     def handle_endtag(self, tag: str) -> None:
@@ -254,7 +310,9 @@ class TicketsParser(HTMLParser):
         self.in_schedule = False
 
 
-def parse_garden_multi_days(base_url: str = "https://www.cinemagarden.net/") -> list[dict]:
+def parse_garden_multi_days(
+    base_url: str = "https://www.cinemagarden.net/",
+) -> list[dict]:
     """Accurately parses Cinema Garden across available program dates."""
     try:
         home_html = fetch(base_url)
@@ -275,8 +333,7 @@ def parse_garden_multi_days(base_url: str = "https://www.cinemagarden.net/") -> 
         try:
             day_html = fetch(day_url)
         except Exception as e:
-            print(f"[Garden] Errore di rete su {day_url}: {e}")
-            continue
+            raise RuntimeError(f"[Garden] Errore di rete su {day_url}: {e}") from e
 
         blocks = re.findall(
             r'<div[^>]*class=["\'][^"\']*inner-film[^"\']*["\'].*?(?=<div[^>]*class=["\'][^"\']*inner-film|\Z)',
@@ -285,23 +342,31 @@ def parse_garden_multi_days(base_url: str = "https://www.cinemagarden.net/") -> 
         )
 
         for b in blocks:
-            title_m = re.search(r'<span[^>]*itemprop=["\']name["\'][^>]*>(.*?)</span>', b, re.S)
+            title_m = re.search(
+                r'<span[^>]*itemprop=["\']name["\'][^>]*>(.*?)</span>', b, re.S
+            )
             if not title_m:
                 continue
             raw_title = title_m.group(1).strip()
             clean_t, dur = clean_title_for_display(raw_title)
 
-            poster_m = re.search(r'<img[^>]*itemprop=["\']image["\'][^>]*src=["\']([^"\']+)["\']', b)
+            poster_m = re.search(
+                r'<img[^>]*itemprop=["\']image["\'][^>]*src=["\']([^"\']+)["\']', b
+            )
             if not poster_m:
                 poster_m = re.search(r'<img[^>]*src=["\']([^"\']+)["\']', b)
             poster_url = poster_m.group(1).strip() if poster_m else ""
             if poster_url and not poster_url.startswith("http"):
                 poster_url = urljoin(base_url, poster_url)
 
-            ticket_m = re.search(r'href=["\'](https?://[^"\']*anyticket[^"\']*)["\']', b)
+            ticket_m = re.search(
+                r'href=["\'](https?://[^"\']*anyticket[^"\']*)["\']', b
+            )
             ticket_url = ticket_m.group(1).strip() if ticket_m else base_url
 
-            orari_raw = re.findall(r'<div class=[\'"]unOrario[\'"]>(.*?)</div>', b, re.S)
+            orari_raw = re.findall(
+                r'<div class=[\'"]unOrario[\'"]>(.*?)</div>', b, re.S
+            )
             shows_list = []
             for o in orari_raw:
                 spans = re.findall(r"<span>(.*?)</span>", o)
@@ -340,7 +405,9 @@ def parse_garden_multi_days(base_url: str = "https://www.cinemagarden.net/") -> 
                 movies_map[k]["shows"][date_for_shows] = []
 
             # Deduplicate by time and room
-            existing = {(s["time"], s["room"]) for s in movies_map[k]["shows"][date_for_shows]}
+            existing = {
+                (s["time"], s["room"]) for s in movies_map[k]["shows"][date_for_shows]
+            }
             for s in shows_list:
                 sig = (s["time"], s["room"])
                 if sig not in existing:
@@ -373,34 +440,37 @@ def parse_garden_multi_days(base_url: str = "https://www.cinemagarden.net/") -> 
 
 def parse_source(source: dict) -> list[dict]:
     if source["kind"] == "garden":
-        return parse_garden_multi_days(source["url"])
+        movies = parse_garden_multi_days(source["url"])
+        if not movies:
+            raise RuntimeError(
+                f"[{source['name']}] Nessun film o spettacolo valido trovato."
+            )
+        return movies
 
     try:
         html = fetch(source["url"])
     except Exception as e:
-        print(f"[{source['name']}] Errore di rete su {source['url']}: {e}")
-        return []
+        raise RuntimeError(
+            f"[{source['name']}] Errore di rete su {source['url']}: {e}"
+        ) from e
 
     parser = TicketsParser(base_url=source["url"])
     try:
         parser.feed(html)
         parser.finish_movie()
     except Exception as e:
-        print(f"[{source['name']}] Errore parsing HTML: {e}")
-        return []
+        raise RuntimeError(f"[{source['name']}] Errore parsing HTML: {e}") from e
 
+    if not parser.movies:
+        raise RuntimeError(
+            f"[{source['name']}] Nessun film o spettacolo valido trovato."
+        )
     return parser.movies
 
 
 def main() -> None:
     venue_movies = [(source, parse_source(source)) for source in SOURCES]
     schedule_file = ROOT / "data" / "schedule.json"
-    previous_data = {}
-    if schedule_file.exists():
-        try:
-            previous_data = json.loads(schedule_file.read_text(encoding="utf-8"))
-        except Exception:
-            pass
 
     combined: dict[str, dict] = {}
     venue_counts: dict[str, int] = {}
@@ -431,12 +501,9 @@ def main() -> None:
             for show in movie["shows"]:
                 target["shows"].append({**show, "venue": source["id"]})
 
-    total_found = sum(len(movies) for _, movies in venue_movies)
-    if total_found == 0 and previous_data.get("movies"):
-        print("Attenzione: nessun film scaricato da nessuna fonte. I dati precedenti vengono mantenuti.")
-        movies_output = previous_data["movies"]
-    else:
-        movies_output = list(combined.values())
+    movies_output = list(combined.values())
+    for movie in movies_output:
+        movie["synopsis"] = get_synopsis(movie["url"])
 
     venues_output = [
         {
@@ -445,7 +512,9 @@ def main() -> None:
             "location": source["location"],
             "source": source["url"],
             "sourceName": source["source_name"],
-            "status": "available" if venue_counts.get(source["id"], 0) > 0 else "unavailable",
+            "status": "available"
+            if venue_counts.get(source["id"], 0) > 0
+            else "unavailable",
         }
         for source in SOURCES
     ]
@@ -455,11 +524,14 @@ def main() -> None:
         "venues": venues_output,
         "movies": movies_output,
     }
-    schedule_file.write_text(
+    temporary_file = schedule_file.with_suffix(".json.tmp")
+    temporary_file.write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+    temporary_file.replace(schedule_file)
     counts = ", ".join(
-        f"{source['name']}: {venue_counts.get(source['id'], 0)} film" for source in SOURCES
+        f"{source['name']}: {venue_counts.get(source['id'], 0)} film"
+        for source in SOURCES
     )
     print(f"Aggiornata programmazione con successo: {counts}.")
 

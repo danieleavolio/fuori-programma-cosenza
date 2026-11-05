@@ -21,7 +21,19 @@ Poi visita `http://localhost:8000`. L’app legge i dati da `data/schedule.json`
 
 ## Aggiornamento dati
 
-`python scripts/update_schedule.py` interroga le fonti ufficiali dei cinema e aggiorna `data/schedule.json`. GitHub Actions aggiorna e ripubblica il sito automaticamente tre volte al giorno. Gli orari rimangono collegati direttamente alle pagine di acquisto del rispettivo cinema.
+`python scripts/update_schedule.py` interroga tutte le fonti ufficiali dei cinema e aggiorna `data/schedule.json` solo se ognuna risponde con una programmazione valida. GitHub Actions aggiorna e ripubblica il sito ogni sei ore. Gli orari rimangono collegati direttamente alle pagine di acquisto del rispettivo cinema.
+
+## Headroom locale
+
+Headroom comprime il contesto tra OpenCode e il provider, ma richiede un endpoint compatibile e la relativa chiave API. L'installazione locale usa `uv` e non modifica il PATH o la configurazione globale:
+
+```powershell
+$env:UV_TOOL_DIR = (Join-Path (Get-Location) 'tools\headroom\uv-tools')
+$env:UV_TOOL_BIN_DIR = (Join-Path (Get-Location) 'tools\headroom\bin')
+uv tool install --python 3.10 'headroom-ai[proxy]==0.42.0'
+```
+
+Il comando `headroom` è disponibile in `tools\headroom\bin`. Per attivare il proxy in OpenCode occorre prima scegliere il provider/upstream e impostare la sua chiave API nell'ambiente, senza salvarla nella repo. Guida: <https://docs.headroomlabs.ai/docs/opencode-deepseek>.
 
 ## Pubblicazione
 
