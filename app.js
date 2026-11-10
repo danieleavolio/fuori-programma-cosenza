@@ -10,7 +10,6 @@ const searchInput = $('#search');
 const venueFilter = $('#venue-filter');
 const genreFilter = $('#genre-filter');
 const daysNavStrip = $('#days-nav-strip');
-const dataNotice = $('#data-notice');
 const resultSummary = $('#result-summary');
 const updatedAtEl = $('#updated-at');
 const favToggleBtn = $('#fav-toggle-btn');
@@ -201,8 +200,9 @@ function durationMinutes(raw) {
   return total > 0 ? total : 110;
 }
 
-// Data e ora "da parete" nel fuso italiano, senza conversioni di fuso.
-function icsDateTime(dateStr, timeStr, offsetMinutes = 0) {
+// Data e ora "da parete" nel fuso italiano: il calendario le interpreta con
+// il parametro ctz, senza conversioni di fuso lato browser.
+function calendarDateTime(dateStr, timeStr, offsetMinutes = 0) {
   const [day, month, year] = String(dateStr || '').split('/').map(Number);
   const [hours, minutes] = String(timeStr || '').split(':').map(Number);
   const value = new Date(year || 1970, (month || 1) - 1, day || 1, hours || 0, minutes || 0);
@@ -240,8 +240,8 @@ function icsFold(line) {
 
 function buildCalendarEvent(event) {
   const minutes = durationMinutes(event.eventDuration);
-  const start = icsDateTime(event.eventDate, event.eventTime);
-  const end = icsDateTime(event.eventDate, event.eventTime, minutes);
+  const start = calendarDateTime(event.eventDate, event.eventTime);
+  const end = calendarDateTime(event.eventDate, event.eventTime, minutes);
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const uid = `${event.eventDate.replace(/\D/g, '')}-${event.eventTime.replace(/\D/g, '')}-${Date.now().toString(36)}@fuori-programma-cosenza`;
   const venueLine = `${event.eventVenue}${event.eventRoom ? ` (${event.eventRoom})` : ''}`;
@@ -301,25 +301,123 @@ function buildCalendarEvent(event) {
   return `${lines.map(icsFold).join('\r\n')}\r\n`;
 }
 
-function downloadCalendarEvent(event) {
-  const calendar = buildCalendarEvent(event);
+function calendarFileName(event) {
   const slug = String(event.eventTitle)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^\p{L}\p{N}]+/gu, '-')
     .replace(/^-+|-+$/g, '')
     .toLocaleLowerCase('it') || 'film';
-  const filename = `${slug}-${event.eventDate.replace(/\//g, '-')}-${event.eventTime.replace(':', '')}.ics`;
-  const blob = new Blob([calendar], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 20000);
-  showToast('Evento pronto: scegli il calendario per aggiungerlo');
+  return `${slug}-${event.eventDate.replace(/\//g, '-')}-${event.eventTime.replace(':', '')}.ics`;
+}
+
+// iPhone e iPad: il file ICS passa al sistema, che mostra le app
+// compatibili (Calendario, Google Calendar, Outlook...).
+function canUseNativeCalendarShare() {
+  if (!navigator.canShare || typeof File !== 'function') return false;
+  const appleTablet = /Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent) || appleTablet;
+}
+
+function isAndroid() {
+  return /Android/i.test(navigator.userAgent) && /Chrome|CriOS|SamsungBrowser|EdgA|OPR/i.test(navigator.userAgent);
+}
+
+// Scarto del fuso di Roma rispetto a UTC, in minuti, per un dato istante.
+function romeOffsetMinutes(instant) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Rome',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false,
+  }).formatToParts(new Date(instant));
+  const value = (type) => Number((parts.find((part) => part.type === type) || {}).value || 0);
+  const wall = Date.UTC(value('year'), value('month') - 1, value('day'), value('hour'), value('minute'), value('second'));
+  return Math.round((wall - instant) / 60000);
+}
+
+// Istante UTC corrispondente a un orario "da parete" italiano.
+function romeTimestamp(dateStr, timeStr, addMinutes = 0) {
+  const [day, month, year] = String(dateStr || '').split('/').map(Number);
+  const [hours, minutes] = String(timeStr || '').split(':').map(Number);
+  const wall = Date.UTC(year || 1970, (month || 1) - 1, day || 1, hours || 0, minutes || 0);
+  const offset = romeOffsetMinutes(wall);
+  let instant = wall - offset * 60000;
+  const corrected = romeOffsetMinutes(instant);
+  if (corrected !== offset) instant = wall - corrected * 60000;
+  return instant + addMinutes * 60000;
+}
+
+// Su Android il chooser di sistema apre il calendario scelto con l'evento
+// già compilato: nessun file da scaricare.
+function androidCalendarIntent(event) {
+  const minutes = durationMinutes(event.eventDuration);
+  const start = romeTimestamp(event.eventDate, event.eventTime);
+  const end = start + minutes * 60000;
+  const venueLine = `${event.eventVenue}${event.eventRoom ? ` (${event.eventRoom})` : ''}`;
+  const location = [venueLine, event.eventLocation].filter(Boolean).join(', ');
+  const description = [
+    `Film: ${event.eventTitle}`,
+    `Cinema: ${event.eventVenue}${event.eventLocation ? ` — ${event.eventLocation}` : ''}`,
+    event.eventRoom ? `Sala: ${event.eventRoom}` : '',
+    `Durata: ${minutes} minuti`,
+    event.eventUrl ? `Biglietti: ${event.eventUrl}` : '',
+  ].filter(Boolean).join('\n');
+  const extras = [
+    ['S.title', `${event.eventTitle} — ${event.eventVenue}`],
+    ['S.eventLocation', location],
+    ['S.description', description],
+    ['l.beginTime', String(start)],
+    ['l.endTime', String(end)],
+    ['S.browser_fallback_url', calendarUrl(event)],
+  ].map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join(';');
+  return `intent://#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;${extras};end`;
+}
+
+async function shareCalendarEvent(event) {
+  if (isAndroid()) {
+    window.location.href = androidCalendarIntent(event);
+    return;
+  }
+  const file = new File([buildCalendarEvent(event)], calendarFileName(event), { type: 'text/calendar' });
+  if (canUseNativeCalendarShare() && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: `${event.eventTitle} — ${event.eventVenue}` });
+      return;
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+    }
+    // Dopo l'attesa del foglio di condivisione il browser non concede più
+    // una nuova finestra: sul telefono si apre il calendario nella stessa scheda.
+    window.location.href = calendarUrl(event);
+    return;
+  }
+  window.open(calendarUrl(event), '_blank', 'noopener,noreferrer');
+}
+
+function calendarUrl(event) {
+  const minutes = durationMinutes(event.eventDuration);
+  const start = calendarDateTime(event.eventDate, event.eventTime);
+  const end = calendarDateTime(event.eventDate, event.eventTime, minutes);
+  const venueLine = `${event.eventVenue}${event.eventRoom ? ` (${event.eventRoom})` : ''}`;
+  const location = [venueLine, event.eventLocation].filter(Boolean).join(', ');
+  const details = [
+    `Film: ${event.eventTitle}`,
+    `Cinema: ${event.eventVenue}${event.eventLocation ? ` — ${event.eventLocation}` : ''}`,
+    event.eventRoom ? `Sala: ${event.eventRoom}` : '',
+    `Durata: ${minutes} minuti`,
+    event.eventUrl ? `Biglietti: ${event.eventUrl}` : '',
+  ].filter(Boolean).join('\n');
+
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: `${event.eventTitle} — ${event.eventVenue}`,
+    dates: `${start}/${end}`,
+    details,
+    location,
+    ctz: 'Europe/Rome',
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
 function showtimeChipHtml(movie, cinema, dateStr, entry, className) {
@@ -549,41 +647,6 @@ function renderDaysStrip() {
   }).join('');
 }
 
-function renderDataNotice() {
-  if (!dataNotice) return;
-  const messages = [];
-
-  const updatedAt = scheduleData.updatedAt ? new Date(scheduleData.updatedAt) : null;
-  if (updatedAt && !Number.isNaN(updatedAt.getTime())) {
-    const hours = (Date.now() - updatedAt.getTime()) / 36e5;
-    if (hours >= 10) {
-      messages.push(`La programmazione non viene aggiornata da ${Math.round(hours)} ore: gli orari mostrati potrebbero non corrispondere a quelli dei cinema.`);
-    }
-  }
-
-  for (const venue of scheduleData.venues || []) {
-    if (venue.status === 'stale') {
-      messages.push(`${venue.name} non ha risposto all'ultimo aggiornamento: per questa sala restano gli ultimi dati disponibili.`);
-    } else if (venue.status === 'unavailable') {
-      messages.push(`${venue.name} non risulta raggiungibile: per questa sala non ci sono dati.`);
-    }
-  }
-
-  const carried = (scheduleData.warnings || []).filter((warning) => warning.type === 'carried-over');
-  if (carried.length) {
-    messages.push(`${carried.length} ${carried.length === 1 ? 'giorno è stato' : 'giorni sono stati'} recuperati dai dati precedenti perché la fonte non li ha più pubblicati.`);
-  }
-
-  if (!messages.length) {
-    dataNotice.hidden = true;
-    dataNotice.innerHTML = '';
-    return;
-  }
-  dataNotice.hidden = false;
-  dataNotice.innerHTML = `<strong>Programmazione parzialmente aggiornata</strong><ul>${messages.map((message) => `<li>${escapeHtml(message)}</li>`).join('')}</ul>`;
-}
-
-// --- Main Render Dispatcher ---
 function render() {
   const query = (searchInput?.value || '').trim().toLocaleLowerCase('it');
   const selectedVenue = venueFilter?.value || 'all';
@@ -895,7 +958,6 @@ async function loadSchedule({ fresh = false } = {}) {
     }
     renderVenuesInfo(scheduleData.venues);
     renderGenreOptions(scheduleData.movies);
-    renderDataNotice();
     if (updatedAtEl) {
       updatedAtEl.textContent = `Aggiornato il ${new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(scheduleData.updatedAt))}`;
     }
@@ -1026,7 +1088,7 @@ if (showtimeMenu) showtimeMenu.addEventListener('click', (e) => {
   } else if (action === 'share') {
     shareShowtime(event);
   } else if (action === 'calendar') {
-    downloadCalendarEvent(event);
+    shareCalendarEvent(event);
   }
 });
 
