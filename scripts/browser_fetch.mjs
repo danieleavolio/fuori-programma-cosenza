@@ -62,7 +62,8 @@ const CHALLENGE_MARKERS = [
   'aws-waf-token',
   'cf-chl',
   'challenge-platform',
-  'cf-2fa-verify',
+  // 'cf-2fa-verify' e' un meta tag di verifica presente anche sulle pagine
+  // valide di 18tickets, non un segnale di challenge.
   'Just a moment',
 ];
 

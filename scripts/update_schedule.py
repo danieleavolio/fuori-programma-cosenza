@@ -94,7 +94,8 @@ WAF_MARKERS = (
     "aws-waf-token",
     "cf-chl",
     "challenge-platform",
-    "cf-2fa-verify",
+    # "cf-2fa-verify" non e' una challenge: le pagine valide di 18tickets
+    # includono un meta tag di verifica con questo nome.
     "Just a moment",
 )
 BROWSER_SCRIPT = ROOT / "scripts" / "browser_fetch.mjs"
