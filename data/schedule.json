@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T11:48:14.778907+00:00",
+  "updatedAt": "2026-11-10T12:18:34.601499+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -23,7 +23,7 @@
       "location": "Cosenza",
       "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "available"
+      "status": "stale"
     },
     {
       "id": "unical",
@@ -31,7 +31,7 @@
       "location": "Arcavacata di Rende",
       "source": "https://unical.cosenzacinema.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "available"
+      "status": "stale"
     },
     {
       "id": "garden",
@@ -1856,7 +1856,17 @@
     {
       "type": "source-failed",
       "venue": "citrigno",
-      "message": "[Citrigno] Nessun film o spettacolo valido trovato. Pagina ricevuta: 1592 byte, titolo 'Citrigno', movie--preview=0, inner-film=0, time-select=0 | inizio: <html lang=\"it\"><head> <meta charset=\"utf-8\"> <meta content=\"application/xhtml+xml; charset=utf-8\" http-equiv=\"content-type\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"cf-2fa-verify\" content=\"wjV6on173PxlvQr82NhJ\"> <meta content=\"width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=1.0, maximum-scale=2.0\" name=\"viewport\"> <title>Citrigno</title> <meta name"
+      "message": "[Citrigno] Errore di rete su https://citrigno.cosenzacinema.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
+    },
+    {
+      "type": "source-failed",
+      "venue": "cinema-teatro-italia",
+      "message": "[Cinema Teatro Italia A. Tieri] Errore di rete su https://cinemateatroitalia.cosenzacinema.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
+    },
+    {
+      "type": "source-failed",
+      "venue": "unical",
+      "message": "[Unical Cinema] Errore di rete su https://unical.cosenzacinema.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
     }
   ]
 }
