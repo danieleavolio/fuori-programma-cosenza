@@ -1,19 +1,16 @@
-// Scarica una pagina con Chrome headless e ne stampa l'HTML su stdout.
-// Serve per le fonti che rispondono con una challenge anti-bot in JavaScript:
-// il browser esegue la challenge e la pagina reale viene servita.
+// Scarica pagine con Chrome headless e le serve su stdin/stdout.
 //
-// Uso: node scripts/browser_fetch.mjs <url> [timeoutMs]
+// Le fonti 18tickets rispondono ai runner GitHub con una challenge anti-bot in
+// JavaScript: il browser la risolve da solo e restituisce la pagina reale.
+// Modalita' server: un URL per riga su stdin, una risposta JSON per riga su
+// stdout. Il processo resta vivo finche' stdin resta aperto.
+//
+// Uso: node scripts/browser_fetch.mjs
 import { spawn } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-
-const url = process.argv[2];
-const timeoutMs = Number(process.argv[3] || 45000);
-if (!url) {
-  console.error('url mancante');
-  process.exit(2);
-}
+import { createInterface } from 'node:readline';
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -21,14 +18,19 @@ const CHROME_CANDIDATES = [
   'google-chrome-stable',
   'chromium',
   'chromium-browser',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
 ].filter(Boolean);
 
+const PAGE_TIMEOUT_MS = Number(process.env.FP_BROWSER_TIMEOUT || 60000);
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function spawnChrome(port, profileDir) {
+async function spawnChrome(port, profileDir) {
   for (const binary of CHROME_CANDIDATES) {
+    let child;
     try {
-      const child = spawn(binary, [
+      child = spawn(binary, [
         '--headless=new',
         '--disable-gpu',
         '--no-sandbox',
@@ -36,15 +38,24 @@ function spawnChrome(port, profileDir) {
         '--disable-extensions',
         '--no-first-run',
         '--no-default-browser-check',
+        '--disable-features=Translate,BackForwardCache',
         `--remote-debugging-port=${port}`,
         `--user-data-dir=${profileDir}`,
         '--window-size=1440,2400',
         'about:blank',
       ], { stdio: 'ignore' });
-      return child;
     } catch (error) {
-      console.error(`browser non disponibile (${binary}): ${error.message}`);
+      process.stderr.write(`browser non disponibile (${binary}): ${error.message}\n`);
+      continue;
     }
+    let failed = null;
+    child.on('error', (error) => { failed = error; });
+    await sleep(300);
+    if (failed) {
+      process.stderr.write(`browser non disponibile (${binary}): ${failed.message}\n`);
+      continue;
+    }
+    return child;
   }
   return null;
 }
@@ -62,17 +73,26 @@ async function waitForTarget(port) {
   throw new Error('browser non raggiungibile');
 }
 
-const port = 9300 + Math.floor(Math.random() * 400);
+const port = 9300 + Math.floor(Math.random() * 500);
 const profileDir = mkdtempSync(join(tmpdir(), `fp-chrome-${port}-`));
-const chrome = spawnChrome(port, profileDir);
+const chrome = await spawnChrome(port, profileDir);
 
+function shutdown(code) {
+  if (chrome) chrome.kill();
+  try { rmSync(profileDir, { recursive: true, force: true }); } catch {}
+  process.exit(code);
+}
+
+if (!chrome) shutdown(1);
+
+let send;
 try {
   const target = await waitForTarget(port);
   const socket = new WebSocket(target.webSocketDebuggerUrl);
   let messageId = 0;
   const pending = new Map();
 
-  const send = (method, params = {}) => new Promise((resolve, reject) => {
+  send = (method, params = {}) => new Promise((resolve, reject) => {
     const id = ++messageId;
     pending.set(id, { resolve, reject });
     socket.send(JSON.stringify({ id, method, params }));
@@ -90,36 +110,48 @@ try {
 
   await send('Page.enable');
   await send('Runtime.enable');
-  await send('Page.navigate', { url });
+} catch (error) {
+  process.stderr.write(`${error.message}\n`);
+  shutdown(1);
+}
 
-  const deadline = Date.now() + timeoutMs;
+async function readHtml() {
+  const result = await send('Runtime.evaluate', {
+    expression: 'document.documentElement ? document.documentElement.outerHTML : ""',
+    returnByValue: true,
+  });
+  return result.result.value || '';
+}
+
+async function loadPage(url) {
+  await send('Page.navigate', { url });
+  const deadline = Date.now() + PAGE_TIMEOUT_MS;
   let html = '';
   while (Date.now() < deadline) {
     await sleep(1000);
-    const result = await send('Runtime.evaluate', {
-      expression: 'document.documentElement ? document.documentElement.outerHTML : ""',
-      returnByValue: true,
-    });
-    html = result.result.value || '';
-    if (html.includes('movie--preview') || html.includes('inner-film') || html.includes('</html>')) {
-      // La challenge WAF si risolve in pochi secondi: aspetta che la pagina sia stabile.
-      await sleep(1500);
-      const again = await send('Runtime.evaluate', {
-        expression: 'document.documentElement ? document.documentElement.outerHTML : ""',
-        returnByValue: true,
-      });
-      html = again.result.value || html;
-      if (html.includes('movie--preview') || html.includes('inner-film')) break;
+    html = await readHtml();
+    if (html.includes('movie--preview') || html.includes('inner-film')) {
+      await sleep(1200);
+      html = await readHtml();
+      break;
     }
+    if (html.includes('</html>') && html.length > 500) break;
   }
-
-  process.stdout.write(html);
-  socket.close();
-} catch (error) {
-  console.error(error.message);
-  process.exitCode = 1;
-} finally {
-  if (chrome) chrome.kill();
-  try { rmSync(profileDir, { recursive: true, force: true }); } catch {}
-  process.exit(process.exitCode || 0);
+  return html;
 }
+
+const input = createInterface({ input: process.stdin, crlfDelay: Infinity });
+
+for await (const line of input) {
+  const url = line.trim();
+  if (!url) continue;
+  if (url === '__exit__') break;
+  try {
+    const html = await loadPage(url);
+    process.stdout.write(`${JSON.stringify({ url, html })}\n`);
+  } catch (error) {
+    process.stdout.write(`${JSON.stringify({ url, error: error.message })}\n`);
+  }
+}
+
+shutdown(0);

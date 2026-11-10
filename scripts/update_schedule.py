@@ -3,7 +3,10 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import socket
+import subprocess
+import sys
 import time
 import unicodedata
 from datetime import date, datetime, timedelta, timezone
@@ -86,13 +89,10 @@ RETRYABLE_STATUS = {408, 425, 429, 500, 502, 503, 504}
 FETCH_ATTEMPTS = 4
 DETAIL_DELAY = 1.5
 WAF_MARKERS = ("awsWafCookieDomainList", "gokuProps", "aws-waf-token")
-# Gateway pubblici usati solo quando la fonte diretta risponde con una
-# challenge anti-bot: i runner GitHub Actions sono bloccati dal WAF di AWS.
-PROXY_GATEWAYS = [
-    ("cors.lol", "https://api.cors.lol/?url={url}"),
-    ("corsfix", "https://proxy.corsfix.com/?{url}"),
-    ("cors.workers.dev", "https://test.cors.workers.dev/?{url}"),
-]
+BROWSER_SCRIPT = ROOT / "scripts" / "browser_fetch.mjs"
+# Fonti che richiedono il browser: i runner GitHub ricevono una challenge
+# anti-bot di AWS WAF che solo JavaScript puo' risolvere.
+_BROWSER_HOSTS: set[str] = set()
 MONTHS_IT = {
     "GENNAIO": 1,
     "FEBBRAIO": 2,
@@ -183,74 +183,86 @@ def _host_of(url: str) -> str:
     return urlparse(url).netloc
 
 
-# Gateway che hanno gia' funzionato, per non riprovare tutta la catena.
-_GATEWAY_BY_HOST: dict[str, str] = {}
+class BrowserFetcher:
+    """Scarica pagine con Chrome headless, risolvendo le challenge anti-bot.
 
+    Un solo processo Chrome viene tenuto aperto e riusato per tutte le richieste.
+    """
 
-def _gateway_list() -> list[tuple[str, str]]:
-    extra = os.environ.get("FP_PROXY_GATEWAYS")
-    gateways: list[tuple[str, str]] = []
-    if extra:
-        for item in extra.split(","):
-            if "=" in item:
-                name, template = item.split("=", 1)
-                gateways.append((name.strip(), template.strip()))
-    return gateways + list(PROXY_GATEWAYS)
+    def __init__(self) -> None:
+        self.process = None
+        self.node = shutil.which("node")
 
+    def available(self) -> bool:
+        return bool(self.node) and BROWSER_SCRIPT.exists()
 
-def fetch_via_proxy(url: str, timeout: int = 25) -> str | None:
-    """Riprova attraverso un gateway pubblico, usato solo per il blocco WAF."""
-    host = _host_of(url)
-    ordered = _gateway_list()
-    remembered = _GATEWAY_BY_HOST.get(host)
-    if remembered:
-        ordered = [
-            (name, template) for name, template in ordered if template == remembered
-        ] + [(name, template) for name, template in ordered if template != remembered]
-    for name, template in ordered:
-        try:
-            html = fetch(
-                template.format(url=url), attempts=1, timeout=timeout, allow_proxy=False
-            )
-        except Exception as error:
-            print(f"  Gateway {name} non disponibile: {error}")
-            continue
+    def _ensure(self):
+        if self.process and self.process.poll() is None:
+            return self.process
+        if not self.available():
+            raise RuntimeError("node o Chrome non disponibili")
+        self.process = subprocess.Popen(
+            [self.node, str(BROWSER_SCRIPT)],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            bufsize=1,
+        )
+        return self.process
+
+    def get(self, url: str) -> str:
+        process = self._ensure()
+        process.stdin.write(url + "\n")
+        process.stdin.flush()
+        line = process.stdout.readline()
+        if not line:
+            raise RuntimeError("il browser non ha risposto")
+        payload = json.loads(line)
+        if payload.get("error"):
+            raise RuntimeError(payload["error"])
+        html = payload.get("html") or ""
         if is_waf_challenge(html):
-            print(f"  Gateway {name}: il WAF blocca anche la richiesta mediata")
-            continue
-        _GATEWAY_BY_HOST[host] = template
-        print(f"  Gateway {name}: pagina recuperata ({len(html)} byte)")
+            raise RuntimeError("il WAF ha respinto anche la richiesta dal browser")
         return html
-    return None
+
+    def close(self) -> None:
+        if self.process and self.process.poll() is None:
+            try:
+                self.process.stdin.write("__exit__\n")
+                self.process.stdin.flush()
+                self.process.wait(timeout=10)
+            except Exception:
+                self.process.kill()
+
+
+_BROWSER = None
+
+
+def browser_get(url: str) -> str:
+    global _BROWSER
+    if _BROWSER is None:
+        _BROWSER = BrowserFetcher()
+    return _BROWSER.get(url)
 
 
 def fetch(
     url: str,
     attempts: int = FETCH_ATTEMPTS,
     timeout: int = 25,
-    headers: dict[str, str] | None = None,
-    allow_proxy: bool = True,
+    headers=None,
+    allow_browser: bool = True,
 ) -> str:
-    """Scarica una pagina riprovando su errori transitori (429, 5xx, rete)."""
-    last_error: Exception | None = None
+    """Scarica una pagina: diretto, con retry, e con browser se serve."""
+    last_error = None
     request_headers = dict(HEADERS)
     if headers:
         request_headers.update(headers)
 
-    if allow_proxy:
-        remembered = _GATEWAY_BY_HOST.get(_host_of(url))
-        if remembered:
-            try:
-                html = fetch(
-                    remembered.format(url=url),
-                    attempts=1,
-                    timeout=timeout,
-                    allow_proxy=False,
-                )
-                if not is_waf_challenge(html):
-                    return html
-            except Exception:
-                pass
+    if allow_browser and _host_of(url) in _BROWSER_HOSTS:
+        return browser_get(url)
 
     for attempt in range(1, attempts + 1):
         try:
@@ -261,12 +273,10 @@ def fetch(
             html = payload.decode(charset, errors="replace")
             if "\ufffd" in html:
                 html = payload.decode("cp1252", errors="replace")
-            if allow_proxy and is_waf_challenge(html):
-                print(f"  {url}: risposta anti-bot (AWS WAF), provo un gateway.")
-                proxied = fetch_via_proxy(url, timeout=timeout)
-                if proxied is not None:
-                    return proxied
-                raise RuntimeError("richiesta bloccata dal WAF anti-bot di AWS")
+            if allow_browser and is_waf_challenge(html):
+                print(f"  {url}: risposta anti-bot (AWS WAF), provo con il browser.")
+                _BROWSER_HOSTS.add(_host_of(url))
+                return browser_get(url)
             return html
         except HTTPError as error:
             last_error = error
@@ -285,7 +295,6 @@ def fetch(
     raise last_error if last_error else RuntimeError(f"Impossibile scaricare {url}")
 
 
-# --- Parser delle pagine 18tickets ---
 class SynopsisParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T11:33:20.715534+00:00",
+  "updatedAt": "2026-11-10T11:43:55.335364+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -1637,13 +1637,10 @@
       "venueUrls": {
         "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88595"
       },
-      "genres": [
-        "Commedia",
-        "Fantasy"
-      ],
+      "genres": [],
       "director": "Ti West",
-      "year": "2026",
-      "synopsis": "UN'EMOZIONANTE STORIA DI FANTASMI AMBIENTATA NELLA LONDRA DI DICKENS, CHE SEGUE IL VIAGGIO SOPRANNATURALE DI UN UOMO PER AFFRONTARE IL SUO PASSATO, PRESENTE E FUTURO MENTRE LOTTA PER UNA SECONDA POSSI",
+      "year": "",
+      "synopsis": "",
       "shows": [
         {
           "date": "12/11/2026",
