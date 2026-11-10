@@ -311,16 +311,24 @@ function calendarFileName(event) {
   return `${slug}-${event.eventDate.replace(/\//g, '-')}-${event.eventTime.replace(':', '')}.ics`;
 }
 
-// iPhone e iPad: il file ICS passa al sistema, che mostra le app
-// compatibili (Calendario, Google Calendar, Outlook...).
-function canUseNativeCalendarShare() {
-  if (!navigator.canShare || typeof File !== 'function') return false;
-  const appleTablet = /Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
-  return /iPhone|iPad|iPod/i.test(navigator.userAgent) || appleTablet;
+function isAppleMobile() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    || (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
 }
 
 function isAndroid() {
-  return /Android/i.test(navigator.userAgent) && /Chrome|CriOS|SamsungBrowser|EdgA|OPR/i.test(navigator.userAgent);
+  return /Android/i.test(navigator.userAgent);
+}
+
+// Le WebView delle app (Instagram, Facebook, Telegram...) non gestiscono
+// gli intent: lì conviene passare dal foglio di condivisione.
+function isAndroidWebView() {
+  return isAndroid() && /;\s*wv\)/i.test(navigator.userAgent);
+}
+
+function isChromiumAndroid() {
+  return isAndroid() && !isAndroidWebView()
+    && /Chrome|SamsungBrowser|EdgA|OPR|Vivaldi|Brave/i.test(navigator.userAgent);
 }
 
 // Scarto del fuso di Roma rispetto a UTC, in minuti, per un dato istante.
@@ -374,24 +382,65 @@ function androidCalendarIntent(event) {
   return `intent://#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;${extras};end`;
 }
 
+// Apre il selettore delle app di calendario installate sul telefono.
+function openAndroidCalendar(event) {
+  const link = document.createElement('a');
+  link.href = androidCalendarIntent(event);
+  link.rel = 'noopener';
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+
+// iPhone/iPad: il file ICS viene consegnato al sistema, che avvia l'app
+// Calendario con l'evento già compilato.
+function openCalendarFile(file) {
+  const url = URL.createObjectURL(file);
+  window.location.href = url;
+  window.setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+
 async function shareCalendarEvent(event) {
-  if (isAndroid()) {
-    window.location.href = androidCalendarIntent(event);
+  const file = new File([buildCalendarEvent(event)], calendarFileName(event), { type: 'text/calendar' });
+
+  // Android: l'intent INSERT apre il calendario scelto dall'utente
+  // (Calendario, Google Calendar, Samsung Calendar...) con l'evento pronto.
+  if (isChromiumAndroid()) {
+    openAndroidCalendar(event);
     return;
   }
-  const file = new File([buildCalendarEvent(event)], calendarFileName(event), { type: 'text/calendar' });
-  if (canUseNativeCalendarShare() && navigator.canShare({ files: [file] })) {
+
+  // iPhone, iPad e gli altri Android: foglio di condivisione di sistema.
+  // Provo comunque la condivisione del file ICS, senza pretendere che
+  // navigator.canShare lo dichiari supportato in anticipo.
+  if ((isAppleMobile() || isAndroid()) && typeof navigator.share === 'function') {
     try {
       await navigator.share({ files: [file], title: `${event.eventTitle} — ${event.eventVenue}` });
       return;
     } catch (error) {
       if (error.name === 'AbortError') return;
+      if (isAppleMobile()) {
+        openCalendarFile(file);
+        return;
+      }
     }
-    // Dopo l'attesa del foglio di condivisione il browser non concede più
-    // una nuova finestra: sul telefono si apre il calendario nella stessa scheda.
     window.location.href = calendarUrl(event);
     return;
   }
+
+  // iPhone/iPad senza Web Share: il file ICS apre comunque il Calendario.
+  if (isAppleMobile()) {
+    openCalendarFile(file);
+    return;
+  }
+
+  // Android senza Web Share: il link eventedit apre l'app se è installata.
+  if (isAndroid()) {
+    window.location.href = calendarUrl(event);
+    return;
+  }
+
   window.open(calendarUrl(event), '_blank', 'noopener,noreferrer');
 }
 
