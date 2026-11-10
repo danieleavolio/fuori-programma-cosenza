@@ -99,6 +99,13 @@ WAF_MARKERS = (
 )
 BROWSER_SCRIPT = ROOT / "scripts" / "browser_fetch.mjs"
 BROWSER_DELAY = 2.0
+# Gateway pubblici: quando la fonte diretta e il browser vengono respinti
+# (per esempio dai runner GitHub, bloccati dal WAF di AWS).
+PROXY_GATEWAYS = [
+    ("cors.lol", "https://api.cors.lol/?url={url}"),
+    ("corsfix", "https://proxy.corsfix.com/?{url}"),
+    ("cors.workers.dev", "https://test.cors.workers.dev/?{url}"),
+]
 # Fonti che richiedono il browser: i runner GitHub ricevono una challenge
 # anti-bot di AWS WAF che solo JavaScript puo' risolvere.
 _BROWSER_HOSTS: set[str] = set()
@@ -282,21 +289,39 @@ def browser_get(url: str) -> str:
         raise
 
 
+def fetch_via_proxy(url: str, timeout: int = 30):
+    """Riprova attraverso un gateway pubblico."""
+    for name, template in PROXY_GATEWAYS:
+        try:
+            html = fetch(
+                template.format(url=url),
+                attempts=1,
+                timeout=timeout,
+                allow_fallback=False,
+            )
+        except Exception as error:
+            print(f"  Gateway {name} non disponibile: {error}")
+            continue
+        if is_waf_challenge(html):
+            print(f"  Gateway {name}: il WAF blocca anche la richiesta mediata")
+            continue
+        print(f"  Gateway {name}: pagina recuperata ({len(html)} byte)")
+        return html
+    return None
+
+
 def fetch(
     url: str,
     attempts: int = FETCH_ATTEMPTS,
     timeout: int = 25,
     headers=None,
-    allow_browser: bool = True,
+    allow_fallback: bool = True,
 ) -> str:
-    """Scarica una pagina: diretto, con retry, e con browser se serve."""
+    """Scarica una pagina: diretto con retry, poi gateway e browser."""
     last_error = None
     request_headers = dict(HEADERS)
     if headers:
         request_headers.update(headers)
-
-    if allow_browser and _host_of(url) in _BROWSER_HOSTS:
-        return browser_get(url)
 
     for attempt in range(1, attempts + 1):
         try:
@@ -307,8 +332,12 @@ def fetch(
             html = payload.decode(charset, errors="replace")
             if "\ufffd" in html:
                 html = payload.decode("cp1252", errors="replace")
-            if allow_browser and is_waf_challenge(html):
-                print(f"  {url}: risposta anti-bot (AWS WAF), provo con il browser.")
+            if allow_fallback and is_waf_challenge(html):
+                print(f"  {url}: risposta anti-bot, provo un gateway.")
+                proxied = fetch_via_proxy(url, timeout=timeout)
+                if proxied is not None:
+                    return proxied
+                print(f"  {url}: riprovo con il browser.")
                 _BROWSER_HOSTS.add(_host_of(url))
                 return browser_get(url)
             return html
@@ -327,79 +356,6 @@ def fetch(
             print(f"  Errore di rete su {url} ({error}): riprovo tra {delay:.0f}s")
             time.sleep(delay)
     raise last_error if last_error else RuntimeError(f"Impossibile scaricare {url}")
-
-
-class SynopsisParser(HTMLParser):
-    def __init__(self) -> None:
-        super().__init__(convert_charrefs=True)
-        self.in_plot = False
-        self.plot_depth = 0
-        self.seen_plot = False
-        self.parts: list[str] = []
-
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        attributes = dict(attrs)
-        if tag == "div" and attributes.get("id") == "plotPanel" and not self.seen_plot:
-            self.in_plot = True
-            self.plot_depth = 1
-        elif self.in_plot and tag == "div":
-            self.plot_depth += 1
-        elif self.in_plot and tag == "br":
-            self.parts.append(" ")
-
-    def handle_endtag(self, tag: str) -> None:
-        if self.in_plot and tag == "div":
-            self.plot_depth -= 1
-            if self.plot_depth == 0:
-                self.in_plot = False
-                self.seen_plot = True
-
-    def handle_data(self, data: str) -> None:
-        if self.in_plot:
-            self.parts.append(data)
-
-
-class MovieMetadataParser(HTMLParser):
-    def __init__(self) -> None:
-        super().__init__(convert_charrefs=True)
-        self.in_option = False
-        self.in_label = False
-        self.label_parts: list[str] = []
-        self.value_parts: list[str] = []
-        self.metadata: dict[str, str | list[str]] = {
-            "genres": [],
-            "director": "",
-            "year": "",
-        }
-
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        attributes = dict(attrs)
-        if tag == "p" and "movie__option" in (attributes.get("class") or "").split():
-            self.in_option = True
-            self.label_parts = []
-            self.value_parts = []
-        elif self.in_option and tag == "strong":
-            self.in_label = True
-
-    def handle_endtag(self, tag: str) -> None:
-        if tag == "strong":
-            self.in_label = False
-        elif tag == "p" and self.in_option:
-            label = " ".join("".join(self.label_parts).split()).rstrip(":").casefold()
-            value = " ".join("".join(self.value_parts).split())
-            if label in {"genre", "genres", "genere", "generi"}:
-                self.metadata["genres"] = [
-                    item.strip() for item in re.split(r"[,;]", value) if item.strip()
-                ]
-            elif label in {"director", "directors", "regia", "regista"}:
-                self.metadata["director"] = value
-            elif label in {"year", "anno"} and re.fullmatch(r"\d{4}", value):
-                self.metadata["year"] = value
-            self.in_option = False
-
-    def handle_data(self, data: str) -> None:
-        if self.in_option:
-            (self.label_parts if self.in_label else self.value_parts).append(data)
 
 
 def get_movie_details(url: str) -> dict:
@@ -1133,21 +1089,30 @@ def main() -> None:
             target["announcedDates"].append(entry)
 
     movies_output = list(combined.values())
+    previous_details = {
+        title_key(movie.get("title", "")): movie for movie in previous.get("movies", [])
+    }
 
     # Dettagli film: la sinossi richiede la scheda dedicata, con pausa per
     # non farsi limitare dalla biglietteria.
     for index, movie in enumerate(movies_output):
-        if movie.get("synopsis"):
-            continue
-        details = get_movie_details(movie["url"])
-        if details.get("synopsis") and not movie.get("synopsis"):
-            movie["synopsis"] = details["synopsis"]
-        if details.get("genres") and not movie.get("genres"):
-            movie["genres"] = details["genres"]
-        if details.get("director") and not movie.get("director"):
-            movie["director"] = details["director"]
-        if details.get("year") and not movie.get("year"):
-            movie["year"] = details["year"]
+        if not movie.get("synopsis"):
+            details = get_movie_details(movie["url"])
+            if details.get("synopsis") and not movie.get("synopsis"):
+                movie["synopsis"] = details["synopsis"]
+            if details.get("genres") and not movie.get("genres"):
+                movie["genres"] = details["genres"]
+            if details.get("director") and not movie.get("director"):
+                movie["director"] = details["director"]
+            if details.get("year") and not movie.get("year"):
+                movie["year"] = details["year"]
+        if not movie.get("synopsis"):
+            # Scheda non raggiungibile: si tengono i dettagli già noti.
+            old = previous_details.get(title_key(movie["title"]))
+            if old:
+                for field in ("synopsis", "genres", "director", "year"):
+                    if not movie.get(field) and old.get(field):
+                        movie[field] = old[field]
         if index < len(movies_output) - 1:
             time.sleep(DETAIL_DELAY)
 
