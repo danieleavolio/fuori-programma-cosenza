@@ -76,7 +76,10 @@ jobs:
           else
             git commit -m "Aggiorna orari cinema [skip ci]"
             if [ -n "$SCHEDULE_TOKEN" ]; then
+              # Il checkout inietta l'header del GITHUB_TOKEN, che ha la
+              # precedenza sul remote: va rimosso per usare il token dedicato.
               git remote set-url origin "https://x-access-token:${SCHEDULE_TOKEN}@github.com/${{ github.repository }}.git"
+              git config --local --unset-all http.https://github.com/.extraheader || true
             fi
             if ! git push; then
               echo "::warning title=Push non consentito::Il token del workflow non puo' scrivere su main: i dati aggiornati vengono comunque pubblicati dal deploy."
