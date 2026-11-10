@@ -24,6 +24,8 @@ Poi visita `http://localhost:8000`. L’app legge i dati da `data/schedule.json`
 
 `python scripts/update_schedule.py` interroga tutte le fonti ufficiali dei cinema e aggiorna `data/schedule.json`. GitHub Actions aggiorna e ripubblica il sito ogni quattro ore.
 
+Il WAF di AWS davanti alle sale 18tickets risponde ai runner GitHub con una challenge anti-bot in JavaScript invece della pagina: per questo lo scraper usa **Chrome headless** (già presente sui runner, avviato da `scripts/browser_fetch.mjs`) quando la richiesta diretta viene bloccata. Da una rete normale la richiesta diretta funziona e il browser non viene usato.
+
 Lo scraper è pensato per non perdere mai la programmazione:
 
 - ritenta su errori transitori (429, 5xx, rete) con attese crescenti;
@@ -41,6 +43,10 @@ python scripts/test_resilience.py
 ```
 
 Gli orari rimangono collegati direttamente alle pagine di acquisto del rispettivo cinema.
+
+### Token del workflow
+
+Il deploy pubblica sempre i dati aggiornati. Per salvare la programmazione anche nel repository il workflow usa il secret `SCHEDULE_TOKEN` (un token con permesso di scrittura su questo repository): senza il secret il sito si aggiorna lo stesso, ma `data/schedule.json` nel repository resta fermo all'ultimo commit.
 
 ## Interfaccia
 

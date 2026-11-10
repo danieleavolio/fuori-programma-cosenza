@@ -23,7 +23,7 @@ const CHROME_CANDIDATES = [
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
 ].filter(Boolean);
 
-const PAGE_TIMEOUT_MS = Number(process.env.FP_BROWSER_TIMEOUT || 90000);
+const PAGE_TIMEOUT_MS = Number(process.env.FP_BROWSER_TIMEOUT || 40000);
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // La pagina e' quella vera solo se contiene uno di questi segnali.

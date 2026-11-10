@@ -221,7 +221,7 @@ class BrowserFetcher:
         )
         return self.process
 
-    def get(self, url: str, attempts: int = 2) -> str:
+    def get(self, url: str, attempts: int = 1) -> str:
         process = self._ensure()
         for attempt in range(1, attempts + 1):
             process.stdin.write(url + "\n")
@@ -253,13 +253,26 @@ class BrowserFetcher:
 
 
 _BROWSER = None
+# Fonti che hanno respinto il browser: non si riprova, si usa l'ultima
+# programmazione nota.
+_BLOCKED_HOSTS: set[str] = set()
 
 
 def browser_get(url: str) -> str:
     global _BROWSER
+    host = _host_of(url)
+    if host in _BLOCKED_HOSTS:
+        raise RuntimeError(
+            f"{host}: il browser e' stato respinto, nessun nuovo tentativo"
+        )
     if _BROWSER is None:
         _BROWSER = BrowserFetcher()
-    return _BROWSER.get(url)
+    try:
+        return _BROWSER.get(url)
+    except RuntimeError as error:
+        if "WAF" in str(error) or "challenge" in str(error).lower():
+            _BLOCKED_HOSTS.add(host)
+        raise
 
 
 def fetch(
