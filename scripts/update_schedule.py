@@ -98,6 +98,7 @@ WAF_MARKERS = (
     "Just a moment",
 )
 BROWSER_SCRIPT = ROOT / "scripts" / "browser_fetch.mjs"
+BROWSER_DELAY = 2.0
 # Fonti che richiedono il browser: i runner GitHub ricevono una challenge
 # anti-bot di AWS WAF che solo JavaScript puo' risolvere.
 _BROWSER_HOSTS: set[str] = set()
@@ -184,6 +185,10 @@ def _retry_delay(
 
 def is_waf_challenge(html: str) -> bool:
     """True se la fonte ha risposto con la challenge anti-bot di AWS WAF."""
+    head = html.lstrip()[:200].lower()
+    if not head.startswith("<"):
+        # Risposte non-HTML (per esempio il JSON pubblicato) non sono challenge.
+        return False
     return any(marker in html for marker in WAF_MARKERS)
 
 
@@ -233,6 +238,8 @@ class BrowserFetcher:
             if payload.get("error"):
                 raise RuntimeError(payload["error"])
             html = payload.get("html") or ""
+            # Ritmo lento: il WAF penalizza le richieste troppo ravvicinate.
+            time.sleep(BROWSER_DELAY)
             if is_waf_challenge(html):
                 if attempt < attempts:
                     print("  il browser ha ancora la challenge, riprovo.")
@@ -835,18 +842,19 @@ def parse_garden_multi_days(
     return output_movies
 
 
-def describe_page(html: str) -> str:
+def describe_page(html: str, with_preview: bool = False) -> str:
     """Riassunto breve della pagina ricevuta, per capire cosa ha risposto la fonte."""
     title = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
     title_text = " ".join(title.group(1).split())[:120] if title else "(nessun titolo)"
-    preview = " ".join(html[:400].split())
-    return (
+    summary = (
         f"{len(html)} byte, titolo '{title_text}', "
         f"movie--preview={html.count('movie--preview')}, "
         f"inner-film={html.count('inner-film')}, "
-        f"time-select={html.count('time-select__place')} | "
-        f"inizio: {preview}"
+        f"time-select={html.count('time-select__place')}"
     )
+    if with_preview:
+        summary += " | inizio: " + " ".join(html[:400].split())
+    return summary
 
 
 def parse_source(source: dict) -> list[dict]:
@@ -873,6 +881,9 @@ def parse_source(source: dict) -> list[dict]:
         raise RuntimeError(f"[{source['name']}] Errore parsing HTML: {e}") from e
 
     if not parser.movies:
+        # L'anteprima resta nel log: nel JSON deve finire solo il riepilogo,
+        # altrimenti i marcatori della challenge falserebbero i controlli.
+        print(f"  Pagina ricevuta da {source['url']}: {describe_page(html, True)}")
         raise RuntimeError(
             f"[{source['name']}] Nessun film o spettacolo valido trovato. "
             f"Pagina ricevuta: {describe_page(html)}"
