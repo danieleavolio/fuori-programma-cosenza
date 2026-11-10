@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T15:29:23.700992+00:00",
+  "updatedAt": "2026-11-10T15:36:38.156153+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -7,7 +7,7 @@
       "location": "Zumpano",
       "source": "https://zumpano.andromeda.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "stale"
+      "status": "available"
     },
     {
       "id": "citrigno",
@@ -15,7 +15,7 @@
       "location": "Cosenza",
       "source": "https://citrigno.cosenzacinema.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "stale"
+      "status": "available"
     },
     {
       "id": "cinema-teatro-italia",
@@ -23,7 +23,7 @@
       "location": "Cosenza",
       "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "stale"
+      "status": "available"
     },
     {
       "id": "unical",
@@ -31,7 +31,7 @@
       "location": "Arcavacata di Rende",
       "source": "https://unical.cosenzacinema.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "stale"
+      "status": "available"
     },
     {
       "id": "garden",
@@ -1337,11 +1337,11 @@
       "id": "10",
       "title": "IL RUMORE DELLE COSE NUOVE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89849/standard_781ef62b-bb64-460e-952f-f681a6176ce4.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/89849",
+      "url": "https://zumpano.andromeda.andromedacinema.it/film/89849",
       "duration": "1h 53m",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/89849"
+        "andromeda-river": "https://zumpano.andromeda.andromedacinema.it/film/89849"
       },
       "genres": [
         "Dramma"
@@ -1356,17 +1356,17 @@
             {
               "time": "17:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/b0a79546-136b-4860-9c08-e9dc77705cb9#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/b0a79546-136b-4860-9c08-e9dc77705cb9#theater-init"
             },
             {
               "time": "19:30",
               "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/16106cce-6896-4330-8b64-60a0367b1764#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/16106cce-6896-4330-8b64-60a0367b1764#theater-init"
             },
             {
               "time": "21:45",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/5db3c07b-71aa-41aa-b0ca-559c89e4989b#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/5db3c07b-71aa-41aa-b0ca-559c89e4989b#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1377,17 +1377,17 @@
             {
               "time": "17:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/e9da9cf3-2548-4f7c-bc3f-f12736eab1cd#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/e9da9cf3-2548-4f7c-bc3f-f12736eab1cd#theater-init"
             },
             {
               "time": "19:30",
               "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/6f44455e-4182-4723-a4f7-97c3bc22ec00#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/6f44455e-4182-4723-a4f7-97c3bc22ec00#theater-init"
             },
             {
               "time": "21:45",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/18b808a5-226d-4d0c-925d-2663d72ebd89#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/18b808a5-226d-4d0c-925d-2663d72ebd89#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1398,17 +1398,17 @@
             {
               "time": "17:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/1fb7df30-7c15-48d5-b00b-777ccb626598#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/1fb7df30-7c15-48d5-b00b-777ccb626598#theater-init"
             },
             {
               "time": "19:30",
               "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/39f83489-ee5a-47cf-a1fb-711a2be901f8#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/39f83489-ee5a-47cf-a1fb-711a2be901f8#theater-init"
             },
             {
               "time": "21:45",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/af8c4c02-e847-40c8-b6dc-b9aadb91a427#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/af8c4c02-e847-40c8-b6dc-b9aadb91a427#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1419,17 +1419,17 @@
             {
               "time": "17:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/a1ea35a7-d575-4680-98fe-4680971d5c7a#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/a1ea35a7-d575-4680-98fe-4680971d5c7a#theater-init"
             },
             {
               "time": "19:30",
               "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/89505336-278e-4682-a495-cdbc17e72a6e#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/89505336-278e-4682-a495-cdbc17e72a6e#theater-init"
             },
             {
               "time": "21:45",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/7dfea3de-1e96-4d51-8a18-953ea52ab84a#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89849/7dfea3de-1e96-4d51-8a18-953ea52ab84a#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1545,11 +1545,11 @@
       "id": "12",
       "title": "GODZILLA MINUS ZERO",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89882/standard_36595094-483e-486b-b34b-19c364061b0f.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/89882",
+      "url": "https://zumpano.andromeda.andromedacinema.it/film/89882",
       "duration": "",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/89882"
+        "andromeda-river": "https://zumpano.andromeda.andromedacinema.it/film/89882"
       },
       "genres": [
         "Fantascienza",
@@ -1566,12 +1566,12 @@
             {
               "time": "17:00",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/3aab4f12-0159-442d-9ea2-99caaa5cee53#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/3aab4f12-0159-442d-9ea2-99caaa5cee53#theater-init"
             },
             {
               "time": "21:30",
               "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/d67b11e0-e434-44e4-8696-620a1a3640e5#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/d67b11e0-e434-44e4-8696-620a1a3640e5#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1582,12 +1582,12 @@
             {
               "time": "17:00",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/daba5222-453c-4867-a831-401d916f0cf6#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/daba5222-453c-4867-a831-401d916f0cf6#theater-init"
             },
             {
               "time": "21:30",
               "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/78caedc4-2925-4dac-9134-c6e3602fb33a#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/78caedc4-2925-4dac-9134-c6e3602fb33a#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1598,12 +1598,12 @@
             {
               "time": "17:00",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/25364d28-14aa-4f79-86a3-ae8feb9bd9fe#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/25364d28-14aa-4f79-86a3-ae8feb9bd9fe#theater-init"
             },
             {
               "time": "21:30",
               "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/f315d96f-7ebc-4bae-8b7a-058e0606b656#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/f315d96f-7ebc-4bae-8b7a-058e0606b656#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1614,12 +1614,12 @@
             {
               "time": "17:00",
               "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/d33ab485-301f-4ce1-a8c0-9821583e2da9#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/d33ab485-301f-4ce1-a8c0-9821583e2da9#theater-init"
             },
             {
               "time": "21:30",
               "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89882/58bb9c66-372f-4dab-ba86-6e0852ea5997#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/89882/58bb9c66-372f-4dab-ba86-6e0852ea5997#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1631,11 +1631,11 @@
       "id": "13",
       "title": "SCROOGE E GLI SPIRITI DEL NATALE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/88595",
+      "url": "https://zumpano.andromeda.andromedacinema.it/film/88595",
       "duration": "1h 58m",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88595"
+        "andromeda-river": "https://zumpano.andromeda.andromedacinema.it/film/88595"
       },
       "genres": [
         "Commedia",
@@ -1651,12 +1651,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/530e0199-6a23-468a-8348-b813ca5473f4#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/530e0199-6a23-468a-8348-b813ca5473f4#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/1c53963c-18c5-44fd-8630-ca77a0af253a#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/1c53963c-18c5-44fd-8630-ca77a0af253a#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1667,12 +1667,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/c27af6e4-0427-49ba-a778-979634864865#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/c27af6e4-0427-49ba-a778-979634864865#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/0754eace-2994-4051-a786-3f6526b137c0#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/0754eace-2994-4051-a786-3f6526b137c0#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1683,12 +1683,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/63f0e1b0-10b0-41cf-a5fb-eac4f7ed7128#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/63f0e1b0-10b0-41cf-a5fb-eac4f7ed7128#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/052e1738-55d7-4f4e-9286-a24665ad7eac#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/052e1738-55d7-4f4e-9286-a24665ad7eac#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1699,12 +1699,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/314916b1-e4c7-4437-b4bb-4fbd12e0797a#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/314916b1-e4c7-4437-b4bb-4fbd12e0797a#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/05fd981c-e471-4ba0-8705-4ee7a2dca068#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/05fd981c-e471-4ba0-8705-4ee7a2dca068#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1847,26 +1847,5 @@
       "announcedDates": []
     }
   ],
-  "warnings": [
-    {
-      "type": "source-failed",
-      "venue": "andromeda-river",
-      "message": "[Andromeda River] Errore di rete su https://zumpano.andromeda.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
-    },
-    {
-      "type": "source-failed",
-      "venue": "citrigno",
-      "message": "[Citrigno] Errore di rete su https://citrigno.cosenzacinema.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
-    },
-    {
-      "type": "source-failed",
-      "venue": "cinema-teatro-italia",
-      "message": "[Cinema Teatro Italia A. Tieri] Errore di rete su https://cinemateatroitalia.cosenzacinema.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
-    },
-    {
-      "type": "source-failed",
-      "venue": "unical",
-      "message": "[Unical Cinema] Errore di rete su https://unical.cosenzacinema.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
-    }
-  ]
+  "warnings": []
 }
