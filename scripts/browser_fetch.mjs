@@ -149,16 +149,11 @@ async function loadPage(url) {
   await send('Page.navigate', { url });
   const deadline = Date.now() + PAGE_TIMEOUT_MS;
   let html = '';
-  let lastReload = Date.now();
   while (Date.now() < deadline) {
     await sleep(1500);
     html = await readHtml();
+    // La challenge si risolve da sola: ricaricare la pagina la azzererebbe.
     if (hasContent(html) && !isChallenge(html)) break;
-    // La challenge non si risolve: si ricarica la pagina ogni 10 secondi.
-    if (isChallenge(html) && Date.now() - lastReload > 10000) {
-      lastReload = Date.now();
-      try { await send('Page.reload', { ignoreCache: true }); } catch {}
-    }
   }
   return html;
 }

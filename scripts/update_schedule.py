@@ -724,7 +724,9 @@ def parse_garden_multi_days(
         return []
 
     date_links = re.findall(r'href=["\']\?data=(\d{2}-\d{2}-\d{4})["\']', home_html)
-    date_links = list(dict.fromkeys(date_links))[:14]
+    # Pochi giorni: oltre, le pagine future contengono solo annunci e il
+    # WAF penalizza le richieste inutili.
+    date_links = list(dict.fromkeys(date_links))[:5]
     if not date_links:
         date_links = [today_date().strftime("%d-%m-%Y")]
 
