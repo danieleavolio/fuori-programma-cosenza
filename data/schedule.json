@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T16:38:29.632570+00:00",
+  "updatedAt": "2026-11-10T11:11:11.859356+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -62,6 +62,7 @@
       ],
       "director": "Joe Russo, Anthony Russo",
       "year": "2026",
+      "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato.",
       "shows": [
         {
           "date": "16/12/2026",
@@ -272,11 +273,6 @@
           "date": "16/12/2026",
           "shows": [
             {
-              "time": "00:01",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26452"
-            },
-            {
               "time": "16:00",
               "room": "Sala Garden",
               "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26452"
@@ -295,11 +291,56 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [],
-      "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato."
+      "announcedDates": []
     },
     {
       "id": "2",
+      "title": "SHAUN VITA DA PECORA - OPERAZIONE Z.U.C.C.A",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86813/standard_5124ddee-8c1e-417f-baf5-7a7556dd14e1.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86813",
+      "duration": "",
+      "tags": [],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/86813"
+      },
+      "genres": [
+        "Animazione",
+        "Avventura",
+        "Commedia",
+        "Horror",
+        "Famiglia"
+      ],
+      "director": "Steve Cox, Matthew Walker",
+      "year": "2026",
+      "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia.",
+      "shows": [
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86813/38b03fbd-efaf-4411-ab17-069dbb5aec78#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "16:50",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86813/6dec9418-5767-4bc6-8603-1aa1a8726b6b#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        }
+      ],
+      "announcedDates": []
+    },
+    {
+      "id": "3",
       "title": "DIO RIDE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88991/standard_16e4e33a-dbe0-49a8-941c-d40cbae05dab.jpg",
       "url": "https://zumpano.andromeda.18tickets.it/film/88991",
@@ -308,94 +349,15 @@
       "venueUrls": {
         "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88991",
         "cinema-teatro-italia": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538",
-        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
+        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
       },
       "genres": [
         "Commedia"
       ],
       "director": "G. Veronesi",
       "year": "2026",
+      "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
       "shows": [
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "18:45",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/c49eaba1-644d-4e09-816e-98868092cbcc#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/6f25774b-b7ea-43dd-a4c2-6ce401f4e361#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/3658cb02-81fe-49ea-9bee-b93ef9087806#theater-init"
-            },
-            {
-              "time": "18:45",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/8e2ecf7c-850a-40a1-a11b-ad02089b01a9#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/bbc5135a-1ece-4720-a6e0-b222732fb245#theater-init"
-            },
-            {
-              "time": "18:45",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/6c22bc2d-50d8-4738-939b-56de60870774#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/4fa385f2-00c4-4343-a3f0-54f31de99bd1#theater-init"
-            },
-            {
-              "time": "18:45",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/132ed156-f6ad-4915-a6f6-385904ab1af7#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/12946f03-23b1-46a9-b2a9-b2710f797a80#theater-init"
-            },
-            {
-              "time": "18:45",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88991/f4c5d993-0221-4122-b398-99445536ef5b#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "10/11/2026",
           "shows": [
@@ -434,178 +396,69 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "05/11/2026",
+          "date": "12/11/2026",
           "shows": [
             {
-              "time": "19:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/6fa2bc45-5dc4-4142-b12c-b3445a8c99a5#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/bf0196a9-8aff-4cb1-831b-daec517684eb#theater-init"
+              "time": "19:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88991/3f27bd6f-7e68-4aab-b711-474dc5885dce#theater-init"
             }
           ],
-          "venue": "cinema-teatro-italia"
+          "venue": "andromeda-river"
         },
         {
-          "date": "06/11/2026",
+          "date": "13/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88991/4a5840ec-0641-49e2-922b-cf7e33ab54aa#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88991/be4e0215-3800-49bd-a41b-ef0f38ffbcb6#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88991/94fc46e6-bb79-4eab-855f-137d18d83b38#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "11/11/2026",
           "shows": [
             {
               "time": "17:15",
               "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/1259c20c-4cb3-451b-badb-3e82bd070bdd#theater-init"
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/a7296c84-1ef8-4751-953c-c09807f1efee#theater-init"
             },
             {
               "time": "19:15",
               "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/0d1c6ef1-e4c4-4181-be82-a1a4f76eea1c#theater-init"
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/3da064ea-33d3-4425-ace1-6d44cc22858d#theater-init"
             },
             {
               "time": "21:15",
               "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/27198eb6-b00b-4633-81f2-7cd1a59e3ec8#theater-init"
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/2f76ede6-9430-4f9a-8ea0-faafec2cef6e#theater-init"
             }
           ],
           "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "17:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/377f5485-388c-40c5-b8ab-5669c32eb532#theater-init"
-            },
-            {
-              "time": "19:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/5634503f-4b78-4c7a-84f5-ac8b83bc760e#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/8a4c1569-e45c-4bf6-a566-a9ee36cfa631#theater-init"
-            }
-          ],
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "17:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/c57a2b38-d82b-401d-887c-96bb3cc9fad3#theater-init"
-            },
-            {
-              "time": "19:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/bb20fed5-b763-4f0d-b9b3-238cc089cffa#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538/57529e96-c01f-4f48-aa23-0189950084fc#theater-init"
-            }
-          ],
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26834"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "21:00",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "21:00",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "21:00",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            }
-          ],
-          "venue": "garden"
         },
         {
           "date": "10/11/2026",
@@ -652,274 +505,41 @@
       ],
       "announcedDates": [
         {
-          "date": "05/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "06/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "07/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "08/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
           "date": "11/11/2026",
           "venue": "cinema-teatro-italia"
         }
-      ],
-      "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADEDUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE."
-    },
-    {
-      "id": "3",
-      "title": "HOPE",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88925/standard_0da4a5df-4290-42a6-9e4f-7c3247aeffac.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/88925",
-      "duration": "2h 45m",
-      "tags": [],
-      "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88925"
-      },
-      "genres": [
-        "Fantascienza",
-        "Mistero",
-        "Azione"
-      ],
-      "director": "Na Hong Jin.",
-      "year": "2026",
-      "shows": [
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "19:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/0a6960f7-85c4-46b4-a83b-3799b765ee00#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/f790e70a-720c-46e8-8b7b-c03c7ed855d1#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "19:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/388ab2c3-086e-4f40-8630-13d3d8f911ce#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/42b84f8c-0b7c-4344-9385-a6da8b95cb6c#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "19:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/325680cb-3193-40e3-a1c2-8cbb08271d74#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/038dd571-cad0-472c-9b8f-ceffbcfe8cdb#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "19:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/6d21a712-b00b-40ab-902c-a9ba88708648#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/1afa28a8-1080-4fd3-980d-7ba0285b1d1d#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "19:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/048088cc-0f02-41ca-8724-621b2e3c03a9#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/82290594-6d7f-4999-baa1-c474bf1ef03c#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "19:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/59ea6acc-4bbd-49ec-b040-8b91e729a902#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/08a8153d-6684-477d-928d-84bd407634c5#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "11/11/2026",
-          "shows": [
-            {
-              "time": "19:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/d3841540-0f2e-430f-b4a3-952d0b06d07f#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88925/aa095a01-4d10-4358-a711-1c31b208836d#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        }
-      ],
-      "announcedDates": [],
-      "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede."
+      ]
     },
     {
       "id": "4",
-      "title": "WILD HORSE NINE",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89717/standard_00638d12-91e6-4278-83b9-575bebc26d5a.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/89717",
-      "duration": "1h 57m",
+      "title": "IL GATTO COL CAPPELLO",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/86057",
+      "duration": "1h 45m",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/89717",
-        "unical": "https://unical.cosenzacinema.18tickets.it/film/108013",
-        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26964"
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/86057",
+        "citrigno": "https://citrigno.cosenzacinema.18tickets.it/film/107980",
+        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
       },
       "genres": [
+        "Animazione",
+        "Avventura",
         "Commedia",
-        "Thriller",
-        "Crime"
+        "Fantasy",
+        "Famiglia"
       ],
-      "director": "Martin Mc Donagh",
+      "director": "Erica Rivinoja, Alessandro Carloni",
       "year": "2026",
+      "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima.",
       "shows": [
         {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/357686d1-6bb1-4831-ad0e-fa4720f4ed0f#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/58e30657-0f56-47d5-b2a1-0457c766b9bf#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/3ad520bf-b7b9-42a0-bbfb-eecce3b3b267#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/5422c7b1-b10a-441e-9680-e2a341eb4792#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/3ad6f6f4-4a38-41e4-a4a0-c4276507a7a3#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/da819f37-79a6-4680-b1b3-1a451f71170b#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/2dc98a0b-4de7-4b0d-9f60-8d349849db7c#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/b4f50eff-adb4-403e-bd79-447f3c2ad39d#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/cc2eb8c1-22b9-4882-a32a-1594b608cf52#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/3ee69002-9229-400b-8b41-6b796c95c01d#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
           "date": "10/11/2026",
           "shows": [
             {
-              "time": "19:15",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/98071a6d-ff93-4cfa-b4ab-61e210315bf1#theater-init"
-            },
-            {
-              "time": "21:45",
+              "time": "17:00",
               "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/3f059d44-37fb-4d36-8ad4-4a708edebd1a#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/86057/1e560208-a28a-4a3d-9d0c-bd1d0900fc3f#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -928,179 +548,101 @@
           "date": "11/11/2026",
           "shows": [
             {
-              "time": "19:15",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/8aec7437-88a0-4764-be52-a1733d2e1d2e#theater-init"
-            },
-            {
-              "time": "21:45",
+              "time": "17:00",
               "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89717/a7e7ce3c-fc79-4e9e-a8c8-9b570f2e2d8d#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/86057/a19a9918-1bf3-4219-acfb-464125d5a388#theater-init"
             }
           ],
           "venue": "andromeda-river"
         },
         {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/e166c445-c2c8-4cca-830a-686de49d7a88#theater-init"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/06ca7fdd-aef5-469d-820a-5dbec3f09fdb#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
-          "date": "06/11/2026",
+          "date": "12/11/2026",
           "shows": [
             {
               "time": "17:00",
               "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/f0149b72-c4a1-4ffd-b12d-de5fff5c9d73#theater-init"
-            },
-            {
-              "time": "19:15",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/1fe26121-9f15-41c2-86dd-e3aba332101e#theater-init"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/11b53365-c2c3-49b0-9045-5818a273ef2e#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/86057/507eccdb-a9f7-4eb2-8e58-3b81218ff990#theater-init"
             }
           ],
-          "venue": "unical"
+          "venue": "andromeda-river"
         },
         {
-          "date": "07/11/2026",
+          "date": "13/11/2026",
           "shows": [
             {
               "time": "17:00",
               "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/60093548-16e4-43a6-8f70-78f98ec1bf5b#theater-init"
-            },
-            {
-              "time": "19:15",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/ee0800cc-a358-4865-90d3-b5b09bbfd7e7#theater-init"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/a4fd5909-39ae-4ee8-aaff-6a2a34c1acd0#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/86057/3e5bf8cf-d507-4574-b167-d33eb5dcd2b3#theater-init"
             }
           ],
-          "venue": "unical"
+          "venue": "andromeda-river"
         },
         {
-          "date": "08/11/2026",
+          "date": "14/11/2026",
           "shows": [
             {
               "time": "17:00",
               "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/6a6e5060-5891-4a5d-8f4c-e2187df64283#theater-init"
-            },
+              "url": "https://zumpano.andromeda.18tickets.it/film/86057/899b3c02-8eda-45f5-8cc9-4d355fe3ac30#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
             {
-              "time": "19:15",
+              "time": "17:00",
               "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/3144d50b-32bb-4576-98c4-e3315e9c9764#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/86057/7613ff2c-2574-4064-96e0-f36d8cb7b178#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "16:45",
+              "room": "Sala 2",
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/791c6b13-c3ee-47a2-9456-2ad94aa6c25e#theater-init"
             },
             {
-              "time": "21:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/17adb661-d821-4f6b-8340-73b4397bec59#theater-init"
+              "time": "18:50",
+              "room": "Sala 2",
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/c30c3340-36cd-4298-bc3b-977843dad2ac#theater-init"
             }
           ],
-          "venue": "unical"
+          "venue": "citrigno"
         },
         {
-          "date": "05/11/2026",
+          "date": "11/11/2026",
           "shows": [
             {
-              "time": "22:10",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26964"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "22:10",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26964"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+              "time": "16:45",
+              "room": "Sala 2",
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/d1b6ac67-2eff-4a86-8007-9e1f815ca5e6#theater-init"
             },
             {
-              "time": "22:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+              "time": "18:50",
+              "room": "Sala 2",
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/fb87b8e5-5988-4df0-ac9d-457d65af9666#theater-init"
             }
           ],
-          "venue": "garden"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
-            },
-            {
-              "time": "22:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
-            },
-            {
-              "time": "22:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
-            }
-          ],
-          "venue": "garden"
+          "venue": "citrigno"
         },
         {
           "date": "10/11/2026",
           "shows": [
             {
               "time": "16:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
             },
             {
-              "time": "22:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+              "time": "18:20",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
             }
           ],
           "venue": "garden"
@@ -1110,61 +652,111 @@
           "shows": [
             {
               "time": "16:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
             },
             {
-              "time": "22:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+              "time": "18:20",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
             }
           ],
           "venue": "garden"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "05/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "06/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "07/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "08/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "09/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "10/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "11/11/2026",
-          "venue": "unical"
-        }
-      ],
-      "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca."
+      "announcedDates": []
     },
     {
       "id": "5",
+      "title": "GEORGE MICHAEL: THE FAITH TOUR",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/83218/standard_3c5705d7-f46c-4a54-94a0-f1f865056603.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/83218",
+      "duration": "",
+      "tags": [
+        "V.O. SOTT."
+      ],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/83218",
+        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
+      },
+      "genres": [
+        "Documentario",
+        "Musica"
+      ],
+      "director": "Andy Morahan, David Austin",
+      "year": "2026",
+      "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E",
+      "shows": [
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/83218/2895932b-1307-40ad-b848-9717ad58169a#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/83218/dfbd8c49-dbf5-427b-aa4f-e5ed862c00b7#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/83218/2f6f7b2b-b9e4-4e03-97bc-1f8cc5fc4306#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/83218/81e8f3a3-59c4-41dc-b939-95b4d1e24cc6#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "20:10",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "20:10",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
+            }
+          ],
+          "venue": "garden"
+        }
+      ],
+      "announcedDates": []
+    },
+    {
+      "id": "6",
       "title": "SE DOMANI NON TORNO",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_2d0dc9ff-2023-4fa5-8bf8-2f43391e1232.jpg",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_6173535a-3620-4493-b598-af273220de43.jpeg",
       "url": "https://zumpano.andromeda.18tickets.it/film/86088",
       "duration": "1h 46m",
-      "tags": [],
+      "tags": [
+        "Scuole"
+      ],
       "venueUrls": {
         "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/86088",
         "citrigno": "https://citrigno.cosenzacinema.18tickets.it/film/107122",
-        "unical": "https://unical.cosenzacinema.18tickets.it/film/107122",
+        "unical": "https://unical.cosenzacinema.18tickets.it/film/108706",
         "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
       },
       "genres": [
@@ -1172,107 +764,8 @@
       ],
       "director": "Paola Randi",
       "year": "2026",
+      "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
       "shows": [
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/4108c4e6-6044-40d5-8bdd-b27338cd0040#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/4e6b0b08-3b5a-42d2-9b55-f7e2869ae3a1#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/9580e677-3cbf-4c27-bfe7-4fe4a65f0590#theater-init"
-            },
-            {
-              "time": "19:30",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/a25056b9-eef4-4dd5-96cf-c1f16d3f2102#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/6a7bc07b-93a5-44d2-b17d-69ae88360993#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/64fa7edc-824f-495c-b873-7762caca0a61#theater-init"
-            },
-            {
-              "time": "19:30",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/856c7094-54eb-428d-9292-e6a5d788a446#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/c3a666b0-7c58-480a-ad13-9dc3ce1a1511#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/c95db2a7-af67-47ff-8c4a-6453248a72a6#theater-init"
-            },
-            {
-              "time": "19:30",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/4a2b7f2c-2883-4fbf-893f-146ff5751e9e#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/1acdfb90-b622-4562-a554-f400e07f24c8#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/e86a1acc-0b19-4ca8-82e3-6010a3899814#theater-init"
-            },
-            {
-              "time": "19:30",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/c49f0fae-a29e-4b50-82ac-16d0dd8a79fb#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/0d5f6bd4-7e1c-45ea-9ffb-10ea3ca9ec26#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "10/11/2026",
           "shows": [
@@ -1316,91 +809,107 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "05/11/2026",
+          "date": "12/11/2026",
           "shows": [
             {
-              "time": "19:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/a6c47b5f-d8dd-474a-b66a-a9e62710b6bb#theater-init"
+              "time": "17:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/e7e6b2a8-2ca7-4005-bc76-167fc6639a03#theater-init"
             },
             {
-              "time": "21:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/2ee641ee-0779-4da9-9db3-d06cd82e152a#theater-init"
+              "time": "19:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/f45a4293-7c0d-4c56-9f2e-97412273ec1a#theater-init"
             }
           ],
-          "venue": "citrigno"
+          "venue": "andromeda-river"
         },
         {
-          "date": "06/11/2026",
+          "date": "13/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/9bb9aa63-bf72-444b-9960-a61ee2713232#theater-init"
+            },
+            {
+              "time": "19:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/11628ad4-0a60-4a6e-8be9-c204c9f0e08b#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/82bf680f-818b-4a87-9934-43e929310c74#theater-init"
+            },
+            {
+              "time": "19:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/00d47e95-9df1-4efb-b18e-2cb5a6aa8992#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/f92cef47-48e5-46db-9162-293bf08b055c#theater-init"
+            },
+            {
+              "time": "19:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/86088/76266a7f-2d5f-457e-a4c3-4f0642b7e94a#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "10/11/2026",
           "shows": [
             {
               "time": "17:30",
               "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/aa710fea-6b92-4347-8163-4f898a5def85#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/b3123313-51f6-4aa0-8e16-1a2842905578#theater-init"
             },
             {
               "time": "19:30",
               "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/90df3061-7483-4b8e-a4d3-a3b3bab04822#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/475c6541-3ae1-4aa7-be15-fdd1953f0058#theater-init"
             },
             {
               "time": "21:30",
               "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/e04073ee-66a8-4dd9-9066-85f2f14e5b58#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/0763db6e-8587-4e7b-a82a-c5cc1fc818c6#theater-init"
             }
           ],
           "venue": "citrigno"
         },
         {
-          "date": "07/11/2026",
+          "date": "11/11/2026",
           "shows": [
             {
               "time": "17:30",
               "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/a8530b63-da62-4b0d-a4d6-8c79d2574b02#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/40e9861b-91ad-4853-9b4c-1d2484e7a2e5#theater-init"
             },
             {
               "time": "19:30",
               "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/e19c7c6f-bc05-40a3-a7b1-df62af8ec52a#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/047a43c6-44e8-4232-b86a-338cefd7e3d9#theater-init"
             },
             {
               "time": "21:30",
               "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/929ff4f0-b9c1-423d-a2d7-f7487e6ecf2d#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "17:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/46ef499d-3ae6-41a8-b425-4382c7c10810#theater-init"
-            },
-            {
-              "time": "19:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/25ce043a-3dbc-465b-9abf-150b35a5382e#theater-init"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/59843a7c-d5b2-4953-b7ad-0307afcb5291#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "09:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107122/df017497-86d2-4400-87b8-67ba11a86f3c#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/a14c6816-3155-4214-b83a-29251f5b40d0#theater-init"
             }
           ],
           "venue": "citrigno"
@@ -1417,163 +926,46 @@
           "venue": "citrigno"
         },
         {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/31f10cbf-6599-46be-8fe3-9fbafbdb4174#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/de7e0016-27d9-42e1-b8e7-2e02d201dbf9#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
-          "date": "06/11/2026",
+          "date": "10/11/2026",
           "shows": [
             {
               "time": "17:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/f462eeb3-afa9-44d9-a9e2-20fcfb41dd7b#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/6bb3ea4d-4a55-4bfe-b962-e5cd14bec5a2#theater-init"
             },
             {
               "time": "19:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/949433fd-cb07-4052-a915-191a02da5179#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/ec10361b-a2e8-4847-bc07-8bcbad796c24#theater-init"
             },
             {
               "time": "21:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/2f2cbc7b-d7a3-4bfc-b28f-8dc5b115a604#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/5b7d7803-cbf7-40f1-bd9b-32ffdf3ebea3#theater-init"
             }
           ],
           "venue": "unical"
         },
         {
-          "date": "07/11/2026",
+          "date": "11/11/2026",
           "shows": [
             {
               "time": "17:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/899418f5-389a-4385-b30b-b626d492539d#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/8c32a1c2-059f-4a8b-9f82-5ebd65cda3fc#theater-init"
             },
             {
               "time": "19:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/bb4b3d14-23a9-49ad-a2d4-f2dcfb02b5fc#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/c070f29b-12dc-48bf-a93a-dd1844ef86f3#theater-init"
             },
             {
               "time": "21:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/08df82ce-15d0-4b60-90b0-9e2f7e70c77b#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/887e51b1-c17f-4214-b643-dafa2c33164a#theater-init"
             }
           ],
           "venue": "unical"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "17:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/d26fd50e-f5a6-41ac-9b6f-02fbcb1a177d#theater-init"
-            },
-            {
-              "time": "19:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/1c3405f7-200c-4860-87ea-e0a240a61447#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/107122/7f6fa0f9-b87b-44fa-bf7c-e73f14bcd1f0#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "18:20",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "18:20",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "18:20",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "18:20",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "18:20",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            }
-          ],
-          "venue": "garden"
         },
         {
           "date": "10/11/2026",
@@ -1610,25 +1002,242 @@
       ],
       "announcedDates": [
         {
-          "date": "05/11/2026",
+          "date": "10/11/2026",
           "venue": "unical"
         },
         {
-          "date": "06/11/2026",
+          "date": "11/11/2026",
+          "venue": "unical"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "HOPE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88925/standard_0da4a5df-4290-42a6-9e4f-7c3247aeffac.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/88925",
+      "duration": "2h 45m",
+      "tags": [],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88925"
+      },
+      "genres": [
+        "Fantascienza",
+        "Mistero",
+        "Azione"
+      ],
+      "director": "Na Hong Jin.",
+      "year": "2026",
+      "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede.",
+      "shows": [
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/59ea6acc-4bbd-49ec-b040-8b91e729a902#theater-init"
+            },
+            {
+              "time": "21:15",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/08a8153d-6684-477d-928d-84bd407634c5#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "19:00",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/d3841540-0f2e-430f-b4a3-952d0b06d07f#theater-init"
+            },
+            {
+              "time": "21:15",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/aa095a01-4d10-4358-a711-1c31b208836d#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "12/11/2026",
+          "shows": [
+            {
+              "time": "21:15",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/d1d15912-3978-4749-95d2-ae98b39aff04#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "13/11/2026",
+          "shows": [
+            {
+              "time": "21:15",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/4011a659-9bd7-465a-82ec-fb2677b971ba#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "21:15",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/da501f8a-86c3-42b8-9964-d313cb7aeec2#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "21:15",
+              "room": "Sala 5",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88925/1a498b28-b821-438b-9a47-8cb6b3f652c2#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        }
+      ],
+      "announcedDates": []
+    },
+    {
+      "id": "8",
+      "title": "WILD HORSE NINE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89717/standard_00638d12-91e6-4278-83b9-575bebc26d5a.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/89717",
+      "duration": "1h 57m",
+      "tags": [],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/89717",
+        "unical": "https://unical.cosenzacinema.18tickets.it/film/108013",
+        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+      },
+      "genres": [
+        "Commedia",
+        "Thriller",
+        "Crime"
+      ],
+      "director": "Martin Mc Donagh",
+      "year": "2026",
+      "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca.",
+      "shows": [
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89717/98071a6d-ff93-4cfa-b4ab-61e210315bf1#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89717/3f059d44-37fb-4d36-8ad4-4a708edebd1a#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89717/8aec7437-88a0-4764-be52-a1733d2e1d2e#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89717/a7e7ce3c-fc79-4e9e-a8c8-9b570f2e2d8d#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/15e737e8-06b4-4fea-a38c-2e97d49ca673#theater-init"
+            },
+            {
+              "time": "19:15",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/6f01ad1c-f011-4a32-bcbc-26f0c046745a#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/4599d77f-2e00-460c-ab0b-57a88f8d93d1#theater-init"
+            }
+          ],
           "venue": "unical"
         },
         {
-          "date": "07/11/2026",
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/a5244837-7520-4c58-ad4e-71ed39ea3e06#theater-init"
+            },
+            {
+              "time": "19:15",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/324771c4-e4b3-4913-8026-fbd99a3f5e4b#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/108013/7c3abe7b-dbc3-44a7-ab06-8f8909bb0aee#theater-init"
+            }
+          ],
           "venue": "unical"
         },
         {
-          "date": "08/11/2026",
-          "venue": "unical"
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+            },
+            {
+              "time": "22:10",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+            }
+          ],
+          "venue": "garden"
         },
         {
-          "date": "09/11/2026",
-          "venue": "unical"
-        },
+          "date": "11/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+            },
+            {
+              "time": "22:10",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
+            }
+          ],
+          "venue": "garden"
+        }
+      ],
+      "announcedDates": [
         {
           "date": "10/11/2026",
           "venue": "unical"
@@ -1637,11 +1246,10 @@
           "date": "11/11/2026",
           "venue": "unical"
         }
-      ],
-      "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco."
+      ]
     },
     {
-      "id": "6",
+      "id": "9",
       "title": "UN TRANQUILLO FUNERALE DI FAMIGLIA",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86054/standard_d9b2b6d4-1b90-4813-9ad8-ceff62e7342d.jpg",
       "url": "https://zumpano.andromeda.18tickets.it/film/86054",
@@ -1656,87 +1264,8 @@
       ],
       "director": "Massimiliano Bruno",
       "year": "2026",
+      "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta.",
       "shows": [
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/ed980c80-56d6-4990-9423-479f687f4b9e#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/4908014a-ea3c-462c-974a-01919037a132#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/973789a6-878a-454b-a0e9-d0ef5e2e16ea#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/6c6ef5ef-a089-4531-a840-34faa79e7d9d#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/88121b9b-7dc5-4e6e-97c8-4cc86a7a03eb#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/c736acbe-230a-44f3-95d0-fe25f6c1fe5f#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/448a88c4-7c99-483a-afe7-12b0fb60e6d3#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/b2424961-0708-435a-ae54-143cb2c330c1#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/f5e2cb13-0214-47f8-bb18-c7f159ceb3b2#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86054/975d9af6-0d11-4758-a2be-dd3899e84f71#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "10/11/2026",
           "shows": [
@@ -1770,620 +1299,421 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "05/11/2026",
+          "date": "10/11/2026",
           "shows": [
             {
               "time": "20:30",
               "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/01e8b21a-397c-4a05-b758-d77c12de70f4#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/661a0e9b-5468-422a-b998-52f6056edf90#theater-init"
             },
             {
               "time": "22:15",
               "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/8e7349fa-afac-404f-89d6-c6522e098516#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/3f6e35dd-4bf7-48bc-8f9a-3671e3834fb7#theater-init"
             }
           ],
           "venue": "citrigno"
         },
         {
-          "date": "06/11/2026",
+          "date": "11/11/2026",
           "shows": [
             {
               "time": "20:30",
               "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/fd40c2a9-9b60-43d3-8797-18702aebcddd#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/ca63a1a1-6547-4773-921e-ccc1a06c8d2b#theater-init"
             },
             {
               "time": "22:15",
               "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/8de6e637-b2b3-449d-8c99-8cce3e6bca1d#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "20:30",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/4f7ca4a1-afcd-4035-b995-a19e322776f5#theater-init"
-            },
-            {
-              "time": "22:15",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/ab13e757-6080-47fc-80a7-5a93bc8a5e52#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "20:30",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/831802e0-0d9e-47f9-9c74-37c01ba5a9aa#theater-init"
-            },
-            {
-              "time": "22:15",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/7add4c2d-8286-4d0c-93ee-40b732058057#theater-init"
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/105571/1850272f-08e7-4dcc-beeb-e99cffe3e010#theater-init"
             }
           ],
           "venue": "citrigno"
         }
       ],
-      "announcedDates": [],
-      "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
-    },
-    {
-      "id": "7",
-      "title": "SHAUN VITA DA PECORA - OPERAZIONE Z.U.C.C.A",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86813/standard_5124ddee-8c1e-417f-baf5-7a7556dd14e1.jpg",
-      "url": "https://zumpano.andromeda.andromedacinema.it/film/86813",
-      "duration": "",
-      "tags": [],
-      "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.andromedacinema.it/film/86813"
-      },
-      "genres": [
-        "Animazione",
-        "Avventura",
-        "Commedia",
-        "Horror",
-        "Famiglia"
-      ],
-      "director": "Steve Cox, Matthew Walker",
-      "year": "2026",
-      "shows": [
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/86813/9fcf7023-437b-46f0-aa6a-ea49d9989758#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/86813/b969ffd7-ef75-4e88-9116-f964b3329b0b#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/86813/1c75d6dc-49a4-445e-b0e1-c48edbf8da33#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/86813/cf3a133e-8014-4f33-9f60-de241f3fefdc#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/86813/38b03fbd-efaf-4411-ab17-069dbb5aec78#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "11/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/86813/6dec9418-5767-4bc6-8603-1aa1a8726b6b#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        }
-      ],
-      "announcedDates": [],
-      "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia."
-    },
-    {
-      "id": "8",
-      "title": "IL GATTO COL CAPPELLO",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/86057",
-      "duration": "1h 45m",
-      "tags": [],
-      "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/86057",
-        "citrigno": "https://citrigno.cosenzacinema.18tickets.it/film/107980",
-        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26960"
-      },
-      "genres": [
-        "Animazione",
-        "Avventura",
-        "Commedia",
-        "Fantasy",
-        "Famiglia"
-      ],
-      "director": "Erica Rivinoja, Alessandro Carloni",
-      "year": "2026",
-      "shows": [
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86057/86df1e54-b95a-4f35-890e-2817d5cb33b1#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86057/48b70a42-19d3-4514-bf06-9180eb0de70f#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86057/5fb73e0f-0d8a-4875-840a-b8ab4834ff97#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86057/e458f0e3-0b66-492e-91d6-894a9403e91d#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86057/1e560208-a28a-4a3d-9d0c-bd1d0900fc3f#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "11/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86057/a19a9918-1bf3-4219-acfb-464125d5a388#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "18:50",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/dbc2ab2b-7230-4e79-a8c4-ec1de08bfd24#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "16:45",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/d99e7b8a-2e1d-4f28-a16f-a395216b7cba#theater-init"
-            },
-            {
-              "time": "18:50",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/431c08a0-b172-470e-b161-dae66457b7eb#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "16:45",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/d5ea9d7b-aa0f-4edd-8c51-901d519b4089#theater-init"
-            },
-            {
-              "time": "18:50",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/9ca3c4d4-0dad-46d0-a7fa-3dcfc515cd21#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "16:45",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/14f7d81b-d463-4c06-9c05-41f6b4667bba#theater-init"
-            },
-            {
-              "time": "18:50",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/c7a08b4f-99a2-44fb-8cb2-ab0e15112921#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26960"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26960"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            },
-            {
-              "time": "18:20",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            },
-            {
-              "time": "18:20",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            },
-            {
-              "time": "18:20",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            },
-            {
-              "time": "18:20",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "11/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            },
-            {
-              "time": "18:20",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        }
-      ],
-      "announcedDates": [],
-      "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima."
-    },
-    {
-      "id": "9",
-      "title": "GEORGE MICHAEL: THE FAITH TOUR",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/83218/standard_3c5705d7-f46c-4a54-94a0-f1f865056603.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/83218",
-      "duration": "",
-      "tags": [
-        "V.O. SOTT."
-      ],
-      "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/83218",
-        "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26962"
-      },
-      "genres": [
-        "Documentario",
-        "Musica"
-      ],
-      "director": "Andy Morahan, David Austin",
-      "year": "2026",
-      "shows": [
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/046857e1-2333-4acf-941a-39cb9fa495f3#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/fafbc62c-6999-497c-b760-e5255a9a674a#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/72f6f7a8-bb83-4fd3-b73b-e57e0d13f375#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/fbf892b8-0d3f-4540-b0f3-c3e6ab70f820#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/f42bccd8-19b6-4a9a-ab81-8c492ef3993f#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/b5d05371-7318-44c0-9be3-7e08ffd4f11e#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/b440b491-8f55-4b45-a022-bbe09ca2da2a#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/e129380b-0db7-4f37-ae32-c629795beb81#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/2895932b-1307-40ad-b848-9717ad58169a#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/dfbd8c49-dbf5-427b-aa4f-e5ed862c00b7#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "11/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/2f6f7b2b-b9e4-4e03-97bc-1f8cc5fc4306#theater-init"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/83218/81e8f3a3-59c4-41dc-b939-95b4d1e24cc6#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
-          "date": "05/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26962"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "06/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26962"
-            },
-            {
-              "time": "20:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26962"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "07/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "08/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "09/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
-          "date": "11/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
-            }
-          ],
-          "venue": "garden"
-        }
-      ],
-      "announcedDates": [],
-      "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E"
+      "announcedDates": []
     },
     {
       "id": "10",
+      "title": "IL RUMORE DELLE COSE NUOVE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89849/standard_781ef62b-bb64-460e-952f-f681a6176ce4.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/89849",
+      "duration": "1h 53m",
+      "tags": [],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/89849"
+      },
+      "genres": [
+        "Dramma"
+      ],
+      "director": "Paolo Genovese",
+      "year": "2026",
+      "synopsis": "Andrea è un fotografo, Andreina un’infermiera, e se oggi Andrea è ancora vivo è perché Andreina gli ha donato un pezzo di sé. Umberto al lavoro allevia il dolore e a casa lo infligge ad Alba, che aveva sogni semplici e ora ha smesso di sognare. Ralph di mestiere riproduce suoni, Viola è un’attrice che ha scelto di recitare anche nella vita. E poi c’è Mirko, che ha dieci anni ma fa tanto rumore. Tre famiglie, che per anni si sono sfiorate nelle strade di Milano senza conoscersi, trascorrono le loro esistenze fra rancori, bugie e momenti di felicità finché un incontro imprevisto non stravolge tutto. Allora il caos prende il sopravvento sul fragile equilibrio che le regge e rischia di spazzarle via.",
+      "shows": [
+        {
+          "date": "12/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/b0a79546-136b-4860-9c08-e9dc77705cb9#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/16106cce-6896-4330-8b64-60a0367b1764#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/5db3c07b-71aa-41aa-b0ca-559c89e4989b#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "13/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/e9da9cf3-2548-4f7c-bc3f-f12736eab1cd#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/6f44455e-4182-4723-a4f7-97c3bc22ec00#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/18b808a5-226d-4d0c-925d-2663d72ebd89#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/1fb7df30-7c15-48d5-b00b-777ccb626598#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/39f83489-ee5a-47cf-a1fb-711a2be901f8#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/af8c4c02-e847-40c8-b6dc-b9aadb91a427#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/a1ea35a7-d575-4680-98fe-4680971d5c7a#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/89505336-278e-4682-a495-cdbc17e72a6e#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89849/7dfea3de-1e96-4d51-8a18-953ea52ab84a#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        }
+      ],
+      "announcedDates": []
+    },
+    {
+      "id": "11",
+      "title": "UN WEEKEND ARTIFICIALE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90344/standard_74acad47-c983-4eeb-97e2-1c881eedf2e4.jpeg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/90344",
+      "duration": "1h 40m",
+      "tags": [],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/90344"
+      },
+      "genres": [
+        "Commedia"
+      ],
+      "director": "L. Pieraccioni",
+      "year": "2026",
+      "synopsis": "UN GRUPPO DI PERSONE PARTECIPA A UN ESPERIMENTO IN CUI DEVE SCOPRIRE CHI, TRA LORO, È UN UMANOIDE CREATO DALL'INTELLIGENZA ARTIFICIALE. DURANTE UN WEEKEND RICCO DI SOSPETTI, EQUIVOCI E COLPI DI SCENA,",
+      "shows": [
+        {
+          "date": "12/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/7a4149cc-a430-46f0-96ac-7c200b292afe#theater-init"
+            },
+            {
+              "time": "19:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/36ea6efe-bb67-426d-8d12-b046849a4455#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/9fe27fae-70fa-4bb2-be4b-a370d43f6ae6#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "13/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/8752308f-25db-462c-bbd3-cb533421fc8c#theater-init"
+            },
+            {
+              "time": "19:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/6584c31b-e654-46e8-91ea-bd26d5d62302#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/c94ae1c4-f974-43e1-9331-0747e53b6fed#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/b0be5d08-19ed-4729-97c8-8cd5e4ccb05c#theater-init"
+            },
+            {
+              "time": "19:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/02cada78-3926-423b-97f7-1a8c8b4c2dbf#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/035ba77e-8b3a-4d29-9182-3ca40bd144da#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/afa3ced9-6418-4035-8863-9759d80d652c#theater-init"
+            },
+            {
+              "time": "19:45",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/63affa6c-2905-41b3-86d1-5ef9954408cb#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/90344/6d220e07-0361-40b9-9455-9c15ca8531be#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        }
+      ],
+      "announcedDates": []
+    },
+    {
+      "id": "12",
+      "title": "GODZILLA MINUS ZERO",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89882/standard_36595094-483e-486b-b34b-19c364061b0f.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/89882",
+      "duration": "",
+      "tags": [],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/89882"
+      },
+      "genres": [
+        "Fantascienza",
+        "Horror",
+        "Azione"
+      ],
+      "director": "Takashi Yamazaki",
+      "year": "2026",
+      "synopsis": "La vicenda è ambientata nel 1949, in un Giappone che sta ancora faticosamente cercando di ricostruirsi dopo i traumi della Seconda Guerra Mondiale e dopo il precedente passaggio del mostro. La ricomparsa di Godzilla costringerà i due protagonisti, l’ex pilota Kōichi (interpretato da Ryunosuke Kamiki) e Noriko (Minami Hamabe), a una nuova e disperata lotta per la sopravvivenza.",
+      "shows": [
+        {
+          "date": "12/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/3aab4f12-0159-442d-9ea2-99caaa5cee53#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/d67b11e0-e434-44e4-8696-620a1a3640e5#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "13/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/daba5222-453c-4867-a831-401d916f0cf6#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/78caedc4-2925-4dac-9134-c6e3602fb33a#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/25364d28-14aa-4f79-86a3-ae8feb9bd9fe#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/f315d96f-7ebc-4bae-8b7a-058e0606b656#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/d33ab485-301f-4ce1-a8c0-9821583e2da9#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/89882/58bb9c66-372f-4dab-ba86-6e0852ea5997#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        }
+      ],
+      "announcedDates": []
+    },
+    {
+      "id": "13",
+      "title": "SCROOGE E GLI SPIRITI DEL NATALE",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/88595",
+      "duration": "1h 58m",
+      "tags": [],
+      "venueUrls": {
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88595"
+      },
+      "genres": [
+        "Commedia",
+        "Fantasy"
+      ],
+      "director": "Ti West",
+      "year": "2026",
+      "synopsis": "UN'EMOZIONANTE STORIA DI FANTASMI AMBIENTATA NELLA LONDRA DI DICKENS, CHE SEGUE IL VIAGGIO SOPRANNATURALE DI UN UOMO PER AFFRONTARE IL SUO PASSATO, PRESENTE E FUTURO MENTRE LOTTA PER UNA SECONDA POSSI",
+      "shows": [
+        {
+          "date": "12/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/530e0199-6a23-468a-8348-b813ca5473f4#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/1c53963c-18c5-44fd-8630-ca77a0af253a#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "13/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/c27af6e4-0427-49ba-a778-979634864865#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/0754eace-2994-4051-a786-3f6526b137c0#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/63f0e1b0-10b0-41cf-a5fb-eac4f7ed7128#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/052e1738-55d7-4f4e-9286-a24665ad7eac#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/314916b1-e4c7-4437-b4bb-4fbd12e0797a#theater-init"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala 3",
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/05fd981c-e471-4ba0-8705-4ee7a2dca068#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        }
+      ],
+      "announcedDates": []
+    },
+    {
+      "id": "14",
       "title": "DUNE - PARTE TRE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
       "url": "https://zumpano.andromeda.18tickets.it/film/76088",
@@ -2399,6 +1729,7 @@
       ],
       "director": "D. Villeneuve",
       "year": "2026",
+      "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO",
       "shows": [
         {
           "date": "15/12/2026",
@@ -2412,8 +1743,109 @@
           "venue": "andromeda-river"
         }
       ],
-      "announcedDates": [],
-      "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO"
+      "announcedDates": []
+    },
+    {
+      "id": "15",
+      "title": "SERPENTI",
+      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/108673/standard_f39b27fe-e580-4a32-afbf-3b083a3eb53a.jpg",
+      "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/108673",
+      "duration": "",
+      "tags": [
+        "FILM RASSEGNA"
+      ],
+      "venueUrls": {
+        "cinema-teatro-italia": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/108673"
+      },
+      "genres": [
+        "Commedia",
+        "Dramma"
+      ],
+      "director": "Roberto De Paolis",
+      "year": "2026",
+      "synopsis": "Paolo Marra ha ucciso sua moglie, senza un perché. Divorato dal senso di colpa, decide di costituirsi: vuole pagare, scontare la pena, ridare dignità alla donna che ha ucciso e a sé stesso. Tra poliziotti distratti, avvocati zelanti, cartomanti e complicati cavilli burocratici, nessuno lo prende sul serio. L'uomo si scopre vittima di un paradosso kafkiano: per quanto lo desideri, non riesce a farsi arrestare. Il perfetto capro espiatorio di una società grottesca che ignora chi vuole redimersi.",
+      "shows": [
+        {
+          "date": "10/11/2026",
+          "shows": [
+            {
+              "time": "18:30",
+              "room": "Sala FILM",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/108673/07217754-0c8f-4bc6-961b-56f4f9684203#theater-init"
+            },
+            {
+              "time": "20:30",
+              "room": "Sala FILM",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/108673/2da8afe5-f4b4-44a3-8e50-d9d29af264ed#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        }
+      ],
+      "announcedDates": [
+        {
+          "date": "10/11/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "title": "2001: ODISSEA NELLO SPAZIO (2001 A SPACE ODYSSEY) (RIED.)",
+      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/109102/standard_5e6d981e-e32a-445c-b240-20a49630295e.jpg",
+      "url": "https://unical.cosenzacinema.18tickets.it/film/109102",
+      "duration": "",
+      "tags": [
+        "EVENT0 10"
+      ],
+      "venueUrls": {
+        "unical": "https://unical.cosenzacinema.18tickets.it/film/109102"
+      },
+      "genres": [
+        "Avventura",
+        "Fantascienza",
+        "Mistero"
+      ],
+      "director": "Stanley Kubrick",
+      "year": "1968",
+      "synopsis": "Un gigantesco monolite, individuato sulla superficie lunare, trasmette dei messaggi radio in direzione del pianeta Giove. Per seguire il fascio di onde elettromagnetiche viene organizzata una spedizione che ben presto però si trova in balia del computer che governa l'astronave. La lotta avrà un solo vincitore.",
+      "shows": [
+        {
+          "date": "16/11/2026",
+          "shows": [
+            {
+              "time": "20:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/109102/8353deab-f321-491b-9452-ae1d755b0542#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "17/11/2026",
+          "shows": [
+            {
+              "time": "20:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/109102/5246d1ea-b4f7-427a-a289-25b6d9447906#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "18/11/2026",
+          "shows": [
+            {
+              "time": "20:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/109102/8300f969-d616-4fa8-bccb-e56606e07e72#theater-init"
+            }
+          ],
+          "venue": "unical"
+        }
+      ],
+      "announcedDates": []
     }
-  ]
+  ],
+  "warnings": []
 }

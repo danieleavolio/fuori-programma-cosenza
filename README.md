@@ -22,7 +22,29 @@ Poi visita `http://localhost:8000`. L’app legge i dati da `data/schedule.json`
 
 ## Aggiornamento dati
 
-`python scripts/update_schedule.py` interroga tutte le fonti ufficiali dei cinema e aggiorna `data/schedule.json` solo se ognuna risponde con una programmazione valida. GitHub Actions aggiorna e ripubblica il sito ogni sei ore. Gli orari rimangono collegati direttamente alle pagine di acquisto del rispettivo cinema.
+`python scripts/update_schedule.py` interroga tutte le fonti ufficiali dei cinema e aggiorna `data/schedule.json`. GitHub Actions aggiorna e ripubblica il sito ogni quattro ore.
+
+Lo scraper è pensato per non perdere mai la programmazione:
+
+- ritenta su errori transitori (429, 5xx, rete) con attese crescenti;
+- ogni sala è isolata: se una fonte non risponde le altre vengono pubblicate lo stesso e per la sala saltante si tiene l'ultima programmazione nota;
+- se una fonte ha pubblicato meno giorni del solito, i giorni futuri già noti vengono ripristinati (solo per i film ancora in cartellone);
+- le date annunciate da Citrigno Group (`cosenzacinema.it`) sono trattate come fallback e non fanno cadere l'aggiornamento;
+- i film che finiscono vengono eliminati, le date passate non vengono pubblicate.
+
+Lo stato delle fonti finisce dentro `data/schedule.json`: `available` (aggiornata ora), `stale` (ultima programmazione nota) o `unavailable` (nessun dato). Il sito mostra un avviso quando la programmazione è vecchia o parziale.
+
+I test di resilenza si eseguono con:
+
+```
+python scripts/test_resilience.py
+```
+
+Gli orari rimangono collegati direttamente alle pagine di acquisto del rispettivo cinema.
+
+## Interfaccia
+
+Le viste **Per Film** e **Per Giorno** hanno ciascuna una modalità *griglia* e *lista*: il contenuto delle card è identico, cambia solo la disposizione (locandina in alto o a sinistra). In griglia la locandina mantiene proporzioni fisse anche a card aperta, quindi non si gonfia a tutta pagina.
 
 ## Headroom locale
 

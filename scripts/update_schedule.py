@@ -2,14 +2,18 @@ from __future__ import annotations
 
 import json
 import re
+import socket
+import time
 import unicodedata
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
+SCHEDULE_FILE = ROOT / "data" / "schedule.json"
 
 SOURCES = [
     {
@@ -67,20 +71,124 @@ HEADERS = {
     ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Connection": "close",
 }
 
+RETRYABLE_STATUS = {408, 425, 429, 500, 502, 503, 504}
+FETCH_ATTEMPTS = 4
+DETAIL_DELAY = 1.5
+MONTHS_IT = {
+    "GENNAIO": 1,
+    "FEBBRAIO": 2,
+    "MARZO": 3,
+    "APRILE": 4,
+    "MAGGIO": 5,
+    "GIUGNO": 6,
+    "LUGLIO": 7,
+    "AGOSTO": 8,
+    "SETTEMBRE": 9,
+    "OTTOBRE": 10,
+    "NOVEMBRE": 11,
+    "DICEMBRE": 12,
+}
+PLACEHOLDER_TIMES = {"00:00", "00:01"}
 
-def fetch(url: str) -> str:
-    request = Request(url, headers=HEADERS)
-    with urlopen(request, timeout=25) as response:
-        payload = response.read()
-        charset = response.headers.get_content_charset() or "utf-8"
-    html = payload.decode(charset, errors="replace")
-    if "\ufffd" in html:
-        html = payload.decode("cp1252", errors="replace")
-    return html
+
+# --- Fuso orario Italia (con fallback se zoneinfo non è disponibile) ---
+def _rome_timezone():
+    try:
+        from zoneinfo import ZoneInfo
+
+        return ZoneInfo("Europe/Rome")
+    except Exception:
+        return None
 
 
+def _last_sunday(year: int, month: int) -> datetime:
+    day = 31
+    while True:
+        candidate = datetime(year, month, day)
+        if candidate.weekday() == 6:
+            return candidate
+        day -= 1
+
+
+def _rome_offset_hours(moment: datetime) -> int:
+    start = _last_sunday(moment.year, 3).replace(hour=1, tzinfo=timezone.utc)
+    end = _last_sunday(moment.year, 10).replace(hour=1, tzinfo=timezone.utc)
+    return 2 if start <= moment < end else 1
+
+
+def rome_now() -> datetime:
+    zone = _rome_timezone()
+    if zone is not None:
+        return datetime.now(zone)
+    now_utc = datetime.now(timezone.utc)
+    return now_utc + timedelta(hours=_rome_offset_hours(now_utc))
+
+
+def today_date() -> date:
+    return rome_now().date()
+
+
+def parse_it_date(value: str | None) -> date | None:
+    if not value:
+        return None
+    try:
+        return datetime.strptime(value, "%d/%m/%Y").date()
+    except ValueError:
+        return None
+
+
+def format_it_date(value: date) -> str:
+    return value.strftime("%d/%m/%Y")
+
+
+# --- Rete ---
+def _retry_delay(
+    attempt: int, retry_after: str | None = None, status: int = 0
+) -> float:
+    if retry_after:
+        try:
+            return min(60.0, float(retry_after))
+        except ValueError:
+            pass
+    if status == 429:
+        return min(60.0, 8.0 * attempt)
+    return min(20.0, 2.0 * attempt + 1.0)
+
+
+def fetch(url: str, attempts: int = FETCH_ATTEMPTS, timeout: int = 25) -> str:
+    """Scarica una pagina riprovando su errori transitori (429, 5xx, rete)."""
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            request = Request(url, headers=HEADERS)
+            with urlopen(request, timeout=timeout) as response:
+                payload = response.read()
+                charset = response.headers.get_content_charset() or "utf-8"
+            html = payload.decode(charset, errors="replace")
+            if "\ufffd" in html:
+                html = payload.decode("cp1252", errors="replace")
+            return html
+        except HTTPError as error:
+            last_error = error
+            if error.code not in RETRYABLE_STATUS or attempt == attempts:
+                raise
+            delay = _retry_delay(attempt, error.headers.get("Retry-After"), error.code)
+            print(f"  HTTP {error.code} su {url}: riprovo tra {delay:.0f}s")
+            time.sleep(delay)
+        except (URLError, socket.timeout, TimeoutError, OSError) as error:
+            last_error = error
+            if attempt == attempts:
+                raise
+            delay = _retry_delay(attempt)
+            print(f"  Errore di rete su {url} ({error}): riprovo tra {delay:.0f}s")
+            time.sleep(delay)
+    raise last_error if last_error else RuntimeError(f"Impossibile scaricare {url}")
+
+
+# --- Parser delle pagine 18tickets ---
 class SynopsisParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -155,6 +263,8 @@ class MovieMetadataParser(HTMLParser):
 
 
 def get_movie_details(url: str) -> dict:
+    if not url:
+        return {"synopsis": "", "genres": [], "director": "", "year": ""}
     try:
         html = fetch(url)
         parser = SynopsisParser()
@@ -162,7 +272,7 @@ def get_movie_details(url: str) -> dict:
         parser.feed(html)
         metadata_parser.feed(html)
     except Exception as error:
-        print(f"Dettagli film non recuperati da {url}: {error}")
+        print(f"  Dettagli film non recuperati da {url}: {error}")
         return {"synopsis": "", "genres": [], "director": "", "year": ""}
     return {
         "synopsis": " ".join(" ".join(parser.parts).split()),
@@ -207,6 +317,22 @@ def title_key(title: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", t).strip()
 
 
+def release_date_hint(raw_title: str) -> str | None:
+    """Legge annunci tipo 'DAL 16 DICEMBRE' e restituisce la data di uscita."""
+    match = re.search(r"DAL\s+(\d{1,2})\s+([A-Z]{3,10})", raw_title.upper())
+    if not match:
+        return None
+    day = int(match.group(1))
+    month = MONTHS_IT.get(match.group(2))
+    if not month:
+        return None
+    today = today_date()
+    year = today.year
+    if date(year, month, day) < today:
+        year += 1
+    return format_it_date(date(year, month, day))
+
+
 def parse_announced_dates(url: str, venue_id: str) -> list[dict]:
     """Reads announced dates from Citrigno Group's official movie listing."""
     html = fetch(url)
@@ -224,8 +350,8 @@ def parse_announced_dates(url: str, venue_id: str) -> list[dict]:
         )
         detail_url = detail_match.group(1) if detail_match else url
         dates = re.findall(r'<option value="(\d{4}-\d{2}-\d{2})"', card)
-        for date in dates:
-            year, month, day = date.split("-")
+        for date_value in dates:
+            year, month, day = date_value.split("-")
             announced.append(
                 {
                     "title": title,
@@ -257,6 +383,10 @@ class TicketsParser(HTMLParser):
         self.capture_heading_text: list[str] = []
         self.current_date: str | None = None
         self.current_shows_for_date: list[dict] = []
+        self.in_option = False
+        self.in_option_label = False
+        self.option_label_parts: list[str] = []
+        self.option_value_parts: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         a = dict(attrs)
@@ -271,11 +401,22 @@ class TicketsParser(HTMLParser):
                 "url": self.base_url,
                 "duration": "",
                 "tags": [],
+                "genres": [],
+                "director": "",
+                "year": "",
                 "shows": [],
             }
 
         if not self.in_movie_preview or not self.current_movie:
             return
+
+        # Scheda tecnica nella pagina del cinema (Regia, Genere, Anno)
+        if tag == "p" and "movie__option" in classes:
+            self.in_option = True
+            self.option_label_parts = []
+            self.option_value_parts = []
+        elif self.in_option and tag == "strong":
+            self.in_option_label = True
 
         # Heading tag containing title
         if tag in ("h1", "h2", "h3", "h4", "h5", "h6") or "page-heading" in classes:
@@ -331,6 +472,26 @@ class TicketsParser(HTMLParser):
         if not self.in_movie_preview or not self.current_movie:
             return
 
+        if tag == "strong":
+            self.in_option_label = False
+
+        if tag == "p" and self.in_option:
+            label = (
+                " ".join("".join(self.option_label_parts).split())
+                .rstrip(":")
+                .casefold()
+            )
+            value = " ".join("".join(self.option_value_parts).split())
+            if label in {"genere", "generi", "genre", "genres"} and value:
+                self.current_movie["genres"] = [
+                    item.strip() for item in re.split(r"[,;]", value) if item.strip()
+                ]
+            elif label in {"regia", "regista", "director", "directors"} and value:
+                self.current_movie["director"] = value
+            elif label in {"anno", "year"} and re.fullmatch(r"\d{4}", value):
+                self.current_movie["year"] = value
+            self.in_option = False
+
         if self.in_heading and (
             tag in ("h1", "h2", "h3", "h4", "h5", "h6") or tag == "div"
         ):
@@ -361,6 +522,14 @@ class TicketsParser(HTMLParser):
 
     def handle_data(self, data: str) -> None:
         if not self.in_movie_preview or not self.current_movie:
+            return
+
+        if self.in_option:
+            (
+                self.option_label_parts
+                if self.in_option_label
+                else self.option_value_parts
+            ).append(data)
             return
 
         if self.in_heading and not self.in_film_label:
@@ -415,9 +584,9 @@ def parse_garden_multi_days(
         return []
 
     date_links = re.findall(r'href=["\']\?data=(\d{2}-\d{2}-\d{4})["\']', home_html)
-    date_links = list(dict.fromkeys(date_links))[:7]
+    date_links = list(dict.fromkeys(date_links))[:14]
     if not date_links:
-        date_links = [datetime.now().strftime("%d-%m-%Y")]
+        date_links = [today_date().strftime("%d-%m-%Y")]
 
     movies_map: dict[str, dict] = {}
 
@@ -472,7 +641,7 @@ def parse_garden_multi_days(
                         time_str = s_clean
                     elif len(s_clean) > 0:
                         sala = s_clean
-                if time_str:
+                if time_str and time_str not in PLACEHOLDER_TIMES:
                     shows_list.append(
                         {
                             "time": time_str,
@@ -482,8 +651,9 @@ def parse_garden_multi_days(
                     )
 
             date_for_shows = day_formatted
-            if "DAL 16 DICEMBRE" in raw_title.upper():
-                date_for_shows = "16/12/2026"
+            release_hint = release_date_hint(raw_title)
+            if release_hint:
+                date_for_shows = release_hint
 
             k = title_key(clean_t)
             if k not in movies_map:
@@ -562,14 +732,155 @@ def parse_source(source: dict) -> list[dict]:
     return parser.movies
 
 
+# --- Gestione dati precedenti (ripresa in caso di fonte non raggiungibile) ---
+def load_previous() -> dict:
+    if not SCHEDULE_FILE.exists():
+        return {}
+    try:
+        return json.loads(SCHEDULE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def previous_movies_for_venue(previous: dict, venue_id: str, today: date) -> list[dict]:
+    """Recupera i film già noti per una sala, limitando alle date non passate."""
+    recovered: list[dict] = []
+    for movie in previous.get("movies", []):
+        blocks = []
+        for block in movie.get("shows", []):
+            if block.get("venue") != venue_id:
+                continue
+            day = parse_it_date(block.get("date"))
+            if day is None or day < today:
+                continue
+            blocks.append(
+                {"date": block["date"], "shows": list(block.get("shows", []))}
+            )
+        if not blocks:
+            continue
+        recovered.append(
+            {
+                "title": movie.get("title", ""),
+                "poster": movie.get("poster", ""),
+                "url": (movie.get("venueUrls") or {}).get(venue_id)
+                or movie.get("url", ""),
+                "duration": movie.get("duration", ""),
+                "tags": list(movie.get("tags", [])),
+                "genres": list(movie.get("genres", [])),
+                "director": movie.get("director", ""),
+                "year": movie.get("year", ""),
+                "synopsis": movie.get("synopsis", ""),
+                "shows": blocks,
+            }
+        )
+    return recovered
+
+
+def carry_over_missing_dates(
+    movies: list[dict], previous: dict, venue_id: str, today: date
+) -> list[dict]:
+    """Ripristina i giorni futuri spariti da uno scraping incompleto.
+
+    Un giorno viene ripristinato solo se il film è ancora in cartellone nella
+    sala: evita di resuscitare film terminati o annullati.
+    """
+    fresh_keys = {title_key(movie["title"]) for movie in movies}
+    fresh_dates: set[str] = set()
+    for movie in movies:
+        for block in movie.get("shows", []):
+            fresh_dates.add(block["date"])
+
+    carried: list[dict] = []
+    for previous_movie in previous.get("movies", []):
+        key = title_key(previous_movie.get("title", ""))
+        if key not in fresh_keys:
+            continue
+        for block in previous_movie.get("shows", []):
+            if block.get("venue") != venue_id:
+                continue
+            day = parse_it_date(block.get("date"))
+            if day is None or day < today:
+                continue
+            if block["date"] in fresh_dates:
+                continue
+            for movie in movies:
+                if title_key(movie["title"]) != key:
+                    continue
+                movie["shows"].append(
+                    {"date": block["date"], "shows": list(block.get("shows", []))}
+                )
+                fresh_dates.add(block["date"])
+                carried.append(
+                    {
+                        "venue": venue_id,
+                        "date": block["date"],
+                        "title": movie["title"],
+                    }
+                )
+                break
+    return carried
+
+
 def main() -> None:
-    venue_movies = [(source, parse_source(source)) for source in SOURCES]
-    announced_dates = [
-        date
-        for venue_id, url in ANNOUNCED_SCHEDULES.items()
-        for date in parse_announced_dates(url, venue_id)
-    ]
-    schedule_file = ROOT / "data" / "schedule.json"
+    today = today_date()
+    previous = load_previous()
+    warnings: list[dict] = []
+    fresh_movies: dict[str, list[dict]] = {}
+    failures: dict[str, str] = {}
+
+    for source in SOURCES:
+        venue_id = source["id"]
+        print(f"[*] {source['name']}: recupero programmazione...")
+        try:
+            fresh_movies[venue_id] = parse_source(source)
+        except Exception as error:
+            failures[venue_id] = str(error)
+            print(f"[!] {source['name']}: {error}")
+
+    if not fresh_movies:
+        print("[!] Nessuna fonte raggiungibile: i dati precedenti restano invariati.")
+        for venue_id, message in failures.items():
+            print(f"    - {venue_id}: {message}")
+        raise SystemExit(1)
+
+    venue_movies: list[tuple[dict, list[dict]]] = []
+    for source in SOURCES:
+        venue_id = source["id"]
+        if venue_id in fresh_movies:
+            movies = fresh_movies[venue_id]
+            carried = carry_over_missing_dates(movies, previous, venue_id, today)
+            for item in carried:
+                print(
+                    f"    - {source['name']}: ripristinato {item['date']} "
+                    f"per '{item['title']}' dai dati precedenti"
+                )
+                warnings.append({"type": "carried-over", **item})
+        else:
+            movies = previous_movies_for_venue(previous, venue_id, today)
+            message = failures.get(venue_id, "sconosciuto")
+            print(f"[!] {source['name']}: dati precedenti riutilizzati ({message})")
+            warnings.append(
+                {
+                    "type": "source-failed",
+                    "venue": venue_id,
+                    "message": message,
+                }
+            )
+        venue_movies.append((source, movies))
+
+    announced_dates: list[dict] = []
+    for venue_id, url in ANNOUNCED_SCHEDULES.items():
+        try:
+            announced_dates.extend(parse_announced_dates(url, venue_id))
+        except Exception as error:
+            print(f"[!] Date annunciate non lette da {url}: {error}")
+            warnings.append(
+                {
+                    "type": "announced-failed",
+                    "venue": venue_id,
+                    "message": str(error),
+                }
+            )
 
     combined: dict[str, dict] = {}
     venue_counts: dict[str, int] = {}
@@ -588,9 +899,10 @@ def main() -> None:
                     "duration": dur or movie.get("duration", ""),
                     "tags": list(movie.get("tags", [])),
                     "venueUrls": {},
-                    "genres": [],
-                    "director": "",
-                    "year": "",
+                    "genres": list(movie.get("genres", [])),
+                    "director": movie.get("director", ""),
+                    "year": movie.get("year", ""),
+                    "synopsis": movie.get("synopsis", ""),
                     "shows": [],
                     "announcedDates": [],
                 }
@@ -606,7 +918,7 @@ def main() -> None:
             for genre in movie.get("genres", []):
                 if genre not in target["genres"]:
                     target["genres"].append(genre)
-            for field in ("director", "year"):
+            for field in ("director", "year", "synopsis"):
                 if not target[field] and movie.get(field):
                     target[field] = movie[field]
             for show in movie["shows"]:
@@ -637,38 +949,75 @@ def main() -> None:
             target["announcedDates"].append(entry)
 
     movies_output = list(combined.values())
-    for movie in movies_output:
-        movie.update(get_movie_details(movie["url"]))
 
-    venues_output = [
-        {
-            "id": source["id"],
-            "name": source["name"],
-            "location": source["location"],
-            "source": source["url"],
-            "sourceName": source["source_name"],
-            "status": "available"
-            if venue_counts.get(source["id"], 0) > 0
-            else "unavailable",
-        }
-        for source in SOURCES
-    ]
+    # Dettagli film: la sinossi richiede la scheda dedicata, con pausa per
+    # non farsi limitare dalla biglietteria.
+    for index, movie in enumerate(movies_output):
+        if movie.get("synopsis"):
+            continue
+        details = get_movie_details(movie["url"])
+        if details.get("synopsis") and not movie.get("synopsis"):
+            movie["synopsis"] = details["synopsis"]
+        if details.get("genres") and not movie.get("genres"):
+            movie["genres"] = details["genres"]
+        if details.get("director") and not movie.get("director"):
+            movie["director"] = details["director"]
+        if details.get("year") and not movie.get("year"):
+            movie["year"] = details["year"]
+        if index < len(movies_output) - 1:
+            time.sleep(DETAIL_DELAY)
+
+    # Le date passate non interessano più il visitatore.
+    for movie in movies_output:
+        movie["shows"] = [
+            block
+            for block in movie["shows"]
+            if (parse_it_date(block["date"]) or today) >= today
+        ]
+        movie["announcedDates"] = [
+            entry
+            for entry in movie["announcedDates"]
+            if (parse_it_date(entry["date"]) or today) >= today
+        ]
+
+    venues_output = []
+    for source in SOURCES:
+        venue_id = source["id"]
+        if venue_id in fresh_movies:
+            status = "available"
+        elif venue_counts.get(venue_id, 0) > 0:
+            status = "stale"
+        else:
+            status = "unavailable"
+        venues_output.append(
+            {
+                "id": venue_id,
+                "name": source["name"],
+                "location": source["location"],
+                "source": source["url"],
+                "sourceName": source["source_name"],
+                "status": status,
+            }
+        )
 
     data = {
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "venues": venues_output,
         "movies": movies_output,
+        "warnings": warnings,
     }
-    temporary_file = schedule_file.with_suffix(".json.tmp")
+    temporary_file = SCHEDULE_FILE.with_suffix(".json.tmp")
     temporary_file.write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
-    temporary_file.replace(schedule_file)
+    temporary_file.replace(SCHEDULE_FILE)
     counts = ", ".join(
         f"{source['name']}: {venue_counts.get(source['id'], 0)} film"
         for source in SOURCES
     )
     print(f"Aggiornata programmazione con successo: {counts}.")
+    if warnings:
+        print(f"Avvertenze: {len(warnings)}")
 
 
 if __name__ == "__main__":
