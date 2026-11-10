@@ -88,7 +88,15 @@ HEADERS = {
 RETRYABLE_STATUS = {408, 425, 429, 500, 502, 503, 504}
 FETCH_ATTEMPTS = 4
 DETAIL_DELAY = 1.5
-WAF_MARKERS = ("awsWafCookieDomainList", "gokuProps", "aws-waf-token")
+WAF_MARKERS = (
+    "awsWafCookieDomainList",
+    "gokuProps",
+    "aws-waf-token",
+    "cf-chl",
+    "challenge-platform",
+    "cf-2fa-verify",
+    "Just a moment",
+)
 BROWSER_SCRIPT = ROOT / "scripts" / "browser_fetch.mjs"
 # Fonti che richiedono il browser: i runner GitHub ricevono una challenge
 # anti-bot di AWS WAF che solo JavaScript puo' risolvere.
@@ -213,20 +221,26 @@ class BrowserFetcher:
         )
         return self.process
 
-    def get(self, url: str) -> str:
+    def get(self, url: str, attempts: int = 2) -> str:
         process = self._ensure()
-        process.stdin.write(url + "\n")
-        process.stdin.flush()
-        line = process.stdout.readline()
-        if not line:
-            raise RuntimeError("il browser non ha risposto")
-        payload = json.loads(line)
-        if payload.get("error"):
-            raise RuntimeError(payload["error"])
-        html = payload.get("html") or ""
-        if is_waf_challenge(html):
-            raise RuntimeError("il WAF ha respinto anche la richiesta dal browser")
-        return html
+        for attempt in range(1, attempts + 1):
+            process.stdin.write(url + "\n")
+            process.stdin.flush()
+            line = process.stdout.readline()
+            if not line:
+                raise RuntimeError("il browser non ha risposto")
+            payload = json.loads(line)
+            if payload.get("error"):
+                raise RuntimeError(payload["error"])
+            html = payload.get("html") or ""
+            if is_waf_challenge(html):
+                if attempt < attempts:
+                    print("  il browser ha ancora la challenge, riprovo.")
+                    time.sleep(4)
+                    continue
+                raise RuntimeError("il WAF ha respinto anche la richiesta dal browser")
+            return html
+        raise RuntimeError("il browser non ha restituito la pagina")
 
     def close(self) -> None:
         if self.process and self.process.poll() is None:

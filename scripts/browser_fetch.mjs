@@ -23,8 +23,30 @@ const CHROME_CANDIDATES = [
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
 ].filter(Boolean);
 
-const PAGE_TIMEOUT_MS = Number(process.env.FP_BROWSER_TIMEOUT || 60000);
+const PAGE_TIMEOUT_MS = Number(process.env.FP_BROWSER_TIMEOUT || 90000);
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// La pagina e' quella vera solo se contiene uno di questi segnali.
+const CONTENT_MARKERS = [
+  'movie--preview',
+  'inner-film',
+  'plotPanel',
+  'movie__title',
+  'time-select__place',
+];
+// Segnali di challenge anti-bot (AWS WAF, Cloudflare): non e' ancora la pagina.
+const CHALLENGE_MARKERS = [
+  'awsWafCookieDomainList',
+  'gokuProps',
+  'aws-waf-token',
+  'cf-chl',
+  'challenge-platform',
+  'cf-2fa-verify',
+  'Just a moment',
+];
+
+const isChallenge = (html) => CHALLENGE_MARKERS.some((marker) => html.includes(marker));
+const hasContent = (html) => CONTENT_MARKERS.some((marker) => html.includes(marker));
 
 async function spawnChrome(port, profileDir) {
   for (const binary of CHROME_CANDIDATES) {
@@ -127,15 +149,16 @@ async function loadPage(url) {
   await send('Page.navigate', { url });
   const deadline = Date.now() + PAGE_TIMEOUT_MS;
   let html = '';
+  let lastReload = Date.now();
   while (Date.now() < deadline) {
-    await sleep(1000);
+    await sleep(1500);
     html = await readHtml();
-    if (html.includes('movie--preview') || html.includes('inner-film')) {
-      await sleep(1200);
-      html = await readHtml();
-      break;
+    if (hasContent(html) && !isChallenge(html)) break;
+    // La challenge non si risolve: si ricarica la pagina ogni 10 secondi.
+    if (isChallenge(html) && Date.now() - lastReload > 10000) {
+      lastReload = Date.now();
+      try { await send('Page.reload', { ignoreCache: true }); } catch {}
     }
-    if (html.includes('</html>') && html.length > 500) break;
   }
   return html;
 }
