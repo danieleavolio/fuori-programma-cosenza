@@ -165,12 +165,20 @@ def _retry_delay(
     return min(20.0, 2.0 * attempt + 1.0)
 
 
-def fetch(url: str, attempts: int = FETCH_ATTEMPTS, timeout: int = 25) -> str:
+def fetch(
+    url: str,
+    attempts: int = FETCH_ATTEMPTS,
+    timeout: int = 25,
+    headers: dict[str, str] | None = None,
+) -> str:
     """Scarica una pagina riprovando su errori transitori (429, 5xx, rete)."""
     last_error: Exception | None = None
+    request_headers = dict(HEADERS)
+    if headers:
+        request_headers.update(headers)
     for attempt in range(1, attempts + 1):
         try:
-            request = Request(url, headers=HEADERS)
+            request = Request(url, headers=request_headers)
             with urlopen(request, timeout=timeout) as response:
                 payload = response.read()
                 charset = response.headers.get_content_charset() or "utf-8"
@@ -709,6 +717,18 @@ def parse_garden_multi_days(
     return output_movies
 
 
+def describe_page(html: str) -> str:
+    """Riassunto breve della pagina ricevuta, per capire cosa ha risposto la fonte."""
+    title = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+    title_text = " ".join(title.group(1).split())[:120] if title else "(nessun titolo)"
+    return (
+        f"{len(html)} byte, titolo '{title_text}', "
+        f"movie--preview={html.count('movie--preview')}, "
+        f"inner-film={html.count('inner-film')}, "
+        f"time-select={html.count('time-select__place')}"
+    )
+
+
 def parse_source(source: dict) -> list[dict]:
     if source["kind"] == "garden":
         movies = parse_garden_multi_days(source["url"])
@@ -734,7 +754,8 @@ def parse_source(source: dict) -> list[dict]:
 
     if not parser.movies:
         raise RuntimeError(
-            f"[{source['name']}] Nessun film o spettacolo valido trovato."
+            f"[{source['name']}] Nessun film o spettacolo valido trovato. "
+            f"Pagina ricevuta: {describe_page(html)}"
         )
     return parser.movies
 
