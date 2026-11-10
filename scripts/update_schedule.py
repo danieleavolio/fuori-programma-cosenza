@@ -291,7 +291,17 @@ def browser_get(url: str) -> str:
 
 def fetch_via_proxy(url: str, timeout: int = 30):
     """Riprova attraverso un gateway pubblico."""
-    for name, template in PROXY_GATEWAYS:
+    gateways = list(PROXY_GATEWAYS)
+    extra = os.environ.get("FP_PROXY_GATEWAYS", "").strip()
+    if extra:
+        # Formato: nome=template separati da virgola.
+        configured = []
+        for item in extra.split(","):
+            if "=" in item:
+                name, template = item.split("=", 1)
+                configured.append((name.strip(), template.strip()))
+        gateways = configured + gateways
+    for name, template in gateways:
         try:
             html = fetch(
                 template.format(url=url),

@@ -1,17 +1,12 @@
-name: Aggiorna e pubblica su GitHub Pages
+name: Pubblica su GitHub Pages
 
 on:
   push:
     branches: [main]
-  schedule:
-    # La programmazione dei cinema cambia durante la giornata e GitHub ritarda
-    # i run pianificati: frequenza volutamente alta per non perdere giornate.
-    - cron: '0 */4 * * *'
-    - cron: '30 23 * * *'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -25,66 +20,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Aggiorna la programmazione dei cinema
-        id: update
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -o pipefail
-          python scripts/update_schedule.py 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
-
-      - name: Segnala un aggiornamento incompleto
-        if: steps.update.outcome == 'failure'
-        run: |
-          echo "::warning title=Programmazione non aggiornata::Nessuna fonte ha risposto: viene pubblicata l'ultima programmazione disponibile."
-          echo "Nessuna fonte ha risposto: viene pubblicata l'ultima programmazione disponibile." >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Mantieni l'ultima programmazione pubblicata
-        if: steps.update.outcome == 'failure'
-        shell: bash
-        run: |
-          curl -fsSL "https://danieleavolio.github.io/fuori-programma-cosenza/data/schedule.json" -o data/schedule.json \
-            || echo "Ultima programmazione pubblicata non raggiungibile: si mantiene il file del repository."
-
-      - name: Verifica i dati generati
-        if: always()
-        continue-on-error: true
-        run: python scripts/verify_final_schedule.py
-
-      - name: Salva la programmazione aggiornata nel repository
-        if: always()
-        continue-on-error: true
-        shell: bash
-        env:
-          SCHEDULE_TOKEN: ${{ secrets.SCHEDULE_TOKEN }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/schedule.json
-          if git diff --staged --quiet; then
-            echo "Nessuna variazione nella programmazione."
-          else
-            git commit -m "Aggiorna orari cinema [skip ci]"
-            if [ -n "$SCHEDULE_TOKEN" ]; then
-              # Il checkout inietta l'header del GITHUB_TOKEN, che ha la
-              # precedenza sul remote: va rimosso per usare il token dedicato.
-              git remote set-url origin "https://x-access-token:${SCHEDULE_TOKEN}@github.com/${{ github.repository }}.git"
-              git config --local --unset-all http.https://github.com/.extraheader || true
-            fi
-            if ! git push; then
-              echo "::warning title=Push non consentito::Il token del workflow non puo' scrivere su main: i dati aggiornati vengono comunque pubblicati dal deploy."
-            fi
-          fi
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

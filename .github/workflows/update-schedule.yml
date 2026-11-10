@@ -1,0 +1,75 @@
+name: Aggiorna la programmazione dei cinema
+
+on:
+  schedule:
+    # Ogni quattro ore: la programmazione cambia durante la giornata e GitHub
+    # ritarda i run pianificati.
+    - cron: '0 */4 * * *'
+    - cron: '30 23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: schedule
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Aggiorna la programmazione dei cinema
+        id: update
+        continue-on-error: true
+        shell: bash
+        env:
+          FP_PROXY_GATEWAYS: ${{ vars.FP_PROXY_GATEWAYS }}
+        run: |
+          set -o pipefail
+          python scripts/update_schedule.py 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Segnala un aggiornamento incompleto
+        if: steps.update.outcome == 'failure'
+        run: |
+          echo "::warning title=Programmazione non aggiornata::Nessuna fonte ha risposto: resta online l'ultima programmazione pubblicata."
+          echo "Nessuna fonte ha risposto: resta online l'ultima programmazione pubblicata." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verifica i dati generati
+        if: always()
+        continue-on-error: true
+        run: python scripts/verify_final_schedule.py
+
+      - name: Salva la programmazione aggiornata nel repository
+        if: always()
+        continue-on-error: true
+        shell: bash
+        env:
+          SCHEDULE_TOKEN: ${{ secrets.SCHEDULE_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/schedule.json
+          if git diff --staged --quiet; then
+            echo "Nessuna variazione nella programmazione."
+          else
+            git commit -m "Aggiorna gli orari dei cinema"
+            if [ -n "$SCHEDULE_TOKEN" ]; then
+              # Il checkout inietta l'header del GITHUB_TOKEN, che ha la
+              # precedenza sul remote: va rimosso per usare il token dedicato.
+              git remote set-url origin "https://x-access-token:${SCHEDULE_TOKEN}@github.com/${{ github.repository }}.git"
+              git config --local --unset-all http.https://github.com/.extraheader || true
+            fi
+            if ! git push; then
+              echo "::warning title=Push non consentito::Il token del workflow non puo' scrivere su main: i dati aggiornati restano comunque online con il deploy."
+            fi
+          fi
