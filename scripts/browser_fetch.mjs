@@ -26,6 +26,27 @@ const CHROME_CANDIDATES = [
 const PAGE_TIMEOUT_MS = Number(process.env.FP_BROWSER_TIMEOUT || 60000);
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// Un Chrome headless dichiara "HeadlessChrome" nello user agent e lascia
+// navigator.webdriver a true: due firme che l'anti-bot riconosce subito.
+const CHROME_VERSION = '125.0.0.0';
+const USER_AGENT =
+  `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ` +
+  `(KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`;
+const STEALTH_SCRIPT = `
+  Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+  Object.defineProperty(navigator, 'languages', { get: () => ['it-IT', 'it', 'en-US', 'en'] });
+  Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+  Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => 8 });
+  window.chrome = window.chrome || { runtime: {}, app: { isInstalled: false } };
+  const originalQuery = window.navigator.permissions && window.navigator.permissions.query;
+  if (originalQuery) {
+    window.navigator.permissions.query = (parameters) =>
+      parameters.name === 'notifications'
+        ? Promise.resolve({ state: Notification.permission })
+        : originalQuery(parameters);
+  }
+`;
+
 // La pagina e' quella vera solo se contiene uno di questi segnali.
 const CONTENT_MARKERS = [
   'movie--preview',
@@ -60,7 +81,10 @@ async function spawnChrome(port, profileDir) {
         '--disable-extensions',
         '--no-first-run',
         '--no-default-browser-check',
-        '--disable-features=Translate,BackForwardCache',
+        '--disable-blink-features=AutomationControlled',
+        '--disable-features=Translate,BackForwardCache,IsolateOrigins,site-per-process',
+        '--lang=it-IT',
+        `--user-agent=${USER_AGENT}`,
         `--remote-debugging-port=${port}`,
         `--user-data-dir=${profileDir}`,
         '--window-size=1440,2400',
@@ -132,6 +156,13 @@ try {
 
   await send('Page.enable');
   await send('Runtime.enable');
+  await send('Network.enable');
+  await send('Emulation.setUserAgentOverride', {
+    userAgent: USER_AGENT,
+    acceptLanguage: 'it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7',
+    platform: 'Win32',
+  });
+  await send('Page.addScriptToEvaluateOnNewDocument', { source: STEALTH_SCRIPT });
 } catch (error) {
   process.stderr.write(`${error.message}\n`);
   shutdown(1);

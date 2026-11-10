@@ -1103,28 +1103,24 @@ def main() -> None:
         title_key(movie.get("title", "")): movie for movie in previous.get("movies", [])
     }
 
-    # Dettagli film: la sinossi richiede la scheda dedicata, con pausa per
-    # non farsi limitare dalla biglietteria.
+    # Dettagli film: la sinossi richiede la scheda dedicata. Si scarica solo
+    # per i film nuovi, così ogni aggiornamento costa una manciata di
+    # richieste invece di una per film (meno esposizione al WAF).
     for index, movie in enumerate(movies_output):
-        if not movie.get("synopsis"):
+        old = previous_details.get(title_key(movie["title"]))
+        if old:
+            for field in ("synopsis", "genres", "director", "year"):
+                if not movie.get(field) and old.get(field):
+                    movie[field] = old[field]
+
+        needs_details = not movie.get("synopsis") and "/film/" in movie.get("url", "")
+        if needs_details:
             details = get_movie_details(movie["url"])
-            if details.get("synopsis") and not movie.get("synopsis"):
-                movie["synopsis"] = details["synopsis"]
-            if details.get("genres") and not movie.get("genres"):
-                movie["genres"] = details["genres"]
-            if details.get("director") and not movie.get("director"):
-                movie["director"] = details["director"]
-            if details.get("year") and not movie.get("year"):
-                movie["year"] = details["year"]
-        if not movie.get("synopsis"):
-            # Scheda non raggiungibile: si tengono i dettagli già noti.
-            old = previous_details.get(title_key(movie["title"]))
-            if old:
-                for field in ("synopsis", "genres", "director", "year"):
-                    if not movie.get(field) and old.get(field):
-                        movie[field] = old[field]
-        if index < len(movies_output) - 1:
-            time.sleep(DETAIL_DELAY)
+            for field in ("synopsis", "genres", "director", "year"):
+                if details.get(field) and not movie.get(field):
+                    movie[field] = details[field]
+            if index < len(movies_output) - 1:
+                time.sleep(DETAIL_DELAY)
 
     # Le date passate non interessano più il visitatore.
     for movie in movies_output:
