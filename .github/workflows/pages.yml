@@ -46,8 +46,15 @@ jobs:
       - name: Segnala un aggiornamento incompleto
         if: steps.update.outcome == 'failure'
         run: |
-          echo "::warning title=Programmazione non aggiornata::Nessuna fonte ha risposto: vengono pubblicati gli ultimi dati disponibili."
-          echo "::warning title=Programmazione non aggiornata::Nessuna fonte ha risposto: vengono pubblicati gli ultimi dati disponibili." >> "$GITHUB_STEP_SUMMARY"
+          echo "::warning title=Programmazione non aggiornata::Nessuna fonte ha risposto: viene pubblicata l'ultima programmazione disponibile."
+          echo "Nessuna fonte ha risposto: viene pubblicata l'ultima programmazione disponibile." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Mantieni l'ultima programmazione pubblicata
+        if: steps.update.outcome == 'failure'
+        shell: bash
+        run: |
+          curl -fsSL "https://danieleavolio.github.io/fuori-programma-cosenza/data/schedule.json" -o data/schedule.json \
+            || echo "Ultima programmazione pubblicata non raggiungibile: si mantiene il file del repository."
 
       - name: Verifica i dati generati
         if: always()
@@ -56,6 +63,7 @@ jobs:
 
       - name: Salva la programmazione aggiornata nel repository
         if: always()
+        continue-on-error: true
         shell: bash
         run: |
           git config --global user.name "github-actions[bot]"
@@ -65,8 +73,9 @@ jobs:
             echo "Nessuna variazione nella programmazione."
           else
             git commit -m "Aggiorna orari cinema [skip ci]"
-            git pull --rebase origin main
-            git push
+            if ! git push; then
+              echo "::warning title=Push non consentito::Le regole del repository richiedono una pull request per scrivere su main: i dati aggiornati vengono comunque pubblicati dal deploy."
+            fi
           fi
 
       - uses: actions/configure-pages@v5

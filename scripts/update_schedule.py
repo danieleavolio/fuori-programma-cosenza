@@ -15,6 +15,13 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 SCHEDULE_FILE = ROOT / "data" / "schedule.json"
 
+# L'ultima programmazione pubblicata: e' la base per ripristinare i giorni
+# mancanti, perche' il repository non riceve i commit automatici (le regole
+# del repository richiedono una pull request per scrivere su main).
+PUBLISHED_SCHEDULE_URL = (
+    "https://danieleavolio.github.io/fuori-programma-cosenza/data/schedule.json"
+)
+
 SOURCES = [
     {
         "id": "andromeda-river",
@@ -733,13 +740,36 @@ def parse_source(source: dict) -> list[dict]:
 
 
 # --- Gestione dati precedenti (ripresa in caso di fonte non raggiungibile) ---
-def load_previous() -> dict:
-    if not SCHEDULE_FILE.exists():
-        return {}
+def _schedule_timestamp(data: dict) -> float:
+    raw = str(data.get("updatedAt") or "")
     try:
-        return json.loads(SCHEDULE_FILE.read_text(encoding="utf-8"))
-    except Exception:
+        return datetime.fromisoformat(raw).timestamp()
+    except ValueError:
+        return 0.0
+
+
+def load_previous() -> dict:
+    """Carica la programmazione nota piu' recente.
+
+    Fonti: il file nel repository e l'ultima versione pubblicata sul sito.
+    """
+    candidates: list[dict] = []
+
+    if SCHEDULE_FILE.exists():
+        try:
+            candidates.append(json.loads(SCHEDULE_FILE.read_text(encoding="utf-8")))
+        except Exception:
+            pass
+
+    try:
+        published = fetch(PUBLISHED_SCHEDULE_URL, attempts=2, timeout=20)
+        candidates.append(json.loads(published))
+    except Exception as error:
+        print(f"  Programmazione pubblicata non raggiungibile: {error}")
+
+    if not candidates:
         return {}
+    return max(candidates, key=_schedule_timestamp)
 
 
 def previous_movies_for_venue(previous: dict, venue_id: str, today: date) -> list[dict]:

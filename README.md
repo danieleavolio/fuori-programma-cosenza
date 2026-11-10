@@ -61,3 +61,5 @@ Il comando `headroom` è disponibile in `tools\headroom\bin`. Per attivare il pr
 ## Pubblicazione
 
 Il sito è composto da file statici e viene pubblicato tramite GitHub Pages. Il workflow `.github/workflows/pages.yml` aggiorna i dati ed esegue il deploy automatico del repository.
+
+I dati aggiornati vengono pubblicati dal deploy, che carica l'intera cartella come artifact: non serve che il file `data/schedule.json` venga committato su `main` (le regole del repository richiedono comunque una pull request per scrivere su `main`). Per ripristinare un giorno mancante il scraper usa come base la programmazione già pubblicata sul sito, che è sempre più aggiornata del file nel repository.

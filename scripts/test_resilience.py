@@ -152,6 +152,7 @@ def test_source_failure_keeps_previous_data() -> None:
         original_parse = upd.parse_source
         original_details = upd.get_movie_details
         original_announced = upd.parse_announced_dates
+        original_fetch = upd.fetch
         upd.SCHEDULE_FILE = schedule_file
         upd.get_movie_details = lambda url: {
             "synopsis": "",
@@ -160,6 +161,11 @@ def test_source_failure_keeps_previous_data() -> None:
             "year": "",
         }
         upd.parse_announced_dates = lambda url, venue_id: []
+
+        def offline_fetch(url, attempts=1, timeout=25):
+            raise RuntimeError("rete non disponibile")
+
+        upd.fetch = offline_fetch
 
         def fake_parse(source):
             if source["id"] == "citrigno":
@@ -188,6 +194,7 @@ def test_source_failure_keeps_previous_data() -> None:
             upd.parse_source = original_parse
             upd.get_movie_details = original_details
             upd.parse_announced_dates = original_announced
+            upd.fetch = original_fetch
 
         data = _read(schedule_file)
         titles = {movie["title"] for movie in data["movies"]}
