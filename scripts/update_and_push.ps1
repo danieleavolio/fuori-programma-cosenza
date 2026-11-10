@@ -1,0 +1,40 @@
+<#
+    Aggiorna la programmazione e la pubblica nel repository.
+
+    Il WAF di AWS blocca le richieste dai runner di GitHub Actions, quindi lo
+    scraping viene eseguito da questo PC, dove le fonti rispondono senza
+    problemi. Il push sul repository attiva il deploy automatico del sito.
+
+    Uso manuale:  powershell -ExecutionPolicy Bypass -File scripts\update_and_push.ps1
+#>
+
+$ErrorActionPreference = 'Stop'
+
+$root = Split-Path -Parent $PSScriptRoot
+Set-Location $root
+
+Write-Host "[1/3] Aggiorno della programmazione..."
+python scripts\update_schedule.py
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Aggiornamento non riuscito: i dati precedenti restano invariati."
+    exit 1
+}
+
+Write-Host "[2/3] Salvataggio dei dati..."
+git add data/schedule.json
+if (git diff --staged --quiet) {
+    Write-Host "Nessuna variazione nella programmazione."
+    exit 0
+}
+
+git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" `
+    commit -m "Aggiorna orari cinema"
+
+Write-Host "[3/3] Pubblicazione nel repository..."
+git push origin main
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Push non riuscito: i dati restano in locale e il sito non cambia."
+    exit 1
+}
+
+Write-Host "Programmazione pubblicata."
