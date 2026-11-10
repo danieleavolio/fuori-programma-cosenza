@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T13:13:05.593985+00:00",
+  "updatedAt": "2026-11-10T13:22:30.152252+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -503,7 +503,12 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [
+        {
+          "date": "11/11/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ]
     },
     {
       "id": "4",
@@ -995,7 +1000,16 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [
+        {
+          "date": "10/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "11/11/2026",
+          "venue": "unical"
+        }
+      ]
     },
     {
       "id": "7",
@@ -1223,7 +1237,16 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [
+        {
+          "date": "10/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "11/11/2026",
+          "venue": "unical"
+        }
+      ]
     },
     {
       "id": "9",
@@ -1759,7 +1782,12 @@
           "venue": "cinema-teatro-italia"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [
+        {
+          "date": "10/11/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ]
     },
     {
       "id": "16",
@@ -1839,16 +1867,6 @@
       "type": "source-failed",
       "venue": "unical",
       "message": "[Unical Cinema] Errore di rete su https://unical.cosenzacinema.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
-    },
-    {
-      "type": "announced-failed",
-      "venue": "cinema-teatro-italia",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
-    },
-    {
-      "type": "announced-failed",
-      "venue": "unical",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
     }
   ]
 }
