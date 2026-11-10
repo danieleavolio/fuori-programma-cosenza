@@ -133,7 +133,7 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .refresh-btn:disabled { opacity: .55; cursor: wait; }
 
 .movies-catalog-grid { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); }
-.movies-catalog-grid.poster-movie-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 158px), 1fr)); align-items: stretch; gap: 14px; border-top: 0; }
+.movies-catalog-grid.poster-movie-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 158px), 1fr)); align-items: stretch; gap: 14px; border-top: 0; grid-auto-flow: dense; }
 .movie-catalog-card, .film-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
 .movie-catalog-card:hover, .film-card:hover { border-color: var(--muted); }
 .movie-catalog-card { border: 0; border-bottom: 1px solid var(--line); border-left: 3px solid transparent; background: var(--surface); box-shadow: none; animation: film-card-enter 200ms var(--ease) both; transition: background-color 160ms ease, border-color 160ms ease; }
@@ -142,31 +142,50 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .poster-movie-grid .movie-catalog-card:hover { border-left-color: var(--line); }
 
 /* GRIGLIA (per film): stessa card della lista, locandina in alto e testo sotto. */
-.poster-movie-grid .movie-catalog-card { display: flex; flex-direction: column; }
+.poster-movie-grid .movie-catalog-card { display: flex; flex-direction: column; scroll-margin-top: 92px; }
 .poster-movie-grid .movie-card-body { flex: 1; display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 12px; }
 .poster-movie-grid .poster-link, .poster-movie-grid .poster-venue-menu { width: 100%; }
-.poster-movie-grid .movie-card-details { width: 100%; flex: 1; }
-.poster-movie-grid .movie-actions { gap: 2px; }
+.poster-movie-grid .movie-card-details { width: 100%; flex: 1; display: flex; flex-direction: column; }
+
+/* Ogni blocco ha un'altezza fissa: le card restano allineate anche quando
+   badges, sinossi o sale occupano un numero diverso di righe. */
+.poster-movie-grid .movie-card-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 6px; min-height: 0; margin: 0; }
+.poster-movie-grid .movie-badges { height: 54px; overflow: hidden; align-content: flex-start; }
+.poster-movie-grid .movie-actions { gap: 2px; margin-left: 0; }
 .poster-movie-grid .movie-actions .fav-star-btn,
-.poster-movie-grid .movie-actions .btn-share-icon { width: 36px; height: 36px; min-height: 36px; border-color: var(--line); background: var(--surface); }
-.poster-movie-grid .movie-title { font-size: 16px; letter-spacing: -.02em; }
-.poster-movie-grid .movie-card-meta { flex-wrap: wrap; row-gap: 6px; }
-.poster-movie-grid .movie-card-meta .movie-actions { margin-left: auto; }
-.poster-movie-grid .movie-badges { flex: 1 1 100%; }
-.poster-movie-grid .movie-synopsis { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; font-size: 12px; }
-.poster-movie-grid .movie-credits { font-size: 11px; }
-.poster-movie-grid .movie-facts { grid-template-columns: 1fr; gap: 10px; }
+.poster-movie-grid .movie-actions .btn-share-icon { width: 34px; height: 34px; min-height: 34px; border-color: var(--line); background: var(--surface); }
+.poster-movie-grid .movie-title-row { min-height: 38px; }
+.poster-movie-grid .movie-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 15px; line-height: 1.25; letter-spacing: -.02em; }
+.poster-movie-grid .movie-synopsis { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; height: 54px; margin: 8px 0 0; font-size: 12px; line-height: 1.5; }
+.poster-movie-grid .movie-credits { height: 16px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 11px; }
+.poster-movie-grid .movie-facts { grid-template-columns: 1fr; gap: 8px; margin-top: 6px; }
+.poster-movie-grid .venue-pill-list,
+.poster-movie-grid .days-chip-list { height: 62px; overflow: hidden; align-content: flex-start; -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent); mask-image: linear-gradient(to bottom, #000 74%, transparent); }
 .poster-movie-grid .schedule-toggle { width: 100%; margin-top: auto; }
-/* Card espansa: la locandina resta una colonna fissa, non si gonfia a tutta pagina. */
-.poster-movie-grid .movie-catalog-card.is-expanded { grid-column: 1 / -1; }
-.poster-movie-grid .movie-catalog-card.is-expanded .movie-card-body { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 20px; align-items: start; }
+
+/* Card espansa: occupa tutta la riga, con la locandina come colonna fissa. */
+.poster-movie-grid .movie-catalog-card.is-expanded { grid-column: 1 / -1; border-color: var(--ink); box-shadow: 0 18px 48px #00000038; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-card-body { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 24px; align-items: start; padding: 18px; }
 .poster-movie-grid .movie-catalog-card.is-expanded .poster-link,
-.poster-movie-grid .movie-catalog-card.is-expanded .poster-venue-menu { width: 190px; }
+.poster-movie-grid .movie-catalog-card.is-expanded .poster-venue-menu { width: 230px; }
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .fav-star-btn,
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .btn-share-icon { width: 44px; height: 44px; min-height: 44px; }
-.poster-movie-grid .movie-catalog-card.is-expanded .movie-title { font-size: 24px; }
-.poster-movie-grid .movie-catalog-card.is-expanded .movie-synopsis { display: block; -webkit-line-clamp: unset; font-size: 14px; }
-.poster-movie-grid .movie-catalog-card.is-expanded .movie-facts { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 18px; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-card-meta { display: flex; align-items: center; min-height: 36px; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-badges { height: auto; overflow: visible; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-actions { margin-left: auto; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-title-row { min-height: 0; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-title { display: block; -webkit-line-clamp: unset; overflow: visible; font-size: 26px; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-synopsis { display: block; height: auto; -webkit-line-clamp: unset; margin: 10px 0 0; font-size: 14px; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-credits { height: auto; white-space: normal; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-facts { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 18px; margin-top: 12px; }
+.poster-movie-grid .movie-catalog-card.is-expanded .venue-pill-list,
+.poster-movie-grid .movie-catalog-card.is-expanded .days-chip-list { height: auto; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+.poster-movie-grid .movie-catalog-card.is-expanded .schedule-toggle { width: fit-content; margin-top: 16px; }
+
+/* Spostamento fluido delle card quando il layout cambia. */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) { animation-duration: 280ms; animation-timing-function: cubic-bezier(.22, .68, .24, 1); }
 .film-card { animation: film-card-enter 200ms var(--ease) both; transition: border-color 140ms ease; }
 .movie-card-topline { min-height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 5px 12px; border-bottom: 1px dashed var(--line); }
 .topline-left, .topline-right { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
@@ -198,6 +217,8 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .movie-title, .movie-info h3 { margin: 0; font: 700 clamp(19px, 3vw, 27px)/1.08 var(--display); letter-spacing: -.035em; overflow-wrap: anywhere; }
 .movie-synopsis { margin: 9px 0 12px; color: var(--body-copy); font-size: 13px; line-height: 1.55; }
 .movie-credits { margin: -5px 0 12px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.movie-credits:empty { display: none; }
+.poster-movie-grid .movie-credits:empty { display: block; }
 .movie-facts { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 18px; }
 .venues-summary-block, .days-summary-block { margin-top: 8px; }
 .meta-label { display: block; margin-bottom: 5px; color: var(--muted); font: 700 9px/1.3 var(--mono); letter-spacing: .08em; }
@@ -226,10 +247,27 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .venue-loc { color: var(--muted); font-size: 10px; }
 .times-buttons, .times { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
 .time-item-wrapper { display: flex; align-items: center; gap: 3px; }
-.showtime-btn, .showtime { min-width: 64px; min-height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px 8px; border: 1px solid var(--ink); background: var(--paper); text-align: center; transition: background 140ms ease, color 140ms ease, transform 140ms ease; }
+.showtime-btn, .showtime { position: relative; min-width: 64px; min-height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px 8px; border: 1px solid var(--ink); background: var(--paper); text-align: center; cursor: pointer; transition: background 140ms ease, color 140ms ease, transform 140ms ease; }
 .showtime-btn:hover, .showtime:hover { background: var(--blue); color: var(--on-blue); transform: translateY(-1px); }
+.showtime-btn[aria-expanded="true"], .showtime[aria-expanded="true"] { background: var(--blue); color: var(--on-blue); }
 .showtime-btn strong, .showtime strong { font: 700 13px/1.2 var(--mono); font-variant-numeric: tabular-nums; }
 .showtime-btn small, .showtime small { margin-top: 2px; font-size: 9px; }
+.time-cue { position: absolute; top: 4px; right: 4px; opacity: .45; pointer-events: none; }
+.showtime-btn:hover .time-cue, .showtime:hover .time-cue,
+.showtime-btn[aria-expanded="true"] .time-cue, .showtime[aria-expanded="true"] .time-cue { opacity: .8; }
+
+/* Menu azioni di un singolo orario */
+.showtime-menu { position: fixed; z-index: 1200; width: min(266px, calc(100vw - 16px)); border: 1px solid var(--ink); background: var(--surface); box-shadow: 0 18px 44px #00000038; animation: showtime-menu-in 150ms var(--ease); }
+@keyframes showtime-menu-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.showtime-menu-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--line); background: var(--surface-alt); }
+.showtime-menu-head strong { font: 700 16px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.showtime-menu-head span { overflow: hidden; color: var(--muted); font: 10px/1.4 var(--mono); text-align: right; text-overflow: ellipsis; white-space: nowrap; }
+.showtime-menu-item { width: 100%; min-height: 46px; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 13px; font-weight: 600; text-align: left; cursor: pointer; }
+.showtime-menu-item:first-of-type { border-top: 0; }
+.showtime-menu-item:hover, .showtime-menu-item:focus-visible { background: var(--green); }
+.showtime-menu-icon { flex: 0 0 auto; width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid var(--line); background: var(--paper); }
+.showtime-menu-item:hover .showtime-menu-icon { border-color: var(--ink); }
+.menu-go { margin-left: auto; opacity: .4; }
 .share-menu { position: relative; flex: 0 0 auto; }
 .btn-share-icon { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); background: var(--surface); cursor: pointer; list-style: none; }
 .btn-share-icon::-webkit-details-marker { display: none; }
@@ -360,6 +398,17 @@ noscript { display: block; padding: 20px; text-align: center; }
   .refresh-btn { min-height: 44px; padding-inline: 8px; }
   .refresh-btn span { display: none; }
   .movies-catalog-grid, .film-list { gap: 13px; }
+  .poster-movie-grid .movie-catalog-card { scroll-margin-top: 112px; }
+  /* Card espansa su telefono: locandina piccola a sinistra, testo leggibile a destra. */
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-card-body { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 12px 10px; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .poster-link,
+  .poster-movie-grid .movie-catalog-card.is-expanded .poster-venue-menu { width: 104px; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-card-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; min-height: 0; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-title { font-size: 20px; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-facts { grid-template-columns: 1fr; gap: 8px; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .schedule-toggle { width: 100%; margin-top: 12px; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .fav-star-btn,
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .btn-share-icon { width: 38px; height: 38px; min-height: 38px; }
   .movie-card-body { grid-template-columns: 90px minmax(0, 1fr); grid-template-areas: "poster details" "synopsis synopsis" "facts facts" "toggle toggle"; gap: 0 12px; padding: 12px 10px; }
   .movie-card-details { grid-area: details; min-width: 0; display: flex; flex-direction: column; }
   .poster-link { grid-area: poster; width: 90px; }
@@ -402,4 +451,5 @@ noscript { display: block; padding: 20px; text-align: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

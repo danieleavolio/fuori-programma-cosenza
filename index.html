@@ -133,6 +133,33 @@
       </section>
     </main>
 
+    <!-- Menu azioni per un singolo orario -->
+    <div class="showtime-menu" id="showtime-menu" role="menu" aria-label="Azioni per questo orario" hidden>
+      <div class="showtime-menu-head">
+        <strong id="showtime-menu-time"></strong>
+        <span id="showtime-menu-meta"></span>
+      </div>
+      <button class="showtime-menu-item" type="button" role="menuitem" data-time-action="open">
+        <span class="showtime-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </span>
+        <span>Vai all'evento</span>
+        <svg class="menu-go" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <button class="showtime-menu-item" type="button" role="menuitem" data-time-action="share">
+        <span class="showtime-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        </span>
+        <span>Condividi</span>
+      </button>
+      <button class="showtime-menu-item" type="button" role="menuitem" data-time-action="calendar">
+        <span class="showtime-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="16" y1="2" x2="16" y2="7"></line><line x1="8" y1="2" x2="8" y2="7"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="13" x2="12" y2="19"></line><line x1="9" y1="16" x2="15" y2="16"></line></svg>
+        </span>
+        <span>Aggiungi al calendario</span>
+      </button>
+    </div>
+
     <!-- Toast di notifica -->
     <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 

@@ -30,6 +30,17 @@ let dayLayout = 'grid';
 const expandedMovies = new Set();
 let favorites = loadFavorites();
 
+// Le transizioni di vista animano lo spostamento delle card invece di farle
+// saltare: è quello che rende fluida l'apertura di una scheda.
+function withViewTransition(update) {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!document.startViewTransition || reduced) {
+    update();
+    return null;
+  }
+  return document.startViewTransition(update);
+}
+
 // --- Date & String Utilities ---
 const italianDate = (date) => new Intl.DateTimeFormat('it-IT', { weekday: 'short', day: 'numeric', month: 'short' }).format(date).replace('.', '');
 const italianFullDate = (date) => new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }).format(date);
@@ -169,6 +180,252 @@ async function shareFilmPoster(movie) {
   }
 }
 
+// ==========================================
+// MENU ORARIO: evento, condivisione, calendario
+// ==========================================
+const showtimeMenu = $('#showtime-menu');
+const showtimeMenuTime = $('#showtime-menu-time');
+const showtimeMenuMeta = $('#showtime-menu-meta');
+const utf8Encoder = new TextEncoder();
+let activeShowtime = null;
+let activeShowtimeButton = null;
+
+const pad2 = (value) => String(value).padStart(2, '0');
+
+// "1h 54m" -> 114. Senza durata si assume un film medio.
+function durationMinutes(raw) {
+  const text = String(raw || '').toLocaleLowerCase('it');
+  const hours = Number((text.match(/(\d+)\s*h/) || [])[1] || 0);
+  const minutes = Number((text.match(/(\d+)\s*m/) || [])[1] || 0);
+  const total = hours * 60 + minutes;
+  return total > 0 ? total : 110;
+}
+
+// Data e ora "da parete" nel fuso italiano, senza conversioni di fuso.
+function icsDateTime(dateStr, timeStr, offsetMinutes = 0) {
+  const [day, month, year] = String(dateStr || '').split('/').map(Number);
+  const [hours, minutes] = String(timeStr || '').split(':').map(Number);
+  const value = new Date(year || 1970, (month || 1) - 1, day || 1, hours || 0, minutes || 0);
+  value.setMinutes(value.getMinutes() + offsetMinutes);
+  return `${value.getFullYear()}${pad2(value.getMonth() + 1)}${pad2(value.getDate())}T${pad2(value.getHours())}${pad2(value.getMinutes())}00`;
+}
+
+function icsText(value) {
+  return String(value || '')
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\r?\n/g, '\\n');
+}
+
+// Le righe iCalendar non possono superare 75 ottetti.
+function icsFold(line) {
+  const parts = [];
+  let current = '';
+  let bytes = 0;
+  for (const char of line) {
+    const size = utf8Encoder.encode(char).length;
+    if (bytes + size > 73) {
+      parts.push(current);
+      current = ` ${char}`;
+      bytes = 1 + size;
+    } else {
+      current += char;
+      bytes += size;
+    }
+  }
+  parts.push(current);
+  return parts.join('\r\n');
+}
+
+function buildCalendarEvent(event) {
+  const minutes = durationMinutes(event.eventDuration);
+  const start = icsDateTime(event.eventDate, event.eventTime);
+  const end = icsDateTime(event.eventDate, event.eventTime, minutes);
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const uid = `${event.eventDate.replace(/\D/g, '')}-${event.eventTime.replace(/\D/g, '')}-${Date.now().toString(36)}@fuori-programma-cosenza`;
+  const venueLine = `${event.eventVenue}${event.eventRoom ? ` (${event.eventRoom})` : ''}`;
+  const location = [venueLine, event.eventLocation].filter(Boolean).join(', ');
+  const description = [
+    `Film: ${event.eventTitle}`,
+    `Cinema: ${event.eventVenue}${event.eventLocation ? ` — ${event.eventLocation}` : ''}`,
+    event.eventRoom ? `Sala: ${event.eventRoom}` : '',
+    `Inizio: ${event.eventDate} alle ${event.eventTime}`,
+    `Durata: ${minutes} minuti`,
+    event.eventUrl ? `Biglietti: ${event.eventUrl}` : '',
+  ].filter(Boolean).join('\n');
+
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Fuori Programma Cosenza//Programmazione cinema//IT',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VTIMEZONE',
+    'TZID:Europe/Rome',
+    'X-LIC-LOCATION:Europe/Rome',
+    'BEGIN:DAYLIGHT',
+    'TZOFFSETFROM:+0100',
+    'TZOFFSETTO:+0200',
+    'TZNAME:CEST',
+    'DTSTART:19700329T020000',
+    'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+    'END:DAYLIGHT',
+    'BEGIN:STANDARD',
+    'TZOFFSETFROM:+0200',
+    'TZOFFSETTO:+0100',
+    'TZNAME:CET',
+    'DTSTART:19701025T030000',
+    'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+    'END:STANDARD',
+    'END:VTIMEZONE',
+    'BEGIN:VEVENT',
+    `UID:${uid}`,
+    `DTSTAMP:${stamp}`,
+    `DTSTART;TZID=Europe/Rome:${start}`,
+    `DTEND;TZID=Europe/Rome:${end}`,
+    `SUMMARY:${icsText(`${event.eventTitle} — ${event.eventVenue}`)}`,
+    `LOCATION:${icsText(location)}`,
+    `DESCRIPTION:${icsText(description)}`,
+    ...(event.eventUrl ? [`URL:${event.eventUrl}`] : []),
+    'STATUS:CONFIRMED',
+    'BEGIN:VALARM',
+    'TRIGGER:-PT45M',
+    'ACTION:DISPLAY',
+    `DESCRIPTION:${icsText(`${event.eventTitle} tra 45 minuti`)}`,
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ];
+
+  return `${lines.map(icsFold).join('\r\n')}\r\n`;
+}
+
+function downloadCalendarEvent(event) {
+  const calendar = buildCalendarEvent(event);
+  const slug = String(event.eventTitle)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLocaleLowerCase('it') || 'film';
+  const filename = `${slug}-${event.eventDate.replace(/\//g, '-')}-${event.eventTime.replace(':', '')}.ics`;
+  const blob = new Blob([calendar], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 20000);
+  showToast('Evento pronto: scegli il calendario per aggiungerlo');
+}
+
+function showtimeChipHtml(movie, cinema, dateStr, entry, className) {
+  return `
+    <button class="${className}" type="button" data-showtime aria-haspopup="menu" aria-controls="showtime-menu" aria-expanded="false"
+      data-event-title="${escapeHtml(movie.title)}"
+      data-event-date="${escapeHtml(dateStr)}"
+      data-event-time="${escapeHtml(entry.time)}"
+      data-event-duration="${escapeHtml(cleanDuration(movie.duration))}"
+      data-event-venue="${escapeHtml(cinema.name)}"
+      data-event-location="${escapeHtml(cinema.location || '')}"
+      data-event-room="${escapeHtml(entry.room ? roomLabel(entry.room) : '')}"
+      data-event-url="${escapeHtml(entry.url || movie.url)}"
+      title="Azioni per ${escapeHtml(movie.title)} alle ${escapeHtml(entry.time)}">
+      <strong>${escapeHtml(entry.time)}</strong>
+      <small>${entry.room ? escapeHtml(roomLabel(entry.room)) : 'Biglietti'}</small>
+      <svg class="time-cue" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+  `;
+}
+
+function positionShowtimeMenu(button) {
+  const margin = 8;
+  const rect = button.getBoundingClientRect();
+  const menuRect = showtimeMenu.getBoundingClientRect();
+  const left = Math.max(margin, Math.min(
+    rect.left + rect.width / 2 - menuRect.width / 2,
+    window.innerWidth - menuRect.width - margin,
+  ));
+  let top = rect.bottom + margin;
+  if (top + menuRect.height > window.innerHeight - margin) {
+    const above = rect.top - menuRect.height - margin;
+    top = above >= margin ? above : Math.max(margin, window.innerHeight - menuRect.height - margin);
+  }
+  showtimeMenu.style.left = `${Math.round(left)}px`;
+  showtimeMenu.style.top = `${Math.round(top)}px`;
+}
+
+function openShowtimeMenu(button) {
+  if (!showtimeMenu) return;
+  closeShowtimeMenu();
+  activeShowtime = { ...button.dataset };
+  activeShowtimeButton = button;
+  showtimeMenuTime.textContent = activeShowtime.eventTime;
+  showtimeMenuMeta.textContent = `${formatDayLabel(activeShowtime.eventDate)} · ${activeShowtime.eventVenue}`;
+  showtimeMenu.hidden = false;
+  positionShowtimeMenu(button);
+  button.setAttribute('aria-expanded', 'true');
+  showtimeMenu.querySelector('.showtime-menu-item')?.focus({ preventScroll: true });
+}
+
+function closeShowtimeMenu() {
+  if (!showtimeMenu || showtimeMenu.hidden) return;
+  showtimeMenu.hidden = true;
+  if (activeShowtimeButton) {
+    activeShowtimeButton.setAttribute('aria-expanded', 'false');
+    activeShowtimeButton = null;
+  }
+  activeShowtime = null;
+}
+
+async function copyToClipboard(text) {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch (error) {}
+
+  try {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+    const copied = document.execCommand('copy');
+    area.remove();
+    return copied;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function shareShowtime(event) {
+  const lines = [
+    `${event.eventTitle} — ${event.eventVenue}`,
+    `${italianFullDate(parseDate(event.eventDate))} alle ${event.eventTime}`,
+    event.eventLocation ? `Dove: ${event.eventLocation}${event.eventRoom ? `, ${event.eventRoom}` : ''}` : '',
+    event.eventUrl || '',
+  ].filter(Boolean).join('\n');
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: `${event.eventTitle} — ${event.eventVenue}`, text: lines, url: event.eventUrl || undefined });
+      return;
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+    }
+  }
+
+  if (await copyToClipboard(lines)) showToast('Orario copiato negli appunti');
+  else showToast('Impossibile condividere questo orario');
+}
+
 // --- Setup Venues & Days ---
 function renderVenuesInfo(venues) {
   if (venueFilter) {
@@ -207,7 +464,9 @@ function renderMovieMetadata(movie) {
   const details = [];
   if (movie.director) details.push(`Regia: ${escapeHtml(movie.director)}`);
   if (movie.year) details.push(escapeHtml(movie.year));
-  return details.length ? `<p class="movie-credits">${details.join(' · ')}</p>` : '';
+  // Sempre presente: nella griglia occupa un'altezza fissa, così le card
+  // restano allineate anche quando la regia non è nota.
+  return `<p class="movie-credits">${details.join(' · ')}</p>`;
 }
 
 function movieUrlForVenue(movie, venueId) {
@@ -422,7 +681,7 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
   const showCount = relevantShows.reduce((sum, show) => sum + show.shows.length, 0);
 
   return `
-    <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}">
+    <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}" style="view-transition-name: film-${escapeHtml(movie.id)}">
       <div class="movie-card-body">
         ${renderPosterLink(movie, venueIds, venuesMap, selectedVenue)}
 
@@ -504,10 +763,7 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
                             <div class="times-buttons">
                               ${s.shows.map((entry) => `
                                 <div class="time-item-wrapper">
-                                  <a class="showtime-btn" href="${escapeHtml(entry.url || movie.url)}" target="_blank" rel="noreferrer" title="Acquista biglietto per ${escapeHtml(movie.title)} alle ${escapeHtml(entry.time)} al ${escapeHtml(cinema.name)}">
-                                    <strong>${escapeHtml(entry.time)}</strong>
-                                    <small>${entry.room ? escapeHtml(roomLabel(entry.room)) : 'Biglietti'}</small>
-                                  </a>
+                                  ${showtimeChipHtml(movie, cinema, dateStr, entry, 'showtime-btn')}
                                 </div>
                               `).join('')}
                             </div>
@@ -603,10 +859,7 @@ function dayCardHtml(movie, { venuesMap, dayDate }) {
               <div class="times">
                 ${show.shows.map((entry) => `
                   <div class="time-item-wrapper">
-                    <a class="showtime" href="${escapeHtml(entry.url || movie.url)}" target="_blank" rel="noreferrer">
-                      <strong>${escapeHtml(entry.time)}</strong>
-                      <small>${entry.room ? escapeHtml(roomLabel(entry.room)) : 'Biglietti'}</small>
-                    </a>
+                    ${showtimeChipHtml(movie, cinema, dayDate, entry, 'showtime')}
                   </div>
                 `).join('')}
               </div>
@@ -757,8 +1010,49 @@ $('#clear-filters').addEventListener('click', () => {
   render();
 });
 
+// Azioni del menu orario (aperto cliccando un orario)
+if (showtimeMenu) showtimeMenu.addEventListener('click', (e) => {
+  const item = e.target.closest('[data-time-action]');
+  if (!item) return;
+  const action = item.dataset.timeAction;
+  const event = activeShowtime;
+  const button = activeShowtimeButton;
+  if (button) button.focus({ preventScroll: true });
+  closeShowtimeMenu();
+  if (!event) return;
+
+  if (action === 'open' && event.eventUrl) {
+    window.open(event.eventUrl, '_blank', 'noopener,noreferrer');
+  } else if (action === 'share') {
+    shareShowtime(event);
+  } else if (action === 'calendar') {
+    downloadCalendarEvent(event);
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' || !showtimeMenu || showtimeMenu.hidden) return;
+  const button = activeShowtimeButton;
+  if (button) button.focus({ preventScroll: true });
+  closeShowtimeMenu();
+});
+
+// Il menu è ancorato alla pagina: se si scorre o ridimensiona va richiuso.
+window.addEventListener('scroll', () => closeShowtimeMenu(), { passive: true, capture: true });
+window.addEventListener('resize', () => closeShowtimeMenu());
+
 // In-place accordion card toggle (con scroll fluido centrato)
 document.addEventListener('click', (e) => {
+  // 0. Apre il menu azioni di un singolo orario
+  const showtimeBtn = showtimeMenu ? e.target.closest('[data-showtime]') : null;
+  if (showtimeBtn) {
+    if (activeShowtimeButton === showtimeBtn && !showtimeMenu.hidden) closeShowtimeMenu();
+    else openShowtimeMenu(showtimeBtn);
+    return;
+  }
+  if (e.target.closest('#showtime-menu')) return;
+  closeShowtimeMenu();
+
   // 1. Gestione stella preferiti
   const favBtn = e.target.closest('.fav-star-btn');
   if (favBtn) {
@@ -807,15 +1101,27 @@ document.addEventListener('click', (e) => {
     const movieId = card.dataset.movieId;
     const willExpand = scheduleToggle.getAttribute('aria-expanded') !== 'true';
     const panel = card.querySelector(`#schedule-${CSS.escape(movieId)}`);
-    scheduleToggle.setAttribute('aria-expanded', String(willExpand));
-    scheduleToggle.querySelector('span').textContent = willExpand
-      ? 'Nascondi gli orari'
-      : `Date, orari e biglietti · ${card.querySelectorAll('.showtime-btn').length}`;
-    scheduleToggle.querySelector('.cue-chevron').classList.toggle('is-rotated', willExpand);
-    panel.hidden = !willExpand;
-    card.classList.toggle('is-expanded', willExpand);
-    if (willExpand) expandedMovies.add(movieId);
-    else expandedMovies.delete(movieId);
+
+    const apply = () => {
+      scheduleToggle.setAttribute('aria-expanded', String(willExpand));
+      scheduleToggle.querySelector('span').textContent = willExpand
+        ? 'Nascondi gli orari'
+        : `Date, orari e biglietti · ${card.querySelectorAll('.showtime-btn').length}`;
+      scheduleToggle.querySelector('.cue-chevron').classList.toggle('is-rotated', willExpand);
+      panel.hidden = !willExpand;
+      card.classList.toggle('is-expanded', willExpand);
+      if (willExpand) expandedMovies.add(movieId);
+      else expandedMovies.delete(movieId);
+    };
+
+    // Aprendo, la scheda passa in primo piano e lo scroll la porta in vista.
+    const reveal = () => {
+      if (willExpand) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const transition = withViewTransition(apply);
+    if (transition) transition.finished.then(reveal).catch(() => {});
+    else requestAnimationFrame(reveal);
   }
 });
 
