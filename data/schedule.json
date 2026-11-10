@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T11:43:55.335364+00:00",
+  "updatedAt": "2026-11-10T11:48:14.778907+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -7,7 +7,7 @@
       "location": "Zumpano",
       "source": "https://zumpano.andromeda.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "available"
+      "status": "stale"
     },
     {
       "id": "citrigno",
@@ -15,7 +15,7 @@
       "location": "Cosenza",
       "source": "https://citrigno.cosenzacinema.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "available"
+      "status": "stale"
     },
     {
       "id": "cinema-teatro-italia",
@@ -1637,10 +1637,13 @@
       "venueUrls": {
         "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88595"
       },
-      "genres": [],
+      "genres": [
+        "Commedia",
+        "Fantasy"
+      ],
       "director": "Ti West",
-      "year": "",
-      "synopsis": "",
+      "year": "2026",
+      "synopsis": "UN'EMOZIONANTE STORIA DI FANTASMI AMBIENTATA NELLA LONDRA DI DICKENS, CHE SEGUE IL VIAGGIO SOPRANNATURALE DI UN UOMO PER AFFRONTARE IL SUO PASSATO, PRESENTE E FUTURO MENTRE LOTTA PER UNA SECONDA POSSI",
       "shows": [
         {
           "date": "12/11/2026",
@@ -1844,5 +1847,16 @@
       "announcedDates": []
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "type": "source-failed",
+      "venue": "andromeda-river",
+      "message": "[Andromeda River] Errore di rete su https://zumpano.andromeda.18tickets.it/: il WAF ha respinto anche la richiesta dal browser"
+    },
+    {
+      "type": "source-failed",
+      "venue": "citrigno",
+      "message": "[Citrigno] Nessun film o spettacolo valido trovato. Pagina ricevuta: 1592 byte, titolo 'Citrigno', movie--preview=0, inner-film=0, time-select=0 | inizio: <html lang=\"it\"><head> <meta charset=\"utf-8\"> <meta content=\"application/xhtml+xml; charset=utf-8\" http-equiv=\"content-type\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"cf-2fa-verify\" content=\"wjV6on173PxlvQr82NhJ\"> <meta content=\"width=device-width, initial-scale=1.0, user-scalable=1, minimum-scale=1.0, maximum-scale=2.0\" name=\"viewport\"> <title>Citrigno</title> <meta name"
+    }
+  ]
 }
