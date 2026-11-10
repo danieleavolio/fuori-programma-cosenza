@@ -320,79 +320,6 @@ function isAndroid() {
   return /Android/i.test(navigator.userAgent);
 }
 
-// Le WebView delle app (Instagram, Facebook, Telegram...) non gestiscono
-// gli intent: lì conviene passare dal foglio di condivisione.
-function isAndroidWebView() {
-  return isAndroid() && /;\s*wv\)/i.test(navigator.userAgent);
-}
-
-function isChromiumAndroid() {
-  return isAndroid() && !isAndroidWebView()
-    && /Chrome|SamsungBrowser|EdgA|OPR|Vivaldi|Brave/i.test(navigator.userAgent);
-}
-
-// Scarto del fuso di Roma rispetto a UTC, in minuti, per un dato istante.
-function romeOffsetMinutes(instant) {
-  const parts = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'Europe/Rome',
-    year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', second: '2-digit',
-    hour12: false,
-  }).formatToParts(new Date(instant));
-  const value = (type) => Number((parts.find((part) => part.type === type) || {}).value || 0);
-  const wall = Date.UTC(value('year'), value('month') - 1, value('day'), value('hour'), value('minute'), value('second'));
-  return Math.round((wall - instant) / 60000);
-}
-
-// Istante UTC corrispondente a un orario "da parete" italiano.
-function romeTimestamp(dateStr, timeStr, addMinutes = 0) {
-  const [day, month, year] = String(dateStr || '').split('/').map(Number);
-  const [hours, minutes] = String(timeStr || '').split(':').map(Number);
-  const wall = Date.UTC(year || 1970, (month || 1) - 1, day || 1, hours || 0, minutes || 0);
-  const offset = romeOffsetMinutes(wall);
-  let instant = wall - offset * 60000;
-  const corrected = romeOffsetMinutes(instant);
-  if (corrected !== offset) instant = wall - corrected * 60000;
-  return instant + addMinutes * 60000;
-}
-
-// Su Android il chooser di sistema apre il calendario scelto con l'evento
-// già compilato: nessun file da scaricare.
-function androidCalendarIntent(event) {
-  const minutes = durationMinutes(event.eventDuration);
-  const start = romeTimestamp(event.eventDate, event.eventTime);
-  const end = start + minutes * 60000;
-  const venueLine = `${event.eventVenue}${event.eventRoom ? ` (${event.eventRoom})` : ''}`;
-  const location = [venueLine, event.eventLocation].filter(Boolean).join(', ');
-  const description = [
-    `Film: ${event.eventTitle}`,
-    `Cinema: ${event.eventVenue}${event.eventLocation ? ` — ${event.eventLocation}` : ''}`,
-    event.eventRoom ? `Sala: ${event.eventRoom}` : '',
-    `Durata: ${minutes} minuti`,
-    event.eventUrl ? `Biglietti: ${event.eventUrl}` : '',
-  ].filter(Boolean).join('\n');
-  const extras = [
-    ['S.title', `${event.eventTitle} — ${event.eventVenue}`],
-    ['S.eventLocation', location],
-    ['S.description', description],
-    ['l.beginTime', String(start)],
-    ['l.endTime', String(end)],
-    ['S.browser_fallback_url', calendarUrl(event)],
-  ].map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join(';');
-  return `intent://#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;${extras};end`;
-}
-
-// Apre il selettore delle app di calendario installate sul telefono.
-function openAndroidCalendar(event) {
-  const link = document.createElement('a');
-  link.href = androidCalendarIntent(event);
-  link.rel = 'noopener';
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-}
-
 // iPhone/iPad: il file ICS viene consegnato al sistema, che avvia l'app
 // Calendario con l'evento già compilato.
 function openCalendarFile(file) {
@@ -404,39 +331,23 @@ function openCalendarFile(file) {
 async function shareCalendarEvent(event) {
   const file = new File([buildCalendarEvent(event)], calendarFileName(event), { type: 'text/calendar' });
 
-  // Android: l'intent INSERT apre il calendario scelto dall'utente
-  // (Calendario, Google Calendar, Samsung Calendar...) con l'evento pronto.
-  if (isChromiumAndroid()) {
-    openAndroidCalendar(event);
-    return;
-  }
-
-  // iPhone, iPad e gli altri Android: foglio di condivisione di sistema.
-  // Provo comunque la condivisione del file ICS, senza pretendere che
-  // navigator.canShare lo dichiari supportato in anticipo.
-  if ((isAppleMobile() || isAndroid()) && typeof navigator.share === 'function') {
-    try {
-      await navigator.share({ files: [file], title: `${event.eventTitle} — ${event.eventVenue}` });
-      return;
-    } catch (error) {
-      if (error.name === 'AbortError') return;
-      if (isAppleMobile()) {
-        openCalendarFile(file);
+  // Sul telefono il file ICS passa al foglio di condivisione di sistema:
+  // tra le destinazioni compaiono le app di calendario installate.
+  if (isAppleMobile() || isAndroid()) {
+    if (typeof navigator.share === 'function') {
+      try {
+        await navigator.share({ files: [file], title: `${event.eventTitle} — ${event.eventVenue}` });
         return;
+      } catch (error) {
+        if (error.name === 'AbortError') return;
       }
     }
-    window.location.href = calendarUrl(event);
-    return;
-  }
-
-  // iPhone/iPad senza Web Share: il file ICS apre comunque il Calendario.
-  if (isAppleMobile()) {
-    openCalendarFile(file);
-    return;
-  }
-
-  // Android senza Web Share: il link eventedit apre l'app se è installata.
-  if (isAndroid()) {
+    if (isAppleMobile()) {
+      openCalendarFile(file);
+      return;
+    }
+    // Su Android, senza condivisione, il link apre Google Calendar
+    // (l'app se è installata, altrimenti il sito).
     window.location.href = calendarUrl(event);
     return;
   }
