@@ -721,11 +721,13 @@ def describe_page(html: str) -> str:
     """Riassunto breve della pagina ricevuta, per capire cosa ha risposto la fonte."""
     title = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
     title_text = " ".join(title.group(1).split())[:120] if title else "(nessun titolo)"
+    preview = " ".join(html[:400].split())
     return (
         f"{len(html)} byte, titolo '{title_text}', "
         f"movie--preview={html.count('movie--preview')}, "
         f"inner-film={html.count('inner-film')}, "
-        f"time-select={html.count('time-select__place')}"
+        f"time-select={html.count('time-select__place')} | "
+        f"inizio: {preview}"
     )
 
 

@@ -65,6 +65,8 @@ jobs:
         if: always()
         continue-on-error: true
         shell: bash
+        env:
+          SCHEDULE_TOKEN: ${{ secrets.SCHEDULE_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -73,8 +75,11 @@ jobs:
             echo "Nessuna variazione nella programmazione."
           else
             git commit -m "Aggiorna orari cinema [skip ci]"
+            if [ -n "$SCHEDULE_TOKEN" ]; then
+              git remote set-url origin "https://x-access-token:${SCHEDULE_TOKEN}@github.com/${{ github.repository }}.git"
+            fi
             if ! git push; then
-              echo "::warning title=Push non consentito::Le regole del repository richiedono una pull request per scrivere su main: i dati aggiornati vengono comunque pubblicati dal deploy."
+              echo "::warning title=Push non consentito::Il token del workflow non puo' scrivere su main: i dati aggiornati vengono comunque pubblicati dal deploy."
             fi
           fi
 
