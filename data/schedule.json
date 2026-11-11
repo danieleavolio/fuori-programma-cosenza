@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T21:36:36.660214+00:00",
+  "updatedAt": "2026-11-11T02:56:30.752527+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -324,17 +324,6 @@
             }
           ],
           "venue": "andromeda-river"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86813/38b03fbd-efaf-4411-ab17-069dbb5aec78#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
         }
       ],
       "announcedDates": []
@@ -529,27 +518,6 @@
           "venue": "cinema-teatro-italia"
         },
         {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "18:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            },
-            {
-              "time": "21:00",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "11/11/2026",
           "shows": [
             {
@@ -604,6 +572,22 @@
         },
         {
           "date": "14/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            },
+            {
+              "time": "18:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "15/11/2026",
           "shows": [
             {
               "time": "16:30",
@@ -721,33 +705,6 @@
           "venue": "citrigno"
         },
         {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "18:50",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/c30c3340-36cd-4298-bc3b-977843dad2ac#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            },
-            {
-              "time": "18:20",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "11/11/2026",
           "shows": [
             {
@@ -795,6 +752,17 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
+            }
+          ],
+          "venue": "garden"
         }
       ],
       "announcedDates": []
@@ -830,17 +798,6 @@
             }
           ],
           "venue": "andromeda-river"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "20:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26969"
-            }
-          ],
-          "venue": "garden"
         },
         {
           "date": "11/11/2026",
@@ -1017,43 +974,6 @@
           "venue": "unical"
         },
         {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "17:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/6bb3ea4d-4a55-4bfe-b962-e5cd14bec5a2#theater-init"
-            },
-            {
-              "time": "19:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/ec10361b-a2e8-4847-bc07-8bcbad796c24#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/5b7d7803-cbf7-40f1-bd9b-32ffdf3ebea3#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "18:20",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "11/11/2026",
           "shows": [
             {
@@ -1116,13 +1036,25 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "18:45",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26963"
+            }
+          ],
+          "venue": "garden"
         }
       ],
       "announcedDates": [
-        {
-          "date": "10/11/2026",
-          "venue": "unical"
-        },
         {
           "date": "11/11/2026",
           "venue": "unical"
@@ -1270,22 +1202,6 @@
           "venue": "unical"
         },
         {
-          "date": "10/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
-            },
-            {
-              "time": "22:10",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26967"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "11/11/2026",
           "shows": [
             {
@@ -1303,10 +1219,6 @@
         }
       ],
       "announcedDates": [
-        {
-          "date": "10/11/2026",
-          "venue": "unical"
-        },
         {
           "date": "11/11/2026",
           "venue": "unical"
@@ -1638,6 +1550,27 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
+            },
+            {
+              "time": "20:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
+            },
+            {
+              "time": "22:10",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
+            }
+          ],
+          "venue": "garden"
         }
       ],
       "announcedDates": []
@@ -1858,6 +1791,22 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "15/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27066"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27066"
+            }
+          ],
+          "venue": "garden"
         }
       ],
       "announcedDates": []
@@ -2019,33 +1968,9 @@
       "director": "Roberto De Paolis",
       "year": "2026",
       "shows": [],
-      "announcedDates": [
-        {
-          "date": "10/11/2026",
-          "venue": "cinema-teatro-italia"
-        }
-      ],
+      "announcedDates": [],
       "synopsis": "Paolo Marra ha ucciso sua moglie, senza un perché. Divorato dal senso di colpa, decide di costituirsi: vuole pagare, scontare la pena, ridare dignità alla donna che ha ucciso e a sé stesso. Tra poliziotti distratti, avvocati zelanti, cartomanti e complicati cavilli burocratici, nessuno lo prende sul serio. L'uomo si scopre vittima di un paradosso kafkiano: per quanto lo desideri, non riesce a farsi arrestare. Il perfetto capro espiatorio di una società grottesca che ignora chi vuole redimersi."
     }
   ],
-  "warnings": [
-    {
-      "type": "carried-over",
-      "venue": "andromeda-river",
-      "date": "10/11/2026",
-      "title": "SHAUN VITA DA PECORA - OPERAZIONE Z.U.C.C.A"
-    },
-    {
-      "type": "carried-over",
-      "venue": "citrigno",
-      "date": "10/11/2026",
-      "title": "IL GATTO COL CAPPELLO"
-    },
-    {
-      "type": "carried-over",
-      "venue": "unical",
-      "date": "10/11/2026",
-      "title": "SE DOMANI NON TORNO"
-    }
-  ]
+  "warnings": []
 }
