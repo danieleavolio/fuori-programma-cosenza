@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T03:32:53.702664+00:00",
+  "updatedAt": "2026-11-13T11:48:14.279385+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -1483,6 +1483,10 @@
         {
           "date": "15/11/2026",
           "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "18/11/2026",
+          "venue": "cinema-teatro-italia"
         }
       ]
     },
@@ -1545,11 +1549,11 @@
       "id": "9",
       "title": "SCROOGE E GLI SPIRITI DEL NATALE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/88595",
+      "url": "https://zumpano.andromeda.andromedacinema.it/film/88595",
       "duration": "1h 58m",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88595",
+        "andromeda-river": "https://zumpano.andromeda.andromedacinema.it/film/88595",
         "citrigno": "https://citrigno.cosenzacinema.18tickets.it/film/109894",
         "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27066"
       },
@@ -1567,12 +1571,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/c27af6e4-0427-49ba-a778-979634864865#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/c27af6e4-0427-49ba-a778-979634864865#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/0754eace-2994-4051-a786-3f6526b137c0#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/0754eace-2994-4051-a786-3f6526b137c0#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1583,12 +1587,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/63f0e1b0-10b0-41cf-a5fb-eac4f7ed7128#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/63f0e1b0-10b0-41cf-a5fb-eac4f7ed7128#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/052e1738-55d7-4f4e-9286-a24665ad7eac#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/052e1738-55d7-4f4e-9286-a24665ad7eac#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1599,12 +1603,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/314916b1-e4c7-4437-b4bb-4fbd12e0797a#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/314916b1-e4c7-4437-b4bb-4fbd12e0797a#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/05fd981c-e471-4ba0-8705-4ee7a2dca068#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/05fd981c-e471-4ba0-8705-4ee7a2dca068#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1615,12 +1619,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/88c07a2b-7ed1-46dc-b05f-d3881c91aae9#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/88c07a2b-7ed1-46dc-b05f-d3881c91aae9#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/294b15c1-014c-4bf0-85cf-d2bf02273604#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/294b15c1-014c-4bf0-85cf-d2bf02273604#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1631,12 +1635,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/beb7df2e-7c8e-4ce1-81f3-bfbb2394b7d3#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/beb7df2e-7c8e-4ce1-81f3-bfbb2394b7d3#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/092abd38-e32f-4e63-a3f8-4a159f722438#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/092abd38-e32f-4e63-a3f8-4a159f722438#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1647,12 +1651,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/360076dd-6408-4eeb-8e3c-629bc808f13b#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/360076dd-6408-4eeb-8e3c-629bc808f13b#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/ea2c9e0e-7b7d-4a61-9606-b8ce25018e60#theater-init"
+              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/ea2c9e0e-7b7d-4a61-9606-b8ce25018e60#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -2116,7 +2120,20 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [
+        {
+          "date": "13/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "14/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "15/11/2026",
+          "venue": "unical"
+        }
+      ]
     },
     {
       "id": "15",
