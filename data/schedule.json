@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T11:48:14.279385+00:00",
+  "updatedAt": "2026-11-13T12:22:00.767944+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -62,6 +62,9 @@
       ],
       "director": "Joe Russo, Anthony Russo",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "Robert Downey Jr., Chris Evans, Chris Hemsworth, Pedro Pascal, Paul Rudd, Ant...",
+      "trailer": "https://www.youtube.com/watch?v=v5jz9Nmp7U0",
       "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato.",
       "shows": [
         {
@@ -314,6 +317,9 @@
       ],
       "director": "Erica Rivinoja, Alessandro Carloni",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "Bill Hader, Xochitl Gomez, Tiago Martinez, Matt Berry, Quinta Brunson, Bowen ...",
+      "trailer": "https://www.youtube.com/watch?v=bCZo-8YVjgs",
       "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima.",
       "shows": [
         {
@@ -491,6 +497,9 @@
       ],
       "director": "Paola Randi",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "Sabrina Martina, Filippo Timi, Tecla Bossi, Tommaso Allione, Massimo Scola, C...",
+      "trailer": "https://www.youtube.com/watch?v=M4T73uO9VxQ",
       "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
       "shows": [
         {
@@ -729,6 +738,9 @@
       ],
       "director": "L. Pieraccioni",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "L. Pieraccioni, G. Vecchio, H. Ballerina",
+      "trailer": "",
       "synopsis": "UN GRUPPO DI PERSONE PARTECIPA A UN ESPERIMENTO IN CUI DEVE SCOPRIRE CHI, TRA LORO, È UN UMANOIDE CREATO DALL'INTELLIGENZA ARTIFICIALE. DURANTE UN WEEKEND RICCO DI SOSPETTI, EQUIVOCI E COLPI DI SCENA,",
       "shows": [
         {
@@ -956,6 +968,9 @@
       ],
       "director": "Paolo Genovese",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "Edoardo Pesce, Stefano Accorsi, Emanuela Fanelli, Lino Musella, Claudia Pando...",
+      "trailer": "https://www.youtube.com/watch?v=KKWO4jLB24U",
       "synopsis": "Andrea è un fotografo, Andreina un’infermiera, e se oggi Andrea è ancora vivo è perché Andreina gli ha donato un pezzo di sé. Umberto al lavoro allevia il dolore e a casa lo infligge ad Alba, che aveva sogni semplici e ora ha smesso di sognare. Ralph di mestiere riproduce suoni, Viola è un’attrice che ha scelto di recitare anche nella vita. E poi c’è Mirko, che ha dieci anni ma fa tanto rumore. Tre famiglie, che per anni si sono sfiorate nelle strade di Milano senza conoscersi, trascorrono le loro esistenze fra rancori, bugie e momenti di felicità finché un incontro imprevisto non stravolge tutto. Allora il caos prende il sopravvento sul fragile equilibrio che le regge e rischia di spazzarle via.",
       "shows": [
         {
@@ -1125,7 +1140,7 @@
       "title": "GODZILLA MINUS ZERO",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89882/standard_789ba83b-3e30-49fe-bb0d-437285f18220.jpg",
       "url": "https://zumpano.andromeda.18tickets.it/film/89882",
-      "duration": "",
+      "duration": "2h 15m",
       "tags": [],
       "venueUrls": {
         "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/89882",
@@ -1138,6 +1153,9 @@
       ],
       "director": "Takashi Yamazaki",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "Ryūnosuke Kamiki, 浜辺美波, 山田裕貴, Kuranosuke Sasaki, Jun Kunimura, 田中美央, Sakura A...",
+      "trailer": "https://www.youtube.com/watch?v=a1y8wbDMUOg",
       "synopsis": "La vicenda è ambientata nel 1949, in un Giappone che sta ancora faticosamente cercando di ricostruirsi dopo i traumi della Seconda Guerra Mondiale e dopo il precedente passaggio del mostro. La ricomparsa di Godzilla costringerà i due protagonisti, l’ex pilota Kōichi (interpretato da Ryunosuke Kamiki) e Noriko (Minami Hamabe), a una nuova e disperata lotta per la sopravvivenza.",
       "shows": [
         {
@@ -1302,6 +1320,9 @@
       ],
       "director": "G. Veronesi",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "P. Favino, A. Noce, M. Lombardi",
+      "trailer": "",
       "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
       "shows": [
         {
@@ -1507,6 +1528,9 @@
       ],
       "director": "Na Hong Jin.",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "황정민, 조인성, 정호연, Alicia Vikander, Michael Fassbender, Taylor Russell, Cameron B...",
+      "trailer": "https://www.youtube.com/watch?v=uV3s51ivuVI",
       "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede.",
       "shows": [
         {
@@ -1549,11 +1573,11 @@
       "id": "9",
       "title": "SCROOGE E GLI SPIRITI DEL NATALE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
-      "url": "https://zumpano.andromeda.andromedacinema.it/film/88595",
+      "url": "https://zumpano.andromeda.18tickets.it/film/88595",
       "duration": "1h 58m",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.andromedacinema.it/film/88595",
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88595",
         "citrigno": "https://citrigno.cosenzacinema.18tickets.it/film/109894",
         "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27066"
       },
@@ -1563,6 +1587,9 @@
       ],
       "director": "Ti West",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "Johnny Depp, Rupert Grint, Daisy Ridley, Andrea Riseborough, Tramell Tillman,...",
+      "trailer": "https://www.youtube.com/watch?v=FATCofGu-6k",
       "synopsis": "UN'EMOZIONANTE STORIA DI FANTASMI AMBIENTATA NELLA LONDRA DI DICKENS, CHE SEGUE IL VIAGGIO SOPRANNATURALE DI UN UOMO PER AFFRONTARE IL SUO PASSATO, PRESENTE E FUTURO MENTRE LOTTA PER UNA SECONDA POSSI",
       "shows": [
         {
@@ -1571,12 +1598,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/c27af6e4-0427-49ba-a778-979634864865#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/c27af6e4-0427-49ba-a778-979634864865#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/0754eace-2994-4051-a786-3f6526b137c0#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/0754eace-2994-4051-a786-3f6526b137c0#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1587,12 +1614,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/63f0e1b0-10b0-41cf-a5fb-eac4f7ed7128#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/63f0e1b0-10b0-41cf-a5fb-eac4f7ed7128#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/052e1738-55d7-4f4e-9286-a24665ad7eac#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/052e1738-55d7-4f4e-9286-a24665ad7eac#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1603,12 +1630,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/314916b1-e4c7-4437-b4bb-4fbd12e0797a#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/314916b1-e4c7-4437-b4bb-4fbd12e0797a#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/05fd981c-e471-4ba0-8705-4ee7a2dca068#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/05fd981c-e471-4ba0-8705-4ee7a2dca068#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1619,12 +1646,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/88c07a2b-7ed1-46dc-b05f-d3881c91aae9#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/88c07a2b-7ed1-46dc-b05f-d3881c91aae9#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/294b15c1-014c-4bf0-85cf-d2bf02273604#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/294b15c1-014c-4bf0-85cf-d2bf02273604#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1635,12 +1662,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/beb7df2e-7c8e-4ce1-81f3-bfbb2394b7d3#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/beb7df2e-7c8e-4ce1-81f3-bfbb2394b7d3#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/092abd38-e32f-4e63-a3f8-4a159f722438#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/092abd38-e32f-4e63-a3f8-4a159f722438#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1651,12 +1678,12 @@
             {
               "time": "19:30",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/360076dd-6408-4eeb-8e3c-629bc808f13b#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/360076dd-6408-4eeb-8e3c-629bc808f13b#theater-init"
             },
             {
               "time": "22:00",
               "room": "Sala 3",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88595/ea2c9e0e-7b7d-4a61-9606-b8ce25018e60#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88595/ea2c9e0e-7b7d-4a61-9606-b8ce25018e60#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1797,7 +1824,7 @@
       "title": "LA STORIA INFINITA (RIED.)",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92622/standard_354fae6f-a558-43a3-a315-b052ba040e14.jpg",
       "url": "https://zumpano.andromeda.18tickets.it/film/92622",
-      "duration": "",
+      "duration": "1h 34m",
       "tags": [
         "EVENTO 8"
       ],
@@ -1805,10 +1832,17 @@
         "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/92622",
         "unical": "https://unical.cosenzacinema.18tickets.it/film/109762"
       },
-      "genres": [],
+      "genres": [
+        "Avventura",
+        "Fantasy",
+        "Famiglia"
+      ],
       "director": "Wolfgang Petersen",
-      "year": "",
-      "synopsis": "",
+      "year": "1984",
+      "language": "Italiano",
+      "cast": "Noah Hathaway, Barret Oliver, Tami Stronach, Alan Oppenheimer, Sydney Bromley...",
+      "trailer": "https://www.youtube.com/watch?v=9gTb0-oLkVk",
+      "synopsis": "Il piccolo Bastian che ha da poco perso la mamma, si rifugia nella soffitta della scuola a leggere un vecchio libro che si rivela magico; così Bastian “entra” nella storia e combatte contro il Nulla per difendere il mondo di Fantasia con l'aiuto di un drago volante e di un fanciullo guerriero. Suggestiva superproduzione tedesca, girata però in inglese, che all'epoca ottenne un grande successo grazie alla fiabesca vicenda del romanzo di Michael Ende (debitamente semplificata) e alla colonna sonora di Giorgio Moroder. Appassionante e non stucchevole.",
       "shows": [
         {
           "date": "16/11/2026",
@@ -1897,7 +1931,7 @@
       "title": "2001: ODISSEA NELLO SPAZIO",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92357/standard_12953b05-83f2-4390-b201-5137bfc6a7c0.jpg",
       "url": "https://zumpano.andromeda.18tickets.it/film/92357",
-      "duration": "",
+      "duration": "2h 21m",
       "tags": [
         "EVENTO 10",
         "EVENT0 10",
@@ -1914,6 +1948,9 @@
       ],
       "director": "Stanley Kubrick",
       "year": "1968",
+      "language": "Italiano",
+      "cast": "Keir Dullea, Gary Lockwood, William Sylvester, Daniel Richter, Leonard Rossit...",
+      "trailer": "",
       "synopsis": "Un gigantesco monolite, individuato sulla superficie lunare, trasmette dei messaggi radio in direzione del pianeta Giove. Per seguire il fascio di onde elettromagnetiche viene organizzata una spedizione che ben presto però si trova in balia del computer che governa l'astronave. La lotta avrà un solo vincitore.",
       "shows": [
         {
@@ -2003,7 +2040,7 @@
       "title": "DUNE - PARTE TRE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
       "url": "https://zumpano.andromeda.18tickets.it/film/76088",
-      "duration": "",
+      "duration": "2h 20m",
       "tags": [
         "#ANTEPRIMA"
       ],
@@ -2015,6 +2052,9 @@
       ],
       "director": "D. Villeneuve",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "T. Chalamet, Zendaya, J. Momoa",
+      "trailer": "",
       "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO",
       "shows": [
         {
@@ -2036,17 +2076,23 @@
       "title": "KONTINENTAL '25",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/110488/standard_7c40ded2-3db7-4608-9e79-afeb8d09736a.jpg",
       "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/110488",
-      "duration": "",
+      "duration": "1h 49m",
       "tags": [
         "FILM RASSEGNA"
       ],
       "venueUrls": {
         "cinema-teatro-italia": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/110488"
       },
-      "genres": [],
+      "genres": [
+        "Commedia",
+        "Dramma"
+      ],
       "director": "Radu Jude",
-      "year": "",
-      "synopsis": "",
+      "year": "2025",
+      "language": "Italiano",
+      "cast": "Eszter Tompa, Gabriel Spahiu, Adonis Tanța, Oana Mardare, șerban Pavlu, Annam...",
+      "trailer": "https://www.youtube.com/watch?v=8ahBbE48x-A",
+      "synopsis": "Dovrebbe essere un normale giorno di lavoro per Orsoloya, ufficiale addetta agli sfratti. Ma, quando caccia un senzatetto da un seminterrato in cui si era rifugiato, accade l’irreparabile: l’uomo si toglie la vita. Sopraffatta dal senso di colpa, Orsoloya si imbarca in una serie di incontri e situazioni sempre più assurdi per cercare goffamente di trovare una qualche forma di redenzione.",
       "shows": [
         {
           "date": "16/11/2026",
@@ -2065,14 +2111,19 @@
           "venue": "cinema-teatro-italia"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [
+        {
+          "date": "16/11/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ]
     },
     {
       "id": "14",
       "title": "WILD HORSE NINE",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/108013/standard_3861bb03-6489-4516-a008-1d703c1d7283.jpg",
       "url": "https://unical.cosenzacinema.18tickets.it/film/108013",
-      "duration": "",
+      "duration": "1h 30m",
       "tags": [],
       "venueUrls": {
         "unical": "https://unical.cosenzacinema.18tickets.it/film/108013"
@@ -2084,6 +2135,9 @@
       ],
       "director": "Martin McDonagh",
       "year": "2026",
+      "language": "Italiano",
+      "cast": "John Malkovich, Sam Rockwell, Steve Buscemi, Tom Waits, Parker Posey, Mariana...",
+      "trailer": "https://www.youtube.com/watch?v=djscxQOf8bo",
       "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca.",
       "shows": [
         {
@@ -2134,26 +2188,6 @@
           "venue": "unical"
         }
       ]
-    },
-    {
-      "id": "15",
-      "title": "Kontinental &rsquo;25",
-      "poster": "",
-      "url": "https://cosenzacinema.it/movie/kontinental-25/",
-      "duration": "",
-      "tags": [],
-      "venueUrls": {},
-      "genres": [],
-      "director": "",
-      "year": "",
-      "shows": [],
-      "announcedDates": [
-        {
-          "date": "16/11/2026",
-          "venue": "cinema-teatro-italia"
-        }
-      ],
-      "synopsis": ""
     }
   ],
   "warnings": []

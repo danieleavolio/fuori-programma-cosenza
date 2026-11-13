@@ -1,0 +1,48 @@
+{
+  "name": "Fuori programma — Cinema a Cosenza e Rende",
+  "short_name": "Fuori programma",
+  "description": "Programmazione e orari dei cinema di Cosenza, Rende e Zumpano, con spettacoli in corso, film salvati e esportazione in calendario.",
+  "lang": "it",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f5f5",
+  "theme_color": "#15191e",
+  "categories": ["entertainment", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Programmazione di oggi",
+      "short_name": "Oggi",
+      "url": "./?view=schedule",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Film salvati",
+      "short_name": "Salvati",
+      "url": "./?view=favorites",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

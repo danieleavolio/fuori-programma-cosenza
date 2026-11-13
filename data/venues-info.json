@@ -1,0 +1,42 @@
+{
+  "andromeda-river": {
+    "address": "c/o River Village, Via Beato Francesco Marino 47",
+    "city": "Zumpano (CS)",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Andromeda+River+Via+Beato+Francesco+Marino+47+Zumpano",
+    "phone": "0984 411380",
+    "phoneHref": "+390984411380",
+    "features": ["Multisala", "Parcheggio gratuito", "River Village"]
+  },
+  "citrigno": {
+    "address": "Via Adige 13",
+    "city": "Cosenza (CS)",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cinema+Citrigno+Via+Adige+13+Cosenza",
+    "phone": "0984 25085",
+    "phoneHref": "+39098425085",
+    "features": ["Cinema storico", "Centro città", "Biglietteria in sala"]
+  },
+  "cinema-teatro-italia": {
+    "address": "Piazza Giovanni Amendola",
+    "city": "Cosenza (CS)",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cinema+Teatro+Italia+Piazza+Giovanni+Amendola+Cosenza",
+    "phone": "0984 186 3516",
+    "phoneHref": "+3909841863516",
+    "features": ["Teatro storico", "Piazza Amendola", "Biglietteria in sala"]
+  },
+  "garden": {
+    "address": "Via Torino 8/20",
+    "city": "Rende (CS)",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cinema+Garden+Via+Torino+8+Rende",
+    "phone": "0984 33912",
+    "phoneHref": "+39098433912",
+    "features": ["Multisala", "Teatro", "Rende"]
+  },
+  "unical": {
+    "address": "Piazza Vermicelli, Campus Universitario",
+    "city": "Arcavacata di Rende (CS)",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Unical+Cinema+Piazza+Vermicelli+Arcavacata+di+Rende",
+    "phone": "329 331 2584",
+    "phoneHref": "+393293312584",
+    "features": ["Campus Unical", "Sale universitarie", "Parcheggio"]
+  }
+}

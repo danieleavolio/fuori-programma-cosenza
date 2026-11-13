@@ -10,6 +10,7 @@ import sys
 import time
 import unicodedata
 from datetime import date, datetime, timedelta, timezone
+from html import unescape as html_unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -369,27 +370,112 @@ def fetch(
     raise last_error if last_error else RuntimeError(f"Impossibile scaricare {url}")
 
 
+def _html_text(value: str) -> str:
+    """Testo leggibile da un frammento HTML: tag rimossi, entità decodificate."""
+    return " ".join(html_unescape(re.sub(r"<[^>]+>", " ", value or "")).split())
+
+
+def minutes_to_duration(minutes: int) -> str:
+    if minutes <= 0:
+        return ""
+    hours, rest = divmod(minutes, 60)
+    if hours and rest:
+        return f"{hours}h {rest:02d}m"
+    if hours:
+        return f"{hours}h"
+    return f"{rest}m"
+
+
+def parse_movie_detail(html: str) -> dict:
+    """Legge dalla scheda 18tickets trama, trailer e scheda tecnica.
+
+    La pagina non espone un'API: si usano i blocchi stabili del layout
+    (`plotPanel`, `trailer-sample`, `movie__option`). Niente chiavi, niente
+    servizi esterni: i dati restano quelli pubblicati dalla sala.
+    """
+    details = {
+        "synopsis": "",
+        "genres": [],
+        "director": "",
+        "year": "",
+        "language": "",
+        "cast": "",
+        "trailer": "",
+        "duration": "",
+    }
+
+    panel = re.search(
+        r"id=['\"]plotPanel['\"][^>]*>.*?<div class=['\"]card-body['\"]>(.*?)</div>",
+        html,
+        re.S,
+    )
+    if panel:
+        details["synopsis"] = _html_text(panel.group(1))
+
+    options: dict[str, str] = {}
+    for option in re.finditer(
+        r"<p class=['\"]movie__option['\"]>(.*?)</p>", html, re.S
+    ):
+        raw = option.group(1)
+        label = re.search(r"<strong>(.*?)</strong>", raw, re.S)
+        if not label:
+            continue
+        key = _html_text(label.group(1)).rstrip(":").casefold()
+        value = _html_text(raw[label.end() :])
+        if value:
+            options[key] = value
+
+    if options.get("genere") or options.get("generi"):
+        raw_genres = options.get("genere") or options.get("generi")
+        details["genres"] = [
+            item.strip() for item in re.split(r"[,;]", raw_genres) if item.strip()
+        ]
+    details["director"] = options.get("regia", "")
+    year = options.get("anno", "")
+    details["year"] = year if re.fullmatch(r"\d{4}", year) else ""
+    details["language"] = options.get("lingua", "")
+    details["cast"] = options.get("con") or options.get("cast") or ""
+
+    trailer = re.search(r"<a[^>]*trailer-sample[^>]*>", html)
+    if trailer:
+        href = re.search(r"href=['\"]([^'\"]+)['\"]", trailer.group(0))
+        if href:
+            details["trailer"] = href.group(1).strip()
+
+    time_node = re.search(r"<p class=['\"]movie__time['\"]>(.*?)</p>", html, re.S)
+    if time_node:
+        minutes = re.search(r"(\d{2,3})\s*min", _html_text(time_node.group(1)), re.I)
+        if minutes:
+            details["duration"] = minutes_to_duration(int(minutes.group(1)))
+
+    return details
+
+
 def get_movie_details(url: str) -> dict:
+    empty = {
+        "synopsis": "",
+        "genres": [],
+        "director": "",
+        "year": "",
+        "language": "",
+        "cast": "",
+        "trailer": "",
+        "duration": "",
+    }
     if not url:
-        return {"synopsis": "", "genres": [], "director": "", "year": ""}
+        return empty
     try:
         html = fetch(url)
-        parser = SynopsisParser()
-        metadata_parser = MovieMetadataParser()
-        parser.feed(html)
-        metadata_parser.feed(html)
+        return {**empty, **parse_movie_detail(html)}
     except Exception as error:
         print(f"  Dettagli film non recuperati da {url}: {error}")
-        return {"synopsis": "", "genres": [], "director": "", "year": ""}
-    return {
-        "synopsis": " ".join(" ".join(parser.parts).split()),
-        **metadata_parser.metadata,
-    }
+        return empty
 
 
 def clean_title_for_display(raw: str) -> tuple[str, str]:
     """Returns (cleaned_title, duration) without labels or trailing tags."""
     title = re.sub(r"<[^>]+>", "", raw)
+    title = html_unescape(title)
     title = (
         title.replace("\u2013", "-")
         .replace("\u2014", "-")
@@ -452,6 +538,7 @@ def parse_announced_dates(url: str, venue_id: str) -> list[dict]:
         if not title_match or 'class="timelist"' not in card:
             continue
         title = " ".join(re.sub(r"<[^>]+>", "", title_match.group(1)).split())
+        title = html_unescape(title)
         detail_match = re.search(
             r'class="amy-movie-field-title"><a[^>]*href="([^"]+)"', card
         )
@@ -511,6 +598,10 @@ class TicketsParser(HTMLParser):
                 "genres": [],
                 "director": "",
                 "year": "",
+                "language": "",
+                "cast": "",
+                "trailer": "",
+                "synopsis": "",
                 "shows": [],
             }
 
@@ -920,6 +1011,9 @@ def previous_movies_for_venue(previous: dict, venue_id: str, today: date) -> lis
                 "genres": list(movie.get("genres", [])),
                 "director": movie.get("director", ""),
                 "year": movie.get("year", ""),
+                "language": movie.get("language", ""),
+                "cast": movie.get("cast", ""),
+                "trailer": movie.get("trailer", ""),
                 "synopsis": movie.get("synopsis", ""),
                 "shows": blocks,
             }
@@ -1053,6 +1147,9 @@ def main() -> None:
                     "genres": list(movie.get("genres", [])),
                     "director": movie.get("director", ""),
                     "year": movie.get("year", ""),
+                    "language": movie.get("language", ""),
+                    "cast": movie.get("cast", ""),
+                    "trailer": movie.get("trailer", ""),
                     "synopsis": movie.get("synopsis", ""),
                     "shows": [],
                     "announcedDates": [],
@@ -1069,7 +1166,14 @@ def main() -> None:
             for genre in movie.get("genres", []):
                 if genre not in target["genres"]:
                     target["genres"].append(genre)
-            for field in ("director", "year", "synopsis"):
+            for field in (
+                "director",
+                "year",
+                "language",
+                "cast",
+                "trailer",
+                "synopsis",
+            ):
                 if not target[field] and movie.get(field):
                     target[field] = movie[field]
             for show in movie["shows"]:
@@ -1090,6 +1194,9 @@ def main() -> None:
                 "genres": [],
                 "director": "",
                 "year": "",
+                "language": "",
+                "cast": "",
+                "trailer": "",
                 "shows": [],
                 "announcedDates": [],
                 "synopsis": "",
@@ -1104,20 +1211,32 @@ def main() -> None:
         title_key(movie.get("title", "")): movie for movie in previous.get("movies", [])
     }
 
-    # Dettagli film: la sinossi richiede la scheda dedicata. Si scarica solo
-    # per i film nuovi, così ogni aggiornamento costa una manciata di
-    # richieste invece di una per film (meno esposizione al WAF).
+    # Dettagli film: la scheda 18tickets contiene trama, trailer e scheda
+    # tecnica. Si scarica solo quando manca qualcosa, così ogni aggiornamento
+    # costa una manciata di richieste invece di una per film.
+    detail_fields = (
+        "synopsis",
+        "genres",
+        "director",
+        "year",
+        "language",
+        "cast",
+        "trailer",
+        "duration",
+    )
     for index, movie in enumerate(movies_output):
         old = previous_details.get(title_key(movie["title"]))
         if old:
-            for field in ("synopsis", "genres", "director", "year"):
+            for field in detail_fields:
                 if not movie.get(field) and old.get(field):
                     movie[field] = old[field]
 
-        needs_details = not movie.get("synopsis") and "/film/" in movie.get("url", "")
+        needs_details = "/film/" in movie.get("url", "") and any(
+            not movie.get(field) for field in detail_fields
+        )
         if needs_details:
             details = get_movie_details(movie["url"])
-            for field in ("synopsis", "genres", "director", "year"):
+            for field in detail_fields:
                 if details.get(field) and not movie.get(field):
                     movie[field] = details[field]
             if index < len(movies_output) - 1:

@@ -52,6 +52,22 @@ Il deploy pubblica sempre i dati aggiornati. Per salvare la programmazione anche
 
 Le viste **Per Film** e **Per Giorno** hanno ciascuna una modalità *griglia* e *lista*: il contenuto delle card è identico, cambia solo la disposizione (locandina in alto o a sinistra). In griglia la locandina mantiene proporzioni fisse anche a card aperta, quindi non si gonfia a tutta pagina.
 
+Nella vista **Per Giorno**, quando il giorno scelto è oggi, gli spettacoli già iniziati sono nascosti: restano recuperabili con il toggle che li conta, e in quel caso compaiono attenuati con l'orario barrato.
+
+La sezione **Cinema** ha una card per sala con illustrazione vettoriale, indirizzo, telefono, collegamento a Google Maps, caratteristiche e i film in programma oggi. I dati editoriali delle sale stanno in `data/venues-info.json`.
+
+I film salvati sono confrontati a ogni aggiornamento della programmazione: se compaiono nuovi orari la home mostra un avviso con il conteggio e un pulsante per aprire i salvati. Lo stato del confronto è in `localStorage`.
+
+Il pulsante **Calendario** esporta un file `.ics` con gli spettacoli scelti (film salvati, una sala o un giorno), completo di sala, indirizzo, link ai biglietti e promemoria 45 minuti prima. Il file è generato nel browser, senza servizi esterni.
+
+## Dati dei film
+
+`scripts/update_schedule.py` scarica la scheda di ogni film dalle sale 18tickets e ne ricava trama, generi, regia, anno, lingua, cast, durata e trailer YouTube, senza usare API key. I campi vengono conservati nel tempo e riletti a ogni aggiornamento, così restano disponibili anche quando una scheda non viene riscaricata.
+
+## Offline e installazione
+
+Il sito è una PWA: `manifest.webmanifest` e `sw.js` mettono in cache la shell e i dati (`data/schedule.json`, `data/venues-info.json`), quindi l'app si apre e resta consultabile anche senza rete. La versione della cache va aggiornata in `sw.js` a ogni modifica di file della shell o dei dati. Da Chrome o Safari si può aggiungere alla schermata Home; le scorciatoie del manifest aprono direttamente la programmazione (`?view=schedule`) o i film salvati (`?view=favorites`).
+
 ## Headroom locale
 
 Headroom comprime il contesto tra OpenCode e il provider, ma richiede un endpoint compatibile e la relativa chiave API. L'installazione locale usa `uv` e non modifica il PATH o la configurazione globale:

@@ -90,7 +90,7 @@ button, a, select { touch-action: manipulation; }
 .view-pill { min-height: 40px; padding: 6px 13px; border: 0; background: transparent; font-size: 13px; font-weight: 600; cursor: pointer; transition: background-color 140ms ease, color 140ms ease; }
 .view-pill.active { background: var(--ink); color: var(--on-ink); }
 .masthead-actions { gap: 9px; }
-.fav-badge-btn, .top-link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 7px 12px; border: 1px solid var(--line); background: var(--surface); font-size: 12px; font-weight: 600; cursor: pointer; transition: background-color 140ms ease, border-color 140ms ease; }
+.fav-badge-btn, .top-link, .calendar-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 7px 12px; border: 1px solid var(--line); background: var(--surface); font-size: 12px; font-weight: 600; cursor: pointer; transition: background-color 140ms ease, border-color 140ms ease; }
 .fav-badge-btn.has-favorites { background: var(--yellow); }
 .fav-count { display: grid; min-width: 20px; height: 20px; place-items: center; border-radius: 50%; background: var(--ink); color: var(--on-ink); font-size: 11px; }
 .top-link { background: transparent; }
@@ -103,6 +103,15 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 /* ===== ORA IN SALA: cosa sta andando in questo momento ===== */
 .airing-now { margin: 0 0 18px; border: 1px solid var(--ink); background: var(--surface); }
 .airing-now-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 13px; background: var(--ink); color: var(--on-ink); }
+.saved-updates { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin: 0 0 18px; padding: 14px 16px; border: 1px solid var(--ink); border-left: 5px solid var(--live); background: var(--surface-alt); }
+.saved-updates-copy { min-width: 0; }
+.saved-updates-kicker { margin: 0 0 3px; color: var(--live); font: 800 9px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.saved-updates h2 { margin: 0; font: 650 16px/1.3 var(--display); letter-spacing: -.01em; }
+.saved-updates-text { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.saved-updates-actions { display: flex; align-items: center; gap: 8px; }
+.saved-updates-primary { min-height: 44px; padding: 7px 13px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink); font: 650 11px/1 var(--body); cursor: pointer; }
+.saved-updates-dismiss { min-height: 44px; padding: 7px 11px; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 600 11px/1 var(--body); cursor: pointer; }
+.saved-updates-dismiss:hover { border-color: var(--ink); color: var(--ink); }
 .airing-now-title { display: flex; align-items: center; gap: 7px; margin: 0; font: 800 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
 .airing-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: var(--live); animation: airing-pulse 2s ease-in-out infinite; }
 .airing-now-status { color: color-mix(in srgb, var(--on-ink) 72%, transparent); font: 700 10px/1 var(--mono); letter-spacing: .02em; text-align: right; }
@@ -242,6 +251,16 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .movie-title-row { min-width: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .movie-title-row h3 { min-width: 0; }
 .movie-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 2px; }
+.trailer-link { min-height: 44px; display: inline-flex; align-items: center; gap: 5px; padding: 0 10px; border: 1px solid var(--ink); color: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: .02em; text-decoration: none; }
+.trailer-link:hover { background: var(--ink); color: var(--on-ink); }
+.poster-movie-grid .movie-actions .trailer-link,
+.day-movie-grid .movie-actions .trailer-link { width: 34px; min-height: 34px; justify-content: center; padding: 0; border-color: var(--line); border-radius: 50%; background: var(--surface); }
+.poster-movie-grid .movie-actions .trailer-link span,
+.day-movie-grid .movie-actions .trailer-link span { display: none; }
+.movie-cast { margin: -7px 0 12px; color: var(--muted); font-size: 11.5px; line-height: 1.45; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; }
+.movie-cast span { margin-right: 2px; font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.poster-movie-grid .movie-cast { display: none; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-cast { display: -webkit-box; }
 .movie-title, .movie-info h3 { margin: 0; font: 700 clamp(19px, 3vw, 27px)/1.08 var(--display); letter-spacing: -.035em; overflow-wrap: anywhere; }
 .movie-synopsis { margin: 9px 0 12px; color: var(--body-copy); font-size: 13px; line-height: 1.55; }
 .movie-credits { margin: -5px 0 12px; color: var(--muted); font-size: 12px; line-height: 1.4; }
@@ -294,6 +313,15 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .time-cue { position: absolute; top: 4px; right: 4px; opacity: .45; pointer-events: none; }
 .showtime-btn:hover .time-cue, .showtime:hover .time-cue,
 .showtime-btn[aria-expanded="true"] .time-cue, .showtime[aria-expanded="true"] .time-cue { opacity: .8; }
+.showtime.is-past { opacity: .5; border-style: dashed; background: var(--surface); }
+.showtime.is-past strong { text-decoration: line-through; color: var(--muted); }
+.showtime.is-past small { color: var(--muted); }
+
+/* Banner / Toggle per spettacoli passati di oggi */
+.past-shows-banner { grid-column: 1 / -1; display: flex; align-items: center; justify-content: flex-start; margin: 0 0 10px; }
+.past-shows-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border: 1px dashed var(--line); background: var(--surface); color: var(--muted); font: 600 11px/1.2 var(--mono); cursor: pointer; transition: all 140ms ease; }
+.past-shows-toggle:hover { border-color: var(--ink); color: var(--ink); background: var(--paper); }
+.past-shows-toggle.is-active { border-style: solid; border-color: var(--ink); background: var(--ink); color: var(--on-ink); }
 
 /* Menu azioni di un singolo orario */
 .showtime-menu { position: fixed; z-index: 1200; width: min(266px, calc(100vw - 16px)); border: 1px solid var(--ink); background: var(--surface); box-shadow: 0 18px 44px #00000038; animation: showtime-menu-in 150ms var(--ease); }
@@ -357,16 +385,56 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .cinema-section { padding: 32px 0 0; }
 .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
 .section-heading h2 { margin: 0; font-size: 18px; font-weight: 600; }
-.cinema-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.cinema-item { min-width: 0; min-height: 112px; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; padding: 14px 12px 12px 0; border-bottom: 1px solid var(--line); }
-.cinema-item:nth-child(even) { padding-left: 12px; border-left: 1px solid var(--line); }
-.cinema-name { display: block; font-size: 15px; font-weight: 650; line-height: 1.3; }
-.cinema-location { display: block; color: var(--muted); font-size: 11px; }
-.cinema-status, .cinema-source { font-size: 11px; }
-.cinema-status { display: block; color: var(--status-error); font-weight: 700; }
-.cinema-status.available { color: var(--status-ok); }
-.cinema-status.stale { color: var(--muted); }
-.cinema-source { min-height: 44px; display: inline-flex; align-items: center; margin-top: 3px; color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.section-note { margin: 0; color: var(--muted); font-size: 11px; }
+.cinema-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 26px; }
+.cinema-card { min-width: 0; display: flex; flex-direction: column; padding: 18px 0 20px; border-bottom: 1px solid var(--line); }
+.cinema-art { position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--surface-alt); aspect-ratio: 8 / 3; }
+.cinema-art svg { display: block; width: 100%; height: 100%; }
+.cinema-card-body { display: flex; flex: 1; flex-direction: column; gap: 6px; padding-top: 12px; }
+.cinema-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.cinema-card-head h3 { margin: 0; font: 650 17px/1.25 var(--display); letter-spacing: -.01em; }
+.cinema-warning { flex: none; color: var(--status-error); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.cinema-address { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.cinema-today { margin: 0; padding-top: 2px; font-size: 12px; line-height: 1.45; }
+.cinema-features { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+.cinema-features span { padding: 2px 7px; border: 1px solid var(--line); background: var(--paper); color: var(--muted); font-size: 9px; letter-spacing: .04em; text-transform: uppercase; }
+.cinema-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: auto; padding-top: 12px; }
+.cinema-cta { min-height: 34px; padding: 6px 12px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink); font: 650 11px/1 var(--body); letter-spacing: .02em; cursor: pointer; }
+.cinema-cta:hover { background: var(--blue); border-color: var(--blue); }
+.cinema-link { min-height: 34px; display: inline-flex; align-items: center; color: var(--link); font-size: 11px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.cinema-source-link { align-self: flex-start; min-height: 30px; display: inline-flex; align-items: center; margin-top: 4px; color: var(--muted); font-size: 10px; font-weight: 600; }
+.cinema-source-link:hover { color: var(--ink); }
+.calendar-dialog { width: min(560px, calc(100vw - 28px)); max-height: calc(100dvh - 36px); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); }
+.calendar-dialog::backdrop { background: rgba(10, 12, 15, .58); backdrop-filter: blur(2px); }
+.calendar-dialog-head { position: relative; padding: 20px 20px 0; }
+.calendar-dialog-kicker { margin: 0 0 5px; color: var(--live); font: 800 9px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.calendar-dialog h2 { margin: 0; padding-right: 34px; font: 700 23px/1.2 var(--display); letter-spacing: -.02em; }
+.calendar-dialog-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; }
+.calendar-dialog-close:hover { border-color: var(--ink); color: var(--ink); }
+.calendar-dialog-intro { margin: 10px 20px 16px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.calendar-modes { display: grid; gap: 7px; margin: 0 20px; padding: 0; border: 0; }
+.calendar-modes legend { margin-bottom: 6px; padding: 0; color: var(--muted); font: 700 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.calendar-mode { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); background: var(--paper); cursor: pointer; }
+.calendar-mode:has(input:checked) { border-color: var(--ink); background: var(--surface-alt); box-shadow: inset 3px 0 0 var(--ink); }
+.calendar-mode:has(input:disabled) { opacity: .5; cursor: not-allowed; }
+.calendar-mode input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--ink); }
+.calendar-mode span { display: flex; flex-direction: column; gap: 2px; }
+.calendar-mode strong { font-size: 13px; }
+.calendar-mode small { color: var(--muted); font-size: 11px; }
+.calendar-select { display: grid; gap: 4px; margin: 12px 20px 0; }
+.calendar-select label { color: var(--muted); font: 700 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.calendar-select select { width: 100%; min-height: 42px; padding: 8px 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 500 13px/1.3 var(--body); }
+.calendar-alarm { display: flex; align-items: flex-start; gap: 10px; margin: 14px 20px 0; padding: 10px 12px; border: 1px dashed var(--line); cursor: pointer; }
+.calendar-alarm input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--ink); }
+.calendar-alarm span { display: flex; flex-direction: column; gap: 2px; font-size: 12px; font-weight: 600; }
+.calendar-alarm small { color: var(--muted); font-size: 11px; font-weight: 400; }
+.calendar-summary { margin: 14px 20px 0; padding: 10px 12px; border-left: 3px solid var(--live); background: var(--paper); font: 600 12px/1.4 var(--mono); }
+.calendar-dialog-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 20px 0; }
+.calendar-download { min-height: 44px; padding: 9px 16px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink); font: 700 12px/1 var(--body); cursor: pointer; }
+.calendar-download:disabled { opacity: .45; cursor: not-allowed; }
+.calendar-cancel { min-height: 44px; padding: 9px 14px; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 600 12px/1 var(--body); cursor: pointer; }
+.calendar-cancel:hover { border-color: var(--ink); color: var(--ink); }
+.calendar-footnote { margin: 12px 20px 20px; color: var(--muted); font-size: 10px; line-height: 1.5; }
 .toast { position: fixed; z-index: 1000; right: 16px; bottom: max(16px, env(safe-area-inset-bottom)); left: 16px; width: fit-content; max-width: calc(100% - 32px); margin: auto; padding: 12px 18px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink); font-size: 13px; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity 180ms ease, transform 180ms ease; }
 .toast.visible { opacity: 1; transform: translateY(0); }
 footer { min-height: 76px; display: flex; align-items: center; gap: 12px; padding: 12px max(18px, calc((100vw - 1200px) / 2)); border-top: 1px solid var(--line); }
@@ -392,9 +460,7 @@ noscript { display: block; padding: 20px; text-align: center; }
   .poster-venue-menu { width: 132px; }
   .movie-synopsis { max-width: 78ch; font-size: 14px; }
   .movie-title { font-size: clamp(23px, 2.6vw, 32px); }
-  .cinema-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .cinema-item:nth-child(even) { padding-left: 12px; border-left: 1px solid var(--line); }
-  .cinema-item:first-child { padding-left: 0; border-left: 0; }
+  .cinema-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; }
 }
 @media (min-width: 1050px) {
   main { padding-top: 28px; }
@@ -415,12 +481,15 @@ noscript { display: block; padding: 20px; text-align: center; }
   .view-switcher { order: 3; width: 100%; justify-content: stretch; }
   .view-pill { flex: 1; }
   .masthead-actions { margin-left: auto; gap: 6px; }
-  .fav-badge-btn, .top-link { min-height: 44px; padding: 6px 9px; font-size: 11px; }
+  .fav-badge-btn, .top-link, .calendar-btn { min-height: 44px; padding: 6px 9px; font-size: 11px; }
   .top-link { display: none; }
+  .calendar-label { display: none; }
   main { padding: 12px 12px 42px; }
   .page-heading { align-items: flex-start; flex-direction: column; gap: 2px; margin-bottom: 10px; }
   .page-heading h1 { font-size: 21px; }
   .airing-now { margin-bottom: 12px; }
+  .cinema-list { grid-template-columns: 1fr; gap: 0; }
+  .cinema-art { aspect-ratio: 16 / 6; }
   .airing-now-head { padding: 7px 10px; }
   .airing-now-title { font-size: 10px; letter-spacing: .12em; }
   .airing-now-status { font-size: 9px; }
