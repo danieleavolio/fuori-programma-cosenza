@@ -15,8 +15,23 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Fuori programma" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="stylesheet" href="styles.css?v=20261113g" />
-    <script src="app.js?v=20261113g" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261113h" />
+    <script src="app.js?v=20261113h" defer></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        const wasControlled = Boolean(navigator.serviceWorker.controller);
+        let reloading = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (wasControlled && !reloading) {
+            reloading = true;
+            window.location.reload();
+          }
+        });
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(() => {});
+        });
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#programmazione">Vai alla programmazione</a>
@@ -174,7 +189,7 @@
         <span class="showtime-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
         </span>
-        <span>Vai all'evento</span>
+        <span id="showtime-ticket-label">Biglietti per questo spettacolo</span>
         <svg class="menu-go" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
       <button class="showtime-menu-item" type="button" role="menuitem" data-time-action="share">

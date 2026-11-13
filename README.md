@@ -52,6 +52,16 @@ Il deploy pubblica sempre i dati aggiornati. Per salvare la programmazione anche
 
 Le viste **Per Film** e **Per Giorno** hanno ciascuna una modalità *griglia* e *lista*: il contenuto delle card è identico, cambia solo la disposizione (locandina in alto o a sinistra). In griglia la locandina mantiene proporzioni fisse anche a card aperta, quindi non si gonfia a tutta pagina.
 
+La griglia usa due colonne su telefono/tablet e tre da 960 px. Le card chiuse condividono gli stessi spazi e la stessa altezza. Durata, generi e barra delle azioni scorrono orizzontalmente (anche con le frecce da tastiera); trailer, condividi e salva hanno tutti un'area di tocco alta 44 px. La locandina e **Vedi sale e orari** aprono lo stesso pannello in entrambe le viste: prima si sceglie il cinema, poi l'orario e la relativa biglietteria. Trama completa e cast sono consultabili senza occupare lo spazio degli orari.
+
+Test UI con Chrome/Chromium e Node 22+, senza dipendenze npm:
+
+```powershell
+node scripts/test_ui.mjs http://127.0.0.1:8000/
+```
+
+Il test verifica griglia/lista, otto larghezze da 320 a 1440 px, entrambi i temi, altezza delle card e dei comandi, overflow, apertura e focus, menu dei biglietti, calendario e ricaricamento offline. `--quick` limita le larghezze a 390 e 1280 px; `--screenshots <cartella>` salva le schermate. Se Chrome non è nel percorso standard, impostare `CHROME_BIN`.
+
 Nella vista **Per Giorno**, quando il giorno scelto è oggi, gli spettacoli già iniziati sono nascosti: restano recuperabili con il toggle che li conta, e in quel caso compaiono attenuati con l'orario barrato.
 
 La sezione **Cinema** ha una card per sala con illustrazione vettoriale, indirizzo, telefono, collegamento a Google Maps, caratteristiche e i film in programma oggi. I dati editoriali delle sale stanno in `data/venues-info.json`.
