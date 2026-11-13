@@ -6,6 +6,7 @@
   --muted: #555;
   --line: #d5d5d5;
   --red: #315f9c;
+  --live: #d93a2b;
   --yellow: #ececec;
   --blue: #245b9d;
   --green: #f0f0f0;
@@ -34,6 +35,7 @@
     --muted: #b0bac5;
     --line: #46525e;
     --red: #315f9c;
+    --live: #ff6b5a;
     --yellow: #514429;
     --blue: #245b9d;
     --green: #2d3944;
@@ -98,6 +100,33 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .page-heading h1 { margin: 0; font-size: 24px; font-weight: 650; line-height: 1.25; }
 .page-heading p { margin: 0; color: var(--muted); font-size: 13px; }
 
+/* ===== ORA IN SALA: cosa sta andando in questo momento ===== */
+.airing-now { margin: 0 0 18px; border: 1px solid var(--ink); background: var(--surface); }
+.airing-now-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 13px; background: var(--ink); color: var(--on-ink); }
+.airing-now-title { display: flex; align-items: center; gap: 7px; margin: 0; font: 800 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.airing-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: var(--live); animation: airing-pulse 2s ease-in-out infinite; }
+.airing-now-status { color: color-mix(in srgb, var(--on-ink) 72%, transparent); font: 700 10px/1 var(--mono); letter-spacing: .02em; text-align: right; }
+.airing-now-body { padding: 11px; }
+.airing-grid { display: grid; grid-template-columns: 1fr; gap: 9px; }
+.airing-item { min-width: 0; display: flex; flex-direction: column; gap: 3px; padding: 10px 11px; border: 1px solid var(--line); border-left: 3px solid var(--live); background: var(--paper); transition: border-color 140ms ease, background-color 140ms ease; }
+.airing-item:hover, .airing-item:focus-visible { border-color: var(--ink); background: var(--surface); }
+.airing-item-times { display: inline-flex; align-items: baseline; gap: 5px; font: 800 13px/1.1 var(--mono); }
+.airing-item-times strong { color: var(--red); }
+.airing-arrow { color: var(--muted); font-weight: 600; }
+.airing-end { color: var(--muted); font-weight: 600; }
+.airing-item-title { font: 700 14px/1.2 var(--display); letter-spacing: -.015em; overflow-wrap: anywhere; }
+.airing-item-venue { color: var(--muted); font-size: 10px; line-height: 1.35; }
+.airing-progress { display: block; height: 3px; margin-top: 5px; overflow: hidden; background: var(--line); }
+.airing-progress > span { display: block; height: 100%; background: var(--live); }
+.airing-item-foot { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: auto; color: var(--muted); font: 9px/1.3 var(--mono); }
+.airing-more { margin: 8px 2px 0; color: var(--muted); font: 700 9px/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.airing-empty { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px dashed var(--line); background: var(--paper); background-image: repeating-linear-gradient(-45deg, transparent 0 9px, color-mix(in srgb, var(--ink) 4%, transparent) 9px 10px); }
+.airing-empty-mark { display: grid; flex: 0 0 auto; width: 38px; height: 38px; place-items: center; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 300 20px/1 var(--mono); }
+.airing-empty-title { margin: 0; font: 700 13px/1.25 var(--display); letter-spacing: -.01em; }
+.airing-empty-next { margin: 3px 0 0; color: var(--muted); font-size: 11px; line-height: 1.4; }
+.airing-empty-next strong { color: var(--ink); font-family: var(--mono); }
+@keyframes airing-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
 .schedule-controls { margin: 0 0 8px; }
 .controls-view { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1px solid var(--line); background: var(--surface); }
 .controls-view#controls-per-film { flex-wrap: wrap; justify-content: space-between; }
@@ -132,7 +161,7 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .movies-catalog-grid.poster-movie-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 158px), 1fr)); align-items: stretch; gap: 14px; border-top: 0; grid-auto-flow: dense; }
 .movie-catalog-card, .film-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
 .movie-catalog-card:hover, .film-card:hover { border-color: var(--muted); }
-.movie-catalog-card { border: 0; border-bottom: 1px solid var(--line); border-left: 3px solid transparent; background: var(--surface); box-shadow: none; animation: film-card-enter 200ms var(--ease) both; transition: background-color 160ms ease, border-color 160ms ease; }
+.movie-catalog-card { border: 0; border-bottom: 1px solid var(--line); border-left: 3px solid transparent; background: var(--surface); box-shadow: none; scroll-margin-top: 92px; animation: film-card-enter 200ms var(--ease) both; transition: background-color 160ms ease, border-color 160ms ease; }
 .movie-catalog-card:hover { border-left-color: var(--red); background: var(--surface); }
 .poster-movie-grid .movie-catalog-card { border: 1px solid var(--line); }
 .poster-movie-grid .movie-catalog-card:hover { border-left-color: var(--line); }
@@ -177,6 +206,9 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .poster-movie-grid .movie-catalog-card.is-expanded .venue-pill-list,
 .poster-movie-grid .movie-catalog-card.is-expanded .days-chip-list { height: auto; overflow: visible; -webkit-mask-image: none; mask-image: none; }
 .poster-movie-grid .movie-catalog-card.is-expanded .schedule-toggle { width: fit-content; margin-top: 16px; }
+
+.movie-catalog-card.is-highlighted { animation: airing-target 1.6s var(--ease); }
+@keyframes airing-target { 0%, 100% { box-shadow: none; } 15%, 55% { box-shadow: 0 0 0 3px var(--live); } }
 
 /* Spostamento fluido delle card quando il layout cambia. */
 ::view-transition-group(*),
@@ -226,8 +258,13 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .date-chip { border-color: var(--line); background: var(--surface); }
 .next-show-block { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; margin-top: 11px; }
 .next-show-block .meta-label { margin: 0; }
-.next-show-line { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 5px 9px; border: 1px solid var(--line); background: var(--paper); font-size: 11px; line-height: 1.3; }
-.next-show-line strong { color: var(--red); font: 800 12px/1.15 var(--mono); white-space: nowrap; }
+.next-show-line { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 5px 9px; border: 1px solid var(--line); background: var(--paper); font-size: 11px; line-height: 1.3; }
+.next-show-times { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 5px; font: 800 12px/1.15 var(--mono); }
+.next-show-times strong { color: var(--red); font: inherit; white-space: nowrap; }
+.next-show-arrow { color: var(--muted); font-weight: 600; }
+.next-show-end { color: var(--ink); }
+.next-show-duration { padding: 1px 5px; border: 1px solid var(--line); color: var(--muted); font: 700 9px/1.4 var(--mono); }
+.next-show-duration.is-missing { border-style: dashed; }
 .next-show-meta { display: inline-flex; align-items: baseline; gap: 6px; color: var(--muted); }
 .next-show-more { font: 700 10px/1 var(--mono); }
 .schedule-toggle { width: fit-content; max-width: 100%; min-height: 44px; display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 14px; padding: 8px 13px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink); font-size: 12px; font-weight: 750; text-align: left; cursor: pointer; }
@@ -347,6 +384,7 @@ noscript { display: block; padding: 20px; text-align: center; }
 
 @media (min-width: 700px) {
   .movies-catalog-grid, .film-list { grid-template-columns: 1fr; }
+  .airing-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
   .movie-catalog-card, .film-card { align-self: start; }
   .movie-card-body { grid-template-columns: 132px minmax(0, 1fr); gap: 22px; padding: 20px 18px; }
   .movie-main { grid-template-columns: 132px minmax(0, 1fr); gap: 22px; }
@@ -382,6 +420,14 @@ noscript { display: block; padding: 20px; text-align: center; }
   main { padding: 12px 12px 42px; }
   .page-heading { align-items: flex-start; flex-direction: column; gap: 2px; margin-bottom: 10px; }
   .page-heading h1 { font-size: 21px; }
+  .airing-now { margin-bottom: 12px; }
+  .airing-now-head { padding: 7px 10px; }
+  .airing-now-title { font-size: 10px; letter-spacing: .12em; }
+  .airing-now-status { font-size: 9px; }
+  .airing-now-body { padding: 9px; }
+  .airing-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(82%, 280px); gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding-bottom: 3px; scrollbar-width: thin; }
+  .airing-item { padding: 9px 10px; scroll-snap-align: start; }
+  .airing-item-title { font-size: 13px; }
   .controls-view { align-items: stretch; gap: 9px; padding: 10px; }
   .controls-view#controls-per-film { flex-direction: column; }
   .movie-layout-switch { align-self: flex-end; }

@@ -8,8 +8,8 @@
     <meta name="description" content="Programmazione e orari dei cinema a Cosenza e Rende: Andromeda River, Citrigno, Teatro Italia, Garden e Cinema Unical." />
     <title>Fuori programma — Cinema a Cosenza e Rende</title>
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20261113b" />
-    <script src="app.js?v=20261113b" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261113d" />
+    <script src="app.js?v=20261113d" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#programmazione">Vai alla programmazione</a>
@@ -43,6 +43,15 @@
       <section class="page-heading" aria-labelledby="page-title">
         <h1 id="page-title">Programmazione cinema</h1>
         <p>Cosenza, Rende e Zumpano</p>
+      </section>
+
+      <!-- Cosa sta andando in sala in questo momento -->
+      <section class="airing-now" id="airing-now" aria-labelledby="airing-now-title" hidden>
+        <div class="airing-now-head">
+          <h2 class="airing-now-title" id="airing-now-title"><span class="airing-dot" aria-hidden="true"></span>Ora in sala</h2>
+          <span class="airing-now-status" id="airing-now-status"></span>
+        </div>
+        <div class="airing-now-body" id="airing-now-body"></div>
       </section>
 
       <!-- Barra filtri contestuale e non-ridondante -->

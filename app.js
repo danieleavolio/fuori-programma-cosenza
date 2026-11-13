@@ -17,6 +17,9 @@ const favCountEl = $('#fav-count');
 const chipFavCountEl = $('#chip-fav-count');
 const toastEl = $('#toast');
 const emptyState = $('#empty-state');
+const airingNowSection = $('#airing-now');
+const airingNowBody = $('#airing-now-body');
+const airingNowStatus = $('#airing-now-status');
 const requiredVenues = ['andromeda-river', 'citrigno', 'cinema-teatro-italia', 'unical', 'garden'];
 
 // State
@@ -55,6 +58,8 @@ const getTodayString = () => {
   return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
 };
 
+const dateString = (date) => `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+
 const isPastDate = (dateStr) => {
   const [day, month, year] = dateStr.split('/').map(Number);
   if (!year || !month || !day) return false;
@@ -80,8 +85,32 @@ const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (char) => (
 
 const cleanDuration = (raw) => {
   if (!raw) return '';
-  return String(raw).replace(/H/i, 'h ').replace(/['’]/g, 'm').trim();
+  return String(raw).replace(/H/i, 'h ').replace(/['’]/g, 'm').replace(/\s+/g, ' ').trim();
 };
+
+// "1h 46m" -> 106, "" -> 0. La distinzione con durationMinutes() serve dove
+// la durata manca davvero e non va inventata (fine proiezione, banner).
+const parseDurationMinutes = (raw) => {
+  const text = String(raw || '').toLocaleLowerCase('it');
+  const hours = Number((text.match(/(\d+)\s*h/) || [])[1] || 0);
+  const minutes = Number((text.match(/(\d+)\s*m/) || [])[1] || 0);
+  return hours * 60 + minutes;
+};
+
+const formatDuration = (minutes) => {
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return [hours ? `${hours}h` : '', rest ? `${rest}m` : ''].filter(Boolean).join(' ') || '0m';
+};
+
+const wallClockDate = (dateStr, timeStr) => {
+  const [day, month, year] = String(dateStr || '').split('/').map(Number);
+  const [hours, minutes] = String(timeStr || '').split(':').map(Number);
+  return new Date(year || 1970, (month || 1) - 1, day || 1, hours || 0, minutes || 0);
+};
+
+const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
+
 const roomLabel = (room) => room && /^sala\b/i.test(room) ? room : `Sala ${room}`;
 
 // --- Storage & Favorites ---
@@ -193,12 +222,11 @@ const pad2 = (value) => String(value).padStart(2, '0');
 
 // "1h 54m" -> 114. Senza durata si assume un film medio.
 function durationMinutes(raw) {
-  const text = String(raw || '').toLocaleLowerCase('it');
-  const hours = Number((text.match(/(\d+)\s*h/) || [])[1] || 0);
-  const minutes = Number((text.match(/(\d+)\s*m/) || [])[1] || 0);
-  const total = hours * 60 + minutes;
+  const total = parseDurationMinutes(raw);
   return total > 0 ? total : 110;
 }
+
+const timeLabel = (date) => `${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
 
 // Data e ora "da parete" nel fuso italiano: il calendario le interpreta con
 // il parametro ctz, senza conversioni di fuso lato browser.
@@ -413,17 +441,19 @@ function showtimeChipHtml(movie, cinema, dateStr, entry, className) {
 
 // Primo spettacolo ancora da iniziare: sulla card evita di dover aprire
 // il pannello solo per sapere a che ora è il prossimo.
-function nextShowtime(shows) {
+function nextShowtime(shows, durationRaw = '') {
+  const duration = parseDurationMinutes(durationRaw);
   const entries = [];
   for (const group of shows) {
     for (const entry of group.shows) {
-      const [day, month, year] = String(group.date).split('/').map(Number);
-      const [hours, minutes] = String(entry.time).split(':').map(Number);
+      const startsAt = wallClockDate(group.date, entry.time);
       entries.push({
         date: group.date,
         time: entry.time,
         venue: group.venue,
-        startsAt: new Date(year, month - 1, day, hours || 0, minutes || 0),
+        startsAt,
+        duration,
+        endsAt: duration ? addMinutes(startsAt, duration) : null,
       });
     }
   }
@@ -698,11 +728,181 @@ function render() {
 }
 
 // ==========================================
+// ORA IN SALA: film in proiezione adesso
+// ==========================================
+function airingNowFilms(movies, venuesMap, now = new Date()) {
+  const today = dateString(now);
+  const yesterdayDate = new Date(now);
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  const yesterday = dateString(yesterdayDate);
+  const playing = [];
+
+  for (const movie of movies) {
+    const parsedDuration = parseDurationMinutes(movie.duration);
+    const durationKnown = parsedDuration > 0;
+    // Senza durata dichiarata si assume un film medio: serve solo a capire
+    // se la proiezione è ancora in corso, non a mostrare un orario di fine.
+    const length = durationKnown ? parsedDuration : 110;
+    let current = null;
+
+    for (const group of movie.shows || []) {
+      // Anche la programmazione di ieri può essere ancora in corso dopo mezzanotte.
+      if (group.date !== today && group.date !== yesterday) continue;
+      for (const entry of group.shows || []) {
+        const start = wallClockDate(group.date, entry.time);
+        const end = addMinutes(start, length);
+        if (now < start || now >= end) continue;
+
+        // Un film può essere in più sale: nella card conta una volta sola,
+        // con la proiezione iniziata da più tempo.
+        if (!current || start < current.start) {
+          current = {
+            movie,
+            venue: venuesMap[group.venue] || { id: group.venue, name: group.venue, location: '' },
+            room: entry.room || '',
+            start,
+            end,
+            durationMinutes: length,
+            durationKnown,
+            progress: (now - start) / (end - start),
+            minutesLeft: Math.max(0, Math.ceil((end - now) / 60000)),
+          };
+        }
+      }
+    }
+
+    if (current) playing.push(current);
+  }
+
+  playing.sort((a, b) => a.start - b.start);
+  return playing;
+}
+
+// Primo spettacolo futuro, utile per dare un orario all'empty state.
+function nextScreening(movies, venuesMap, now = new Date()) {
+  let next = null;
+  for (const movie of movies) {
+    for (const group of movie.shows || []) {
+      for (const entry of group.shows || []) {
+        const start = wallClockDate(group.date, entry.time);
+        if (start <= now) continue;
+        if (!next || start < next.start) {
+          next = {
+            start,
+            date: group.date,
+            time: entry.time,
+            movie,
+            venue: venuesMap[group.venue] || { id: group.venue, name: group.venue, location: '' },
+          };
+        }
+      }
+    }
+  }
+  return next;
+}
+
+function airingCardHtml(item) {
+  const elapsed = Math.round(Math.min(1, Math.max(0, item.progress)) * 100);
+  const venueLine = `${item.venue.name}${item.room ? ` · ${roomLabel(item.room)}` : ''}`;
+  return `
+    <a class="airing-item" href="#film-${escapeHtml(item.movie.id)}" data-airing-film="${escapeHtml(item.movie.id)}">
+      <span class="airing-item-times">
+        <strong>${escapeHtml(timeLabel(item.start))}</strong>
+        <span class="airing-arrow" aria-hidden="true">&rarr;</span>
+        <span class="airing-end">${item.durationKnown ? escapeHtml(timeLabel(item.end)) : 'in corso'}</span>
+      </span>
+      <span class="airing-item-title">${escapeHtml(item.movie.title)}</span>
+      <span class="airing-item-venue">${escapeHtml(venueLine)}</span>
+      ${item.durationKnown ? `
+        <span class="airing-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${elapsed}" aria-label="Avanzamento della proiezione">
+          <span style="width:${elapsed}%"></span>
+        </span>
+      ` : ''}
+      <span class="airing-item-foot">
+        <span>${item.durationKnown ? `Durata ${formatDuration(item.durationMinutes)}` : 'Durata n.d.'}</span>
+        ${item.durationKnown ? `<span>${item.minutesLeft} min alla fine</span>` : ''}
+      </span>
+    </a>
+  `;
+}
+
+function renderAiringNow() {
+  if (!airingNowSection || !airingNowBody) return;
+  const movies = scheduleData.movies || [];
+  if (!movies.length) {
+    airingNowSection.hidden = true;
+    return;
+  }
+
+  const venuesMap = Object.fromEntries((scheduleData.venues || []).map((venue) => [venue.id, venue]));
+  const now = new Date();
+  const playing = airingNowFilms(movies, venuesMap, now);
+  airingNowSection.hidden = false;
+
+  if (airingNowStatus) {
+    airingNowStatus.textContent = `${timeLabel(now)} · ${playing.length ? `${playing.length} film in corso` : 'nessun film in corso'}`;
+  }
+
+  if (!playing.length) {
+    const next = nextScreening(movies, venuesMap, now);
+    const nextDay = next ? formatDayLabel(next.date) : '';
+    airingNowBody.innerHTML = `
+      <div class="airing-empty">
+        <span class="airing-empty-mark" aria-hidden="true">&ndash;</span>
+        <div class="airing-empty-copy">
+          <p class="airing-empty-title">Nessuno spettacolo in corso</p>
+          <p class="airing-empty-next">${next
+            ? `Il prossimo inizia ${nextDay === 'Oggi' ? 'oggi' : nextDay} alle <strong>${escapeHtml(next.time)}</strong> · ${escapeHtml(next.venue.name)}`
+            : 'La programmazione riprende con le prossime date annunciate.'}</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const visible = playing.slice(0, 3);
+  const hidden = playing.length - visible.length;
+  airingNowBody.innerHTML = `
+    <div class="airing-grid">${visible.map(airingCardHtml).join('')}</div>
+    ${hidden ? `<p class="airing-more">+${hidden} ${hidden === 1 ? 'altro film in corso' : 'altri film in corso'}</p>` : ''}
+  `;
+}
+
+// Dal banner alla scheda del film, anche se una vista o un filtro la nascondono.
+function revealFilm(movieId) {
+  const needsViewSwitch = currentView !== 'movies';
+  currentView = 'movies';
+  $$('.view-pill').forEach((button) => {
+    const active = button.dataset.view === 'movies';
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-selected', String(active));
+  });
+  if (needsViewSwitch) render();
+
+  if (!document.getElementById(`film-${movieId}`)) {
+    if (searchInput) searchInput.value = '';
+    if (venueFilter) venueFilter.value = 'all';
+    if (genreFilter) genreFilter.value = 'all';
+    $$('.chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.chip === 'all'));
+    activeChip = 'all';
+    render();
+  }
+
+  const card = document.getElementById(`film-${movieId}`);
+  if (!card) return;
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  card.classList.remove('is-highlighted');
+  void card.offsetWidth;
+  card.classList.add('is-highlighted');
+  window.setTimeout(() => card.classList.remove('is-highlighted'), 1800);
+}
+
+// ==========================================
 // VISTA 1: Catalogo per Film (Card Espandibili)
 // ==========================================
 function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
   const todayString = getTodayString();
-  const totalShows = movies.reduce((sum, movie) => movie.shows
+  const totalShows = movies.reduce((sum, movie) => sum + movie.shows
     .filter((show) => (selectedVenue === 'all' || show.venue === selectedVenue)
       && (activeChip !== 'today' || show.date === todayString))
     .reduce((total, show) => total + show.shows.length, 0), 0);
@@ -734,7 +934,7 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
   const venuesPlaying = venueIds.map((id) => venuesMap[id] || { id, name: id, location: '' });
   const datesAvailable = [...new Set(relevantProgramming.map((item) => item.date))].sort((a, b) => parseDate(a) - parseDate(b));
   const durationText = cleanDuration(movie.duration);
-  const nextShow = nextShowtime(relevantShows);
+  const nextShow = nextShowtime(relevantShows, movie.duration);
   const nextShowVenue = nextShow ? (venuesMap[nextShow.venue] || { name: nextShow.venue }) : null;
 
   const allMovieDates = [...new Set(venueProgramming.map((item) => item.date))];
@@ -742,7 +942,7 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
   const showCount = relevantShows.reduce((sum, show) => sum + show.shows.length, 0);
 
   return `
-    <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" data-movie-id="${escapeHtml(movie.id)}" style="view-transition-name: film-${escapeHtml(movie.id)}">
+    <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" id="film-${escapeHtml(movie.id)}" data-movie-id="${escapeHtml(movie.id)}" style="view-transition-name: film-${escapeHtml(movie.id)}">
       <div class="movie-card-body">
         ${renderPosterLink(movie, venueIds, venuesMap, selectedVenue)}
 
@@ -750,9 +950,9 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
           <div class="movie-card-meta">
             <div class="movie-badges">
               ${isOnlyToday ? `<span class="badge-last-chance">Solo oggi</span>` : ''}
+              ${durationText ? `<span class="film-duration" title="Durata del film">${escapeHtml(durationText)}</span>` : ''}
               ${(movie.tags || []).map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('')}
               ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
-              ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
             </div>
             <div class="movie-actions">
               ${renderShareMenu(movie)}
@@ -789,7 +989,11 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
             <div class="next-show-block">
               <span class="meta-label">PROSSIMO SPETTACOLO</span>
               <span class="next-show-line">
-                <strong>${escapeHtml(formatDayLabel(nextShow.date))} · ${escapeHtml(nextShow.time)}</strong>
+                <span class="next-show-times">
+                  <strong>${escapeHtml(formatDayLabel(nextShow.date))} · ${escapeHtml(nextShow.time)}</strong>
+                  ${nextShow.endsAt ? `<span class="next-show-arrow" aria-hidden="true">&rarr;</span><span class="next-show-end">${escapeHtml(timeLabel(nextShow.endsAt))}</span>` : ''}
+                  ${nextShow.duration ? `<span class="next-show-duration">${escapeHtml(formatDuration(nextShow.duration))}</span>` : `<span class="next-show-duration is-missing">durata n.d.</span>`}
+                </span>
                 <span class="next-show-meta">
                   <span class="next-show-venue">${escapeHtml(nextShowVenue.name)}</span>
                   ${nextShow.upcomingCount > 1 ? `<span class="next-show-more">+${nextShow.upcomingCount - 1}</span>` : ''}
@@ -973,6 +1177,7 @@ async function loadSchedule({ fresh = false } = {}) {
       updatedAtEl.textContent = `Aggiornato il ${new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(scheduleData.updatedAt))}`;
     }
     render();
+    renderAiringNow();
   } catch (error) {
     resultSummary.textContent = error.message;
     moviesGrid.hidden = true;
@@ -1116,6 +1321,14 @@ window.addEventListener('resize', () => closeShowtimeMenu());
 
 // In-place accordion card toggle (con scroll fluido centrato)
 document.addEventListener('click', (e) => {
+  // Dal banner "Ora in sala" salta alla scheda del film
+  const airingLink = e.target.closest('[data-airing-film]');
+  if (airingLink) {
+    e.preventDefault();
+    revealFilm(airingLink.dataset.airingFilm);
+    return;
+  }
+
   // 0. Apre il menu azioni di un singolo orario
   const showtimeBtn = showtimeMenu ? e.target.closest('[data-showtime]') : null;
   if (showtimeBtn) {
@@ -1201,3 +1414,10 @@ document.addEventListener('click', (e) => {
 // Boot
 updateFavoritesBadge();
 loadSchedule();
+
+// Il banner "Ora in sala" e l'orologio devono restare veri anche con la
+// pagina aperta a lungo, senza ricaricare la programmazione.
+window.setInterval(renderAiringNow, 60000);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) renderAiringNow();
+});
