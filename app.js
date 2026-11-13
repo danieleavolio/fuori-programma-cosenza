@@ -1505,67 +1505,55 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
   const isOnlyToday = allMovieDates.length === 1 && allMovieDates[0] === todayString;
   const showCount = relevantShows.reduce((sum, show) => sum + show.shows.length, 0);
 
+  const venuesText = venuesPlaying.length ? venuesPlaying.map((v) => escapeHtml(v.name)).join(', ') : 'Nessuna sala con i filtri';
+  const datesText = datesAvailable.length ? datesAvailable.map((d) => formatDayLabel(d)).join(', ') : 'Nessuna data';
+  const nextShowText = nextShow
+    ? `<strong>${escapeHtml(formatDayLabel(nextShow.date))} ${escapeHtml(nextShow.time)}</strong> &middot; ${escapeHtml(nextShowVenue.name)}${nextShow.upcomingCount > 1 ? ` <small>(+${nextShow.upcomingCount - 1})</small>` : ''}`
+    : 'Nessuno spettacolo';
+
   return `
     <article class="movie-catalog-card ${isExpanded ? 'is-expanded' : ''}" id="film-${escapeHtml(movie.id)}" data-movie-id="${escapeHtml(movie.id)}" style="view-transition-name: film-${escapeHtml(movie.id)}">
       <div class="movie-card-body">
         ${renderPosterLink(movie, venueIds, venuesMap, selectedVenue)}
 
         <div class="movie-card-details">
-          <div class="movie-card-meta">
-            <div class="movie-badges">
-              ${isOnlyToday ? `<span class="badge-last-chance">Solo oggi</span>` : ''}
-              ${durationText ? `<span class="film-duration" title="Durata del film">${escapeHtml(durationText)}</span>` : ''}
-              ${(movie.tags || []).map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('')}
-              ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
-            </div>
-            <div class="movie-actions">
-              ${renderTrailerLink(movie)}
-              ${renderShareMenu(movie)}
-              <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
-                <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-              </button>
-            </div>
+          <div class="movie-badges">
+            ${isOnlyToday ? `<span class="badge-last-chance">Solo oggi</span>` : ''}
+            ${durationText ? `<span class="film-duration" title="Durata del film">${escapeHtml(durationText)}</span>` : ''}
+            ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
+            ${(movie.tags || []).map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('')}
           </div>
+
+          <div class="movie-actions">
+            ${renderTrailerLink(movie)}
+            ${renderShareMenu(movie)}
+            <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
+              <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </button>
+          </div>
+
           <div class="movie-title-row">
             <h3 class="movie-title">${escapeHtml(movie.title)}</h3>
           </div>
-          <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
+
           ${renderMovieMetadata(movie)}
 
-          <div class="movie-facts">
-            <div class="venues-summary-block">
-              <span class="meta-label">IN SALA</span>
-              <div class="venue-pill-list">
-                ${venuesPlaying.length ? venuesPlaying.map((v) => `
-                  <span class="cinema-pill">${escapeHtml(v.name)} <small>${escapeHtml(v.location)}</small></span>
-                `).join('') : '<span class="cinema-pill none">Nessun cinema con i filtri attuali</span>'}
-              </div>
-            </div>
+          <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
 
-            <div class="days-summary-block">
-              <span class="meta-label">DATE IN PROGRAMMAZIONE</span>
-              <div class="days-chip-list">
-                ${datesAvailable.map((d) => `<span class="date-chip">${escapeHtml(formatDayLabel(d))}</span>`).join('')}
-              </div>
+          <div class="card-facts-box">
+            <div class="fact-row">
+              <span class="fact-label">IN SALA</span>
+              <span class="fact-value" title="${escapeHtml(venuesPlaying.map((v) => v.name).join(', '))}">${venuesText}</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">PROSSIMO</span>
+              <span class="fact-value">${nextShowText}</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">DATE</span>
+              <span class="fact-value" title="${escapeHtml(datesAvailable.map((d) => formatDayLabel(d)).join(', '))}">${datesText}</span>
             </div>
           </div>
-
-          ${nextShow ? `
-            <div class="next-show-block">
-              <span class="meta-label">PROSSIMO SPETTACOLO</span>
-              <span class="next-show-line">
-                <span class="next-show-times">
-                  <strong>${escapeHtml(formatDayLabel(nextShow.date))} · ${escapeHtml(nextShow.time)}</strong>
-                  ${nextShow.endsAt ? `<span class="next-show-arrow" aria-hidden="true">&rarr;</span><span class="next-show-end">${escapeHtml(timeLabel(nextShow.endsAt))}</span>` : ''}
-                  ${nextShow.duration ? `<span class="next-show-duration">${escapeHtml(formatDuration(nextShow.duration))}</span>` : `<span class="next-show-duration is-missing">durata n.d.</span>`}
-                </span>
-                <span class="next-show-meta">
-                  <span class="next-show-venue">${escapeHtml(nextShowVenue.name)}</span>
-                  ${nextShow.upcomingCount > 1 ? `<span class="next-show-more">+${nextShow.upcomingCount - 1}</span>` : ''}
-                </span>
-              </span>
-            </div>
-          ` : ''}
 
           <button class="schedule-toggle" type="button" aria-expanded="${isExpanded}" aria-controls="schedule-${escapeHtml(movie.id)}" data-schedule-id="${escapeHtml(movie.id)}">
             <span>${isExpanded ? 'Nascondi gli orari' : `Date, orari e biglietti · ${showCount}`}</span>
@@ -1718,63 +1706,71 @@ function dayCardHtml(movie, { venuesMap, dayDate }) {
   const isFav = favorites.has(movie.id);
   const durationText = cleanDuration(movie.duration);
   const detailsUrl = movieUrlForVenue(movie, movie.dayProgramming[0]?.venue);
-  const dayDisplay = formatDayLabel(dayDate);
 
   return `
-    <article class="film-card" data-movie-id="${escapeHtml(movie.id)}">
-      <div class="movie-main">
+    <article class="movie-catalog-card day-card" data-movie-id="${escapeHtml(movie.id)}">
+      <div class="movie-card-body">
         ${renderPosterLink(movie, movie.dayProgramming.map((item) => item.venue), venuesMap)}
-        <div class="movie-info">
-          <div class="movie-card-meta">
-            <div class="movie-badges">
-              ${(movie.tags || []).map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('')}
-              ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
-              ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
-            </div>
-            <div class="movie-actions">
-              ${renderTrailerLink(movie)}
-              ${renderShareMenu(movie)}
-              <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
-                <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-              </button>
-            </div>
+
+        <div class="movie-card-details">
+          <div class="movie-badges">
+            ${durationText ? `<span class="film-duration" title="Durata">${escapeHtml(durationText)}</span>` : ''}
+            ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
+            ${(movie.tags || []).map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('')}
           </div>
+
+          <div class="movie-actions">
+            ${renderTrailerLink(movie)}
+            ${renderShareMenu(movie)}
+            <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}" title="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}" aria-label="${isFav ? 'Rimuovi dai salvati' : 'Salva film'}">
+              <svg class="bookmark-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </button>
+          </div>
+
           <div class="movie-title-row">
-            <h3>${escapeHtml(movie.title)}</h3>
+            <h3 class="movie-title">${escapeHtml(movie.title)}</h3>
           </div>
-          <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
+
           ${renderMovieMetadata(movie)}
-          <p class="movie-prompt">Programmazione per ${dayDisplay}:</p>
+
+          <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
+
+          <div class="card-facts-box day-showtimes-box">
+            ${movie.shows.map((show) => {
+              const cinema = venuesMap[show.venue] || { name: show.venue, location: '' };
+              return `
+                <div class="day-venue-group">
+                  <div class="day-venue-head">
+                    <strong>${escapeHtml(cinema.name)}</strong>
+                    ${cinema.location ? `<span class="day-venue-loc">${escapeHtml(cinema.location)}</span>` : ''}
+                  </div>
+                  <div class="day-venue-times">
+                    ${show.shows.map((entry) => `
+                      <div class="time-item-wrapper">
+                        ${showtimeChipHtml(movie, cinema, dayDate, entry, 'showtime', entry.isPast)}
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+            ${movie.dayProgramming.filter((item) => !movie.shows.some((show) => show.venue === item.venue)).map((item) => {
+              const cinema = venuesMap[item.venue] || { name: item.venue, location: '' };
+              return `
+                <div class="day-venue-group">
+                  <div class="day-venue-head"><strong>${escapeHtml(cinema.name)}</strong></div>
+                  <p class="no-times-note">Data annunciata. Orari e biglietti a breve.</p>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <a class="schedule-toggle day-card-more" href="${escapeHtml(detailsUrl)}" target="_blank" rel="noreferrer">
+            <span>Dettagli e biglietti</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
         </div>
       </div>
-
-      <div class="showtime-groups">
-        ${movie.dayProgramming.filter((item) => !movie.shows.some((show) => show.venue === item.venue)).map((item) => {
-          const cinema = venuesMap[item.venue] || { name: item.venue, location: '' };
-          return `<div class="showtime-group"><div class="venue-line"><strong>${escapeHtml(cinema.name)}</strong><span class="venue-location-inline">${escapeHtml(cinema.location)}</span></div><p class="no-times-note">Data annunciata. Orari e biglietti non ancora disponibili.</p></div>`;
-        }).join('')}
-        ${movie.shows.map((show) => {
-          const cinema = venuesMap[show.venue] || { name: show.venue, location: '' };
-          return `
-            <div class="showtime-group">
-              <div class="venue-line">
-                <strong>${escapeHtml(cinema.name)}</strong>
-                <span class="venue-location-inline">${escapeHtml(cinema.location)}</span>
-              </div>
-              <div class="times">
-                ${show.shows.map((entry) => `
-                  <div class="time-item-wrapper">
-                    ${showtimeChipHtml(movie, cinema, dayDate, entry, 'showtime', entry.isPast)}
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `;
-        }).join('')}
-      </div>
-      <a class="card-more" href="${escapeHtml(detailsUrl)}" target="_blank" rel="noreferrer">
-        Dettagli e scheda ufficiale &rarr;
-      </a>
     </article>
   `;
 }
