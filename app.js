@@ -328,12 +328,30 @@ function openCalendarFile(file) {
   window.setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
-async function shareCalendarEvent(event) {
-  const file = new File([buildCalendarEvent(event)], calendarFileName(event), { type: 'text/calendar' });
+// Android: Google Calendar dichiara un App Link su /calendar/render, quindi
+// un vero clic sul link apre l'editor nativo dell'app (con la scelta del
+// calendario), non il sito. Gli intent INSERT non sono raggiungibili dal
+// browser perché Chrome aggiunge a forza la categoria BROWSABLE.
+function openAndroidCalendar(event) {
+  const link = document.createElement('a');
+  link.href = calendarUrl(event);
+  link.rel = 'noopener';
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
 
-  // Sul telefono il file ICS passa al foglio di condivisione di sistema:
-  // tra le destinazioni compaiono le app di calendario installate.
-  if (isAppleMobile() || isAndroid()) {
+async function shareCalendarEvent(event) {
+  if (isAndroid()) {
+    openAndroidCalendar(event);
+    return;
+  }
+
+  const file = new File([buildCalendarEvent(event)], calendarFileName(event), { type: 'text/calendar' });
+  if (isAppleMobile()) {
+    // Il foglio di condivisione iOS non elenca Calendario: il file ICS
+    // viene passato a Safari, che mostra "Aggiungi al calendario".
     if (typeof navigator.share === 'function') {
       try {
         await navigator.share({ files: [file], title: `${event.eventTitle} — ${event.eventVenue}` });
@@ -342,13 +360,7 @@ async function shareCalendarEvent(event) {
         if (error.name === 'AbortError') return;
       }
     }
-    if (isAppleMobile()) {
-      openCalendarFile(file);
-      return;
-    }
-    // Su Android, senza condivisione, il link apre Google Calendar
-    // (l'app se è installata, altrimenti il sito).
-    window.location.href = calendarUrl(event);
+    openCalendarFile(file);
     return;
   }
 
@@ -397,6 +409,30 @@ function showtimeChipHtml(movie, cinema, dateStr, entry, className) {
       <svg class="time-cue" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
   `;
+}
+
+// Primo spettacolo ancora da iniziare: sulla card evita di dover aprire
+// il pannello solo per sapere a che ora è il prossimo.
+function nextShowtime(shows) {
+  const entries = [];
+  for (const group of shows) {
+    for (const entry of group.shows) {
+      const [day, month, year] = String(group.date).split('/').map(Number);
+      const [hours, minutes] = String(entry.time).split(':').map(Number);
+      entries.push({
+        date: group.date,
+        time: entry.time,
+        venue: group.venue,
+        startsAt: new Date(year, month - 1, day, hours || 0, minutes || 0),
+      });
+    }
+  }
+  if (!entries.length) return null;
+  entries.sort((a, b) => a.startsAt - b.startsAt);
+  const now = new Date();
+  const upcoming = entries.filter((entry) => entry.startsAt >= now);
+  if (!upcoming.length) return null;
+  return { ...upcoming[0], upcomingCount: upcoming.length };
 }
 
 function positionShowtimeMenu(button) {
@@ -698,6 +734,8 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
   const venuesPlaying = venueIds.map((id) => venuesMap[id] || { id, name: id, location: '' });
   const datesAvailable = [...new Set(relevantProgramming.map((item) => item.date))].sort((a, b) => parseDate(a) - parseDate(b));
   const durationText = cleanDuration(movie.duration);
+  const nextShow = nextShowtime(relevantShows);
+  const nextShowVenue = nextShow ? (venuesMap[nextShow.venue] || { name: nextShow.venue }) : null;
 
   const allMovieDates = [...new Set(venueProgramming.map((item) => item.date))];
   const isOnlyToday = allMovieDates.length === 1 && allMovieDates[0] === todayString;
@@ -746,6 +784,19 @@ function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
               </div>
             </div>
           </div>
+
+          ${nextShow ? `
+            <div class="next-show-block">
+              <span class="meta-label">PROSSIMO SPETTACOLO</span>
+              <span class="next-show-line">
+                <strong>${escapeHtml(formatDayLabel(nextShow.date))} · ${escapeHtml(nextShow.time)}</strong>
+                <span class="next-show-meta">
+                  <span class="next-show-venue">${escapeHtml(nextShowVenue.name)}</span>
+                  ${nextShow.upcomingCount > 1 ? `<span class="next-show-more">+${nextShow.upcomingCount - 1}</span>` : ''}
+                </span>
+              </span>
+            </div>
+          ` : ''}
 
           <button class="schedule-toggle" type="button" aria-expanded="${isExpanded}" aria-controls="schedule-${escapeHtml(movie.id)}" data-schedule-id="${escapeHtml(movie.id)}">
             <span>${isExpanded ? 'Nascondi gli orari' : `Date, orari e biglietti · ${showCount}`}</span>
