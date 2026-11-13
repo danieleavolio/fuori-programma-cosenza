@@ -1124,18 +1124,29 @@ function renderMovieMetadata(movie) {
   return credits + cast;
 }
 
+// Il trailer è sempre il primo dei tre comandi della card: quando manca
+// resta al suo posto in stato disabilitato, così la fila non si sfalsa.
 function renderTrailerLink(movie) {
-  if (!movie.trailer) return '';
-  let url;
-  try {
-    url = new URL(movie.trailer);
-  } catch (error) {
-    return '';
+  let url = '';
+  if (movie.trailer) {
+    try {
+      const parsed = new URL(movie.trailer);
+      if (/^https?:$/.test(parsed.protocol)) url = parsed.href;
+    } catch (error) {
+      // Un link malformato equivale a un trailer assente.
+    }
   }
-  if (!/^https?:$/.test(url.protocol)) return '';
-  return `<a class="trailer-link" href="${escapeHtml(url.href)}" target="_blank" rel="noreferrer" title="Guarda il trailer di ${escapeHtml(movie.title)}" aria-label="Guarda il trailer di ${escapeHtml(movie.title)}">
+
+  if (!url) {
+    return `<span class="trailer-link is-unavailable" aria-disabled="true" title="Trailer non disponibile per ${escapeHtml(movie.title)}">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="5.6" y1="5.6" x2="18.4" y2="18.4"></line></svg>
+      <span>Trailer non disponibile</span>
+    </span>`;
+  }
+
+  return `<a class="trailer-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer" title="Guarda il trailer di ${escapeHtml(movie.title)}" aria-label="Guarda il trailer di ${escapeHtml(movie.title)}">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
-    <span>Trailer</span>
+    <span>Guarda trailer</span>
   </a>`;
 }
 

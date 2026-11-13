@@ -176,18 +176,20 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .poster-movie-grid .movie-catalog-card:hover { border-left-color: var(--line); }
 
 /* GRIGLIA (per film): stessa card della lista, locandina in alto e testo sotto. */
-.poster-movie-grid .movie-catalog-card { display: flex; flex-direction: column; scroll-margin-top: 92px; }
+.poster-movie-grid .movie-catalog-card { display: flex; flex-direction: column; scroll-margin-top: 92px; container-type: inline-size; }
 .poster-movie-grid .movie-card-body { flex: 1; display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 12px; }
 .poster-movie-grid .poster-link, .poster-movie-grid .poster-venue-menu { width: 100%; }
 .poster-movie-grid .movie-card-details { width: 100%; flex: 1; display: flex; flex-direction: column; }
 
 /* Ogni blocco ha un'altezza fissa: le card restano allineate anche quando
    badges, sinossi o sale occupano un numero diverso di righe. */
-.poster-movie-grid .movie-card-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 6px; min-height: 0; margin: 0; }
+.poster-movie-grid .movie-card-meta { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 7px; min-height: 0; margin: 0; }
 .poster-movie-grid .movie-badges { height: 54px; overflow: hidden; align-content: flex-start; }
-.poster-movie-grid .movie-actions { gap: 2px; margin-left: 0; }
+.poster-movie-grid .movie-actions { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 36px 36px; align-items: stretch; gap: 4px; margin-left: 0; }
 .poster-movie-grid .movie-actions .fav-star-btn,
-.poster-movie-grid .movie-actions .btn-share-icon { width: 34px; height: 34px; min-height: 34px; border-color: var(--line); background: var(--surface); }
+.poster-movie-grid .movie-actions .btn-share-icon { width: 36px; height: 36px; min-height: 36px; border-color: var(--line); border-radius: 0; background: var(--surface); }
+.poster-movie-grid .movie-actions .trailer-link { width: auto; height: 36px; min-height: 36px; justify-content: flex-start; gap: 5px; padding: 0 7px; border-radius: 0; background: var(--surface); font-size: 8.5px; line-height: 1.05; letter-spacing: .04em; }
+.poster-movie-grid .movie-actions .trailer-link span { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; text-align: left; }
 .poster-movie-grid .movie-title-row { min-height: 38px; }
 .poster-movie-grid .movie-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 15px; line-height: 1.25; letter-spacing: -.02em; }
 .poster-movie-grid .movie-synopsis { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; height: 54px; margin: 8px 0 0; font-size: 12px; line-height: 1.5; }
@@ -206,7 +208,9 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .btn-share-icon { width: 44px; height: 44px; min-height: 44px; }
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-card-meta { display: flex; align-items: center; min-height: 36px; }
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-badges { height: auto; overflow: visible; }
-.poster-movie-grid .movie-catalog-card.is-expanded .movie-actions { margin-left: auto; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-actions { width: auto; display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .trailer-link { width: auto; height: 44px; min-height: 44px; padding: 0 12px; font-size: 10px; }
+.poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .fav-star-btn { border-radius: 50%; }
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-title-row { min-height: 0; }
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-title { display: block; -webkit-line-clamp: unset; overflow: visible; font-size: 26px; }
 .poster-movie-grid .movie-catalog-card.is-expanded .movie-synopsis { display: block; height: auto; -webkit-line-clamp: unset; margin: 10px 0 0; font-size: 14px; }
@@ -251,12 +255,13 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .movie-title-row { min-width: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .movie-title-row h3 { min-width: 0; }
 .movie-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 2px; }
-.trailer-link { min-height: 44px; display: inline-flex; align-items: center; gap: 5px; padding: 0 10px; border: 1px solid var(--ink); color: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: .02em; text-decoration: none; }
+.trailer-link { min-height: 44px; display: inline-flex; align-items: center; gap: 5px; padding: 0 10px; border: 1px solid var(--ink); color: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: .03em; text-decoration: none; text-transform: uppercase; }
+.trailer-link svg { flex: 0 0 auto; }
 .trailer-link:hover { background: var(--ink); color: var(--on-ink); }
-.poster-movie-grid .movie-actions .trailer-link,
-.day-movie-grid .movie-actions .trailer-link { width: 34px; min-height: 34px; justify-content: center; padding: 0; border-color: var(--line); border-radius: 50%; background: var(--surface); }
-.poster-movie-grid .movie-actions .trailer-link span,
-.day-movie-grid .movie-actions .trailer-link span { display: none; }
+.trailer-link.is-unavailable { border-color: var(--line); border-style: dashed; background: transparent; color: var(--muted); cursor: default; }
+.trailer-link.is-unavailable:hover { border-color: var(--line); background: transparent; color: var(--muted); }
+.day-movie-grid .movie-actions .trailer-link { width: auto; height: 38px; min-height: 38px; justify-content: flex-start; gap: 5px; padding: 0 7px; border-color: var(--line); border-radius: 0; background: var(--surface); font-size: 8.5px; line-height: 1.05; letter-spacing: .04em; }
+.day-movie-grid .movie-actions .trailer-link span { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; text-align: left; }
 .movie-cast { margin: -7px 0 12px; color: var(--muted); font-size: 11.5px; line-height: 1.45; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; }
 .movie-cast span { margin-right: 2px; font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 .poster-movie-grid .movie-cast { display: none; }
@@ -351,20 +356,40 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .film-list.day-movie-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 158px), 1fr)); align-items: stretch; gap: 14px; }
 .film-card { padding: 0; display: flex; flex-direction: column; }
 /* GRIGLIA (per giorno): stessa card della lista, locandina in alto e testo sotto. */
+.day-movie-grid .film-card { container-type: inline-size; }
 .day-movie-grid .movie-main { flex: 1; display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 12px; }
 .day-movie-grid .poster-link, .day-movie-grid .poster-venue-menu { width: 100%; }
 .day-movie-grid .movie-info { align-self: stretch; }
-.day-movie-grid .movie-actions { gap: 2px; }
+.day-movie-grid .movie-actions { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 38px 38px; align-items: stretch; gap: 4px; }
 .day-movie-grid .movie-actions .fav-star-btn,
-.day-movie-grid .movie-actions .btn-share-icon { width: 36px; height: 36px; min-height: 36px; border-color: var(--line); background: var(--surface); }
-.day-movie-grid .movie-card-meta { flex-wrap: wrap; row-gap: 6px; }
-.day-movie-grid .movie-card-meta .movie-actions { margin-left: auto; }
+.day-movie-grid .movie-actions .btn-share-icon { width: 38px; height: 38px; min-height: 38px; border-color: var(--line); border-radius: 0; background: var(--surface); }
+.day-movie-grid .movie-card-meta { flex-wrap: wrap; row-gap: 7px; }
+.day-movie-grid .movie-card-meta .movie-actions { margin-left: 0; }
 .day-movie-grid .movie-badges { flex: 1 1 100%; }
 .day-movie-grid .movie-title { font-size: 16px; letter-spacing: -.02em; }
 .day-movie-grid .movie-synopsis { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; font-size: 12px; }
 .day-movie-grid .movie-credits { font-size: 11px; }
 .day-movie-grid .showtime-groups { padding: 0 12px 12px; }
 .day-movie-grid .showtime-group { background: var(--surface); }
+
+/* Card di griglia strette: il trailer prende una riga intera, così anche
+   "Trailer non disponibile" resta leggibile; condividi e salva stanno sotto. */
+@container (max-width: 189px) {
+  .poster-movie-grid .movie-actions,
+  .day-movie-grid .movie-actions { grid-template-columns: minmax(0, 1fr) 38px 38px; }
+  .poster-movie-grid .movie-actions .trailer-link,
+  .day-movie-grid .movie-actions .trailer-link { grid-column: 1 / -1; width: 100%; height: 38px; min-height: 38px; font-size: 9px; }
+  .poster-movie-grid .movie-actions .trailer-link span,
+  .day-movie-grid .movie-actions .trailer-link span { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .poster-movie-grid .movie-actions .fav-star-btn,
+  .poster-movie-grid .movie-actions .btn-share-icon,
+  .day-movie-grid .movie-actions .fav-star-btn,
+  .day-movie-grid .movie-actions .btn-share-icon { width: 38px; height: 38px; min-height: 38px; }
+  .poster-movie-grid .movie-actions .btn-share-icon,
+  .day-movie-grid .movie-actions .btn-share-icon { grid-column: 2; grid-row: 2; }
+  .poster-movie-grid .movie-actions .fav-star-btn,
+  .day-movie-grid .movie-actions .fav-star-btn { grid-column: 3; grid-row: 2; }
+}
 .movie-topline { min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 12px; border-bottom: 1px dashed var(--line); }
 .topline-left { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .movie-main { grid-template-columns: 96px minmax(0, 1fr); }
@@ -520,7 +545,11 @@ noscript { display: block; padding: 20px; text-align: center; }
   .poster-movie-grid .movie-catalog-card.is-expanded .movie-card-body { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 12px 10px; }
   .poster-movie-grid .movie-catalog-card.is-expanded .poster-link,
   .poster-movie-grid .movie-catalog-card.is-expanded .poster-venue-menu { width: 104px; }
-  .poster-movie-grid .movie-catalog-card.is-expanded .movie-card-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; min-height: 0; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-card-meta { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 7px; min-height: 0; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 38px 38px; align-items: stretch; gap: 4px; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .trailer-link { grid-column: auto; width: auto; height: 38px; min-height: 38px; padding: 0 8px; font-size: 8.5px; }
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .btn-share-icon,
+  .poster-movie-grid .movie-catalog-card.is-expanded .movie-actions .fav-star-btn { grid-column: auto; grid-row: auto; }
   .poster-movie-grid .movie-catalog-card.is-expanded .movie-title { font-size: 20px; }
   .poster-movie-grid .movie-catalog-card.is-expanded .movie-facts { grid-template-columns: 1fr; gap: 8px; }
   .poster-movie-grid .movie-catalog-card.is-expanded .schedule-toggle { width: 100%; margin-top: 12px; }
@@ -544,6 +573,20 @@ noscript { display: block; padding: 20px; text-align: center; }
   .movie-info .movie-title-row .movie-actions { position: static; margin: 2px -4px 0 0; }
   .movie-title, .movie-info h3 { font-size: 20px; }
   .movie-card-meta { min-height: 34px; margin-top: -3px; }
+  /* Su telefono i tre comandi stanno su una riga piena sotto i badge. */
+  .movies-catalog-grid:not(.poster-movie-grid) .movie-card-meta,
+  .film-list:not(.day-movie-grid) .movie-card-meta { flex-wrap: wrap; row-gap: 7px; }
+  .movies-catalog-grid:not(.poster-movie-grid) .movie-card-meta .movie-actions,
+  .film-list:not(.day-movie-grid) .movie-card-meta .movie-actions { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 40px 40px; align-items: stretch; gap: 4px; margin-left: 0; }
+  .movies-catalog-grid:not(.poster-movie-grid) .movie-actions .trailer-link,
+  .film-list:not(.day-movie-grid) .movie-actions .trailer-link { width: auto; height: 40px; min-height: 40px; justify-content: flex-start; padding: 0 8px; border-radius: 0; font-size: 9px; line-height: 1.05; }
+  .movies-catalog-grid:not(.poster-movie-grid) .movie-actions .trailer-link span,
+  .film-list:not(.day-movie-grid) .movie-actions .trailer-link span { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; text-align: left; }
+  .movies-catalog-grid:not(.poster-movie-grid) .movie-actions .fav-star-btn,
+  .movies-catalog-grid:not(.poster-movie-grid) .movie-actions .btn-share-icon,
+  .film-list:not(.day-movie-grid) .movie-actions .fav-star-btn,
+  .film-list:not(.day-movie-grid) .movie-actions .btn-share-icon { width: 40px; height: 40px; min-height: 40px; border-radius: 0; }
+
   .movie-facts { grid-template-columns: 1fr; gap: 2px; }
   .movie-synopsis { margin: 7px 0 9px; font-size: 13px; line-height: 1.5; }
   .venues-summary-block, .days-summary-block { margin-top: 7px; }
