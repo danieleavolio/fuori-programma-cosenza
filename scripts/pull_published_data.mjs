@@ -6,8 +6,8 @@ import { writeFile } from 'node:fs/promises';
 const base = process.env.FP_PUBLISHED_BASE || 'https://danieleavolio.github.io/fuori-programma-cosenza/';
 const dryRun = process.env.FP_PULL_DRY_RUN === '1' || process.argv.includes('--dry-run');
 
-if (process.env.VERCEL_ENV !== 'production' && !process.env.FP_PULL_PUBLISHED && !dryRun) {
-  console.log('Programmazione: uso la copia nel repository (fuori dalla produzione Vercel).');
+if (!process.env.VERCEL && !process.env.FP_PULL_PUBLISHED && !dryRun) {
+  console.log('Programmazione: uso la copia nel repository (fuori da Vercel).');
   process.exit(0);
 }
 
