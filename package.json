@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite dev",
     "preview": "vite preview",
-    "build": "npm run legacy:sync && vite build",
+    "build": "npm run data:pull && npm run legacy:sync && vite build",
+    "data:pull": "node scripts/pull_published_data.mjs",
+    "data:pull:check": "node scripts/pull_published_data.mjs --dry-run",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "legacy:sync": "node scripts/sync_legacy.mjs",
     "test:svelte": "npm run legacy:sync && node scripts/test_svelte.mjs",
