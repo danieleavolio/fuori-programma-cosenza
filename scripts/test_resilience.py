@@ -153,6 +153,8 @@ def test_source_failure_keeps_previous_data() -> None:
         original_details = upd.get_movie_details
         original_announced = upd.parse_announced_dates
         original_fetch = upd.fetch
+        original_enrich = upd.enrich_schedule
+        upd.enrich_schedule = lambda *args, **kwargs: None
         upd.SCHEDULE_FILE = schedule_file
         upd.get_movie_details = lambda url: {
             "synopsis": "",
@@ -195,6 +197,7 @@ def test_source_failure_keeps_previous_data() -> None:
             upd.get_movie_details = original_details
             upd.parse_announced_dates = original_announced
             upd.fetch = original_fetch
+            upd.enrich_schedule = original_enrich
 
         data = _read(schedule_file)
         titles = {movie["title"] for movie in data["movies"]}

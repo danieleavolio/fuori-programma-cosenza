@@ -34,6 +34,13 @@ let dayLayout = 'grid';
 const expandedMovies = new Set();
 const cardOpeners = new WeakMap();
 let favorites = loadFavorites();
+const sortModes = new Set(['release', 'added', 'next', 'rating', 'title']);
+let moviesSort = readStore('fp_movies_sort', 'release');
+let scheduleSort = readStore('fp_schedule_sort', 'next');
+if (!sortModes.has(moviesSort)) moviesSort = 'release';
+if (!sortModes.has(scheduleSort)) scheduleSort = 'next';
+const storedVenues = readStore('fp_preferred_venues', []);
+const preferredVenues = new Set(Array.isArray(storedVenues) ? storedVenues.filter((id) => requiredVenues.includes(id)) : []);
 
 // Le transizioni di vista animano lo spostamento delle card invece di farle
 // saltare: è quello che rende fluida l'apertura di una scheda.
@@ -317,17 +324,27 @@ async function getPosterFile(movie) {
 }
 
 async function shareFilmPoster(movie) {
+  const text = formatFilmShareMessage(movie);
   try {
-    const file = await getPosterFile(movie);
-    if (!navigator.share || !navigator.canShare?.({ files: [file] })) {
-      showToast('La condivisione di immagini non è supportata da questo browser');
-      return;
+    if (navigator.share && navigator.canShare) {
+      const file = await getPosterFile(movie);
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({ title: movie.title, text, files: [file] });
+        return;
+      }
     }
-    const text = formatFilmShareMessage(movie);
-    await navigator.share({ title: movie.title, text, files: [file] });
   } catch (error) {
-    if (error.name !== 'AbortError') showToast('Impossibile condividere la locandina');
+    if (error.name === 'AbortError') return;
   }
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: movie.title, text });
+      return;
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+    }
+  }
+  showToast(await copyToClipboard(text) ? 'Film e orari copiati negli appunti' : 'Condivisione non disponibile in questo browser');
 }
 
 // ==========================================
@@ -414,7 +431,7 @@ function icsStamp() {
 }
 
 function icsUid(event) {
-  const seed = `${event.date}-${event.time}-${event.venue}-${event.title}`
+  const seed = `${event.date}-${event.time}-${event.venue}-${event.room || ''}-${event.title}`
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-zA-Z0-9]+/g, '-')
@@ -427,7 +444,6 @@ function icsEventLines(event, { alarm = true } = {}) {
   const knownDuration = parseDurationMinutes(event.duration);
   const minutes = durationMinutes(event.duration);
   const start = calendarDateTime(event.date, event.time);
-  const end = calendarDateTime(event.date, event.time, minutes);
   const venueLine = `${event.venue}${event.room ? ` (${event.room})` : ''}`;
   const location = [venueLine, event.location].filter(Boolean).join(', ');
   const description = event.description || [
@@ -435,7 +451,7 @@ function icsEventLines(event, { alarm = true } = {}) {
     `Cinema: ${event.venue}${event.location ? ` — ${event.location}` : ''}`,
     event.room ? `Sala: ${event.room}` : '',
     `Inizio: ${event.date} alle ${event.time}`,
-    knownDuration ? `Durata: ${minutes} minuti` : 'Durata: non disponibile',
+    knownDuration ? `Durata: ${minutes} minuti; fine indicativa, escluse pubblicità e intervallo.` : 'Durata non disponibile; fine dell’evento indicativa (110 minuti).',
     event.url ? `Biglietti: ${event.url}` : '',
     'Programmazione: Fuori programma Cosenza',
   ].filter(Boolean).join('\n');
@@ -445,7 +461,7 @@ function icsEventLines(event, { alarm = true } = {}) {
     `UID:${icsUid(event)}`,
     `DTSTAMP:${icsStamp()}`,
     `DTSTART;TZID=Europe/Rome:${start}`,
-    `DTEND;TZID=Europe/Rome:${end}`,
+    `DURATION:PT${minutes}M`,
     `SUMMARY:${icsText(`${event.title} — ${event.venue}`)}`,
     `LOCATION:${icsText(location)}`,
     `DESCRIPTION:${icsText(description)}`,
@@ -548,14 +564,6 @@ async function shareCalendarEvent(event) {
   if (isAppleMobile()) {
     // Il foglio di condivisione iOS non elenca Calendario: il file ICS
     // viene passato a Safari, che mostra "Aggiungi al calendario".
-    if (typeof navigator.share === 'function') {
-      try {
-        await navigator.share({ files: [file], title: `${event.eventTitle} — ${event.eventVenue}` });
-        return;
-      } catch (error) {
-        if (error.name === 'AbortError') return;
-      }
-    }
     openCalendarFile(file);
     return;
   }
@@ -573,7 +581,7 @@ function calendarUrl(event) {
     `Film: ${event.eventTitle}`,
     `Cinema: ${event.eventVenue}${event.eventLocation ? ` — ${event.eventLocation}` : ''}`,
     event.eventRoom ? `Sala: ${event.eventRoom}` : '',
-    `Durata: ${minutes} minuti`,
+    parseDurationMinutes(event.eventDuration) ? `Durata: ${minutes} minuti; fine indicativa, escluse pubblicità e intervallo.` : 'Durata non disponibile; fine impostata indicativamente a 110 minuti.',
     event.eventUrl ? `Biglietti: ${event.eventUrl}` : '',
   ].filter(Boolean).join('\n');
 
@@ -589,7 +597,7 @@ function calendarUrl(event) {
 }
 
 // ==========================================
-// CALENDARIO DELL'APP: esportazione di più spettacoli in un solo .ics
+// CALENDARIO DELL'APP: abbonamento multi-cinema ed esportazione personale
 // ==========================================
 const calendarDialog = $('#calendar-dialog');
 
@@ -603,10 +611,22 @@ function calendarSlug(value) {
 }
 
 function calendarMode() {
-  return document.querySelector('input[name="calendar-mode"]:checked')?.value || 'favorites';
+  return $('#calendar-export-mode')?.value || 'venues';
 }
 
-function collectCalendarShows(mode, value) {
+function selectedCalendarVenues() {
+  return [...$$('#calendar-venues input:checked')].map((input) => input.value).sort();
+}
+
+function calendarFeedUrl(ids = selectedCalendarVenues()) {
+  const known = scheduleData.venues.map((venue) => venue.id);
+  const selected = [...new Set(ids)].filter((id) => known.includes(id)).sort();
+  if (!selected.length) return '';
+  const file = selected.length === known.length ? 'all' : selected.join('_');
+  return new URL(`calendars/${file}.ics`, document.baseURI).href;
+}
+
+function collectCalendarShows(mode, value, venueIds = selectedCalendarVenues()) {
   const now = new Date();
   const shows = [];
   const venuesById = Object.fromEntries((scheduleData.venues || []).map((venue) => [venue.id, venue]));
@@ -615,6 +635,7 @@ function collectCalendarShows(mode, value) {
     if (mode === 'favorites' && !favorites.has(movie.id)) continue;
 
     for (const group of movie.shows || []) {
+      if (!venueIds.includes(group.venue)) continue;
       if (mode === 'venue' && group.venue !== value) continue;
       if (mode === 'day' && group.date !== value) continue;
 
@@ -646,17 +667,13 @@ function collectCalendarShows(mode, value) {
 
 function calendarSelection() {
   const mode = calendarMode();
-  if (mode === 'venue') return { mode, value: $('#calendar-venue')?.value || '' };
   if (mode === 'day') return { mode, value: $('#calendar-day')?.value || '' };
   return { mode, value: '' };
 }
 
 function calendarExportName(selection) {
   if (selection.mode === 'favorites') return 'Fuori programma — Film salvati';
-  if (selection.mode === 'venue') {
-    const venue = (scheduleData.venues || []).find((item) => item.id === selection.value);
-    return `Fuori programma — ${venue?.name || 'Cinema'}`;
-  }
+  if (selection.mode === 'venues') return 'Fuori programma — I miei cinema';
   return `Fuori programma — ${formatDayLabel(selection.value)}`;
 }
 
@@ -667,52 +684,40 @@ function updateCalendarSummary() {
 
   const selection = calendarSelection();
   const events = collectCalendarShows(selection.mode, selection.value);
-  const venueRow = $('#calendar-venue-row');
   const dayRow = $('#calendar-day-row');
-  if (venueRow) venueRow.hidden = selection.mode !== 'venue';
   if (dayRow) dayRow.hidden = selection.mode !== 'day';
-
-  download.disabled = events.length === 0;
-  if (!events.length) {
-    summary.textContent = selection.mode === 'favorites'
-      ? 'Nessuno spettacolo futuro per i film che hai salvato.'
-      : 'Nessuno spettacolo futuro per questa selezione.';
-    return;
+  const ids = selectedCalendarVenues();
+  const allEvents = collectCalendarShows('venues', '');
+  const feed = calendarFeedUrl(ids);
+  const name = ids.length === scheduleData.venues.length
+    ? 'Tutti i cinema' : scheduleData.venues.filter((v) => ids.includes(v.id)).map((v) => v.name).join(', ');
+  summary.textContent = !ids.length ? 'Seleziona almeno un cinema per creare il tuo abbonamento.'
+    : `${ids.length} ${ids.length === 1 ? 'cinema selezionato' : 'cinema selezionati'} · ${allEvents.length} spettacoli futuri${allEvents.length ? ` · ${new Set(allEvents.map((event) => event.title)).size} film` : '. Gli orari futuri compariranno quando pubblicati.'}`;
+  const links = {
+    '#calendar-google': feed ? `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(feed)}` : '',
+    '#calendar-apple': feed.replace(/^https?:/, 'webcal:'),
+    '#calendar-outlook': feed ? `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(feed)}&name=${encodeURIComponent(`Fuori programma — ${name}`)}` : '',
+  };
+  for (const [selector, url] of Object.entries(links)) {
+    const link = $(selector);
+    if (url) link.href = url;
+    else link.removeAttribute('href');
+    link.setAttribute('aria-disabled', String(!url));
   }
-
-  const first = events[0];
-  const last = events[events.length - 1];
-  const range = first.date === last.date
-    ? formatDayLabel(first.date)
-    : `${formatDayLabel(first.date)} — ${formatDayLabel(last.date)}`;
-  const filmCount = new Set(events.map((event) => event.title)).size;
-  summary.textContent = `${events.length} ${events.length === 1 ? 'spettacolo' : 'spettacoli'} · ${filmCount} ${filmCount === 1 ? 'film' : 'film'} · ${range}`;
+  $('#calendar-copy').disabled = !feed;
+  $('#calendar-select-all').textContent = ids.length === scheduleData.venues.length ? 'Deseleziona tutti' : 'Seleziona tutti';
+  download.disabled = events.length === 0;
+  $('#calendar-export-summary').textContent = events.length
+    ? `${events.length} spettacoli nel file, senza aggiornamenti automatici.`
+    : selection.mode === 'favorites' ? 'Nessuno spettacolo futuro per i film salvati nei cinema selezionati.' : 'Nessuno spettacolo futuro per questa selezione.';
 }
 
 function populateCalendarDialog() {
-  const favInput = document.querySelector('input[name="calendar-mode"][value="favorites"]');
-  const favCount = $('#calendar-fav-count');
-  if (favCount) {
-    favCount.textContent = favorites.size
-      ? `${favorites.size} ${favorites.size === 1 ? 'film salvato' : 'film salvati'}`
-      : 'Nessun film salvato';
-  }
-  if (favInput) {
-    favInput.disabled = favorites.size === 0;
-    if (favorites.size === 0 && favInput.checked) {
-      const venueInput = document.querySelector('input[name="calendar-mode"][value="venue"]');
-      if (venueInput) venueInput.checked = true;
-    }
-  }
-
-  const venueSelect = $('#calendar-venue');
-  if (venueSelect) {
-    const venues = scheduleData.venues || [];
-    venueSelect.innerHTML = venues.map((venue) => `<option value="${escapeHtml(venue.id)}">${escapeHtml(venue.name)}</option>`).join('');
-    if (!venues.some((venue) => venue.id === venueSelect.value)) {
-      venueSelect.value = venues[0]?.id || '';
-    }
-  }
+  const saved = readStore('fp_calendar_venues', null);
+  const chosen = Array.isArray(saved) ? saved : preferredVenues.size ? [...preferredVenues] : scheduleData.venues.map((v) => v.id);
+  $('#calendar-venues').innerHTML = '<legend class="sr-only">Cinema da seguire</legend>' + scheduleData.venues.map((venue) =>
+    `<label class="venue-choice"><input type="checkbox" value="${escapeHtml(venue.id)}" ${chosen.includes(venue.id) ? 'checked' : ''}><span><strong>${escapeHtml(venue.name)}</strong><small>${escapeHtml(venue.location)}</small></span></label>`
+  ).join('');
 
   const daySelect = $('#calendar-day');
   if (daySelect) {
@@ -730,6 +735,7 @@ function openCalendarDialog() {
   populateCalendarDialog();
   if (typeof calendarDialog.showModal === 'function') calendarDialog.showModal();
   else calendarDialog.setAttribute('open', '');
+  calendarDialog.scrollTop = 0;
 }
 
 function closeCalendarDialog() {
@@ -763,6 +769,10 @@ function downloadCalendar() {
 }
 
 function showtimeChipHtml(movie, cinema, dateStr, entry, className, isPast = false) {
+  const minutes = parseDurationMinutes(movie.duration);
+  const end = minutes ? addMinutes(wallClockDate(dateStr, entry.time), minutes) : null;
+  const endsAt = end ? `${timeLabel(end)}${dateString(end) !== dateStr ? ' (+1g)' : ''}` : '';
+  const flags = showtimeFormats(entry);
   return `
     <button class="${className}${isPast ? ' is-past' : ''}" type="button" data-showtime aria-haspopup="menu" aria-controls="showtime-menu" aria-expanded="false"
       data-event-title="${escapeHtml(movie.title)}"
@@ -777,7 +787,9 @@ function showtimeChipHtml(movie, cinema, dateStr, entry, className, isPast = fal
       data-is-past="${isPast ? 'true' : 'false'}"
       aria-label="${escapeHtml(`${movie.title}, ${cinema.name}, ${dateStr} alle ${entry.time}${entry.room ? `, ${roomLabel(entry.room)}` : ''}${isPast ? ', già iniziato' : ''}: biglietti e altre azioni`)}">
       <strong>${escapeHtml(entry.time)}</strong>
+      ${endsAt ? `<span class="showtime-end">Fine ≈ ${endsAt}</span>` : ''}
       <span class="showtime-room">${isPast ? 'Iniziato' : entry.room ? escapeHtml(roomLabel(entry.room)) : 'Scegli orario'}</span>
+      ${flags.length ? `<span class="showtime-format">${escapeHtml(flags.join(' · '))}</span>` : ''}
     </button>
   `;
 }
@@ -1038,8 +1050,11 @@ function venueTodayText(venueId) {
 
 function renderVenuesInfo(venues) {
   if (venueFilter) {
-    venueFilter.innerHTML = '<option value="all">Tutte le sale</option>' + venues.map((venue) => `<option value="${escapeHtml(venue.id)}">${escapeHtml(venue.name)}</option>`).join('');
+    const selected = readStore('fp_venue_filter', venueFilter.value || 'all');
+    venueFilter.innerHTML = '<option value="all">Tutte le sale</option><option value="preferred">I miei cinema</option>' + venues.map((venue) => `<option value="${escapeHtml(venue.id)}">${escapeHtml(venue.name)}</option>`).join('');
+    venueFilter.value = ['all', 'preferred', ...venues.map((v) => v.id)].includes(selected) ? selected : 'all';
   }
+  renderPreferredVenues(venues);
 
   const cinemaList = $('#cinema-list');
   if (!cinemaList) return;
@@ -1076,6 +1091,22 @@ function renderVenuesInfo(venues) {
   }).join('');
 }
 
+function renderPreferredVenues(venues = scheduleData.venues) {
+  $('#preferred-venues').innerHTML = venues.map((venue) =>
+    `<label class="venue-choice"><input type="checkbox" value="${escapeHtml(venue.id)}" ${preferredVenues.has(venue.id) ? 'checked' : ''}><span><strong>${escapeHtml(venue.name)}</strong><small>${escapeHtml(venue.location)}</small></span></label>`
+  ).join('');
+  updatePreferredVenues();
+}
+
+function updatePreferredVenues() {
+  $('#preferred-venue-count').textContent = preferredVenues.size ? `· ${preferredVenues.size} selezionati` : '· scegli le sale';
+  $('#preferred-venues-apply').disabled = preferredVenues.size === 0;
+}
+
+function matchesVenue(id, selected = venueFilter?.value || 'all') {
+  return selected === 'all' || (selected === 'preferred' ? preferredVenues.has(id) : id === selected);
+}
+
 function updateVenueTodayTexts() {
   $$('[data-venue-today]').forEach((el) => {
     el.textContent = venueTodayText(el.dataset.venueToday);
@@ -1084,6 +1115,7 @@ function updateVenueTodayTexts() {
 
 function showVenueSchedule(venueId) {
   if (venueFilter) venueFilter.value = venueId;
+  writeStore('fp_venue_filter', venueId);
   if (searchInput) searchInput.value = '';
   if (genreFilter) genreFilter.value = 'all';
   $$('.chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.chip === 'all'));
@@ -1114,6 +1146,36 @@ function renderGenreOptions(movies) {
   genreFilter.value = genres.includes(selectedGenre) ? selectedGenre : 'all';
 }
 
+function readableISODate(value) {
+  const date = new Date(value?.length === 10 ? `${value}T12:00:00` : value);
+  return Number.isFinite(date.getTime()) ? new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'short', year: 'numeric' }).format(date) : '';
+}
+
+function renderMovieRating(movie) {
+  const info = ratingInfo(movie);
+  if (!info.rating) return '<p class="movie-rating rating-unavailable">Voto non disponibile</p>';
+  const value = info.rating.toLocaleString('it-IT', { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+  return `<a class="movie-rating" href="${escapeHtml(info.url)}" target="_blank" rel="noreferrer"
+    aria-label="Voto complessivo MYmovies: ${value} su 5. Apri la fonte">
+    <span class="rating-value"><span aria-hidden="true">★</span> ${value}<small>/5</small></span><span class="rating-source">MYmovies</span></a>`;
+}
+
+function renderRatingDetails(movie) {
+  const info = ratingInfo(movie);
+  if (!info.url) return '';
+  const score = (value) => Number(value) > 0 && Number(value) <= 5
+    ? `${Number(value).toLocaleString('it-IT', { maximumFractionDigits: 2 })}/5` : 'Non disponibile';
+  return `<section class="rating-details" aria-label="Valutazioni MYmovies">
+    <div class="rating-breakdown"><p><span>Complessivo</span><strong>${score(info.rating)}</strong></p>
+    <p><span>Critica</span><strong>${score(info.criticsRating)}</strong></p>
+    <p><span>Pubblico</span><strong>${score(info.audienceRating)}</strong></p></div>
+    <p>${info.ratingCount ? `${info.ratingCount.toLocaleString('it-IT')} valutazioni complessive. ${info.ratingCount < 10 ? 'Campione ancora piccolo. ' : ''}` : 'Numero di valutazioni non disponibile. '}
+    Il voto complessivo MYmovies include fonti diverse: non è il solo voto del pubblico.</p>
+    <a href="${escapeHtml(info.url)}" target="_blank" rel="noreferrer">Fonte: MYmovies ↗</a>
+    ${info.checkedAt ? `<small>Verificato il ${escapeHtml(readableISODate(info.checkedAt))}</small>` : ''}
+  </section>`;
+}
+
 function renderMovieMetadata(movie) {
   const details = [];
   if (movie.director) details.push(`Regia: ${escapeHtml(movie.director)}`);
@@ -1139,15 +1201,15 @@ function renderTrailerLink(movie) {
   }
 
   if (!url) {
-    return `<button class="trailer-link is-unavailable" type="button" disabled title="Trailer non disponibile per ${escapeHtml(movie.title)}">
+    return `<button class="trailer-link is-unavailable" type="button" disabled aria-label="Trailer non disponibile per ${escapeHtml(movie.title)}" title="Trailer non disponibile per ${escapeHtml(movie.title)}">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="5.6" y1="5.6" x2="18.4" y2="18.4"></line></svg>
-      <span>Trailer non disponibile</span>
+      <span class="sr-only">Trailer non disponibile</span>
     </button>`;
   }
 
   return `<a class="trailer-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer" title="Guarda il trailer di ${escapeHtml(movie.title)}" aria-label="Guarda il trailer di ${escapeHtml(movie.title)}">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
-    <span>Guarda trailer</span>
+    <span class="sr-only">Guarda trailer</span>
   </a>`;
 }
 
@@ -1216,72 +1278,107 @@ function render() {
   const selectedGenre = genreFilter?.value || 'all';
   const venuesMap = Object.fromEntries(scheduleData.venues.map((v) => [v.id, v]));
   const todayString = getTodayString();
-
-  if (currentView === 'movies') {
+  const isMovies = currentView === 'movies';
+  $('#movie-sort').value = isMovies ? moviesSort : scheduleSort;
+  $$('.chip').forEach((chip) => {
+    const selected = chip.dataset.chip === activeChip;
+    chip.classList.toggle('active', selected);
+    chip.setAttribute('aria-pressed', String(selected));
+  });
+  const filteredMovies = scheduleData.movies.filter((movie) => {
+    const fields = [movie.title, movie.synopsis, movie.director, movie.year, movie.cast, ...(movie.genres || []),
+      ...movieProgramming(movie).map((item) => venuesMap[item.venue]?.name)];
+    if (!fields.some((field) => String(field || '').toLocaleLowerCase('it').includes(query))) return false;
+    if (selectedGenre !== 'all' && !(movie.genres || []).includes(selectedGenre)) return false;
+    if (activeChip === 'favorites' && !favorites.has(movie.id)) return false;
+    return true;
+  });
+  if (isMovies) {
     controlsPerFilm.hidden = false;
     controlsPerDay.hidden = true;
     moviesGrid.hidden = false;
     filmList.hidden = true;
-    if (!controlsPerFilm.contains(venueFilter)) {
-      controlsPerFilm.insertBefore(venueFilter.closest('.filter-dropdown'), genreFilter.closest('.filter-dropdown'));
-    }
-
-    // Filter movies for "Per Film"
-    const filteredMovies = scheduleData.movies.filter((movie) => {
-      // 1. Text Search
-      const matchesTitle = movie.title.toLocaleLowerCase('it').includes(query);
-      const matchesSynopsis = (movie.synopsis || '').toLocaleLowerCase('it').includes(query);
-      const matchesMetadata = [movie.director, movie.year, ...(movie.genres || [])]
-        .some((value) => (value || '').toLocaleLowerCase('it').includes(query));
-      const matchesAnyVenue = movieProgramming(movie).some((item) => (venuesMap[item.venue]?.name || '').toLocaleLowerCase('it').includes(query));
-      if (!matchesTitle && !matchesSynopsis && !matchesMetadata && !matchesAnyVenue) return false;
-
-      // 2. Venue Filter
-      if (selectedVenue !== 'all' && !movieProgramming(movie).some((item) => item.venue === selectedVenue)) {
-        return false;
-      }
-
-      if (selectedGenre !== 'all' && !(movie.genres || []).includes(selectedGenre)) {
-        return false;
-      }
-
-      // 3. Quick Chips
-      if (activeChip === 'today') {
-        const now = new Date();
-        const hasUpcomingToday = (movie.shows || []).some((group) =>
-          group.date === todayString && (selectedVenue === 'all' || group.venue === selectedVenue)
-          && group.shows.some((entry) => showPastShowsToday || wallClockDate(group.date, entry.time) >= now)
-        );
-        const hasAnnouncedWithoutShows = (movie.announcedDates || []).some((item) =>
-          item.date === todayString && (selectedVenue === 'all' || item.venue === selectedVenue)
-          && !(movie.shows || []).some((group) => group.date === todayString && group.venue === item.venue && group.shows.length)
-        );
-        if (!hasUpcomingToday && !hasAnnouncedWithoutShows) return false;
-      } else if (activeChip === 'favorites') {
-        if (!favorites.has(movie.id)) return false;
-      }
-
-      return true;
-    });
-
-    renderMoviesCatalogView(filteredMovies, venuesMap, selectedVenue);
+    const movies = filteredMovies.filter((movie) => catalogSelection(movie, selectedVenue, todayString).programming.length);
+    renderMoviesCatalogView(sortMovies(movies, moviesSort, (movie) => catalogSelection(movie, selectedVenue, todayString).shows), venuesMap, selectedVenue);
+    const hints = {
+      release: 'Uscita italiana più recente; le prossime uscite seguono i film già usciti.',
+      added: 'Prima comparsa nella programmazione del sito, non data di uscita.',
+      next: 'Prima i film con lo spettacolo più vicino nei cinema selezionati.',
+      rating: 'Voti MYmovies ponderati per il numero di valutazioni; pochi voti pesano meno.',
+      title: 'Titoli in ordine alfabetico.',
+    };
+    $('.view-hint').textContent = hints[moviesSort];
   } else if (currentView === 'schedule') {
     controlsPerFilm.hidden = true;
     controlsPerDay.hidden = false;
     moviesGrid.hidden = true;
     filmList.hidden = false;
-    if (!controlsPerDay.contains(venueFilter)) controlsPerDay.appendChild(venueFilter.closest('.filter-dropdown'));
-
     renderDaysStrip();
-    renderScheduleDayView(scheduleData.movies, venuesMap, selectedDate);
+    renderScheduleDayView(filteredMovies, venuesMap, selectedDate);
   }
-  requestAnimationFrame(updateScrollRails);
+  $('#empty-msg').textContent = selectedVenue === 'preferred' && !preferredVenues.size
+    ? 'Scegli prima le sale in “I miei cinema”, oppure mostra tutte le sale.'
+    : 'Nessuna proiezione corrisponde ai filtri selezionati.';
 }
 
-function updateScrollRails() {
-  $$('.card-scroll-wrap').forEach((wrap) => {
-    const rail = wrap.querySelector('.scroll-rail');
-    wrap.classList.toggle('has-overflow', rail.scrollWidth > rail.clientWidth + 1);
+function showtimeFormats(entry) {
+  const declared = [entry.format, entry.language, entry.version, entry.room, ...(entry.tags || [])].filter(Boolean).join(' ');
+  const flags = [];
+  if (/(?:\b(?:OV|VO)\b|V\.O\.|versione originale|original version)/i.test(declared)) flags.push('V.O.');
+  if (entry.subtitles || /\b(?:sottotitol[io]|sub(?:\s*ita)?)\b/i.test(declared)) flags.push('Sottotitoli');
+  if (/\b3D\b/i.test(declared)) flags.push('3D');
+  return flags;
+}
+
+function periodDateMatches(dateStr, period = activeChip, now = new Date()) {
+  if (period === 'today' || period === 'tonight') return dateStr === dateString(now);
+  if (period !== 'weekend') return !isPastDate(dateStr);
+  const friday = new Date(now);
+  const weekday = now.getDay();
+  friday.setDate(now.getDate() + (weekday === 0 ? -2 : weekday === 6 ? -1 : (5 - weekday + 7) % 7));
+  friday.setHours(0, 0, 0, 0);
+  const monday = new Date(friday);
+  monday.setDate(friday.getDate() + 3);
+  return parseDate(dateStr) >= friday && parseDate(dateStr) < monday;
+}
+
+function ratingInfo(movie) {
+  const source = movie.external || {};
+  const rating = Number(source.rating);
+  let url = '';
+  try {
+    const parsed = new URL(source.url);
+    if (parsed.protocol === 'https:' && parsed.hostname === 'www.mymovies.it') url = parsed.href;
+  } catch {}
+  return { ...source, rating: url && rating > 0 && rating <= 5 ? rating : 0,
+    ratingCount: Math.max(0, Number(source.ratingCount) || 0), url };
+}
+
+function sortMovies(movies, mode, showsForMovie = (movie) => movie.shows || []) {
+  const today = dateString(new Date()).split('/').reverse().join('-');
+  const timestamp = (value) => Number.isFinite(Date.parse(value)) ? Date.parse(value) : -Infinity;
+  const nextTime = (movie) => nextShowtime(showsForMovie(movie))?.startsAt.getTime() ?? Infinity;
+  return [...movies].sort((a, b) => {
+    let difference = 0;
+    if (mode === 'release') {
+      const available = (m) => m.releaseDateIT && m.releaseDateIT <= today ? timestamp(m.releaseDateIT) : -Infinity;
+      const left = available(a), right = available(b);
+      difference = left === right ? 0 : right > left ? 1 : -1;
+    } else if (mode === 'added') {
+      const left = timestamp(a.firstSeenAt), right = timestamp(b.firstSeenAt);
+      difference = left === right ? 0 : right > left ? 1 : -1;
+    } else if (mode === 'next') {
+      const left = nextTime(a), right = nextTime(b);
+      difference = left === right ? 0 : left < right ? -1 : 1;
+    } else if (mode === 'rating') {
+      const score = (movie) => {
+        const info = ratingInfo(movie);
+        if (!info.rating) return -1;
+        return (info.rating * info.ratingCount + 3 * 20) / (info.ratingCount + 20);
+      };
+      difference = score(b) - score(a);
+    }
+    return difference || a.title.localeCompare(b.title, 'it', { sensitivity: 'base' });
   });
 }
 
@@ -1418,7 +1515,7 @@ function renderAiringNow() {
     return;
   }
 
-  const visible = playing.slice(0, 3);
+  const visible = playing.slice(0, window.matchMedia('(max-width: 699px)').matches ? 1 : 3);
   const hidden = playing.length - visible.length;
   airingNowBody.innerHTML = `
     <div class="airing-grid">${visible.map(airingCardHtml).join('')}</div>
@@ -1479,20 +1576,17 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
 }
 
 function catalogSelection(movie, selectedVenue, todayString) {
-  const venueShows = movie.shows.filter((s) => selectedVenue === 'all' || s.venue === selectedVenue);
-  const venueProgramming = movieProgramming(movie).filter((item) => selectedVenue === 'all' || item.venue === selectedVenue);
+  const venueShows = (movie.shows || []).filter((s) => matchesVenue(s.venue, selectedVenue));
+  const venueProgramming = movieProgramming(movie).filter((item) => matchesVenue(item.venue, selectedVenue));
   const now = new Date();
-  const relevantShows = activeChip === 'today'
-    ? venueShows.filter((group) => group.date === todayString).map((group) => ({
+  const relevantShows = venueShows.filter((group) => periodDateMatches(group.date)).map((group) => ({
       ...group,
-      shows: group.shows.filter((entry) => showPastShowsToday || wallClockDate(group.date, entry.time) >= now),
-    })).filter((group) => group.shows.length)
-    : venueShows;
-  const relevantProgramming = (activeChip === 'today'
-    ? venueProgramming.filter((item) => item.date === todayString)
-    : venueProgramming).filter((item) =>
+      shows: group.shows.filter((entry) => (showPastShowsToday || wallClockDate(group.date, entry.time) >= now)
+        && (activeChip !== 'tonight' || entry.time >= '18:00')),
+    })).filter((group) => group.shows.length);
+  const relevantProgramming = venueProgramming.filter((item) => periodDateMatches(item.date)).filter((item) =>
     relevantShows.some((group) => group.date === item.date && group.venue === item.venue)
-    || !venueShows.some((group) => group.date === item.date && group.venue === item.venue && group.shows.length)
+    || (activeChip !== 'tonight' && !venueShows.some((group) => group.date === item.date && group.venue === item.venue && group.shows.length))
   );
   return { shows: relevantShows, programming: relevantProgramming };
 }
@@ -1518,8 +1612,11 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
   const previewTitle = next ? 'Prossimo spettacolo' : preview ? 'Spettacolo iniziato' : 'Data annunciata';
   const previewDate = preview ? formatDayLabel(preview.date) : dates.length ? formatDayLabel(dates[0]) : 'Orari in arrivo';
   const previewVenue = preview ? (venuesMap[preview.venue]?.name || preview.venue) : 'Orari non ancora pubblicati';
-  const allDates = [...new Set(movieProgramming(movie).map((item) => item.date))];
-  const isOnlyToday = allDates.length === 1 && allDates[0] === getTodayString();
+  const fullProgramming = movieProgramming(movie).filter((item) => matchesVenue(item.venue));
+  const publishedDates = [...new Set(fullProgramming.map((item) => item.date))].sort((a, b) => parseDate(a) - parseDate(b));
+  const age = Date.now() - Date.parse(movie.firstSeenAt);
+  const state = movie.releaseDateIT > dateString(new Date()).split('/').reverse().join('-') ? 'Prossimamente'
+    : age >= 0 && age < 7 * 86400000 ? 'Nuovo sul sito' : '';
 
   return `
     <article class="movie-catalog-card ${dayDate ? 'day-card' : ''} ${isExpanded ? 'is-expanded' : ''}"
@@ -1530,27 +1627,29 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
 
         <div class="movie-card-details">
           <div class="movie-title-row">
+            <span class="movie-state">${escapeHtml(state)}</span>
             <h3 class="movie-title" title="${escapeHtml(movie.title)}">${escapeHtml(movie.title)}</h3>
           </div>
-          <div class="card-scroll-wrap badge-wrap">
-            <div class="movie-badges scroll-rail" tabindex="0" role="group" aria-label="Durata e generi di ${escapeHtml(movie.title)}">
-              ${durationText ? `<span class="film-duration">${escapeHtml(durationText)}</span>` : ''}
-              ${isOnlyToday ? '<span class="badge-last-chance">Solo oggi</span>' : ''}
-              ${(movie.genres || []).map((genre) => `<span class="badge-tag">${escapeHtml(genre)}</span>`).join('')}
-              ${(movie.tags || []).map((tag) => `<span class="badge-tag">${escapeHtml(tag)}</span>`).join('')}
-            </div>
+          <div class="badge-wrap card-facts">
+            <span class="film-duration">${escapeHtml(durationText || 'Durata n.d.')}</span>
+            <span class="card-genres">${escapeHtml((movie.genres || []).slice(0, 2).join(' · '))}</span>
           </div>
-          ${renderMovieMetadata(movie)}
-          <p class="movie-synopsis">${movie.synopsis ? escapeHtml(movie.synopsis) : 'Sinossi non disponibile.'}</p>
+          ${renderMovieRating(movie)}
           <details class="movie-extra">
-            <summary>Trama completa${movie.cast ? ' e cast' : ''}</summary>
+            <summary>Trama, cast e dettagli</summary>
             <div class="movie-extra-copy">
+              ${renderMovieMetadata(movie)}
+              ${movie.releaseDateIT ? `<p><strong>Uscita / riedizione in Italia</strong> ${escapeHtml(readableISODate(movie.releaseDateIT))}</p>` : ''}
+              ${movie.firstSeenAt ? `<p><strong>Sul sito dal</strong> ${escapeHtml(readableISODate(movie.firstSeenAt))}</p>` : ''}
+              ${(movie.genres || []).length ? `<p><strong>Generi</strong> ${escapeHtml(movie.genres.join(', '))}</p>` : ''}
+              ${(movie.tags || []).length ? `<p><strong>Info dalla sala</strong> ${escapeHtml(movie.tags.join(', '))}</p>` : ''}
               <p>${escapeHtml(movie.synopsis || 'Sinossi non disponibile.')}</p>
               ${movie.cast ? `<p class="movie-cast"><strong>Con</strong> ${escapeHtml(movie.cast)}</p>` : ''}
+              ${renderRatingDetails(movie)}
             </div>
           </details>
-          <div class="card-scroll-wrap actions-wrap">
-            <div class="movie-actions scroll-rail" tabindex="0" role="group" aria-label="Trailer, condivisione e salvataggio di ${escapeHtml(movie.title)}">
+          <div class="actions-wrap">
+            <div class="movie-actions" role="group" aria-label="Trailer, condivisione e salvataggio di ${escapeHtml(movie.title)}">
               ${renderTrailerLink(movie)}
               ${renderShareMenu(movie)}
               <button class="fav-star-btn ${isFav ? 'is-favorite' : ''}" type="button" data-fav-id="${escapeHtml(movie.id)}"
@@ -1558,7 +1657,6 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
               </button>
             </div>
-            <span class="rail-hint" aria-hidden="true">Scorri le azioni ↔</span>
           </div>
           <div class="card-preview">
             <span class="preview-label">${previewTitle}</span>
@@ -1577,6 +1675,8 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
         <div class="panel-heading">
           <h4 tabindex="-1">${dayDate ? escapeHtml(formatDayLabel(dayDate)) : 'Scegli il cinema e l’orario'}</h4>
           <p>${showCount ? `${showCount} spettacoli · ${venueIds.length} cinema. Tocca un orario per biglietti, calendario e condivisione.` : 'Date annunciate: gli orari saranno pubblicati dal cinema.'}</p>
+          ${publishedDates.length ? `<p class="published-until">In programma fino a ${escapeHtml(readableISODate(parseDate(publishedDates.at(-1)).toISOString()))}, secondo le date pubblicate. Possono essere aggiunti altri giorni.</p>` : ''}
+          ${parseDurationMinutes(movie.duration) ? '<p class="end-time-note">Fine indicativa: durata del film, escluse pubblicità e intervallo.</p>' : ''}
         </div>
         ${venueIds.map((venueId) => {
           const cinema = { id: venueId, name: venueId, ...venuesMap[venueId] };
@@ -1616,7 +1716,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
   let totalPastShows = 0;
   for (const movie of movies) {
     for (const show of movie.shows || []) {
-      if (show.date === dayDate && (selectedVenue === 'all' || show.venue === selectedVenue)) {
+      if (show.date === dayDate && matchesVenue(show.venue, selectedVenue)) {
         for (const entry of show.shows || []) {
           if (isToday && wallClockDate(dayDate, entry.time) < now) {
             totalPastShows += 1;
@@ -1628,7 +1728,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
 
   const visible = movies.map((movie) => {
     const matchingShows = (movie.shows || [])
-      .filter((show) => show.date === dayDate && (selectedVenue === 'all' || show.venue === selectedVenue))
+      .filter((show) => show.date === dayDate && matchesVenue(show.venue, selectedVenue))
       .map((show) => {
         const enrichedShows = (show.shows || []).map((entry) => {
           const isPast = isToday && wallClockDate(dayDate, entry.time) < now;
@@ -1642,7 +1742,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
       .filter((show) => show.shows.length > 0);
 
     const matchingProgramming = movieProgramming(movie).filter((item) =>
-      item.date === dayDate && (selectedVenue === 'all' || item.venue === selectedVenue)
+      item.date === dayDate && matchesVenue(item.venue, selectedVenue)
       && (matchingShows.some((group) => group.venue === item.venue)
         || !movie.shows.some((group) => group.date === dayDate && group.venue === item.venue && group.shows.length))
     );
@@ -1693,7 +1793,7 @@ function renderScheduleDayView(movies, venuesMap, dayDate) {
     </div>
   ` : '';
 
-  filmList.innerHTML = pastToggleHtml + visible.map((movie) => dayCardHtml(movie, { venuesMap, dayDate })).join('');
+  filmList.innerHTML = pastToggleHtml + sortMovies(visible, scheduleSort).map((movie) => dayCardHtml(movie, { venuesMap, dayDate })).join('');
 }
 
 function dayCardHtml(movie, { venuesMap, dayDate }) {
@@ -1758,6 +1858,7 @@ $$('.view-pill').forEach((btn) => {
     btn.classList.add('active');
     btn.setAttribute('aria-selected', 'true');
     currentView = btn.dataset.view;
+    if (currentView === 'schedule' && ['today', 'tonight', 'weekend'].includes(activeChip)) activeChip = 'all';
     render();
   });
 });
@@ -1768,6 +1869,14 @@ $$('.chip').forEach((chip) => {
     $$('.chip').forEach((c) => c.classList.remove('active'));
     chip.classList.add('active');
     activeChip = chip.dataset.chip;
+    if (['today', 'tonight', 'weekend', 'favorites'].includes(activeChip)) {
+      currentView = 'movies';
+      $$('.view-pill').forEach((button) => {
+        const selected = button.dataset.view === currentView;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-selected', String(selected));
+      });
+    }
     render();
   });
 });
@@ -1828,8 +1937,34 @@ if (favToggleBtn) {
 
 // Input filtri
 if (searchInput) searchInput.addEventListener('input', render);
-if (venueFilter) venueFilter.addEventListener('change', render);
+if (venueFilter) venueFilter.addEventListener('change', () => {
+  writeStore('fp_venue_filter', venueFilter.value);
+  if (venueFilter.value === 'preferred' && !preferredVenues.size) $('#venue-preferences').open = true;
+  render();
+});
 if (genreFilter) genreFilter.addEventListener('change', render);
+$('#movie-sort')?.addEventListener('change', (event) => {
+  const mode = event.target.value;
+  if (!sortModes.has(mode)) return;
+  if (currentView === 'movies') { moviesSort = mode; writeStore('fp_movies_sort', mode); }
+  else { scheduleSort = mode; writeStore('fp_schedule_sort', mode); }
+  render();
+});
+$('#preferred-venues')?.addEventListener('change', (event) => {
+  const input = event.target.closest('input');
+  if (!input) return;
+  if (input.checked) preferredVenues.add(input.value);
+  else preferredVenues.delete(input.value);
+  writeStore('fp_preferred_venues', [...preferredVenues]);
+  updatePreferredVenues();
+  render();
+});
+$('#preferred-venues-apply')?.addEventListener('click', () => {
+  venueFilter.value = 'preferred';
+  writeStore('fp_venue_filter', 'preferred');
+  $('#venue-preferences').open = false;
+  render();
+});
 
 $('#refresh').addEventListener('click', () => loadSchedule({ fresh: true }));
 
@@ -1839,12 +1974,25 @@ $('#calendar-close')?.addEventListener('click', closeCalendarDialog);
 $('#calendar-cancel')?.addEventListener('click', closeCalendarDialog);
 $('#calendar-download')?.addEventListener('click', downloadCalendar);
 calendarDialog?.addEventListener('click', (event) => {
-  if (event.target === calendarDialog) closeCalendarDialog();
+  if (event.target !== calendarDialog) return;
+  const rect = calendarDialog.getBoundingClientRect();
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closeCalendarDialog();
 });
-$$('input[name="calendar-mode"]').forEach((input) => {
-  input.addEventListener('change', updateCalendarSummary);
+$('#calendar-export-mode')?.addEventListener('change', updateCalendarSummary);
+$('#calendar-venues')?.addEventListener('change', () => {
+  writeStore('fp_calendar_venues', selectedCalendarVenues());
+  updateCalendarSummary();
 });
-$('#calendar-venue')?.addEventListener('change', updateCalendarSummary);
+$('#calendar-select-all')?.addEventListener('click', () => {
+  const select = selectedCalendarVenues().length !== scheduleData.venues.length;
+  $$('#calendar-venues input').forEach((input) => { input.checked = select; });
+  writeStore('fp_calendar_venues', selectedCalendarVenues());
+  updateCalendarSummary();
+});
+$('#calendar-copy')?.addEventListener('click', async () => {
+  const url = calendarFeedUrl();
+  if (url) showToast(await copyToClipboard(url) ? 'Link del calendario copiato' : 'Copia non riuscita. Riprova dal browser.');
+});
 $('#calendar-day')?.addEventListener('change', updateCalendarSummary);
 
 // Avviso "nuovi orari" dei film salvati
@@ -1858,6 +2006,7 @@ $('#saved-updates-dismiss')?.addEventListener('click', clearSavedUpdates);
 $('#clear-filters').addEventListener('click', () => {
   if (searchInput) searchInput.value = '';
   if (venueFilter) venueFilter.value = 'all';
+  writeStore('fp_venue_filter', 'all');
   if (genreFilter) genreFilter.value = 'all';
   $$('.chip').forEach((c) => c.classList.remove('active'));
   $('[data-chip="all"]').classList.add('active');
@@ -1886,9 +2035,13 @@ if (showtimeMenu) showtimeMenu.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-  if (e.target.matches('.scroll-rail') && ['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+  if (showtimeMenu && !showtimeMenu.hidden && ['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
     e.preventDefault();
-    e.target.scrollBy({ left: e.key === 'ArrowRight' ? 120 : -120, behavior: 'smooth' });
+    const items = [...showtimeMenu.querySelectorAll('[role="menuitem"]')];
+    const current = items.indexOf(document.activeElement);
+    const index = e.key === 'Home' ? 0 : e.key === 'End' ? items.length - 1
+      : (current + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+    items[index]?.focus({ preventScroll: true });
     return;
   }
   if (e.key !== 'Escape' || !showtimeMenu || showtimeMenu.hidden) return;
@@ -1899,10 +2052,10 @@ document.addEventListener('keydown', (e) => {
 
 // Il menu è ancorato alla pagina: se si scorre o ridimensiona va richiuso.
 window.addEventListener('scroll', () => closeShowtimeMenu(), { passive: true, capture: true });
-window.addEventListener('resize', () => closeShowtimeMenu());
-if ('ResizeObserver' in window) {
-  new ResizeObserver(updateScrollRails).observe($('#view-container'));
-}
+window.addEventListener('resize', () => {
+  closeShowtimeMenu();
+  renderAiringNow();
+});
 
 function setMovieCardExpanded(card, expanded, trigger) {
   const panel = card.querySelector('.movie-full-schedule-panel');
@@ -1920,7 +2073,6 @@ function setMovieCardExpanded(card, expanded, trigger) {
     toggle.querySelector('.cue-chevron').classList.toggle('is-rotated', expanded);
     if (expanded) expandedMovies.add(card.dataset.cardKey);
     else expandedMovies.delete(card.dataset.cardKey);
-    updateScrollRails();
   };
   const reveal = () => {
     if (expanded) {

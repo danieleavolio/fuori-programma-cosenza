@@ -15,6 +15,7 @@ Web app statica per confrontare la programmazione dei cinema di Cosenza e Rende 
 Apri la cartella con un server statico, per esempio:
 
 ```powershell
+python scripts/build_calendars.py
 python -m http.server 8000
 ```
 
@@ -34,7 +35,7 @@ Lo scraper è pensato per non perdere mai la programmazione:
 - le date annunciate da Citrigno Group (`cosenzacinema.it`) sono trattate come fallback e non fanno cadere l'aggiornamento;
 - i film che finiscono vengono eliminati, le date passate non vengono pubblicate.
 
-Lo stato delle fonti finisce dentro `data/schedule.json`: `available` (aggiornata ora), `stale` (ultima programmazione nota) o `unavailable` (nessun dato). Il sito mostra un avviso quando la programmazione è vecchia o parziale.
+Lo stato delle fonti finisce dentro `data/schedule.json`: `available` (aggiornata ora), `stale` (ultima programmazione nota) o `unavailable` (nessun dato). Eventuali problemi della singola fonte sono indicati nella sua card cinema, senza avvisi generici di programmazione parzialmente aggiornata.
 
 I test di resilenza si eseguono con:
 
@@ -52,7 +53,13 @@ Il deploy pubblica sempre i dati aggiornati. Per salvare la programmazione anche
 
 Le viste **Per Film** e **Per Giorno** hanno ciascuna una modalità *griglia* e *lista*: il contenuto delle card è identico, cambia solo la disposizione (locandina in alto o a sinistra). In griglia la locandina mantiene proporzioni fisse anche a card aperta, quindi non si gonfia a tutta pagina.
 
-La griglia usa due colonne su telefono/tablet e tre da 960 px. Le card chiuse condividono gli stessi spazi e la stessa altezza. Durata, generi e barra delle azioni scorrono orizzontalmente (anche con le frecce da tastiera); trailer, condividi e salva hanno tutti un'area di tocco alta 44 px. La locandina e **Vedi sale e orari** aprono lo stesso pannello in entrambe le viste: prima si sceglie il cinema, poi l'orario e la relativa biglietteria. Trama completa e cast sono consultabili senza occupare lo spazio degli orari.
+La griglia usa due colonne su telefono/tablet e tre da 960 px. Le card chiuse condividono gli stessi spazi e la stessa altezza, **senza scorrimento interno**. Tre comandi a icona (trailer, condividi e salva) rimangono sempre visibili, con aree di tocco di almeno 44 × 44 px anche a 320 px. La locandina e **Vedi sale e orari** aprono lo stesso pannello: prima si sceglie il cinema, poi l'orario e la relativa biglietteria. Trama, cast, generi completi e valutazioni dettagliate sono nella scheda aperta.
+
+L'ordine predefinito è **Ultime uscite** in Per Film e **Prossimo spettacolo** in Per Giorno. Sono disponibili anche Ultime aggiunte, Più votati e Titolo A–Z; l'ordinamento è ricordato separatamente per vista. Uscite e riedizioni future seguono i film già usciti. I voti sono ponderati con 20 valutazioni a priori a 3/5, per non premiare un 5/5 basato su pochissime persone. Date e voti mancanti non vengono inventati.
+
+Le scorciatoie **Oggi**, **Stasera** (dalle 18:00) e **Weekend** filtrano gli spettacoli ancora da iniziare. Il weekend comprende venerdì, sabato e domenica correnti o successivi, senza saltare alla settimana dopo se è già domenica. **I miei cinema** consente di scegliere più sale e ricordarle sul dispositivo; l'applicazione del filtro è esplicita. Ricerca, genere, cinema e ordinamento sono comuni alle due viste.
+
+Gli orari mostrano la fine indicativa solo se la durata è nota, escluse pubblicità e intervallo. V.O., sottotitoli e 3D sono indicati soltanto quando dichiarati per quello spettacolo dalla sala. “In programma fino a…” descrive le date pubblicate, non presume che sia l'ultima occasione di vedere il film.
 
 Test UI con Chrome/Chromium e Node 22+, senza dipendenze npm:
 
@@ -60,7 +67,7 @@ Test UI con Chrome/Chromium e Node 22+, senza dipendenze npm:
 node scripts/test_ui.mjs http://127.0.0.1:8000/
 ```
 
-Il test verifica griglia/lista, otto larghezze da 320 a 1440 px, entrambi i temi, altezza delle card e dei comandi, overflow, apertura e focus, menu dei biglietti, calendario e ricaricamento offline. `--quick` limita le larghezze a 390 e 1280 px; `--screenshots <cartella>` salva le schermate. Se Chrome non è nel percorso standard, impostare `CHROME_BIN`.
+Il test verifica griglia/lista, otto larghezze da 320 a 1440 px, entrambi i temi, altezza delle card e dei comandi, assenza di scorrimento e comandi tagliati, apertura e focus, menu dei biglietti, ordinamenti, filtri, preferenze, calendario multi-cinema (anche 320 × 600 px) e ricaricamento offline. `--quick` limita le larghezze a 390 e 1280 px; `--screenshots <cartella>` salva le schermate. Se Chrome non è nel percorso standard, impostare `CHROME_BIN`.
 
 Nella vista **Per Giorno**, quando il giorno scelto è oggi, gli spettacoli già iniziati sono nascosti: restano recuperabili con il toggle che li conta, e in quel caso compaiono attenuati con l'orario barrato.
 
@@ -68,11 +75,33 @@ La sezione **Cinema** ha una card per sala con illustrazione vettoriale, indiriz
 
 I film salvati sono confrontati a ogni aggiornamento della programmazione: se compaiono nuovi orari la home mostra un avviso con il conteggio e un pulsante per aprire i salvati. Lo stato del confronto è in `localStorage`.
 
-Il pulsante **Calendario** esporta un file `.ics` con gli spettacoli scelti (film salvati, una sala o un giorno), completo di sala, indirizzo, link ai biglietti e promemoria 45 minuti prima. Il file è generato nel browser, senza servizi esterni.
+### Calendario in abbonamento
+
+**Calendario → Segui i tuoi cinema** permette di selezionare più sale e aggiungere un unico calendario aggiornabile a Google Calendar, Apple Calendario o Outlook, oppure copiarne il link. Con cinque cinema, `scripts/build_calendars.py` genera le 31 selezioni possibili in `calendars/` (non versionata; generata a ogni deploy). `all.ics` comprende tutte le sale; gli altri nomi contengono gli ID ordinati e separati da `_`.
+
+I feed contengono sala, indirizzo e link ai biglietti, fuso Europe/Rome, UID stabili, versioni degli eventi e cancellazioni esplicite. Sono trasparenti (non bloccano l'agenda) e **senza promemoria automatici per ogni proiezione**. Lo storico in `data/calendar-state.json` conserva 30 giorni e viene recuperato anche dall'ultimo deploy, qualora il bot non abbia potuto fare push.
+
+Google richiede l'aggiunta iniziale dal web su computer: nell'interfaccia sono disponibili istruzioni e link da copiare. L'effettiva sincronizzazione e la gestione di `webcal:` dipendono dall'app installata. Per cambiare selezione bisogna sostituire l'abbonamento precedente, non aggiungerlo nuovamente lasciando entrambi attivi.
+
+**Preferisci una copia da importare?** conserva l'esportazione locale `.ics` per i cinema scelti, i film salvati o un giorno, con promemoria facoltativo. È una copia non sincronizzata. I salvati restano sul dispositivo: non vengono presentati come un abbonamento personalizzato. Dal menu di un orario si può aggiungere il singolo appuntamento.
 
 ## Dati dei film
 
 `scripts/update_schedule.py` scarica la scheda di ogni film dalle sale 18tickets e ne ricava trama, generi, regia, anno, lingua, cast, durata e trailer YouTube, senza usare API key. I campi vengono conservati nel tempo e riletti a ogni aggiornamento, così restano disponibili anche quando una scheda non viene riscaricata.
+
+`scripts/movie_metadata.py` arricchisce i dati con voto complessivo MYmovies su 5, critica, pubblico, numero di valutazioni/recensioni quando pubblicato e data di uscita o riedizione italiana. L'identità è verificata con titolo, anno e regista (incluse iniziali e marcatori di riedizione). La fonte e la data di verifica accompagnano i voti: nessuna media fra siti o confusione tra critica e pubblico.
+
+La cache `data/movie-metadata.json` limita la verifica a una volta al giorno e a 42 richieste per esecuzione; dopo errori si attende almeno sei ore, conservando il dato precedente. Un problema dei metadati non blocca gli orari. `data/movie-history.json` conserva la prima comparsa, inizialmente ricostruita dai commit disponibili, anche se un film esce e rientra in programmazione.
+
+```powershell
+python scripts/movie_metadata.py
+python scripts/test_enrichment.py
+python scripts/test_resilience.py
+node --check app.js
+node --check sw.js
+```
+
+I test Python dei metadati e dei calendari sono deterministici, senza rete o dipendenze aggiuntive, e coprono abbinamenti errati, dati mancanti, cache, indisponibilità, 31 selezioni, UID, modifiche, cancellazioni e ripristino degli eventi. Non sono configurati build o linter di framework.
 
 ## Offline e installazione
 
@@ -92,6 +121,6 @@ Il comando `headroom` è disponibile in `tools\headroom\bin`. Per attivare il pr
 
 ## Pubblicazione
 
-Il sito è composto da file statici e viene pubblicato tramite GitHub Pages. Il workflow `.github/workflows/pages.yml` aggiorna i dati ed esegue il deploy automatico del repository.
+Il sito è composto da file statici e viene pubblicato tramite GitHub Pages. Il workflow `.github/workflows/pages.yml` verifica il codice, conserva la programmazione pubblicata più recente tramite `scripts/prepare_release.py`, arricchisce i metadati e genera i feed prima del deploy.
 
-I dati aggiornati vengono pubblicati dal deploy, che carica l'intera cartella come artifact: non serve che il file `data/schedule.json` venga committato su `main` (le regole del repository richiedono comunque una pull request per scrivere su `main`). Per ripristinare un giorno mancante il scraper usa come base la programmazione già pubblicata sul sito, che è sempre più aggiornata del file nel repository.
+Il workflow `.github/workflows/update-schedule.yml` aggiorna automaticamente gli orari ogni quattro ore, i metadati e i calendari e pubblica direttamente l'artifact anche se il push del bot non è consentito. I due workflow condividono la stessa coda di deploy. Nessun task Windows o API key è necessario.

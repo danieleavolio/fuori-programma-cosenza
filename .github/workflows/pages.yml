@@ -27,6 +27,17 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verifica metadati e genera calendari in abbonamento
+        run: |
+          python scripts/test_enrichment.py
+          python scripts/test_resilience.py
+          node --check app.js
+          node --check sw.js
+          python scripts/prepare_release.py
+          python scripts/build_calendars.py --published
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .

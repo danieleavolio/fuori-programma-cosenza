@@ -15,8 +15,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Fuori programma" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="stylesheet" href="styles.css?v=20261113h" />
-    <script src="app.js?v=20261113h" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261113i" />
+    <script src="app.js?v=20261113i" defer></script>
     <script>
       if ('serviceWorker' in navigator) {
         const wasControlled = Boolean(navigator.serviceWorker.controller);
@@ -52,7 +52,7 @@
       </nav>
 
       <div class="masthead-actions">
-        <button class="calendar-btn" id="calendar-open" type="button" aria-haspopup="dialog" aria-controls="calendar-dialog" aria-label="Crea un calendario con gli spettacoli">
+        <button class="calendar-btn" id="calendar-open" type="button" aria-haspopup="dialog" aria-controls="calendar-dialog" aria-label="Segui i tuoi cinema nel calendario">
           <svg class="icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="16" y1="2" x2="16" y2="7"></line><line x1="8" y1="2" x2="8" y2="7"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="13" x2="12" y2="19"></line><line x1="9" y1="16" x2="15" y2="16"></line></svg>
           <span class="calendar-label">Calendario</span>
         </button>
@@ -95,33 +95,56 @@
 
       <!-- Barra filtri contestuale e non-ridondante -->
       <section class="schedule-controls" aria-label="Filtri programmazione">
-        <!-- Controlli VISTA 1: Per Film -->
-        <div class="controls-view" id="controls-per-film">
+        <div class="controls-shared">
           <div class="search-box">
             <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input id="search" type="search" placeholder="Cerca un film o un cinema..." autocomplete="off" aria-label="Cerca un film" />
+            <input id="search" type="search" placeholder="Cerca un film…" autocomplete="off" aria-label="Cerca un film, un regista o un cinema" />
           </div>
 
           <div class="quick-chips">
-            <button type="button" class="chip active" data-chip="all">Tutti</button>
-            <button type="button" class="chip" data-chip="today">Solo oggi</button>
-            <button type="button" class="chip" data-chip="favorites">
+            <button type="button" class="chip active" data-chip="all" aria-pressed="true">Tutti</button>
+            <button type="button" class="chip" data-chip="today" aria-pressed="false">Oggi</button>
+            <button type="button" class="chip" data-chip="tonight" aria-pressed="false">Stasera</button>
+            <button type="button" class="chip" data-chip="weekend" aria-pressed="false">Weekend</button>
+            <button type="button" class="chip" data-chip="favorites" aria-pressed="false">
               Salvati (<span id="chip-fav-count">0</span>)
             </button>
           </div>
 
-          <div class="filter-dropdown">
+          <div class="filter-row">
+          <div class="filter-dropdown" id="venue-filter-control">
+            <label for="venue-filter">Cinema</label>
             <select id="venue-filter" aria-label="Filtra per cinema">
               <option value="all">Tutte le sale</option>
             </select>
           </div>
 
           <div class="filter-dropdown">
+            <label for="genre-filter">Genere</label>
             <select id="genre-filter" aria-label="Filtra per genere">
               <option value="all">Tutti i generi</option>
             </select>
           </div>
-
+          <div class="filter-dropdown sort-control">
+            <label for="movie-sort">Ordina per</label>
+            <select id="movie-sort">
+              <option value="release">Ultime uscite</option>
+              <option value="added">Ultime aggiunte</option>
+              <option value="next">Prossimo spettacolo</option>
+              <option value="rating">Più votati</option>
+              <option value="title">Titolo A–Z</option>
+            </select>
+          </div>
+          </div>
+          <details class="venue-preferences" id="venue-preferences">
+            <summary>I miei cinema <span id="preferred-venue-count"></span></summary>
+            <p>Scegli le sale che frequenti. Le ricorderemo su questo dispositivo.</p>
+            <div class="venue-choice-grid" id="preferred-venues"></div>
+            <button type="button" class="preference-apply" id="preferred-venues-apply">Mostra i miei cinema</button>
+          </details>
+        </div>
+        <div class="controls-view" id="controls-per-film">
+          <span class="view-hint">Scegli un film, poi la sala e l’orario.</span>
           <div class="schedule-layout-switch movie-layout-switch" role="group" aria-label="Visualizzazione dei film">
             <button class="layout-button active" id="movie-layout-grid" type="button" aria-pressed="true" data-movie-layout="grid">Griglia</button>
             <button class="layout-button" id="movie-layout-list" type="button" aria-pressed="false" data-movie-layout="list">Lista</button>
@@ -206,50 +229,60 @@
       </button>
     </div>
 
-    <!-- Esportazione calendario: un unico .ics per gli spettacoli scelti -->
+    <!-- Abbonamento alla programmazione, distinto dall'esportazione personale. -->
     <dialog class="calendar-dialog" id="calendar-dialog" aria-labelledby="calendar-dialog-title">
       <div class="calendar-dialog-head">
-        <p class="calendar-dialog-kicker">Fuori programma</p>
-        <h2 id="calendar-dialog-title">Porta gli spettacoli nel tuo calendario</h2>
+        <p class="calendar-dialog-kicker">Il cinema, nella tua agenda</p>
+        <h2 id="calendar-dialog-title">Segui i tuoi cinema</h2>
         <button class="calendar-dialog-close" id="calendar-close" type="button" aria-label="Chiudi">&times;</button>
       </div>
-      <p class="calendar-dialog-intro">Scegli cosa esportare. Otterrai un file <strong>.ics</strong> con film, sala, indirizzo e link ai biglietti, pronto per Google Calendar, Apple Calendario e Outlook.</p>
-
-      <fieldset class="calendar-modes">
-        <legend>Cosa vuoi esportare</legend>
-        <label class="calendar-mode">
-          <input type="radio" name="calendar-mode" value="favorites" checked />
-          <span><strong>I film salvati</strong><small id="calendar-fav-count">Nessun film salvato</small></span>
-        </label>
-        <label class="calendar-mode">
-          <input type="radio" name="calendar-mode" value="venue" />
-          <span><strong>Una sala</strong><small>Tutti gli spettacoli di un cinema</small></span>
-        </label>
-        <label class="calendar-mode">
-          <input type="radio" name="calendar-mode" value="day" />
-          <span><strong>Un giorno</strong><small>Tutti i film in programma quel giorno</small></span>
-        </label>
+      <p class="calendar-dialog-intro">Aggiungili una volta alla tua app: la programmazione si aggiornerà in un calendario separato, senza importare ogni volta un file.</p>
+      <div class="calendar-selection-head">
+        <strong>1. Scegli uno o più cinema</strong>
+        <button type="button" class="text-button" id="calendar-select-all">Seleziona tutti</button>
+      </div>
+      <fieldset class="venue-choice-grid calendar-venues" id="calendar-venues">
+        <legend class="sr-only">Cinema da seguire</legend>
       </fieldset>
-
-      <div class="calendar-select" id="calendar-venue-row" hidden>
-        <label for="calendar-venue">Sala</label>
-        <select id="calendar-venue"></select>
-      </div>
-      <div class="calendar-select" id="calendar-day-row" hidden>
-        <label for="calendar-day">Giorno</label>
-        <select id="calendar-day"></select>
-      </div>
-
-      <label class="calendar-alarm">
-        <input type="checkbox" id="calendar-alarm" checked />
-        <span>Promemoria 45 minuti prima<small>Un avviso sul telefono prima dello spettacolo</small></span>
-      </label>
-
       <p class="calendar-summary" id="calendar-summary" aria-live="polite"></p>
-
+      <section class="calendar-subscribe" aria-labelledby="calendar-app-title">
+        <h3 id="calendar-app-title">2. Aggiungi alla tua app</h3>
+        <div class="calendar-apps">
+          <a id="calendar-google" class="calendar-app-link" target="_blank" rel="noopener noreferrer"><strong>Google Calendar</strong><small>Aggiunta iniziale dal web su computer</small></a>
+          <a id="calendar-apple" class="calendar-app-link"><strong>Apple Calendario</strong><small>Apri la richiesta di abbonamento</small></a>
+          <a id="calendar-outlook" class="calendar-app-link" target="_blank" rel="noopener noreferrer"><strong>Outlook</strong><small>Aggiungi dalla versione web</small></a>
+          <button id="calendar-copy" type="button" class="calendar-app-link"><strong>Copia link</strong><small>Per altre app di calendario</small></button>
+        </div>
+        <p class="calendar-help" id="calendar-subscription-help">Un solo calendario per i cinema selezionati. Nessun promemoria per ogni proiezione; i tempi di aggiornamento dipendono dall’app. Per cambiare cinema, sostituisci l’abbonamento precedente.</p>
+        <details class="calendar-instructions">
+          <summary>Come aggiungerlo su Google Calendar</summary>
+          <p>Da un computer: apri Google Calendar → Altri calendari → + → Da URL, incolla il link copiato qui e conferma. Poi abilita il calendario nell’app sul telefono. Il pulsante Google apre il collegamento di aggiunta, se supportato.</p>
+        </details>
+      </section>
+      <details class="calendar-export" id="calendar-export">
+        <summary>Preferisci una copia da importare?</summary>
+        <p>Il file non si aggiorna automaticamente. Puoi esportare anche soltanto i film salvati o un giorno.</p>
+        <div class="calendar-select">
+          <label for="calendar-export-mode">Cosa includere</label>
+          <select id="calendar-export-mode">
+            <option value="venues">I cinema selezionati</option>
+            <option value="favorites">I film salvati, nei cinema selezionati</option>
+            <option value="day">Un giorno, nei cinema selezionati</option>
+          </select>
+        </div>
+        <div class="calendar-select" id="calendar-day-row" hidden>
+          <label for="calendar-day">Giorno</label>
+          <select id="calendar-day"></select>
+        </div>
+        <label class="calendar-alarm">
+          <input type="checkbox" id="calendar-alarm" />
+          <span>Promemoria 45 minuti prima<small>Solo per gli eventi del file esportato</small></span>
+        </label>
+        <p id="calendar-export-summary" class="calendar-help" aria-live="polite"></p>
+        <button type="button" class="calendar-download" id="calendar-download">Scarica file .ics</button>
+      </details>
       <div class="calendar-dialog-actions">
-        <button type="button" class="calendar-download" id="calendar-download">Scarica il calendario</button>
-        <button type="button" class="calendar-cancel" id="calendar-cancel">Annulla</button>
+        <button type="button" class="calendar-cancel" id="calendar-cancel">Fatto</button>
       </div>
       <p class="calendar-footnote">Gli orari possono cambiare: la scheda della sala resta la fonte ufficiale.</p>
     </dialog>

@@ -116,6 +116,26 @@ try {
     return result.result.value;
   };
   const frames = () => evaluate('new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))');
+  const assertContrast = async (context) => {
+    const problems = await evaluate(`(() => {
+      const selectors='.movie-state,.rating-source,.rating-unavailable,.movie-rating,.view-hint,.filter-dropdown label,.chip.active,.layout-button.active,.card-genres,.film-duration,.preview-label,.preview-time,.showtime-room,.showtime-end,.calendar-dialog-kicker,.calendar-dialog-intro,.calendar-app-link,.calendar-app-link small,.calendar-summary';
+      const rgb=value=>(value.match(/[\\d.]+/g)||[]).map(Number);
+      const lum=values=>{const v=values.slice(0,3).map(x=>x/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return v[0]*.2126+v[1]*.7152+v[2]*.0722;};
+      return [...document.querySelectorAll(selectors)].filter(e=>e.getBoundingClientRect().height &&
+        !e.closest(':disabled,[aria-disabled=true]')).flatMap(e=>{
+          let parent=e, bg=[255,255,255];
+          while(parent) {
+            const color=rgb(getComputedStyle(parent).backgroundColor);
+            if(color.length===3 || color[3]===1) {bg=color;break;}
+            parent=parent.parentElement;
+          }
+          const a=lum(rgb(getComputedStyle(e).color)), b=lum(bg);
+          const ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+          return ratio<4.5 ? [e.className+': '+ratio.toFixed(2)] : [];
+        });
+    })()`);
+    assert.equal(problems.length, 0, `Contrasti ${context}: ${problems.join(', ')}`);
+  };
   await cdp('Page.enable');
   await cdp('Runtime.enable');
   await cdp('Network.enable');
@@ -158,21 +178,28 @@ try {
           tick();
         })`);
         await frames();
+        await assertContrast(`${width}/${scheme}/${view}`);
         const measure = await evaluate(`(() => {
           const grid = document.querySelector('.movie-grid:not([hidden])');
           const cards = [...grid.querySelectorAll('article')];
           const visible = (e) => e.getBoundingClientRect().height > 0;
           const heights = cards.map(c => c.getBoundingClientRect().height);
           const buttons = [...grid.querySelectorAll('.movie-actions > *')];
-          const railProblems = [...grid.querySelectorAll('.scroll-rail')].filter(r =>
-            r.scrollWidth > r.clientWidth + 1 && getComputedStyle(r).overflowX !== 'auto');
+          const horizontalScroll = [...grid.querySelectorAll('*')].filter(e => visible(e) &&
+            ['auto','scroll'].includes(getComputedStyle(e).overflowX) && e.scrollWidth > e.clientWidth + 1);
+          const actionProblems = buttons.filter(b => {
+            const r=b.getBoundingClientRect(), p=b.closest('article').getBoundingClientRect();
+            return r.width<43.9 || r.left<p.left || r.right>p.right;
+          });
           const ids = [...document.querySelectorAll('[id]')].map(e => e.id);
           return {
             cards:cards.length,columns:getComputedStyle(grid).gridTemplateColumns.split(' ').length,
             minHeight:Math.min(...heights),maxHeight:Math.max(...heights),
             actionHeights:[...new Set(buttons.map(b => b.getBoundingClientRect().height))],
             pageOverflow:document.documentElement.scrollWidth > innerWidth,
-            railProblems:railProblems.length,duplicateIds:ids.length !== new Set(ids).size,
+            horizontalScroll:horizontalScroll.length,actionProblems:actionProblems.length,
+            oldRails:grid.querySelectorAll('.scroll-rail,.rail-hint').length,
+            duplicateIds:ids.length !== new Set(ids).size,
             nestedVerticalScroll:[...grid.querySelectorAll('*')].filter(e => visible(e) &&
               getComputedStyle(e).overflowY === 'auto' && e.scrollHeight > e.clientHeight + 1).length,
             oldPosterMenu:!!grid.querySelector('.poster-venue-menu'),
@@ -184,11 +211,12 @@ try {
         assert(measure.maxHeight - measure.minHeight < 1, `Altezze diverse: ${context}`);
         assert.deepEqual(measure.actionHeights, [44], `Azioni disallineate: ${context}`);
         assert.equal(measure.pageOverflow, false, `Overflow pagina: ${context}`);
-        assert.equal(measure.railProblems + measure.nestedVerticalScroll, 0, `Scroll errato: ${context}`);
+        assert.equal(measure.horizontalScroll + measure.nestedVerticalScroll + measure.actionProblems + measure.oldRails, 0, `Scroll/comandi errati: ${context}`);
         assert.equal(measure.duplicateIds || measure.oldPosterMenu || measure.oldTicketCTA, false, context);
         reports.push({ context, ...measure });
         const prefix = `${width}-${scheme}-${view}`;
-        if ([390, 1280].includes(width)) await shot(prefix, '.movie-grid:not([hidden]) article');
+        if ([320, 390, 1280].includes(width)) await shot(prefix, '.movie-grid:not([hidden]) article');
+        if ([320, 390, 1280].includes(width) && view==='movies') await shot(`${prefix}-controls`, '.schedule-controls');
 
         // La stessa azione funziona da locandina, tastiera e pulsante in entrambe le viste.
         assert(await evaluate(`(() => {
@@ -213,7 +241,7 @@ try {
         })()`);
         assert(!opened.pageOverflow && opened.fullWidthSynopsis && opened.posterDisabled && opened.focused, `Apertura: ${context}`);
         assert(opened.timeFont >= 16 && opened.timeHeight >= 44 && opened.arrows === 0, `Orari: ${context}`);
-        if ([390, 1280].includes(width)) await shot(`${prefix}-open`, '.movie-grid:not([hidden]) .is-expanded');
+        if ([320, 390, 1280].includes(width)) await shot(`${prefix}-open`, '.movie-grid:not([hidden]) .is-expanded');
         const hasShowtime = await evaluate(`!!document.querySelector('.movie-grid:not([hidden]) .is-expanded [data-showtime]')`);
         if (hasShowtime) {
           await evaluate(`document.querySelector('.movie-grid:not([hidden]) .is-expanded [data-showtime]').scrollIntoView({behavior:'instant',block:'center'})`);
@@ -263,6 +291,18 @@ try {
           return !grid.classList.contains('movie-grid') && document.documentElement.scrollWidth <= innerWidth;
         })()`), `Vista lista: ${context}`);
         if ([390, 1280].includes(width)) await shot(`${prefix}-list`, `${view === 'movies' ? '#movies-grid' : '#film-list'} article`);
+        await evaluate('openCalendarDialog()');
+        await assertContrast(`${width}/${scheme}/calendar`);
+        assert(await evaluate(`(() => {
+          const r=calendarDialog.getBoundingClientRect();
+          const boxes=[...document.querySelectorAll('#calendar-venues input')];
+          return r.left>=0 && r.right<=innerWidth && r.top>=0 && r.bottom<=innerHeight &&
+            calendarDialog.scrollWidth<=calendarDialog.clientWidth+1 && boxes.length===5 &&
+            document.activeElement.closest('#calendar-dialog') &&
+            [...document.querySelectorAll('.calendar-app-link')].every(e=>e.getBoundingClientRect().height>=44);
+        })()`), `Dialog calendario: ${context}`);
+        if ([320, 390, 1280].includes(width) && view==='movies') await shot(`${width}-${scheme}-calendar`, '#calendar-dialog');
+        await evaluate('closeCalendarDialog()');
       }
     }
   }
@@ -302,7 +342,7 @@ try {
     venueFilter.value=scheduleData.venues[0].id; currentView='schedule'; render();
     const matches=Array.from(filmList.querySelectorAll('[data-showtime]')).every(b=>
       b.dataset.eventVenue===scheduleData.venues[0].name);
-    const filterVisible=controlsPerDay.contains(venueFilter);
+    const filterVisible=!!venueFilter.getBoundingClientRect().height;
     venueFilter.value='all'; activeChip='all';
     return number===total && matches && filterVisible;
   })()`), 'Conteggio Solo oggi / filtro cinema');
@@ -330,6 +370,90 @@ try {
     closeCalendarDialog();
     return valid;
   })()`), 'Calendario');
+
+  assert(await evaluate(`(() => {
+    const a={title:'Alfa',releaseDateIT:'2026-11-12',firstSeenAt:'2026-11-10T12:00:00Z'};
+    const b={title:'Beta',releaseDateIT:'2026-11-01',firstSeenAt:'2026-11-12T12:00:00Z'};
+    const c={title:'Gamma',releaseDateIT:'2026-12-01',firstSeenAt:'invalid'};
+    const d={title:'Delta'};
+    const films=[d,c,b,a];
+    if(sortMovies(films,'release').map(m=>m.title).join()!=='Alfa,Beta,Delta,Gamma') return false;
+    if(sortMovies(films,'added')[0]!==b || sortMovies(films,'title')[0]!==a) return false;
+    const source={url:'https://www.mymovies.it/film/2026/test/'};
+    const popular={title:'Affidabile',external:{...source,rating:4,ratingCount:1000}};
+    const tiny={title:'Due voti',external:{...source,rating:5,ratingCount:2}};
+    return sortMovies([tiny,d,popular],'rating')[0]===popular &&
+      sortMovies([tiny,d,popular],'rating').at(-1)===d &&
+      !ratingInfo({external:{rating:5,url:'javascript:alert(1)'}}).rating &&
+      !renderMovieRating({}).includes('0/5') &&
+      renderRatingDetails({external:{...source,rating:3,criticsRating:4,audienceRating:2,ratingCount:2}}).includes('Campione ancora piccolo');
+  })()`), 'Ordinamenti e voti mancanti/non attendibili');
+  assert(await evaluate(`(() => {
+    activeChip='tonight'; currentView='movies'; venueFilter.value='all'; render();
+    if(![...moviesGrid.querySelectorAll('[data-showtime]')].every(b=>b.dataset.eventDate===getTodayString() && b.dataset.eventTime>='18:00')) return false;
+    activeChip='weekend'; render();
+    if(![...moviesGrid.querySelectorAll('[data-showtime]')].every(b=>[0,5,6].includes(parseDate(b.dataset.eventDate).getDay()))) return false;
+    const sunday=new Date(2026,10,15,12);
+    if(!periodDateMatches('15/11/2026','weekend',sunday) || periodDateMatches('20/11/2026','weekend',sunday)) return false;
+    activeChip='all'; render();
+    const first=scheduleData.movies.find(m=>parseDurationMinutes(m.duration));
+    const wrap=document.createElement('div');
+    wrap.innerHTML=showtimeChipHtml({title:'Test',duration:'2h 10m'}, {id:'test',name:'Test'},getTodayString(),{time:'23:30',version:'OV',subtitles:true,format:'3D'},'showtime');
+    const labels=wrap.textContent;
+    return labels.includes('01:40') && labels.includes('V.O.') && labels.includes('Sottotitoli') && labels.includes('3D') &&
+      showtimeFormats({language:'Italiano'}).length===0 && showtimeFormats({room:'Sala 1'}).length===0;
+  })()`), 'Stasera, weekend, fine indicativa e formati dichiarati');
+  assert(await evaluate(`(() => {
+    const inputs=[...document.querySelectorAll('#preferred-venues input')];
+    inputs[0].checked=true;inputs[0].dispatchEvent(new Event('change',{bubbles:true}));
+    inputs[2].checked=true;inputs[2].dispatchEvent(new Event('change',{bubbles:true}));
+    document.querySelector('#preferred-venues-apply').click();
+    const ids=[inputs[0].value,inputs[2].value];
+    const valid=venueFilter.value==='preferred' &&
+      [...moviesGrid.querySelectorAll('[data-showtime]')].every(b=>ids.some(id=>scheduleData.venues.find(v=>v.id===id).name===b.dataset.eventVenue)) &&
+      JSON.parse(localStorage.getItem('fp_preferred_venues')).length===2;
+    inputs.forEach(input=>{input.checked=false;input.dispatchEvent(new Event('change',{bubbles:true}));});
+    const empty=emptyState.hidden===false && document.querySelector('#preferred-venues-apply').disabled;
+    venueFilter.value='all';writeStore('fp_venue_filter','all');render();
+    return valid && empty;
+  })()`), 'Cinema preferiti multipli, persistenza e selezione vuota');
+  assert(await evaluate(`(async () => {
+    openCalendarDialog();
+    const boxes=[...document.querySelectorAll('#calendar-venues input')];
+    boxes.forEach((b,i)=>{b.checked=i===0 || i===2;});
+    updateCalendarSummary();
+    const ids=selectedCalendarVenues(), feed=calendarFeedUrl();
+    const valid=ids.length===2 && feed.endsWith(ids.join('_')+'.ics') &&
+      new URL(document.querySelector('#calendar-google').href).searchParams.get('cid')===feed &&
+      document.querySelector('#calendar-apple').href===feed.replace(/^https?:/,'webcal:') &&
+      new URL(document.querySelector('#calendar-outlook').href).searchParams.get('url')===feed &&
+      collectCalendarShows('venues','').every(e=>ids.includes(e.venueId));
+    boxes.forEach(b=>{b.checked=false;});updateCalendarSummary();
+    const disabled=!document.querySelector('#calendar-google').hasAttribute('href') &&
+      document.querySelector('#calendar-copy').disabled && document.querySelector('#calendar-download').disabled;
+    document.querySelector('#calendar-select-all').click();
+    const all=calendarFeedUrl().endsWith('/all.ics');
+    const response=await fetch(feed);
+    const text=await response.text();
+    const ics=response.ok && text.startsWith('BEGIN:VCALENDAR') && text.includes('TZID:Europe/Rome') &&
+      !text.includes('BEGIN:VALARM');
+    closeCalendarDialog();
+    return valid && disabled && all && ics;
+  })()`), 'Abbonamento multi-cinema, provider, nessuna selezione e feed pubblico');
+  // Telefono stretto, landscape/viewport basso: chiusura sempre raggiungibile.
+  await cdp('Emulation.setDeviceMetricsOverride', { width:320,height:600,deviceScaleFactor:1,mobile:true });
+  await evaluate('openCalendarDialog();calendarDialog.scrollTop=calendarDialog.scrollHeight');
+  await frames();
+  assert(await evaluate(`(() => {
+    const close=document.querySelector('#calendar-close').getBoundingClientRect();
+    return close.top>=0 && close.bottom<=innerHeight && calendarDialog.scrollWidth<=calendarDialog.clientWidth+1;
+  })()`), 'Calendario su schermo 320×600');
+  await evaluate('closeCalendarDialog()');
+  assert(await evaluate(`(() => {
+    const event={date:getTodayString(),time:'23:30',venue:'Test',title:'Film',duration:'2h 10m',room:'Sala 1'};
+    return icsUid(event)!==icsUid({...event,room:'Sala 2'}) &&
+      buildCalendarDocument([event]).includes('DURATION:PT130M');
+  })()`), 'UID distinti per sala e durata iCalendar');
   await cdp('Network.setBypassServiceWorker', { bypass: false });
   await navigate(new URL('?view=movies', base).href);
   await evaluate(`navigator.serviceWorker.ready.then(() => new Promise(resolve => {

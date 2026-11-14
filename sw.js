@@ -1,14 +1,14 @@
 // Service worker: la programmazione deve restare leggibile anche senza rete.
 // La shell viene precaricata, i dati sono serviti prima dalla rete e poi dalla cache.
-const VERSION = 'fp-20261113-6';
+const VERSION = 'fp-20261113-7';
 const SHELL = `${VERSION}-shell`;
 const DATA = `${VERSION}-data`;
 
 const SHELL_ASSETS = [
   './',
   './index.html',
-  './styles.css?v=20261113h',
-  './app.js?v=20261113h',
+  './styles.css?v=20261113i',
+  './app.js?v=20261113i',
   './icon.svg',
   './manifest.webmanifest',
   './icons/icon-192.png',
@@ -73,6 +73,12 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+
+  // I feed non sono asset immutabili: mai bloccarne gli aggiornamenti in cache.
+  if (/\/calendars\/[^/]+\.ics$/.test(url.pathname)) {
+    event.respondWith(networkFirst(request, DATA));
+    return;
+  }
 
   if (request.mode === 'navigate') {
     event.respondWith((async () => {

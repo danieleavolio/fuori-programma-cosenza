@@ -16,6 +16,7 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
+from movie_metadata import enrich_schedule
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEDULE_FILE = ROOT / "data" / "schedule.json"
@@ -451,6 +452,19 @@ def parse_movie_detail(html: str) -> dict:
     return details
 
 
+def declared_show_details(raw: str) -> dict:
+    result = {}
+    if re.search(r"\b3D\b", raw, re.I):
+        result["format"] = "3D"
+    if re.search(
+        r"(?:\b(?:OV|VO)\b|V\.O\.|versione originale|original version)", raw, re.I
+    ):
+        result["version"] = "OV"
+    if re.search(r"\b(?:sottotitol[io]|sub(?:\s*ita)?)\b", raw, re.I):
+        result["subtitles"] = True
+    return result
+
+
 def get_movie_details(url: str) -> dict:
     empty = {
         "synopsis": "",
@@ -664,7 +678,12 @@ class TicketsParser(HTMLParser):
             self.show_url = (
                 urljoin(self.base_url, href) if href else self.current_movie["url"]
             )
-            self.show_text_parts = []
+            self.show_text_parts = [
+                a.get("title", ""),
+                " ",
+                a.get("data-format", ""),
+                " ",
+            ]
 
     def handle_endtag(self, tag: str) -> None:
         if not self.in_movie_preview or not self.current_movie:
@@ -714,6 +733,7 @@ class TicketsParser(HTMLParser):
                         "time": time_m.group(1),
                         "room": f"Sala {room_m.group(1)}" if room_m else "",
                         "url": self.show_url or self.current_movie["url"],
+                        **declared_show_details(show_raw),
                     }
                 )
             self.capture_showtime_a = False
@@ -847,6 +867,7 @@ def parse_garden_multi_days(
                             "time": time_str,
                             "room": sala,
                             "url": ticket_url,
+                            **declared_show_details(_html_text(o)),
                         }
                     )
 
@@ -1281,6 +1302,11 @@ def main() -> None:
         "movies": movies_output,
         "warnings": warnings,
     }
+    # Le valutazioni non devono mai impedire la pubblicazione degli orari.
+    try:
+        enrich_schedule(data, previous, directory=SCHEDULE_FILE.parent)
+    except Exception as error:
+        print(f"  Arricchimento film non completato: {error}")
     temporary_file = SCHEDULE_FILE.with_suffix(".json.tmp")
     temporary_file.write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

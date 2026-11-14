@@ -294,7 +294,8 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-04T15:11:13.874288+00:00"
     },
     {
       "id": "2",
@@ -455,7 +456,18 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-04T15:11:13.874288+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/il-gatto-col-cappello/",
+        "rating": 3.45,
+        "reviewCount": 6,
+        "criticsRating": 3.4,
+        "releaseDateIT": "2026-11-05",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-05"
     },
     {
       "id": "3",
@@ -704,7 +716,20 @@
           "date": "15/11/2026",
           "venue": "unical"
         }
-      ]
+      ],
+      "firstSeenAt": "2026-11-04T15:11:13.874288+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/se-domani-non-torno/",
+        "rating": 3.39,
+        "ratingCount": 18,
+        "reviewCount": 10,
+        "criticsRating": 2.67,
+        "audienceRating": 4.5,
+        "releaseDateIT": "2026-11-05",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-05"
     },
     {
       "id": "4",
@@ -938,7 +963,19 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-10T11:11:11.859356+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/un-weekend-artificiale/",
+        "rating": 2.0,
+        "ratingCount": 6,
+        "reviewCount": 5,
+        "criticsRating": 1.5,
+        "releaseDateIT": "2026-11-12",
+        "checkedAt": "2026-11-13T16:27:43.807196+00:00"
+      },
+      "releaseDateIT": "2026-11-12"
     },
     {
       "id": "5",
@@ -1094,7 +1131,20 @@
           "venue": "citrigno"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-10T11:11:11.859356+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/il-rumore-delle-cose-nuove/",
+        "rating": 2.69,
+        "ratingCount": 11,
+        "reviewCount": 4,
+        "criticsRating": 2.13,
+        "audienceRating": 3.95,
+        "releaseDateIT": "2026-11-12",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-12"
     },
     {
       "id": "6",
@@ -1241,7 +1291,18 @@
           "date": "15/11/2026",
           "venue": "unical"
         }
-      ]
+      ],
+      "firstSeenAt": "2026-11-10T11:11:11.859356+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/godzilla-minus-zero/",
+        "rating": 2.8,
+        "reviewCount": 6,
+        "criticsRating": 3.6,
+        "releaseDateIT": "2026-11-12",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-12"
     },
     {
       "id": "7",
@@ -1418,7 +1479,20 @@
           "date": "18/11/2026",
           "venue": "cinema-teatro-italia"
         }
-      ]
+      ],
+      "firstSeenAt": "2026-11-04T15:11:13.874288+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/dio-ride/",
+        "rating": 3.53,
+        "ratingCount": 38,
+        "reviewCount": 16,
+        "criticsRating": 2.97,
+        "audienceRating": 4.11,
+        "releaseDateIT": "2026-10-29",
+        "checkedAt": "2026-11-13T16:27:43.807196+00:00"
+      },
+      "releaseDateIT": "2026-10-29"
     },
     {
       "id": "8",
@@ -1498,7 +1572,20 @@
           "venue": "andromeda-river"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-04T16:21:34.889114+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/hope/",
+        "rating": 3.03,
+        "ratingCount": 29,
+        "reviewCount": 20,
+        "criticsRating": 2.97,
+        "audienceRating": 3.11,
+        "releaseDateIT": "2026-11-05",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-05"
     },
     {
       "id": "9",
@@ -1716,7 +1803,17 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-10T11:11:11.859356+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
+        "rating": 3.0,
+        "reviewCount": 2,
+        "releaseDateIT": "2026-11-12",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-12"
     },
     {
       "id": "10",
@@ -1823,7 +1920,19 @@
           "date": "18/11/2026",
           "venue": "unical"
         }
-      ]
+      ],
+      "firstSeenAt": "2026-11-11T22:26:35.753472+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/1984/lastoriainfinita/",
+        "rating": 3.39,
+        "ratingCount": 48,
+        "reviewCount": 1,
+        "audienceRating": 3.79,
+        "releaseDateIT": "2026-11-16",
+        "checkedAt": "2026-11-13T16:27:43.807196+00:00"
+      },
+      "releaseDateIT": "2026-11-16"
     },
     {
       "id": "11",
@@ -1932,7 +2041,19 @@
           "date": "18/11/2026",
           "venue": "unical"
         }
-      ]
+      ],
+      "firstSeenAt": "2026-11-11T22:26:35.753472+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/1968/2001odisseanellospazio/",
+        "rating": 4.68,
+        "ratingCount": 295,
+        "reviewCount": 9,
+        "audienceRating": 4.03,
+        "releaseDateIT": "2026-11-16",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-16"
     },
     {
       "id": "12",
@@ -1968,7 +2089,15 @@
           "venue": "andromeda-river"
         }
       ],
-      "announcedDates": []
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-04T16:21:34.889114+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
+        "releaseDateIT": "2026-12-16",
+        "checkedAt": "2026-11-13T16:27:43.807196+00:00"
+      },
+      "releaseDateIT": "2026-12-16"
     },
     {
       "id": "13",
@@ -2015,7 +2144,20 @@
           "date": "16/11/2026",
           "venue": "cinema-teatro-italia"
         }
-      ]
+      ],
+      "firstSeenAt": "2026-11-12T16:29:51.796773+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2025/kontinental-25/",
+        "rating": 3.61,
+        "ratingCount": 22,
+        "reviewCount": 15,
+        "criticsRating": 3.83,
+        "audienceRating": 3.0,
+        "releaseDateIT": "2026-06-25",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-06-25"
     },
     {
       "id": "14",
@@ -2071,7 +2213,20 @@
           "date": "15/11/2026",
           "venue": "unical"
         }
-      ]
+      ],
+      "firstSeenAt": "2026-11-04T15:11:13.874288+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/wild-horse-nine/",
+        "rating": 3.87,
+        "ratingCount": 52,
+        "reviewCount": 25,
+        "criticsRating": 4.04,
+        "audienceRating": 3.56,
+        "releaseDateIT": "2026-11-05",
+        "checkedAt": "2026-11-13T16:11:50.921970+00:00"
+      },
+      "releaseDateIT": "2026-11-05"
     }
   ],
   "warnings": []
