@@ -5,7 +5,11 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const legacy = path.join(root, 'static', 'legacy');
-const generated = spawnSync('python', ['scripts/build_calendars.py'], { cwd: root, stdio: 'inherit' });
+
+// Su Windows l'eseguibile si chiama python, sulle immagini di build (Linux, Vercel) spesso solo python3.
+const python = ['python', 'python3'].find((candidate) => spawnSync(candidate, ['--version'], { stdio: 'ignore' }).status === 0);
+if (!python) throw new Error('Python non trovato: serve per generare i calendari legacy');
+const generated = spawnSync(python, ['scripts/build_calendars.py'], { cwd: root, stdio: 'inherit' });
 if (generated.status !== 0) throw new Error('Generazione dei calendari legacy fallita');
 
 await rm(legacy, { recursive: true, force: true });
