@@ -3,3 +3,8 @@ Thumbs.db
 __pycache__/
 /tools/headroom/
 /calendars/
+/static/legacy/
+/node_modules/
+/.svelte-kit/
+/.vercel/
+/build/

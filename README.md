@@ -124,3 +124,28 @@ Il comando `headroom` è disponibile in `tools\headroom\bin`. Per attivare il pr
 Il sito è composto da file statici e viene pubblicato tramite GitHub Pages. Il workflow `.github/workflows/pages.yml` verifica il codice, conserva la programmazione pubblicata più recente tramite `scripts/prepare_release.py`, arricchisce i metadati e genera i feed prima del deploy.
 
 Il workflow `.github/workflows/update-schedule.yml` aggiorna automaticamente gli orari ogni quattro ore, i metadati e i calendari e pubblica direttamente l'artifact anche se il push del bot non è consentito. I due workflow condividono la stessa coda di deploy. Nessun task Windows o API key è necessario.
+
+## Preview SvelteKit e Vercel
+
+La migrazione è affiancata alla PWA esistente: GitHub Pages e i suoi URL non vengono sostituiti. L'applicazione SvelteKit usa rendering server-side per home, pagine film, cinema e programmazione di oggi/weekend; espone `robots.txt`, `sitemap.xml`, canonical, Open Graph e dati strutturati. La PWA completa, con preferiti locali, filtri e calendari multi-cinema, viene copiata durante la build in `/legacy/`.
+
+Per lo sviluppo locale:
+
+```powershell
+npm ci
+npm run dev
+npm run check
+npm run test:svelte
+npm run build
+npm run test:preview -- --browser
+```
+
+Importare questa repository in Vercel con preset SvelteKit e Node.js 22. `@sveltejs/adapter-auto` seleziona Vercel durante il deploy. Non cambiare il dominio attuale finché la preview e i flussi PWA/calendario non sono verificati; una preview Vercel risponde con `robots.txt` che blocca l'indicizzazione.
+
+La build esegue `scripts/build_calendars.py` e include nell'app legacy l'ultima programmazione presente in `data/schedule.json`. Per mantenere aggiornato anche Vercel, collegare il repository GitHub al progetto Vercel (così i commit periodici del workflow creano deployment). Se il secret `SCHEDULE_TOKEN` non permette di salvare un aggiornamento nel repository, GitHub Pages pubblica ugualmente il dato acquisito nell'artifact, ma Vercel continuerà a leggere il JSON dell'ultimo commit: configurare un token di scrittura oppure un deploy hook con dati aggiornati prima di affidargli il dominio.
+
+Le schede evento offrono Google Calendar tramite il suo editor precompilato e un iCalendar `.ics` individuale servito dal sito. La nuova pagina `/calendario` permette di scegliere più cinema anche senza JavaScript e distingue abbonamenti da appuntamenti singoli; i link di abbonamento puntano ai feed aggiornati di GitHub Pages, non a copie generate dalla preview. La copia legacy rimane disponibile sotto `/legacy/calendars/`.
+
+Il download dell'ICS è un'alternativa per Apple e altri client, ma i browser mobili decidono autonomamente quale app può importarlo. L'abbonamento Google tramite URL continua a richiedere il web desktop. Aggiungerlo direttamente a un account Google da mobile richiede un'integrazione Google Calendar API e OAuth verificata; non si simula con un link e non è attivata senza credenziali/configurazione OAuth.
+
+`npm run test:preview -- --browser` avvia una preview di produzione temporanea sulla porta 4387, verifica HTML SSR, sitemap, selezioni calendario, date e UID iCalendar, pagine mancanti e layout su quattro larghezze da 320 a 1280 px. Il controllo browser richiede Chrome/Chromium (`CHROME_BIN` se non è nel percorso standard). Il workflow `.github/workflows/svelte-preview.yml` esegue questi controlli separatamente dal deploy Pages; non pubblica né modifica il sito attuale.
