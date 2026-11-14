@@ -92,24 +92,25 @@ try {
       layouts++;
     }
   }
-  // Da telefono il pulsante Google deve portare alla pagina "Da URL" del calendario web.
+  // Il pulsante calendario scarica il file .ics sia da telefono sia da computer.
   await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 3, mobile: true });
   await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
   await navigate(new URL('/', base).href, '#calendar-open');
   await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'programmazione caricata');
   await evaluate('document.querySelector("#calendar-open").click()');
   assert.ok(await evaluate('document.querySelector("#calendar-dialog").open'));
-  await waitFor('document.querySelector("#calendar-google").getAttribute("href")', 'link Google Calendar');
+  await waitFor('document.querySelector("#calendar-google").getAttribute("href")', 'link file .ics');
   const googleHref = await evaluate('document.querySelector("#calendar-google").getAttribute("href")');
-  assert.ok(googleHref.startsWith('https://calendar.google.com/calendar/u/0/r/settings/addbyurl'), googleHref);
+  assert.ok(googleHref.endsWith('.ics'), googleHref);
+  assert.ok(!googleHref.includes('calendar.google.com'), googleHref);
   await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
   await cdp('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false });
   await navigate(new URL('/', base).href, '#calendar-open');
   await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'programmazione caricata');
   await evaluate('document.querySelector("#calendar-open").click()');
-  await waitFor('document.querySelector("#calendar-google").getAttribute("href")', 'link Google Calendar desktop');
+  await waitFor('document.querySelector("#calendar-google").getAttribute("href")', 'link file .ics desktop');
   const googleDesktop = await evaluate('document.querySelector("#calendar-google").getAttribute("href")');
-  assert.ok(googleDesktop.includes('calendar.google.com/calendar/r?cid='), googleDesktop);
+  assert.ok(googleDesktop.endsWith('.ics'), googleDesktop);
 
   // Offline: dopo l'installazione il service worker deve servire la home dalla cache.
   await waitFor('Boolean(navigator.serviceWorker.controller)', 'service worker attivo');
@@ -123,6 +124,7 @@ try {
   assert.equal(await evaluate('document.querySelectorAll("input[type=checkbox]:checked").length'), 1);
   assert.ok(await evaluate('document.querySelector("input[type=url]").value.endsWith("/garden.ics")'));
   assert.ok(await evaluate('document.querySelector("a[href^=webcal]").getAttribute("href").endsWith("/garden.ics")'));
+  assert.ok(await evaluate('[...document.querySelectorAll("a.calendar-app-link")].some((a) => a.getAttribute("href")?.endsWith("/garden.ics"))'));
   assert.equal(runtimeErrors.length, 0, runtimeErrors.join('\n'));
   console.log(JSON.stringify({ layouts, widths: [320, 390, 768, 1280], calendarWithoutJavaScript: true, runtimeErrors }));
 } finally {

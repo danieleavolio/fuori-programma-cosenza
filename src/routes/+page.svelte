@@ -11,12 +11,11 @@
   <meta property="og:title" content="Fuori programma — Cinema a Cosenza e Rende" />
   <meta property="og:description" content="Tutti gli orari dei cinema di Cosenza, Rende e Zumpano in un solo posto." />
   <meta property="og:url" content={data.canonical} />
-  <meta property="og:locale" content="it_IT" />
   {#if data.movies[0]?.poster}<meta property="og:image" content={data.movies[0].poster} />{/if}
   <meta name="twitter:card" content="summary_large_image" />
   {#if data.movies[0]?.poster}<meta name="twitter:image" content={data.movies[0].poster} />{/if}
   <JsonLd schema={data.schema} />
-  <script src="/app.js?v=20261114a" defer></script>
+  <script src="/app.js?v=20261114b" defer></script>
 </svelte:head>
 
 <section class="page-heading" aria-labelledby="page-title">
@@ -187,7 +186,7 @@
   <section class="calendar-subscribe" aria-labelledby="calendar-app-title">
     <h3 id="calendar-app-title">2. Aggiungi alla tua app</h3>
     <div class="calendar-apps">
-      <a id="calendar-google" class="calendar-app-link" href="#calendar-dialog-title" target="_blank" rel="noopener noreferrer"><strong>Google Calendar</strong><small>Aggiunta da URL, una volta sola</small></a>
+      <a id="calendar-google" class="calendar-app-link" href="#calendar-dialog-title"><strong>Scarica il file .ics</strong><small>Da importare una volta, senza aggiornamenti</small></a>
       <a id="calendar-apple" class="calendar-app-link" href="#calendar-dialog-title"><strong>Apple Calendario</strong><small>Apri la richiesta di abbonamento</small></a>
       <a id="calendar-outlook" class="calendar-app-link" href="#calendar-dialog-title" target="_blank" rel="noopener noreferrer"><strong>Outlook</strong><small>Aggiungi dalla versione web</small></a>
       <button id="calendar-copy" type="button" class="calendar-app-link"><strong>Copia link</strong><small>Per altre app di calendario</small></button>
@@ -195,7 +194,7 @@
     <p class="calendar-help" id="calendar-subscription-help">Un solo calendario per i cinema selezionati. Nessun promemoria per ogni proiezione; i tempi di aggiornamento dipendono dall’app. Per cambiare cinema, sostituisci l’abbonamento precedente.</p>
     <details class="calendar-instructions">
       <summary>Come aggiungerlo su Google Calendar</summary>
-      <p>Apri Google Calendar, scegli Altri calendari → + → Da URL e incolla il link copiato qui. Dal telefono, se la pagina si apre in versione mobile e non trovi «Da URL», attiva «Sito desktop» nel menu del browser. Dopo l’aggiunta il calendario compare nell’app su iPhone e Android con lo stesso account Google.</p>
+      <p>Su computer apri Google Calendar, scegli Altri calendari → + → Da URL e incolla il link copiato qui: il calendario si aggiorna da solo e compare nell’app su iPhone e Android con lo stesso account Google. Il file .ics scaricato, invece, è una copia degli spettacoli attuali.</p>
     </details>
   </section>
   <details class="calendar-export" id="calendar-export">

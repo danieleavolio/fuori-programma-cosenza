@@ -50,18 +50,18 @@
       <h3 id="subscribe-title">2. Aggiungi alla tua app</h3>
       <div class="calendar-apps">
         <a class="calendar-app-link" href={data.apple}><strong>Apple Calendario</strong><small>Apri la richiesta di abbonamento</small></a>
-        <a class="calendar-app-link" href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" target="_blank" rel="noopener noreferrer"><strong>Google Calendar</strong><small>Aggiunta da URL, una volta sola</small></a>
+        <a class="calendar-app-link" href={data.feed}><strong>Scarica il file .ics</strong><small>Da importare una volta, senza aggiornamenti</small></a>
         <a class="calendar-app-link" href={data.outlook} target="_blank" rel="noopener noreferrer"><strong>Outlook</strong><small>Aggiungi dalla versione web</small></a>
         <button class="calendar-app-link" type="button" onclick={copyLink}><strong>Copia link</strong><small>Per altre app di calendario</small></button>
       </div>
-      <p class="calendar-help"><strong>Sul telefono:</strong> l’app Google Calendar non aggiunge un calendario da un link. Apri il pulsante Google Calendar qui sopra — se la pagina si apre in versione mobile e non trovi «Da URL», attiva «Sito desktop» nel menu del browser — poi incolla il link copiato. Il calendario compare nell’app su iPhone e Android con lo stesso account Google.</p>
+      <p class="calendar-help"><strong>Sul telefono:</strong> il file .ics si apre nell’app calendario del dispositivo o si salva per importarlo. È una copia degli spettacoli attuali: non si aggiorna da sola. Per un abbonamento che si aggiorna, copia il link e aggiungilo dalla versione desktop di Google Calendar (Altri calendari → + → Da URL).</p>
       <p class="calendar-help">Un solo calendario per i cinema selezionati. Nessun promemoria per ogni proiezione; i tempi di aggiornamento dipendono dall’app. Per cambiare cinema, sostituisci l’abbonamento precedente.</p>
       <label class="feed-label" for="feed-url">Link dell’abbonamento</label>
       <input class="feed-url" id="feed-url" type="url" readonly value={data.feed} aria-label="Link HTTPS del calendario aggiornabile" />
       <p class="calendar-help" role="status">{feedback}</p>
       <details class="calendar-instructions">
         <summary>Come aggiungerlo su Google Calendar</summary>
-        <p>Apri Google Calendar, scegli Altri calendari → + → Da URL e incolla il link copiato qui. Dal telefono, se la pagina si apre in versione mobile e non trovi «Da URL», attiva «Sito desktop» nel menu del browser. Dopo l’aggiunta il calendario compare nell’app su iPhone e Android con lo stesso account Google.</p>
+        <p>Su computer apri Google Calendar, scegli Altri calendari → + → Da URL e incolla il link copiato qui: il calendario si aggiorna da solo e compare nell’app su iPhone e Android con lo stesso account Google.</p>
       </details>
       <p class="calendar-help">Il calendario si aggiorna da solo: non serve aggiungerlo di nuovo quando cambiano gli orari.</p>
     </div>

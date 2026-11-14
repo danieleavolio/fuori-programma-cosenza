@@ -691,16 +691,14 @@ function updateCalendarSummary() {
   const feed = calendarFeedUrl(ids);
   const name = ids.length === scheduleData.venues.length
     ? 'Tutti i cinema' : scheduleData.venues.filter((v) => ids.includes(v.id)).map((v) => v.name).join(', ');
-  // L'app Google Calendar non aggiunge feed da URL: da telefono conviene aprire
-  // la pagina "Da URL" del calendario web, eventualmente in versione desktop.
-  const googleLink = !feed ? ''
-    : matchMedia('(pointer: coarse)').matches
-      ? 'https://calendar.google.com/calendar/u/0/r/settings/addbyurl'
-      : `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(feed)}`;
+  // L'app Google Calendar non aggiunge feed da URL: il file .ics apre l'import
+  // su telefono e scarica la copia su computer. Chi vuole l'abbonamento copia
+  // il link e lo aggiunge dalla versione desktop di Google Calendar.
+  const downloadLink = feed;
   summary.textContent = !ids.length ? 'Seleziona almeno un cinema per creare il tuo abbonamento.'
     : `${ids.length} ${ids.length === 1 ? 'cinema selezionato' : 'cinema selezionati'} · ${allEvents.length} spettacoli futuri${allEvents.length ? ` · ${new Set(allEvents.map((event) => event.title)).size} film` : '. Gli orari futuri compariranno quando pubblicati.'}`;
   const links = {
-    '#calendar-google': googleLink,
+    '#calendar-google': downloadLink,
     '#calendar-apple': feed.replace(/^https?:/, 'webcal:'),
     '#calendar-outlook': feed ? `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(feed)}&name=${encodeURIComponent(`Fuori programma — ${name}`)}` : '',
   };

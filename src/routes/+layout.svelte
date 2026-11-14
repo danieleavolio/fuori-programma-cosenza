@@ -17,6 +17,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#15191e" media="(prefers-color-scheme: dark)" />
+  <meta property="og:site_name" content="Fuori programma" />
+  <meta property="og:locale" content="it_IT" />
 </svelte:head>
 
 <a class="skip-link" href="#programmazione">Vai alla programmazione</a>
