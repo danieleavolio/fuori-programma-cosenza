@@ -3,6 +3,12 @@ Thumbs.db
 __pycache__/
 /tools/headroom/
 /calendars/
+/static/app.js
+/static/styles.css
+/static/icon.svg
+/static/icons/
+/static/calendars/
+/static/data/
 /static/legacy/
 /node_modules/
 /.svelte-kit/

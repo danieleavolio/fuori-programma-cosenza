@@ -1,7 +1,16 @@
 import schedule from '../../../data/schedule.json';
 import venueInfo from '../../../data/venues-info.json';
 
-export type Show = { time: string; room?: string; url?: string; format?: string; version?: string; subtitles?: boolean };
+export type Show = {
+  time: string;
+  room?: string;
+  url?: string;
+  format?: string;
+  language?: string;
+  version?: string;
+  subtitles?: boolean;
+  tags?: string[];
+};
 export type ScreeningGroup = { date: string; venue: string; shows: Show[] };
 export type Movie = {
   id: string;
@@ -13,13 +22,23 @@ export type Movie = {
   genres?: string[];
   director?: string;
   year?: string;
+  language?: string;
   cast?: string;
   trailer?: string;
   synopsis?: string;
   releaseDateIT?: string;
   firstSeenAt?: string;
-  external?: { rating?: number; ratingCount?: number; criticsRating?: number; audienceRating?: number; source?: string };
+  external?: {
+    rating?: number;
+    ratingCount?: number;
+    criticsRating?: number;
+    audienceRating?: number;
+    source?: string;
+    url?: string;
+    checkedAt?: string;
+  };
   venueUrls?: Record<string, string>;
+  announcedDates?: { date: string; venue: string }[];
   shows: ScreeningGroup[];
 };
 export type Venue = { id: string; name: string; location: string; source: string; status: string };
@@ -71,4 +90,17 @@ export function allScreenings() {
   return movies.flatMap((movie) => movie.shows.flatMap((group) => group.shows.map((show) => ({
     movie, group, show, venue: venues.find((item) => item.id === group.venue)
   })))).filter((item) => item.venue);
+}
+
+/**
+ * "Adesso" con le lancette di Roma. Il server di deploy gira in UTC: senza
+ * questo, fra mezzanotte e le due il sito mostrerebbe il giorno prima.
+ */
+export function romeNow(): Date {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+  }).formatToParts(new Date());
+  const part = (type: string) => Number(parts.find((item) => item.type === type)?.value);
+  return new Date(part('year'), part('month') - 1, part('day'), part('hour'), part('minute'), part('second'));
 }

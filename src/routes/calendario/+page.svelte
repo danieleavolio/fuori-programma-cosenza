@@ -22,72 +22,63 @@
   <meta property="og:url" content={data.canonical} />
 </svelte:head>
 
-<p class="bread"><a href="/">Home</a> / Calendario</p>
-<p class="eyebrow">Il cinema nella tua agenda</p>
-<h1>Segui i tuoi cinema</h1>
-<p class="intro">Un calendario separato, con la programmazione delle sale che scegli. Gli aggiornamenti arrivano attraverso l’abbonamento: non devi importare un file ogni volta.</p>
+<section class="page-heading" aria-labelledby="page-title">
+  <h1 id="page-title">Segui i tuoi cinema</h1>
+  <p>Un calendario separato, aggiornato tramite abbonamento</p>
+</section>
 
-<form method="GET" class="calendar-note">
-  <fieldset>
-    <legend><strong>1. Scegli uno o più cinema</strong></legend>
-    <div class="calendar-choices">
-      {#each data.venues as venue}
-        <label><input type="checkbox" name="cinema" value={venue.id} checked={data.selected.includes(venue.id)} /> <span>{venue.name}<small>{venue.location}</small></span></label>
-      {/each}
-    </div>
+<form method="GET" class="venue-schedule-block">
+  <div class="calendar-selection-head">
+    <strong>1. Scegli uno o più cinema</strong>
+    <button class="text-button" type="submit">Aggiorna selezione</button>
+  </div>
+  <fieldset class="venue-choice-grid calendar-venues">
+    <legend class="sr-only">Cinema da seguire</legend>
+    {#each data.venues as venue (venue.id)}
+      <label class="venue-choice">
+        <input type="checkbox" name="cinema" value={venue.id} checked={data.selected.includes(venue.id)} />
+        <span><strong>{venue.name}</strong><small>{venue.location}</small></span>
+      </label>
+    {/each}
   </fieldset>
-  <button class="button" type="submit">Aggiorna selezione</button>
-  <p class="muted">Senza selezione viene mostrato il calendario di tutti i cinema.</p>
+  <p class="calendar-help">Senza selezione viene mostrato il calendario di tutti i cinema.</p>
 </form>
 
 {#if data.feed}
-  <section class="calendar-note">
-    <h2>2. Aggiungi un abbonamento</h2>
-    <p>Selezione attiva: <strong>{data.selected.length} cinema</strong>. Per cambiarli, sostituisci il vecchio abbonamento per evitare doppioni.</p>
-    <div class="calendar-methods">
-      <article>
-        <h3>Apple Calendario</h3>
-        <p>Apri il link da Safari e conferma la richiesta di abbonamento, se supportata. Se non si apre, usa il link HTTPS qui sotto nelle impostazioni di Calendario, alla voce Aggiungi calendario con iscrizione.</p>
-        <a class="button" href={data.apple}>Richiedi abbonamento Apple</a>
-      </article>
-      <article>
-        <h3>Google Calendar</h3>
-        <p>L’app mobile non aggiunge calendari da URL. Da un computer apri Google Calendar → Altri calendari → + → Da URL, incolla il link e conferma. Poi rendilo visibile nell’app sul telefono.</p>
-        <a class="button secondary" href={data.google} rel="noopener" target="_blank">Apri Google Calendar sul web</a>
-        <p class="muted">Non è un pulsante di aggiunta diretta all’app mobile.</p>
-      </article>
-      <article>
-        <h3>Outlook e altre app</h3>
-        <p>Su Outlook web usa l’aggiunta da Internet. Nelle altre app cerca la funzione Iscriviti tramite URL: importare il file crea invece una copia non aggiornata.</p>
-        <a class="button secondary" href={data.outlook} rel="noopener" target="_blank">Apri Outlook sul web</a>
-      </article>
+  <section class="venue-schedule-block" aria-labelledby="subscribe-title">
+    <div class="calendar-subscribe">
+      <h3 id="subscribe-title">2. Aggiungi alla tua app</h3>
+      <div class="calendar-apps">
+        <a class="calendar-app-link" href={data.apple}><strong>Apple Calendario</strong><small>Apri la richiesta di abbonamento</small></a>
+        <a class="calendar-app-link" href={data.google} target="_blank" rel="noopener noreferrer"><strong>Google Calendar</strong><small>Aggiunta iniziale dal web su computer</small></a>
+        <a class="calendar-app-link" href={data.outlook} target="_blank" rel="noopener noreferrer"><strong>Outlook</strong><small>Aggiungi dalla versione web</small></a>
+        <button class="calendar-app-link" type="button" onclick={copyLink}><strong>Copia link</strong><small>Per altre app di calendario</small></button>
+      </div>
+      <p class="calendar-help">Un solo calendario per i cinema selezionati. Nessun promemoria per ogni proiezione; i tempi di aggiornamento dipendono dall’app. Per cambiare cinema, sostituisci l’abbonamento precedente.</p>
+      <label class="feed-label" for="feed-url">Link dell’abbonamento</label>
+      <input class="feed-url" id="feed-url" type="url" readonly value={data.feed} aria-label="Link HTTPS del calendario aggiornabile" />
+      <p class="calendar-help" role="status">{feedback}</p>
+      <details class="calendar-instructions">
+        <summary>Come aggiungerlo su Google Calendar</summary>
+        <p>L’app mobile non aggiunge calendari da URL. Da un computer: apri Google Calendar → Altri calendari → + → Da URL, incolla il link copiato qui e conferma. Poi abilita il calendario nell’app sul telefono. Il pulsante Google apre il collegamento di aggiunta, se supportato.</p>
+      </details>
+      <p class="calendar-help">Il feed resta sul sito attuale, anche da questa preview. Nessun promemoria automatico per tutte le proiezioni.</p>
     </div>
-    <label class="calendar-url">Link dell’abbonamento
-      <input type="url" readonly value={data.feed} aria-label="Link HTTPS del calendario aggiornabile" />
-    </label>
-    <button class="button secondary" type="button" onclick={copyLink}>Copia link</button>
-    <p role="status">{feedback}</p>
-    <p class="muted">Il feed resta sul sito attuale, anche da questa preview. La frequenza di sincronizzazione dipende dall’app; nessun promemoria automatico per tutte le proiezioni.</p>
   </section>
 {:else}
-  <p class="notice">Nessun cinema riconosciuto. Scegli una sala dall’elenco.</p>
+  <p class="no-times-note">Nessun cinema riconosciuto. Scegli una sala dall’elenco.</p>
 {/if}
 
-<aside class="calendar-note">
-  <h2>Vuoi un solo spettacolo?</h2>
-  <p>Apri la <a href="/">scheda del film</a> e scegli Google Calendar oppure il file per altre app accanto all’orario. È un appuntamento singolo: non si aggiorna con il feed.</p>
-  <p class="muted">L’apertura dell’app installata dipende dal telefono e dal browser. Se sei nel browser interno di un social, apri la pagina in Safari o Chrome.</p>
+<aside class="venue-schedule-block">
+  <div class="calendar-subscribe">
+    <h3>Vuoi un solo spettacolo?</h3>
+    <p class="calendar-help">Apri la <a href="/">scheda del film</a> e scegli Google Calendar oppure il file per altre app accanto all’orario. È un appuntamento singolo: non si aggiorna con il feed.</p>
+    <p class="calendar-help">L’apertura dell’app installata dipende dal telefono e dal browser. Se sei nel browser interno di un social, apri la pagina in Safari o Chrome.</p>
+  </div>
 </aside>
 
 <style>
-  fieldset { border: 0; padding: 0; margin: 0 0 18px; }
-  .calendar-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 10px; margin-top: 14px; }
-  .calendar-choices label { display: flex; gap: 10px; align-items: center; min-height: 56px; padding: 12px; border: 1px solid #dce4dc; border-radius: 9px; cursor: pointer; }
-  .calendar-choices small { display: block; color: #626b63; margin-top: 4px; }
-  .calendar-choices input { width: 20px; height: 20px; }
-  .calendar-methods { display: grid; gap: 18px; margin: 20px 0; }
-  .calendar-methods article { border-top: 1px solid #e0e5e0; padding-top: 12px; }
-  .calendar-methods p { line-height: 1.6; }
-  .calendar-url { display: block; font-weight: 650; margin: 20px 0 10px; }
-  .calendar-url input { display: block; width: 100%; min-width: 0; margin-top: 8px; padding: 12px; min-height: 44px; border: 1px solid #a9b6ab; border-radius: 6px; font-size: 16px; }
+  .feed-label { display: block; margin: 14px 0 6px; font-size: 12px; font-weight: 700; }
+  .feed-url { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font: 600 12px/1.4 var(--mono); }
+  .calendar-subscribe { margin: 20px; }
 </style>

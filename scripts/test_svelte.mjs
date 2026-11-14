@@ -8,15 +8,20 @@ const get = async (path) => {
 
 const home = await get('/');
 assert.equal(home.response.status, 200);
-assert.match(home.text, /<h1>Il cinema, fuori programma\.<\/h1>/);
-assert.match(home.text, /<article class="movie-card"|<a class="movie-card"/);
+assert.match(home.text, /<h1 id="page-title">Programmazione cinema<\/h1>/);
+assert.match(home.text, /<article class="movie-catalog-card/);
+assert.match(home.text, /id="movies-grid"/);
+assert.match(home.text, /src="\/app\.js"/);
 assert.match(home.text, /rel="canonical"/);
 assert.match(home.text, /property="og:title"/);
 assert.match(home.text, /application\/ld\+json/);
-assert.match(home.text, /\/legacy\//);
+assert.doesNotMatch(home.text, /href="\/legacy\//);
 
-const filmSlug = home.text.match(/href="(\/film\/[^"]+)"/)?.[1];
-const cinemaSlug = home.text.match(/href="(\/cinema\/[^"]+)"/)?.[1];
+const sitemap = await get('/sitemap.xml');
+assert.equal(sitemap.response.status, 200);
+assert.match(sitemap.text, /<urlset/);
+const filmSlug = sitemap.text.match(/<loc>[^<]*?(\/film\/[^<]+)<\/loc>/)?.[1];
+const cinemaSlug = sitemap.text.match(/<loc>[^<]*?(\/cinema\/[^<]+)<\/loc>/)?.[1];
 assert.ok(filmSlug);
 assert.ok(cinemaSlug);
 
@@ -32,10 +37,8 @@ for (const path of [filmSlug, cinemaSlug, '/programmazione/oggi', '/programmazio
   }
 }
 
-const sitemap = await get('/sitemap.xml');
-assert.equal(sitemap.response.status, 200);
-assert.match(sitemap.text, /<urlset/);
-assert.match(sitemap.text, new RegExp(filmSlug.replaceAll('/', '\\/')));
+const sitemapFilm = sitemap.text.match(new RegExp(filmSlug.replaceAll('/', '\\/')));
+assert.ok(sitemapFilm);
 const robots = await get('/robots.txt');
 assert.equal(robots.response.status, 200);
 assert.match(robots.text, /Sitemap:/);
@@ -96,4 +99,4 @@ for (const path of ['/film/inesistente', '/cinema/inesistente', '/programmazione
   assert.equal((await get(path)).response.status, 404, path);
 }
 
-console.log(JSON.stringify({ status: 'passed', homeMovies: (home.text.match(/class="movie-card"/g) || []).length, sampleFilm: filmSlug, calendar: 'all/subset/invalid', eventDates: 'winter/leap/invalid' }));
+console.log(JSON.stringify({ status: 'passed', homeMovies: (home.text.match(/class="movie-catalog-card/g) || []).length, sampleFilm: filmSlug, calendar: 'all/subset/invalid', eventDates: 'winter/leap/invalid' }));

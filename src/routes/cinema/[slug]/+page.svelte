@@ -1,6 +1,16 @@
 <script lang="ts">
   import JsonLd from '../../../lib/JsonLd.svelte';
   let { data } = $props();
+
+  const byDay = $derived.by(() => {
+    const days = new Map<string, typeof data.screenings>();
+    for (const item of data.screenings) {
+      const list = days.get(item.dateISO) || [];
+      list.push(item);
+      days.set(item.dateISO, list);
+    }
+    return [...days.entries()];
+  });
 </script>
 
 <svelte:head>
@@ -15,28 +25,62 @@
   <JsonLd schema={data.schema} />
 </svelte:head>
 
-<p class="bread"><a href="/">Home</a> / Cinema / {data.venue.name}</p>
-<p class="eyebrow">Cinema · {data.info.city || data.venue.location}</p>
-<h1>{data.venue.name}</h1>
-<p class="intro">{data.info.address}{#if data.info.city}, {data.info.city}{/if}</p>
-{#if data.info.mapsUrl}<p><a class="button" href={data.info.mapsUrl} rel="noopener">Apri indicazioni stradali</a></p>{/if}
-{#if data.info.phone}<p><a href={`tel:${data.info.phoneHref || data.info.phone}`}>{data.info.phone}</a></p>{/if}
-{#if data.info.features?.length}<div class="film-meta">{#each data.info.features as feature}<span class="tag">{feature}</span>{/each}</div>{/if}
-
-<section>
-  <h2 class="section-title">Programmazione pubblicata</h2>
-  {#if data.screenings.length}
-    <div class="screening-list">
-      {#each data.screenings as item}
-        <article class="show-row">
-          <time class="show-time" datetime={item.dateISO}>{item.dateLabel}<br />{item.show.time}</time>
-          <div>
-            <h3><a href={item.filmPath}>{item.movie.title}</a></h3>
-            <p class="muted">{item.group.date}{#if item.show.room} · {item.show.room}{/if}</p>
-          </div>
-          <a class="button" href={item.url} rel="nofollow noopener" target="_blank">Biglietti</a>
-        </article>
-      {/each}
-    </div>
-  {:else}<p class="notice">Non risultano spettacoli pubblicati al momento.</p>{/if}
+<section class="page-heading" aria-labelledby="page-title">
+  <h1 id="page-title">{data.venue.name}</h1>
+  <p>{[data.info.address, data.info.city || data.venue.location].filter(Boolean).join(' · ')}</p>
 </section>
+
+<section class="venue-schedule-block" aria-label="Informazioni sulla sala">
+  <div class="venue-info-row">
+    <p class="venue-info-address">{data.info.address}{#if data.info.city}, {data.info.city}{/if}</p>
+    <div class="venue-info-actions">
+      {#if data.info.mapsUrl}<a href={data.info.mapsUrl} target="_blank" rel="noopener">Indicazioni ↗</a>{/if}
+      {#if data.info.phone}<a href={`tel:${data.info.phoneHref || data.info.phone}`}>{data.info.phone}</a>{/if}
+      {#if data.venue.source}<a href={data.venue.source} target="_blank" rel="noopener">Biglietteria ↗</a>{/if}
+    </div>
+  </div>
+  {#if data.info.features?.length}
+    <div class="cinema-features">{#each data.info.features as feature}<span>{feature}</span>{/each}</div>
+  {/if}
+</section>
+
+<section class="cinema-section" aria-labelledby="screenings-title">
+  <div class="section-heading">
+    <h2 id="screenings-title">Programmazione pubblicata</h2>
+    <p class="section-note">{data.screenings.length} spettacoli</p>
+  </div>
+
+  {#if byDay.length}
+    {#each byDay as [iso, shows] (iso)}
+      <div class="venue-date-row">
+        <h6>{shows[0].dateLabel}</h6>
+        <div class="times-buttons">
+          {#each shows as show (show.movie.id + show.show.time + show.url)}
+            <div class="show-entry">
+              <a class="showtime" href={show.filmPath} aria-label={`${show.movie.title}, orari e sale`}>
+                <strong>{show.show.time}</strong>
+                <span class="showtime-room">{show.movie.title}</span>
+              </a>
+              <div class="show-entry-links">
+                <a href={show.url} target="_blank" rel="nofollow noopener">Biglietti</a>
+              </div>
+            </div>
+          {/each}
+        </div>
+      </div>
+    {/each}
+  {:else}
+    <p class="no-times-note">Non risultano spettacoli pubblicati al momento.</p>
+  {/if}
+</section>
+
+<style>
+  .venue-info-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+  .venue-info-address { margin: 0; }
+  .venue-info-actions { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; font-weight: 600; }
+  .venue-info-actions a { text-decoration: underline; text-underline-offset: 3px; }
+  .show-entry { display: flex; flex-direction: column; gap: 4px; }
+  .show-entry-links { display: flex; justify-content: center; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .show-entry-links a:hover { color: var(--ink); text-decoration: underline; }
+  .showtime-room { max-width: 150px; text-align: center; }
+</style>

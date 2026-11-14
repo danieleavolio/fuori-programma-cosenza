@@ -21,3 +21,15 @@ await mkdir(path.join(legacy, 'data'), { recursive: true });
 for (const item of ['schedule.json', 'venues-info.json']) {
   await cp(path.join(root, 'data', item), path.join(legacy, 'data', item));
 }
+
+// La home SvelteKit e' la stessa app: serviamo i suoi asset anche dalla radice,
+// cosi' app.js, styles.css e i calendari restano un'unica copia.
+const site = path.join(root, 'static');
+for (const item of ['app.js', 'styles.css', 'icon.svg', 'icons', 'calendars']) {
+  await rm(path.join(site, item), { recursive: true, force: true });
+  await cp(path.join(root, item), path.join(site, item), { recursive: true });
+}
+await mkdir(path.join(site, 'data'), { recursive: true });
+for (const item of ['schedule.json', 'venues-info.json']) {
+  await cp(path.join(root, 'data', item), path.join(site, 'data', item));
+}

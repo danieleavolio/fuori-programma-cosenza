@@ -1,6 +1,16 @@
 <script lang="ts">
   import JsonLd from '../../../lib/JsonLd.svelte';
   let { data } = $props();
+
+  const byDay = $derived.by(() => {
+    const days = new Map<string, typeof data.screenings>();
+    for (const item of data.screenings) {
+      const list = days.get(item.dateISO) || [];
+      list.push(item);
+      days.set(item.dateISO, list);
+    }
+    return [...days.entries()];
+  });
 </script>
 
 <svelte:head>
@@ -15,24 +25,42 @@
   <JsonLd schema={data.schema} />
 </svelte:head>
 
-<p class="bread"><a href="/">Home</a> / Programmazione / {data.period}</p>
-<p class="eyebrow">Cosenza · Rende · Zumpano</p>
-<h1>{data.title}</h1>
-<p class="intro">Orari pubblicati dalle sale, con link alla biglietteria ufficiale.</p>
-{#if data.screenings.length}
-  <div class="screening-list">
-    {#each data.screenings as item}
-      <article class="show-row">
-        <time class="show-time" datetime={item.startDate}>{item.show.time}<br /><small>{item.dateLabel}</small></time>
-        <div>
-          <h3><a href={item.filmPath}>{item.movie.title}</a></h3>
-          <p class="muted">{item.venue.name}{#if item.show.room} · {item.show.room}{/if}</p>
-        </div>
-        <a class="button" href={item.url} rel="nofollow noopener" target="_blank">Biglietti</a>
-      </article>
-    {/each}
-  </div>
+<section class="page-heading" aria-labelledby="page-title">
+  <h1 id="page-title">{data.title}</h1>
+  <p>{data.screenings.length} spettacoli pubblicati</p>
+</section>
+
+{#if byDay.length}
+  {#each byDay as [iso, shows] (iso)}
+    <section class="cinema-section" aria-label={shows[0].dateLabel}>
+      <div class="section-heading">
+        <h2>{shows[0].dateLabel}</h2>
+        <p class="section-note">{shows.length} spettacoli</p>
+      </div>
+      <div class="times-buttons">
+        {#each shows as show (show.movie.id + show.venue.id + show.show.time)}
+          <div class="show-entry">
+            <a class="showtime" href={show.filmPath}>
+              <strong>{show.show.time}</strong>
+              <span class="showtime-room">{show.movie.title}</span>
+              <span class="showtime-format">{show.venue.name}</span>
+            </a>
+            <div class="show-entry-links">
+              <a href={show.url} target="_blank" rel="nofollow noopener">Biglietti</a>
+            </div>
+          </div>
+        {/each}
+      </div>
+    </section>
+  {/each}
 {:else}
-  <p class="notice">Le sale non hanno ancora pubblicato spettacoli per questo periodo. Gli orari compaiono qui quando disponibili.</p>
+  <p class="no-times-note">Le sale non hanno ancora pubblicato spettacoli per questo periodo. Gli orari compaiono qui quando disponibili.</p>
 {/if}
-<p class="muted">Per la vista interattiva, i filtri e i calendari: <a href="/legacy/">apri l’app completa</a>.</p>
+
+<style>
+  .show-entry { display: flex; flex-direction: column; gap: 4px; }
+  .show-entry-links { display: flex; justify-content: center; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .show-entry-links a:hover { color: var(--ink); text-decoration: underline; }
+  .showtime { width: 190px; }
+  .showtime-room { max-width: 100%; text-align: center; overflow-wrap: anywhere; }
+</style>
