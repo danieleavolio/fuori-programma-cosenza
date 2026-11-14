@@ -17,7 +17,6 @@ export const load: PageServerLoad = ({ url }) => {
     venues, selected, feed,
     canonical: `${url.origin}/calendario`,
     apple: feed.replace(/^https:/, 'webcal:'),
-    google: feed ? `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(feed)}` : '',
     outlook: feed ? `https://outlook.live.com/calendar/0/addfromweb?${new URLSearchParams({ url: feed, name })}` : ''
   };
 };

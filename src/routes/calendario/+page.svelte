@@ -50,19 +50,20 @@
       <h3 id="subscribe-title">2. Aggiungi alla tua app</h3>
       <div class="calendar-apps">
         <a class="calendar-app-link" href={data.apple}><strong>Apple Calendario</strong><small>Apri la richiesta di abbonamento</small></a>
-        <a class="calendar-app-link" href={data.google} target="_blank" rel="noopener noreferrer"><strong>Google Calendar</strong><small>Aggiunta iniziale dal web su computer</small></a>
+        <a class="calendar-app-link" href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" target="_blank" rel="noopener noreferrer"><strong>Google Calendar</strong><small>Aggiunta da URL, una volta sola</small></a>
         <a class="calendar-app-link" href={data.outlook} target="_blank" rel="noopener noreferrer"><strong>Outlook</strong><small>Aggiungi dalla versione web</small></a>
         <button class="calendar-app-link" type="button" onclick={copyLink}><strong>Copia link</strong><small>Per altre app di calendario</small></button>
       </div>
+      <p class="calendar-help"><strong>Sul telefono:</strong> l’app Google Calendar non aggiunge un calendario da un link. Apri il pulsante Google Calendar qui sopra — se la pagina si apre in versione mobile e non trovi «Da URL», attiva «Sito desktop» nel menu del browser — poi incolla il link copiato. Il calendario compare nell’app su iPhone e Android con lo stesso account Google.</p>
       <p class="calendar-help">Un solo calendario per i cinema selezionati. Nessun promemoria per ogni proiezione; i tempi di aggiornamento dipendono dall’app. Per cambiare cinema, sostituisci l’abbonamento precedente.</p>
       <label class="feed-label" for="feed-url">Link dell’abbonamento</label>
       <input class="feed-url" id="feed-url" type="url" readonly value={data.feed} aria-label="Link HTTPS del calendario aggiornabile" />
       <p class="calendar-help" role="status">{feedback}</p>
       <details class="calendar-instructions">
         <summary>Come aggiungerlo su Google Calendar</summary>
-        <p>L’app mobile non aggiunge calendari da URL. Da un computer: apri Google Calendar → Altri calendari → + → Da URL, incolla il link copiato qui e conferma. Poi abilita il calendario nell’app sul telefono. Il pulsante Google apre il collegamento di aggiunta, se supportato.</p>
+        <p>Apri Google Calendar, scegli Altri calendari → + → Da URL e incolla il link copiato qui. Dal telefono, se la pagina si apre in versione mobile e non trovi «Da URL», attiva «Sito desktop» nel menu del browser. Dopo l’aggiunta il calendario compare nell’app su iPhone e Android con lo stesso account Google.</p>
       </details>
-      <p class="calendar-help">Il feed resta sul sito attuale, anche da questa preview. Nessun promemoria automatico per tutte le proiezioni.</p>
+      <p class="calendar-help">Il calendario si aggiorna da solo: non serve aggiungerlo di nuovo quando cambiano gli orari.</p>
     </div>
   </section>
 {:else}

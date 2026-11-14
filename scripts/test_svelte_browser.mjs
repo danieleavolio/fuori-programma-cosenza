@@ -75,6 +75,13 @@ try {
     await loading;
     assert.ok(await evaluate(`Boolean(document.querySelector(${JSON.stringify(selector)}))`), `Missing ${selector} at ${url}`);
   };
+  const waitFor = async (expression, label) => {
+    for (let attempt = 0; attempt < 100; attempt++) {
+      if (await evaluate(expression)) return;
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    throw new Error(`Timeout: ${label}`);
+  };
   let layouts = 0;
   for (const width of [320, 390, 768, 1280]) {
     await cdp('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width < 700 });
@@ -85,6 +92,24 @@ try {
       layouts++;
     }
   }
+  // Da telefono il pulsante Google deve portare alla pagina "Da URL" del calendario web.
+  await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 3, mobile: true });
+  await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+  await navigate(new URL('/', base).href, '#calendar-open');
+  await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'programmazione caricata');
+  await evaluate('document.querySelector("#calendar-open").click()');
+  assert.ok(await evaluate('document.querySelector("#calendar-dialog").open'));
+  await waitFor('document.querySelector("#calendar-google").getAttribute("href")', 'link Google Calendar');
+  const googleHref = await evaluate('document.querySelector("#calendar-google").getAttribute("href")');
+  assert.ok(googleHref.startsWith('https://calendar.google.com/calendar/u/0/r/settings/addbyurl'), googleHref);
+  await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
+  await cdp('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false });
+  await navigate(new URL('/', base).href, '#calendar-open');
+  await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'programmazione caricata');
+  await evaluate('document.querySelector("#calendar-open").click()');
+  await waitFor('document.querySelector("#calendar-google").getAttribute("href")', 'link Google Calendar desktop');
+  const googleDesktop = await evaluate('document.querySelector("#calendar-google").getAttribute("href")');
+  assert.ok(googleDesktop.includes('calendar.google.com/calendar/r?cid='), googleDesktop);
   await cdp('Emulation.setScriptExecutionDisabled', { value: true });
   await navigate(new URL('/calendario?cinema=garden', base).href, 'form');
   assert.equal(await evaluate('document.querySelectorAll("input[type=checkbox]:checked").length'), 1);
