@@ -1,13 +1,13 @@
 // Service worker: la programmazione deve restare leggibile anche senza rete.
 // La shell viene precaricata, i dati sono serviti prima dalla rete e poi dalla cache.
-const VERSION = 'fp-20261114-1';
+const VERSION = 'fp-20261114-2';
 const SHELL = `${VERSION}-shell`;
 const DATA = `${VERSION}-data`;
 
 const SHELL_ASSETS = [
   './',
   './styles.css?v=20261113i',
-  './app.js?v=20261113i',
+  './app.js?v=20261114a',
   './icon.svg',
   './manifest.webmanifest',
   './icons/icon-192.png',
