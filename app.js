@@ -26,6 +26,15 @@ let venueInfo = {};
 // storico la mappa non esiste e i titoli restano testo semplice.
 const filmPaths = window.__FP_FILM_PATHS__ || {};
 
+// Ogni ridisegno della griglia deve conservare il link al film: se la mappa non
+// ha la voce (o manca del tutto) si riusa l'href gia' presente nel markup, che
+// arriva dal server o dal render precedente.
+function filmHref(movie) {
+  if (filmPaths[movie.id]) return filmPaths[movie.id];
+  const card = document.getElementById(`film-${movie.id}`) || document.getElementById(`day-film-${movie.id}`);
+  return card?.querySelector('.movie-title a')?.getAttribute('href') || '';
+}
+
 // State
 let scheduleData = { venues: [], movies: [], updatedAt: '' };
 let currentView = 'movies'; // 'movies' | 'schedule'
@@ -1635,7 +1644,7 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
         <div class="movie-card-details">
           <div class="movie-title-row">
             <span class="movie-state">${escapeHtml(state)}</span>
-            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${filmPaths[movie.id] ? `<a href="${escapeHtml(filmPaths[movie.id])}">${escapeHtml(movie.title)}</a>` : escapeHtml(movie.title)}</h3>
+            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${filmHref(movie) ? `<a href="${escapeHtml(filmHref(movie))}">${escapeHtml(movie.title)}</a>` : escapeHtml(movie.title)}</h3>
           </div>
           <div class="badge-wrap card-facts">
             <span class="film-duration">${escapeHtml(durationText || 'Durata n.d.')}</span>

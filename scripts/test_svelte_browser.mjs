@@ -116,6 +116,11 @@ try {
   assert.ok(titleLink.href.startsWith('/film/'), titleLink.href);
   assert.equal(titleLink.reached, true, 'il click sul titolo deve raggiungere il link');
   assert.equal(titleLink.expanded, false, 'il click sul titolo non deve aprire la scheda orari');
+  // Un refresh dei dati ridisegna la griglia: i link devono restare tutti.
+  await evaluate('document.querySelector("#refresh").click()');
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  const afterRefresh = await evaluate('[document.querySelectorAll(".movie-title a").length, document.querySelectorAll(".movie-catalog-card").length]');
+  assert.equal(afterRefresh[0], afterRefresh[1], 'ogni card deve avere il link al film');
   const filmTitleHref = titleLink.href;
   await navigate(new URL(filmTitleHref, base).href, '.film-summary');
   // Tornando indietro il wordmark deve riportare a una home gia' pronta: se la

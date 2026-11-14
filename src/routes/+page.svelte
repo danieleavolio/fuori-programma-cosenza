@@ -19,7 +19,7 @@
   <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
   {@html `<script>window.__FP_FILM_PATHS__=${JSON.stringify(data.paths).replace(/</g, '\\u003c')}</script>`}
-  <script src="/app.js?v=20261114b" defer></script>
+  <script src="/app.js?v=20261114c" defer></script>
 </svelte:head>
 
 <section class="page-heading" aria-labelledby="page-title">
