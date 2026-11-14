@@ -152,6 +152,12 @@ try {
   await navigate(new URL('/', base).href, '#page-title');
   assert.equal(await evaluate('document.querySelector("#page-title").textContent.trim()'), 'Programmazione cinema');
   await cdp('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+  // Navigazione interna (client-side) tra due pagine: la transizione Svelte non
+  // deve impedire il render della pagina nuova.
+  await navigate(new URL('/programmazione/oggi', base).href, '.page-enter h1');
+  await evaluate('document.querySelector("a.calendar-btn").click()');
+  await waitFor('location.pathname === "/calendario" && document.querySelector(".page-enter h1")', 'navigazione interna a /calendario');
+  assert.equal(await evaluate('document.querySelectorAll("h1").length'), 1);
   await cdp('Emulation.setScriptExecutionDisabled', { value: true });
   await navigate(new URL('/calendario?cinema=garden', base).href, 'form');
   assert.equal(await evaluate('document.querySelectorAll("input[type=checkbox]:checked").length'), 1);
