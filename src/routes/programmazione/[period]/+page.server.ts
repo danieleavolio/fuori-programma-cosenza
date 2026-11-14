@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { dateISO, dateTimeISO, dateLabel, filmPath, movies, showUrl, venues, venueDetails } from '../../../lib/server/data';
+import { ogDefault } from '../../../lib/server/og';
 import type { PageServerLoad } from './$types';
 
 function localISO(now: Date): string {
@@ -43,7 +44,7 @@ export const load: PageServerLoad = ({ params, url }) => {
   const title = period === 'oggi' ? 'Cinema oggi a Cosenza e Rende' : 'Cinema questo weekend a Cosenza e Rende';
   const canonical = `${url.origin}/programmazione/${period}`;
   return {
-    period, title, canonical, start, end, screenings,
+    period, title, canonical, ogImage: `${url.origin}${ogDefault}`, start, end, screenings,
     schema: {
       '@context': 'https://schema.org', '@type': 'ItemList', name: title,
       itemListElement: screenings.map((item, index) => ({

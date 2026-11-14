@@ -1,0 +1,19 @@
+{
+  "default": "/og/default.png",
+  "films": {
+    "se-domani-non-torno-2026": "/og/se-domani-non-torno-2026.jpg",
+    "avengers-doomsday-2026": "/og/avengers-doomsday-2026.jpg",
+    "il-gatto-col-cappello-2026": "/og/il-gatto-col-cappello-2026.jpg",
+    "un-weekend-artificiale-2026": "/og/un-weekend-artificiale-2026.jpg",
+    "il-rumore-delle-cose-nuove-2026": "/og/il-rumore-delle-cose-nuove-2026.jpg",
+    "hope-2026": "/og/hope-2026.jpg",
+    "godzilla-minus-zero-2026": "/og/godzilla-minus-zero-2026.jpg",
+    "dio-ride-2026": "/og/dio-ride-2026.jpg",
+    "scrooge-e-gli-spiriti-del-natale-2026": "/og/scrooge-e-gli-spiriti-del-natale-2026.jpg",
+    "la-storia-infinita-ried-1984": "/og/la-storia-infinita-ried-1984.jpg",
+    "2001-odissea-nello-spazio-1968": "/og/2001-odissea-nello-spazio-1968.jpg",
+    "dune-parte-tre-2026": "/og/dune-parte-tre-2026.jpg",
+    "kontinental-25-2025": "/og/kontinental-25-2025.jpg",
+    "wild-horse-nine-2026": "/og/wild-horse-nine-2026.jpg"
+  }
+}

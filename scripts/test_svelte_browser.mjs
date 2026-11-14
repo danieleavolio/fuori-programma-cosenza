@@ -76,8 +76,12 @@ try {
     assert.ok(await evaluate(`Boolean(document.querySelector(${JSON.stringify(selector)}))`), `Missing ${selector} at ${url}`);
   };
   const waitFor = async (expression, label) => {
-    for (let attempt = 0; attempt < 100; attempt++) {
-      if (await evaluate(expression)) return;
+    for (let attempt = 0; attempt < 150; attempt++) {
+      try {
+        if (await evaluate(expression)) return;
+      } catch {
+        // Il contesto JS viene distrutto durante una navigazione: si riprova.
+      }
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
     throw new Error(`Timeout: ${label}`);
@@ -92,6 +96,35 @@ try {
       layouts++;
     }
   }
+  // Il titolo della card linka la scheda film, ma non deve aprire la scheda
+  // orari: il click deve arrivare al link senza far scattare l'accordion.
+  await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 3, mobile: true });
+  await navigate(new URL('/', base).href, '.movie-title a');
+  await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'programmazione caricata');
+  const titleLink = await evaluate(`(() => {
+    const link = document.querySelector('.movie-title a');
+    const card = link.closest('.movie-catalog-card');
+    let reached = false;
+    const stop = (event) => { if (event.target.closest('.movie-title a')) { event.preventDefault(); reached = true; } };
+    document.addEventListener('click', stop);
+    link.click();
+    const expanded = card.classList.contains('is-expanded');
+    const href = link.getAttribute('href');
+    document.removeEventListener('click', stop);
+    return { href, expanded, reached };
+  })()`);
+  assert.ok(titleLink.href.startsWith('/film/'), titleLink.href);
+  assert.equal(titleLink.reached, true, 'il click sul titolo deve raggiungere il link');
+  assert.equal(titleLink.expanded, false, 'il click sul titolo non deve aprire la scheda orari');
+  const filmTitleHref = titleLink.href;
+  await navigate(new URL(filmTitleHref, base).href, '.film-summary');
+  // Tornando indietro il wordmark deve riportare a una home gia' pronta: se la
+  // navigazione interna non caricasse app.js la griglia resterebbe inerte.
+  await evaluate('document.querySelector(".wordmark").click()');
+  await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'home interattiva dopo il ritorno');
+  assert.ok(await evaluate('document.querySelectorAll(".movie-catalog-card").length > 0'));
+  await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
+
   // Il pulsante calendario scarica il file .ics sia da telefono sia da computer.
   await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 3, mobile: true });
   await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });

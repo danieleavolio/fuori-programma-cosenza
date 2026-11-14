@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { dateISO, dateTimeISO, dateLabel, filmPath, movies, showUrl, venues, venueDetails } from '../../../lib/server/data';
+import { ogForFilm } from '../../../lib/server/og';
 import type { PageServerLoad } from './$types';
 
 function durationMinutes(value = ''): number {
@@ -42,6 +43,7 @@ export const load: PageServerLoad = ({ params, url }) => {
   const canonical = `${url.origin}${filmPath(movie)}`;
   return {
     movie, screenings, canonical,
+    ogImage: `${url.origin}${ogForFilm(params.slug)}`,
     schema: {
       '@context': 'https://schema.org',
       '@type': 'Movie',

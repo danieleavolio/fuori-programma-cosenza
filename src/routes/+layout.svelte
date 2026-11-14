@@ -1,12 +1,14 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import { prefersReducedMotion } from 'svelte/motion';
+  import { fly } from 'svelte/transition';
 
   let { children } = $props();
   const isHome = $derived(page.url.pathname === '/');
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="/styles.css?v=20261113i" />
+  <link rel="stylesheet" href="/styles.css?v=20261114c" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -70,7 +72,11 @@
 </header>
 
 <main id="programmazione">
-  {@render children()}
+  {#key page.url.pathname}
+    <div class="page-enter" in:fly={{ y: 12, duration: prefersReducedMotion.current ? 0 : 220 }}>
+      {@render children()}
+    </div>
+  {/key}
 </main>
 
 <footer>

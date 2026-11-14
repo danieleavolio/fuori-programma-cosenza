@@ -12,6 +12,7 @@ __pycache__/
 /static/calendars/
 /static/data/
 /static/legacy/
+/static/og/*.jpg
 /node_modules/
 /.svelte-kit/
 /.vercel/

@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { cinemaPath, dateISO, dateLabel, filmPath, movies, showUrl, venues, venueDetails } from '../../../lib/server/data';
+import { ogDefault } from '../../../lib/server/og';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = ({ params, url }) => {
@@ -18,5 +19,5 @@ export const load: PageServerLoad = ({ params, url }) => {
     ...(info.phone ? { telephone: info.phone } : {}),
     ...(info.mapsUrl ? { sameAs: info.mapsUrl } : {})
   };
-  return { venue, info, screenings, canonical, schema };
+  return { venue, info, screenings, canonical, ogImage: `${url.origin}${ogDefault}`, schema };
 };

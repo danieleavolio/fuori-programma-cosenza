@@ -1,11 +1,13 @@
 import { cinemaPath, filmPath, movies, romeNow, venues, venueDetails, updatedAt } from '../lib/server/data';
 import { buildCatalogHtml } from '../lib/server/legacy-cards';
+import { ogDefault } from '../lib/server/og';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = ({ url }) => {
   const base = url.origin;
   const now = romeNow();
-  const catalog = buildCatalogHtml(movies, venues, now);
+  const paths = Object.fromEntries(movies.map((movie) => [movie.id, filmPath(movie)]));
+  const catalog = buildCatalogHtml(movies, venues, now, paths);
   const schema = {
     '@context': 'https://schema.org', '@type': 'WebSite', name: 'Fuori programma',
     url: base, inLanguage: 'it-IT',
@@ -23,9 +25,11 @@ export const load: PageServerLoad = ({ url }) => {
     updatedAt,
     updatedLabel,
     gridHtml: catalog.html,
+    paths,
     filmCount: catalog.films,
     showCount: catalog.shows,
     canonical: `${base}/`,
+    ogImage: `${base}${ogDefault}`,
     schema
   };
 };

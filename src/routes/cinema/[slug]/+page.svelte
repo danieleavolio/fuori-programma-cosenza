@@ -21,7 +21,12 @@
   <meta property="og:title" content={`${data.venue.name} — cinema a Cosenza e Rende`} />
   <meta property="og:description" content={`Programmazione, indirizzo e biglietti di ${data.venue.name}.`} />
   <meta property="og:url" content={data.canonical} />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content={data.ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={`${data.venue.name}: programmazione e orari`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
 

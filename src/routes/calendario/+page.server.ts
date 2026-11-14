@@ -1,3 +1,4 @@
+import { ogDefault } from '../../lib/server/og';
 import { venues } from '../../lib/server/data';
 import type { PageServerLoad } from './$types';
 
@@ -16,6 +17,7 @@ export const load: PageServerLoad = ({ url }) => {
   return {
     venues, selected, feed,
     canonical: `${url.origin}/calendario`,
+    ogImage: `${url.origin}${ogDefault}`,
     apple: feed.replace(/^https:/, 'webcal:'),
     outlook: feed ? `https://outlook.live.com/calendar/0/addfromweb?${new URLSearchParams({ url: feed, name })}` : ''
   };

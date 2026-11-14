@@ -14,6 +14,11 @@ assert.match(home.text, /id="movies-grid"/);
 assert.match(home.text, /src="\/app\.js\?v=[\w-]+"/);
 assert.match(home.text, /rel="canonical"/);
 assert.match(home.text, /property="og:title"/);
+assert.match(home.text, /property="og:image" content="[^"]+\/og\/default\.png"/);
+assert.match(home.text, /property="og:image:width" content="1200"/);
+// La home deve linkare le schede film: altrimenti i crawler le trovano solo
+// tramite la sitemap e non ricevono autorita' dai link interni.
+assert.match(home.text, /<h3 class="movie-title"[^>]*><a href="\/film\/[^"]+">/);
 assert.match(home.text, /application\/ld\+json/);
 assert.match(home.text, /rel="manifest" href="\/manifest\.webmanifest"/);
 assert.doesNotMatch(home.text, /href="\/legacy\//);
@@ -52,6 +57,9 @@ assert.equal(manifest.response.status, 200);
 assert.equal(JSON.parse(manifest.text).start_url, './');
 
 const filmPage = await get(filmSlug);
+assert.match(filmPage.text, /property="og:image" content="[^"]+\/og\/[a-z0-9-]+\.(jpg|png)"/);
+assert.match(filmPage.text, /name="twitter:image"/);
+assert.match(filmPage.text, /property="og:image:height" content="630"/);
 const icsPath = filmPage.text.match(/href="(\/evento\.ics\?[^"]+)"/)?.[1]?.replaceAll('&amp;', '&');
 assert.ok(icsPath);
 const event = await get(icsPath);

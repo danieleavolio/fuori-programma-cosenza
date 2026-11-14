@@ -11,10 +11,14 @@
   <meta property="og:title" content="Fuori programma — Cinema a Cosenza e Rende" />
   <meta property="og:description" content="Tutti gli orari dei cinema di Cosenza, Rende e Zumpano in un solo posto." />
   <meta property="og:url" content={data.canonical} />
-  {#if data.movies[0]?.poster}<meta property="og:image" content={data.movies[0].poster} />{/if}
+  <meta property="og:image" content={data.ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Fuori programma: orari dei cinema a Cosenza e Rende" />
   <meta name="twitter:card" content="summary_large_image" />
-  {#if data.movies[0]?.poster}<meta name="twitter:image" content={data.movies[0].poster} />{/if}
+  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
+  {@html `<script>window.__FP_FILM_PATHS__=${JSON.stringify(data.paths).replace(/</g, '\\u003c')}</script>`}
   <script src="/app.js?v=20261114b" defer></script>
 </svelte:head>
 

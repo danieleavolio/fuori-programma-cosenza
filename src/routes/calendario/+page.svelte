@@ -20,6 +20,12 @@
   <meta property="og:description" content="Scegli i cinema e copia il link per un calendario aggiornabile." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={data.canonical} />
+  <meta property="og:image" content={data.ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Calendario aggiornabile dei cinema di Cosenza e Rende" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={data.ogImage} />
 </svelte:head>
 
 <section class="page-heading" aria-labelledby="page-title">

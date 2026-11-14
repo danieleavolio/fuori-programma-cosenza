@@ -21,7 +21,12 @@
   <meta property="og:title" content={data.title} />
   <meta property="og:description" content={`Film e orari dei cinema a Cosenza e Rende: ${data.title.toLowerCase()}.`} />
   <meta property="og:url" content={data.canonical} />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content={data.ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={`${data.title}: film e orari dei cinema di Cosenza e Rende`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
 

@@ -22,10 +22,13 @@
   <meta property="og:type" content="video.movie" />
   <meta property="og:title" content={`${data.movie.title} — Fuori programma`} />
   <meta property="og:description" content={data.movie.synopsis || `Scopri gli orari di ${data.movie.title} a Cosenza e Rende.`} />
-  {#if data.movie.poster}<meta property="og:image" content={data.movie.poster} />{/if}
   <meta property="og:url" content={data.canonical} />
+  <meta property="og:image" content={data.ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={`${data.movie.title} in programmazione a Cosenza e Rende`} />
   <meta name="twitter:card" content="summary_large_image" />
-  {#if data.movie.poster}<meta name="twitter:image" content={data.movie.poster} />{/if}
+  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
 

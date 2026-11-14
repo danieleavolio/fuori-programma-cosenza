@@ -246,10 +246,12 @@ function movieCardHtml(
   venuesMap: Record<string, Venue>,
   selection: { shows: ShowGroup[]; programming: { date: string; venue: string }[] },
   now: Date,
+  paths: Record<string, string> = {},
 ) {
   const { shows, programming } = selection;
   const cardKey = `movies-${movie.id}`;
   const panelId = `schedule-${cardKey}`;
+  const filmPath = paths[movie.id];
   const venueIds = [...new Set(programming.map((item) => item.venue))];
   const dates = [...new Set(programming.map((item) => item.date))].sort((a, b) => parseDate(a).getTime() - parseDate(b).getTime());
   const durationText = cleanDuration(movie.duration);
@@ -278,7 +280,7 @@ function movieCardHtml(
         <div class="movie-card-details">
           <div class="movie-title-row">
             <span class="movie-state">${escapeHtml(state)}</span>
-            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${escapeHtml(movie.title)}</h3>
+            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${filmPath ? `<a href="${escapeHtml(filmPath)}">${escapeHtml(movie.title)}</a>` : escapeHtml(movie.title)}</h3>
           </div>
           <div class="badge-wrap card-facts">
             <span class="film-duration">${escapeHtml(durationText || 'Durata n.d.')}</span>
@@ -359,7 +361,7 @@ function movieCardHtml(
  * Markup della griglia film identico a quello che app.js costruisce nel browser:
  * serve ai crawler (e al primo paint) prima che l'app prenda il controllo.
  */
-export function buildCatalogHtml(movies: Movie[], venues: Venue[], now: Date) {
+export function buildCatalogHtml(movies: Movie[], venues: Venue[], now: Date, paths: Record<string, string> = {}) {
   const venuesMap = Object.fromEntries(venues.map((venue) => [venue.id, venue]));
   const visible = movies
     .map((movie) => ({ movie, selection: catalogSelection(movie, now) }))
@@ -376,6 +378,6 @@ export function buildCatalogHtml(movies: Movie[], venues: Venue[], now: Date) {
   });
 
   const totalShows = visible.reduce((sum, item) => sum + item.selection.shows.reduce((total, group) => total + group.shows.length, 0), 0);
-  const html = visible.map((item) => movieCardHtml(item.movie, venuesMap, item.selection, now)).join('');
+  const html = visible.map((item) => movieCardHtml(item.movie, venuesMap, item.selection, now, paths)).join('');
   return { html, films: visible.length, shows: totalShows };
 }

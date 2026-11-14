@@ -22,6 +22,9 @@ const airingNowBody = $('#airing-now-body');
 const airingNowStatus = $('#airing-now-status');
 const requiredVenues = ['andromeda-river', 'citrigno', 'cinema-teatro-italia', 'unical', 'garden'];
 let venueInfo = {};
+// Sul sito SvelteKit la pagina fornisce le URL delle schede film; sul sito
+// storico la mappa non esiste e i titoli restano testo semplice.
+const filmPaths = window.__FP_FILM_PATHS__ || {};
 
 // State
 let scheduleData = { venues: [], movies: [], updatedAt: '' };
@@ -1632,7 +1635,7 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
         <div class="movie-card-details">
           <div class="movie-title-row">
             <span class="movie-state">${escapeHtml(state)}</span>
-            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${escapeHtml(movie.title)}</h3>
+            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${filmPaths[movie.id] ? `<a href="${escapeHtml(filmPaths[movie.id])}">${escapeHtml(movie.title)}</a>` : escapeHtml(movie.title)}</h3>
           </div>
           <div class="badge-wrap card-facts">
             <span class="film-duration">${escapeHtml(durationText || 'Durata n.d.')}</span>
