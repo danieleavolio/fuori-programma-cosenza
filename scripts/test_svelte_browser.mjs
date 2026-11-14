@@ -89,7 +89,7 @@ try {
   let layouts = 0;
   for (const width of [320, 390, 768, 1280]) {
     await cdp('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width < 700 });
-    for (const pathname of ['/', '/calendario']) {
+    for (const pathname of ['/', '/calendario', '/programmazione/stasera', '/prossimamente']) {
       await navigate(new URL(pathname, base).href, 'h1');
       assert.ok(await evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), `Overflow ${pathname} at ${width}px`);
       assert.equal(await evaluate('document.querySelectorAll("h1").length'), 1);

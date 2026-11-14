@@ -104,3 +104,42 @@ export function romeNow(): Date {
   const part = (type: string) => Number(parts.find((item) => item.type === type)?.value);
   return new Date(part('year'), part('month') - 1, part('day'), part('hour'), part('minute'), part('second'));
 }
+
+/** Data di oggi (YYYY-MM-DD) nel fuso di Roma, indipendente dal server. */
+export function romeDateISO(now = new Date()): string {
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(now);
+  const get = (type: string) => parts.find((part) => part.type === type)?.value || '';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+
+/** Etichetta italiana di una data ISO (YYYY-MM-DD). */
+export function isoDateLabel(iso: string, options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long' }): string {
+  return new Intl.DateTimeFormat('it-IT', options).format(new Date(`${iso}T12:00:00Z`));
+}
+
+/** Giorni che mancano a una data ISO, contati sul calendario di Roma. */
+export function daysUntil(iso: string, from = romeDateISO()): number {
+  return Math.round((Date.parse(`${iso}T12:00:00Z`) - Date.parse(`${from}T12:00:00Z`)) / 86_400_000);
+}
+
+export type Crumb = { name: string; path?: string };
+
+/**
+ * Percorso di navigazione: la versione visibile usa link relativi, quella
+ * strutturata URL assoluti come richiede Google.
+ */
+export function breadcrumb(items: Crumb[], origin: string) {
+  return {
+    trail: items.map((item) => ({ name: item.name, href: item.path })),
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        ...(item.path ? { item: `${origin}${item.path}` } : {})
+      }))
+    }
+  };
+}

@@ -127,7 +127,9 @@ Il workflow `.github/workflows/update-schedule.yml` aggiorna automaticamente gli
 
 ## Preview SvelteKit e Vercel
 
-La migrazione è affiancata alla PWA esistente: GitHub Pages e i suoi URL non vengono sostituiti. L'applicazione SvelteKit usa rendering server-side per home, pagine film, cinema e programmazione di oggi/weekend; espone `robots.txt`, `sitemap.xml`, canonical, Open Graph e dati strutturati. La PWA completa, con preferiti locali, filtri e calendari multi-cinema, viene copiata durante la build in `/legacy/`.
+La migrazione è affiancata alla PWA esistente: GitHub Pages e i suoi URL non vengono sostituiti. L'applicazione SvelteKit usa rendering server-side per home, pagine film, cinema e programmazione di oggi/stasera/weekend e per `/prossimamente`; espone `robots.txt`, `sitemap.xml` (con le locandine come `image:image`), canonical, Open Graph, percorsi di navigazione strutturati e dati strutturati. Le viste di programmazione sono collegate tra loro da `/programmazione/oggi`, `/programmazione/stasera`, `/programmazione/weekend` e `/prossimamente`. La PWA completa, con preferiti locali, filtri e calendari multi-cinema, viene copiata durante la build in `/legacy/`.
+
+`/programmazione/stasera` elenca solo gli spettacoli di oggi dalle 20 in poi; `/prossimamente` legge `releaseDateIT` dalla programmazione e mostra le uscite con data italiana futura, con "domani"/"dopodomani" quando mancano uno o due giorni. Entrambe le pagine si aggiornano da sole a ogni scraping: nessun elenco manuale da mantenere.
 
 Per lo sviluppo locale:
 

@@ -15,9 +15,24 @@ function offsetDate(iso: string, days: number): string {
   return date.toISOString().slice(0, 10);
 }
 
+const PAGES: Record<string, { title: string; description: string }> = {
+  oggi: {
+    title: 'Cinema oggi a Cosenza e Rende',
+    description: 'Tutti gli spettacoli di oggi nei cinema di Cosenza, Rende e Zumpano: orari aggiornati e biglietti ufficiali.'
+  },
+  stasera: {
+    title: 'Cinema stasera a Cosenza e Rende',
+    description: 'Cosa vedere stasera a Cosenza e Rende: tutti gli spettacoli dalle 20 in poi, con orari aggiornati e biglietti.'
+  },
+  weekend: {
+    title: 'Cinema questo weekend a Cosenza e Rende',
+    description: 'Cinema nel weekend a Cosenza e Rende: spettacoli di venerdì, sabato e domenica con orari aggiornati.'
+  }
+};
+
 export const load: PageServerLoad = ({ params, url }) => {
   const period = params.period;
-  if (period !== 'oggi' && period !== 'weekend') error(404, 'Programmazione non trovata');
+  if (!(period in PAGES)) error(404, 'Programmazione non trovata');
   const today = localISO(new Date());
   const weekday = new Date(`${today}T12:00:00Z`).getUTCDay();
   let start = today;
@@ -39,12 +54,15 @@ export const load: PageServerLoad = ({ params, url }) => {
         dateISO: iso, dateLabel: dateLabel(group.date), startDate,
         filmPath: filmPath(movie), url: showUrl(movie, venue.id, show)
       };
-    }).filter((item) => new Date(item.startDate).getTime() >= Date.now());
+    })
+      // "Stasera" e' la fascia serale: dalle 20 in poi, sempre di oggi.
+      .filter((item) => period !== 'stasera' || item.show.time >= '20:00')
+      .filter((item) => new Date(item.startDate).getTime() >= Date.now());
   })).sort((a, b) => `${a.dateISO} ${a.show.time}`.localeCompare(`${b.dateISO} ${b.show.time}`));
-  const title = period === 'oggi' ? 'Cinema oggi a Cosenza e Rende' : 'Cinema questo weekend a Cosenza e Rende';
+  const { title, description } = PAGES[period];
   const canonical = `${url.origin}/programmazione/${period}`;
   return {
-    period, title, canonical, ogImage: `${url.origin}${ogDefault}`, start, end, screenings,
+    period, title, description, canonical, ogImage: `${url.origin}${ogDefault}`, start, end, screenings,
     schema: {
       '@context': 'https://schema.org', '@type': 'ItemList', name: title,
       itemListElement: screenings.map((item, index) => ({

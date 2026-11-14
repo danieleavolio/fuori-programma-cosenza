@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Breadcrumb from '../../../lib/Breadcrumb.svelte';
   import JsonLd from '../../../lib/JsonLd.svelte';
   let { data } = $props();
 
@@ -31,6 +32,8 @@
   <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
+
+<Breadcrumb schema={data.crumb.schema} trail={data.crumb.trail} />
 
 <section class="page-heading" aria-labelledby="page-title">
   <h1 id="page-title">{data.movie.title}</h1>

@@ -26,12 +26,17 @@ assert.doesNotMatch(home.text, /href="\/legacy\//);
 const sitemap = await get('/sitemap.xml');
 assert.equal(sitemap.response.status, 200);
 assert.match(sitemap.text, /<urlset/);
+assert.match(sitemap.text, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
+assert.match(sitemap.text, /<image:image><image:loc>https?:\/\/[^<]+<\/image:loc>/);
+for (const path of ['/programmazione/stasera', '/prossimamente']) {
+  assert.match(sitemap.text, new RegExp(`<loc>[^<]*${path}</loc>`), path);
+}
 const filmSlug = sitemap.text.match(/<loc>[^<]*?(\/film\/[^<]+)<\/loc>/)?.[1];
 const cinemaSlug = sitemap.text.match(/<loc>[^<]*?(\/cinema\/[^<]+)<\/loc>/)?.[1];
 assert.ok(filmSlug);
 assert.ok(cinemaSlug);
 
-for (const path of [filmSlug, cinemaSlug, '/programmazione/oggi', '/programmazione/weekend']) {
+for (const path of [filmSlug, cinemaSlug, '/programmazione/oggi', '/programmazione/stasera', '/programmazione/weekend', '/prossimamente']) {
   const page = await get(path);
   assert.equal(page.response.status, 200, `${path} should render`);
   assert.match(page.text, /rel="canonical"/);
@@ -42,6 +47,25 @@ for (const path of [filmSlug, cinemaSlug, '/programmazione/oggi', '/programmazio
     assert.equal(schema['@context'], 'https://schema.org');
   }
 }
+
+// Stasera: solo la fascia serale, e il collegamento attivo tra le viste.
+const stasera = await get('/programmazione/stasera');
+assert.match(stasera.text, /<nav class="period-nav[^"]*"/);
+assert.match(stasera.text, /aria-current="page"[^>]*>Stasera</);
+for (const match of stasera.text.matchAll(/<strong>(\d{2}:\d{2})<\/strong>/g)) {
+  assert.ok(match[1] >= '20:00', `spettacolo serale ${match[1]}`);
+}
+
+// Percorso di navigazione: visibile e strutturato su film e cinema.
+const filmPage = await get(filmSlug);
+assert.match(filmPage.text, /<nav class="breadcrumb[^"]*"/);
+assert.match(filmPage.text, /"@type":"BreadcrumbList"/);
+const cinemaPage = await get(cinemaSlug);
+assert.match(cinemaPage.text, /<nav class="breadcrumb[^"]*"/);
+assert.match(cinemaPage.text, /"@type":"BreadcrumbList"/);
+const prossimamente = await get('/prossimamente');
+assert.match(prossimamente.text, /<h1 id="page-title">Prossimamente<\/h1>/);
+assert.match(prossimamente.text, /"@type":"ItemList"/);
 
 const sitemapFilm = sitemap.text.match(new RegExp(filmSlug.replaceAll('/', '\\/')));
 assert.ok(sitemapFilm);
@@ -56,11 +80,11 @@ const manifest = await get('/manifest.webmanifest');
 assert.equal(manifest.response.status, 200);
 assert.equal(JSON.parse(manifest.text).start_url, './');
 
-const filmPage = await get(filmSlug);
-assert.match(filmPage.text, /property="og:image" content="[^"]+\/og\/[a-z0-9-]+\.(jpg|png)"/);
-assert.match(filmPage.text, /name="twitter:image"/);
-assert.match(filmPage.text, /property="og:image:height" content="630"/);
-const icsPath = filmPage.text.match(/href="(\/evento\.ics\?[^"]+)"/)?.[1]?.replaceAll('&amp;', '&');
+const filmPageOg = filmPage.text;
+assert.match(filmPageOg, /property="og:image" content="[^"]+\/og\/[a-z0-9-]+\.(jpg|png)"/);
+assert.match(filmPageOg, /name="twitter:image"/);
+assert.match(filmPageOg, /property="og:image:height" content="630"/);
+const icsPath = filmPageOg.match(/href="(\/evento\.ics\?[^"]+)"/)?.[1]?.replaceAll('&amp;', '&');
 assert.ok(icsPath);
 const event = await get(icsPath);
 assert.equal(event.response.status, 200);

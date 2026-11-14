@@ -1,5 +1,6 @@
 <script lang="ts">
   import JsonLd from '../../../lib/JsonLd.svelte';
+  import PeriodNav from '../../../lib/PeriodNav.svelte';
   let { data } = $props();
 
   const byDay = $derived.by(() => {
@@ -15,11 +16,11 @@
 
 <svelte:head>
   <title>{data.title} | Fuori programma</title>
-  <meta name="description" content={`${data.title}: spettacoli e orari aggiornati dei cinema. Scegli un film e raggiungi la biglietteria ufficiale.`} />
+  <meta name="description" content={data.description} />
   <link rel="canonical" href={data.canonical} />
   <meta property="og:type" content="website" />
   <meta property="og:title" content={data.title} />
-  <meta property="og:description" content={`Film e orari dei cinema a Cosenza e Rende: ${data.title.toLowerCase()}.`} />
+  <meta property="og:description" content={data.description} />
   <meta property="og:url" content={data.canonical} />
   <meta property="og:image" content={data.ogImage} />
   <meta property="og:image:width" content="1200" />
@@ -34,6 +35,8 @@
   <h1 id="page-title">{data.title}</h1>
   <p>{data.screenings.length} spettacoli pubblicati</p>
 </section>
+
+<PeriodNav current={data.period} />
 
 {#if byDay.length}
   {#each byDay as [iso, shows] (iso)}
@@ -59,7 +62,7 @@
     </section>
   {/each}
 {:else}
-  <p class="no-times-note">Le sale non hanno ancora pubblicato spettacoli per questo periodo. Gli orari compaiono qui quando disponibili.</p>
+  <p class="no-times-note">{data.period === 'stasera' ? 'Nessuno spettacolo serale (dalle 20 in poi) risulta pubblicato per oggi: le sale aggiornano gli orari durante la giornata.' : 'Le sale non hanno ancora pubblicato spettacoli per questo periodo. Gli orari compaiono qui quando disponibili.'}</p>
 {/if}
 
 <style>
