@@ -15,8 +15,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Fuori programma" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="stylesheet" href="styles.css?v=20261113i" />
-    <script src="app.js?v=20261113i" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261114c" />
+    <script src="app.js?v=20261114c" defer></script>
     <script>
       if ('serviceWorker' in navigator) {
         const wasControlled = Boolean(navigator.serviceWorker.controller);
@@ -248,7 +248,7 @@
       <section class="calendar-subscribe" aria-labelledby="calendar-app-title">
         <h3 id="calendar-app-title">2. Aggiungi alla tua app</h3>
         <div class="calendar-apps">
-          <a id="calendar-google" class="calendar-app-link" target="_blank" rel="noopener noreferrer"><strong>Google Calendar</strong><small>Aggiunta iniziale dal web su computer</small></a>
+          <a id="calendar-google" class="calendar-app-link"><strong>Scarica il file .ics</strong><small>Da importare una volta, senza aggiornamenti</small></a>
           <a id="calendar-apple" class="calendar-app-link"><strong>Apple Calendario</strong><small>Apri la richiesta di abbonamento</small></a>
           <a id="calendar-outlook" class="calendar-app-link" target="_blank" rel="noopener noreferrer"><strong>Outlook</strong><small>Aggiungi dalla versione web</small></a>
           <button id="calendar-copy" type="button" class="calendar-app-link"><strong>Copia link</strong><small>Per altre app di calendario</small></button>
@@ -256,7 +256,7 @@
         <p class="calendar-help" id="calendar-subscription-help">Un solo calendario per i cinema selezionati. Nessun promemoria per ogni proiezione; i tempi di aggiornamento dipendono dall’app. Per cambiare cinema, sostituisci l’abbonamento precedente.</p>
         <details class="calendar-instructions">
           <summary>Come aggiungerlo su Google Calendar</summary>
-          <p>Da un computer: apri Google Calendar → Altri calendari → + → Da URL, incolla il link copiato qui e conferma. Poi abilita il calendario nell’app sul telefono. Il pulsante Google apre il collegamento di aggiunta, se supportato.</p>
+          <p>Su computer apri Google Calendar, scegli Altri calendari → + → Da URL e incolla il link copiato qui: il calendario si aggiorna da solo e compare nell’app su iPhone e Android con lo stesso account Google. Il file .ics scaricato, invece, è una copia degli spettacoli attuali.</p>
         </details>
       </section>
       <details class="calendar-export" id="calendar-export">

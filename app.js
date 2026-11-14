@@ -22,6 +22,18 @@ const airingNowBody = $('#airing-now-body');
 const airingNowStatus = $('#airing-now-status');
 const requiredVenues = ['andromeda-river', 'citrigno', 'cinema-teatro-italia', 'unical', 'garden'];
 let venueInfo = {};
+// Sul sito SvelteKit la pagina fornisce le URL delle schede film; sul sito
+// storico la mappa non esiste e i titoli restano testo semplice.
+const filmPaths = window.__FP_FILM_PATHS__ || {};
+
+// Ogni ridisegno della griglia deve conservare il link al film: se la mappa non
+// ha la voce (o manca del tutto) si riusa l'href gia' presente nel markup, che
+// arriva dal server o dal render precedente.
+function filmHref(movie) {
+  if (filmPaths[movie.id]) return filmPaths[movie.id];
+  const card = document.getElementById(`film-${movie.id}`) || document.getElementById(`day-film-${movie.id}`);
+  return card?.querySelector('.movie-title a')?.getAttribute('href') || '';
+}
 
 // State
 let scheduleData = { venues: [], movies: [], updatedAt: '' };
@@ -691,10 +703,14 @@ function updateCalendarSummary() {
   const feed = calendarFeedUrl(ids);
   const name = ids.length === scheduleData.venues.length
     ? 'Tutti i cinema' : scheduleData.venues.filter((v) => ids.includes(v.id)).map((v) => v.name).join(', ');
+  // L'app Google Calendar non aggiunge feed da URL: il file .ics apre l'import
+  // su telefono e scarica la copia su computer. Chi vuole l'abbonamento copia
+  // il link e lo aggiunge dalla versione desktop di Google Calendar.
+  const downloadLink = feed;
   summary.textContent = !ids.length ? 'Seleziona almeno un cinema per creare il tuo abbonamento.'
     : `${ids.length} ${ids.length === 1 ? 'cinema selezionato' : 'cinema selezionati'} · ${allEvents.length} spettacoli futuri${allEvents.length ? ` · ${new Set(allEvents.map((event) => event.title)).size} film` : '. Gli orari futuri compariranno quando pubblicati.'}`;
   const links = {
-    '#calendar-google': feed ? `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(feed)}` : '',
+    '#calendar-google': downloadLink,
     '#calendar-apple': feed.replace(/^https?:/, 'webcal:'),
     '#calendar-outlook': feed ? `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(feed)}&name=${encodeURIComponent(`Fuori programma — ${name}`)}` : '',
   };
@@ -1628,7 +1644,7 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
         <div class="movie-card-details">
           <div class="movie-title-row">
             <span class="movie-state">${escapeHtml(state)}</span>
-            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${escapeHtml(movie.title)}</h3>
+            <h3 class="movie-title" title="${escapeHtml(movie.title)}">${filmHref(movie) ? `<a href="${escapeHtml(filmHref(movie))}">${escapeHtml(movie.title)}</a>` : escapeHtml(movie.title)}</h3>
           </div>
           <div class="badge-wrap card-facts">
             <span class="film-duration">${escapeHtml(durationText || 'Durata n.d.')}</span>
@@ -2213,6 +2229,14 @@ function applyBootView() {
 applyBootView();
 updateFavoritesBadge();
 loadSchedule();
+
+// Offline: la shell è già gestita dal service worker; lo installiamo anche
+// sulla home SvelteKit, che non ha il vecchio index.html.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(new URL('sw.js', document.baseURI), { updateViaCache: 'none' }).catch(() => {});
+  });
+}
 
 // Il banner "Ora in sala" e l'orologio devono restare veri anche con la
 // pagina aperta a lungo, senza ricaricare la programmazione.

@@ -90,3 +90,17 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      # Vercel ricostruisce il sito e legge la programmazione appena pubblicata.
+      # Senza il secret il sito su Vercel si aggiorna solo con i push di codice.
+      - name: Aggiorna il sito su Vercel
+        if: success()
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "::notice title=Deploy Vercel non configurato::Aggiungi il secret VERCEL_DEPLOY_HOOK per aggiornare il sito a ogni pubblicazione."
+            exit 0
+          fi
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
+          echo "Deploy Vercel richiesto."
