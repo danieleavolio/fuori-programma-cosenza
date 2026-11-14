@@ -25,7 +25,7 @@ for (const item of ['schedule.json', 'venues-info.json']) {
 // La home SvelteKit e' la stessa app: serviamo i suoi asset anche dalla radice,
 // cosi' app.js, styles.css e i calendari restano un'unica copia.
 const site = path.join(root, 'static');
-for (const item of ['app.js', 'styles.css', 'icon.svg', 'icons', 'calendars']) {
+for (const item of ['app.js', 'styles.css', 'sw.js', 'manifest.webmanifest', 'icon.svg', 'icons', 'calendars']) {
   await rm(path.join(site, item), { recursive: true, force: true });
   await cp(path.join(root, item), path.join(site, item), { recursive: true });
 }

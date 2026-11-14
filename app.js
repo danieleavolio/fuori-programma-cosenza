@@ -2220,6 +2220,14 @@ applyBootView();
 updateFavoritesBadge();
 loadSchedule();
 
+// Offline: la shell è già gestita dal service worker; lo installiamo anche
+// sulla home SvelteKit, che non ha il vecchio index.html.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(new URL('sw.js', document.baseURI), { updateViaCache: 'none' }).catch(() => {});
+  });
+}
+
 // Il banner "Ora in sala" e l'orologio devono restare veri anche con la
 // pagina aperta a lungo, senza ricaricare la programmazione.
 window.setInterval(() => {

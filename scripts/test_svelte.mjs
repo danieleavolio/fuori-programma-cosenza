@@ -11,10 +11,11 @@ assert.equal(home.response.status, 200);
 assert.match(home.text, /<h1 id="page-title">Programmazione cinema<\/h1>/);
 assert.match(home.text, /<article class="movie-catalog-card/);
 assert.match(home.text, /id="movies-grid"/);
-assert.match(home.text, /src="\/app\.js"/);
+assert.match(home.text, /src="\/app\.js\?v=[\w-]+"/);
 assert.match(home.text, /rel="canonical"/);
 assert.match(home.text, /property="og:title"/);
 assert.match(home.text, /application\/ld\+json/);
+assert.match(home.text, /rel="manifest" href="\/manifest\.webmanifest"/);
 assert.doesNotMatch(home.text, /href="\/legacy\//);
 
 const sitemap = await get('/sitemap.xml');
@@ -42,6 +43,13 @@ assert.ok(sitemapFilm);
 const robots = await get('/robots.txt');
 assert.equal(robots.response.status, 200);
 assert.match(robots.text, /Sitemap:/);
+
+const worker = await get('/sw.js');
+assert.equal(worker.response.status, 200);
+assert.match(worker.text, /SHELL_ASSETS/);
+const manifest = await get('/manifest.webmanifest');
+assert.equal(manifest.response.status, 200);
+assert.equal(JSON.parse(manifest.text).start_url, './');
 
 const filmPage = await get(filmSlug);
 const icsPath = filmPage.text.match(/href="(\/evento\.ics\?[^"]+)"/)?.[1]?.replaceAll('&amp;', '&');

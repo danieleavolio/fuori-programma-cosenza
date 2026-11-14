@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   {#if data.movies[0]?.poster}<meta name="twitter:image" content={data.movies[0].poster} />{/if}
   <JsonLd schema={data.schema} />
-  <script src="/app.js" defer></script>
+  <script src="/app.js?v=20261113i" defer></script>
 </svelte:head>
 
 <section class="page-heading" aria-labelledby="page-title">

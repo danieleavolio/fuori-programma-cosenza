@@ -110,6 +110,14 @@ try {
   await waitFor('document.querySelector("#calendar-google").getAttribute("href")', 'link Google Calendar desktop');
   const googleDesktop = await evaluate('document.querySelector("#calendar-google").getAttribute("href")');
   assert.ok(googleDesktop.includes('calendar.google.com/calendar/r?cid='), googleDesktop);
+
+  // Offline: dopo l'installazione il service worker deve servire la home dalla cache.
+  await waitFor('Boolean(navigator.serviceWorker.controller)', 'service worker attivo');
+  await cdp('Network.enable');
+  await cdp('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0 });
+  await navigate(new URL('/', base).href, '#page-title');
+  assert.equal(await evaluate('document.querySelector("#page-title").textContent.trim()'), 'Programmazione cinema');
+  await cdp('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
   await cdp('Emulation.setScriptExecutionDisabled', { value: true });
   await navigate(new URL('/calendario?cinema=garden', base).href, 'form');
   assert.equal(await evaluate('document.querySelectorAll("input[type=checkbox]:checked").length'), 1);

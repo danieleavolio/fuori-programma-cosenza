@@ -5,6 +5,8 @@ __pycache__/
 /calendars/
 /static/app.js
 /static/styles.css
+/static/sw.js
+/static/manifest.webmanifest
 /static/icon.svg
 /static/icons/
 /static/calendars/
