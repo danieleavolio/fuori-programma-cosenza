@@ -6,6 +6,7 @@
 <svelte:head>
   <title>Programmazione cinema a Cosenza e Rende | Fuori programma</title>
   <meta name="description" content="Programmazione e orari dei cinema a Cosenza e Rende: Andromeda River, Citrigno, Teatro Italia, Garden e Cinema Unical." />
+  <meta name="google-site-verification" content="pcJ4_jepxpSEoTyEsHGYJ2XLyoelCmPYbdCb5JisBgE" />
   <link rel="canonical" href={data.canonical} />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Fuori programma — Cinema a Cosenza e Rende" />
