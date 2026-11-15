@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T23:35:41.469014+00:00",
+  "updatedAt": "2026-11-15T02:58:52.877651+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -1093,11 +1093,11 @@
       "id": "7",
       "title": "DIO RIDE",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88991/standard_16e4e33a-dbe0-49a8-941c-d40cbae05dab.jpg",
-      "url": "https://zumpano.andromeda.andromedacinema.it/film/88991",
+      "url": "https://zumpano.andromeda.18tickets.it/film/88991",
       "duration": "1h 54m",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.andromedacinema.it/film/88991",
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/88991",
         "cinema-teatro-italia": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/105538",
         "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
       },
@@ -1117,7 +1117,7 @@
             {
               "time": "19:00",
               "room": "Sala 2",
-              "url": "https://zumpano.andromeda.andromedacinema.it/film/88991/94fc46e6-bb79-4eab-855f-137d18d83b38#theater-init"
+              "url": "https://zumpano.andromeda.18tickets.it/film/88991/94fc46e6-bb79-4eab-855f-137d18d83b38#theater-init"
             }
           ],
           "venue": "andromeda-river"
