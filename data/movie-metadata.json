@@ -1,7 +1,7 @@
 {
   "avengersdoomsday:2026": {
     "data": {},
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "ilgattocolcappello:2026": {
     "data": {
@@ -11,9 +11,9 @@
       "reviewCount": 7,
       "criticsRating": 3.17,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "sedomaninontorno:2026": {
     "data": {
@@ -25,36 +25,37 @@
       "criticsRating": 2.67,
       "audienceRating": 4.56,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "unweekendartificiale:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/un-weekend-artificiale/",
-      "rating": 1.95,
-      "ratingCount": 8,
+      "rating": 2.23,
+      "ratingCount": 11,
       "reviewCount": 6,
       "criticsRating": 1.4,
+      "audienceRating": 2.8,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "ilrumoredellecosenuove:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/il-rumore-delle-cose-nuove/",
-      "rating": 2.6,
-      "ratingCount": 15,
+      "rating": 2.57,
+      "ratingCount": 16,
       "reviewCount": 5,
       "criticsRating": 1.9,
-      "audienceRating": 3.9,
+      "audienceRating": 3.8,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "godzillaminuszero:2026": {
     "data": {
@@ -65,23 +66,23 @@
       "reviewCount": 7,
       "criticsRating": 3.33,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "dioride:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/dio-ride/",
       "rating": 3.53,
-      "ratingCount": 38,
+      "ratingCount": 39,
       "reviewCount": 16,
       "criticsRating": 2.97,
-      "audienceRating": 4.12,
+      "audienceRating": 4.11,
       "releaseDateIT": "2026-10-29",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "hope:2026": {
     "data": {
@@ -93,9 +94,9 @@
       "criticsRating": 2.97,
       "audienceRating": 2.52,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "scroogeeglispiritidelnatale:2026": {
     "data": {
@@ -106,9 +107,9 @@
       "reviewCount": 4,
       "criticsRating": 3.33,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "lastoriainfinitaried:1984": {
     "data": {
@@ -119,9 +120,9 @@
       "reviewCount": 1,
       "audienceRating": 3.79,
       "releaseDateIT": "2026-11-16",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "2001odisseanellospazio:1968": {
     "data": {
@@ -132,18 +133,18 @@
       "reviewCount": 9,
       "audienceRating": 4.03,
       "releaseDateIT": "2026-11-16",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "dunepartetre:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
       "releaseDateIT": "2026-12-16",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "kontinental25:2025": {
     "data": {
@@ -155,22 +156,22 @@
       "criticsRating": 3.83,
       "audienceRating": 3.0,
       "releaseDateIT": "2026-06-25",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   },
   "wildhorsenine:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/wild-horse-nine/",
       "rating": 3.8,
-      "ratingCount": 53,
+      "ratingCount": 56,
       "reviewCount": 25,
       "criticsRating": 4.04,
-      "audienceRating": 3.35,
+      "audienceRating": 3.37,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-14T17:33:33.767020+00:00"
+      "checkedAt": "2026-11-15T20:44:12.938812+00:00"
     },
-    "retryAt": "2026-11-15T17:33:33.767020+00:00"
+    "retryAt": "2026-11-16T20:44:12.938812+00:00"
   }
 }
