@@ -1,8 +1,9 @@
 import { breadcrumb, comingSoon, daysUntil, filmPath, isoDateLabel, movies, romeDateISO, venues } from '../../lib/server/data';
-import { ogDefault } from '../../lib/server/og';
+import { ogForPage } from '../../lib/server/og';
+import { siteOrigin } from '../../lib/server/site';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = ({ url }) => {
+export const load: PageServerLoad = () => {
   const today = romeDateISO();
   const upcoming = movies
     .filter((movie) => movie.releaseDateIT && movie.releaseDateIT >= today)
@@ -42,12 +43,12 @@ export const load: PageServerLoad = ({ url }) => {
     .filter((group) => group.movies.length > 0);
 
   const title = 'Prossimamente al cinema a Cosenza e Rende';
-  const canonical = `${url.origin}/prossimamente`;
-  const crumb = breadcrumb([{ name: 'Home', path: '/' }, { name: 'Prossimamente' }], url.origin);
+  const canonical = `${siteOrigin}/prossimamente`;
+  const crumb = breadcrumb([{ name: 'Home', path: '/' }, { name: 'Prossimamente' }], siteOrigin);
   return {
     title,
     canonical,
-    ogImage: `${url.origin}${ogDefault}`,
+    ogImage: `${siteOrigin}${ogForPage('prossimamente')}`,
     upcoming,
     localAnnouncements,
     crumb,
@@ -61,8 +62,8 @@ export const load: PageServerLoad = ({ url }) => {
         item: {
           '@type': 'Movie',
           name: entry.movie.title,
-          url: `${url.origin}${entry.href}`,
-          datePublished: entry.releaseDate,
+           url: `${siteOrigin}${entry.href}`,
+           releasedEvent: { '@type': 'PublicationEvent', startDate: entry.releaseDate, location: { '@type': 'Country', name: 'Italia' } },
           ...(entry.movie.poster ? { image: entry.movie.poster } : {}),
           ...(entry.movie.genres?.length ? { genre: entry.movie.genres } : {}),
           ...(entry.movie.synopsis ? { description: entry.movie.synopsis } : {})

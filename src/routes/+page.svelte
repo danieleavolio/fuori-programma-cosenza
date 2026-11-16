@@ -1,31 +1,21 @@
 <script lang="ts">
   import JsonLd from '../lib/JsonLd.svelte';
+  import Seo from '../lib/Seo.svelte';
   let { data } = $props();
 </script>
 
 <svelte:head>
-  <title>Programmazione cinema a Cosenza e Rende | Fuori programma</title>
-  <meta name="description" content="Programmazione e orari dei cinema a Cosenza e Rende: Andromeda River, Citrigno, Teatro Italia, Garden e Cinema Unical." />
   <meta name="google-site-verification" content="pcJ4_jepxpSEoTyEsHGYJ2XLyoelCmPYbdCb5JisBgE" />
-  <link rel="canonical" href={data.canonical} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Fuori programma — Cinema a Cosenza e Rende" />
-  <meta property="og:description" content="Tutti gli orari dei cinema di Cosenza, Rende e Zumpano in un solo posto." />
-  <meta property="og:url" content={data.canonical} />
-  <meta property="og:image" content={data.ogImage} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Fuori programma: orari dei cinema a Cosenza e Rende" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
   {@html `<script>window.__FP_FILM_PATHS__=${JSON.stringify(data.paths).replace(/</g, '\\u003c')}</script>`}
-  <script src="/app.js?v=20261114c" defer></script>
+  <script src="/app.js?v=20261116b" defer></script>
 </svelte:head>
 
+<Seo title="Cinema a Cosenza e Rende: film, orari e biglietti" description="Confronta film e orari di Andromeda River, Citrigno, Italia Tieri, Garden e Unical. Programmazione di oggi, stasera, weekend e film in arrivo." canonical={data.canonical} image={data.ogImage} imageAlt="Fuori programma: film e orari dei cinema a Cosenza, Rende e Zumpano" />
+
 <section class="page-heading" aria-labelledby="page-title">
-  <h1 id="page-title">Programmazione cinema</h1>
-  <p>Cosenza, Rende e Zumpano</p>
+  <h1 id="page-title">Cinema a Cosenza e Rende</h1>
+  <p>Film, orari e biglietti · anche a Zumpano</p>
 </section>
 
 <section class="airing-now" id="airing-now" aria-labelledby="airing-now-title" hidden>
@@ -232,4 +222,38 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-<noscript>Per visualizzare gli orari è necessario attivare JavaScript.</noscript>
+<section class="local-guide" aria-labelledby="local-guide-title">
+  <h2 id="local-guide-title">La programmazione dei cinema, in un solo posto</h2>
+  <p>Fuori programma è una guida indipendente ai cinema di Cosenza, Rende e Zumpano. Confronta i film in sala, scegli l’orario e apri la biglietteria ufficiale del cinema: non vendiamo biglietti e non siamo il sito ufficiale delle sale.</p>
+  <nav class="guide-links" aria-label="Quando andare al cinema">
+    <a href="/programmazione/oggi">Film e orari di oggi</a>
+    <a href="/programmazione/stasera">Cinema stasera, dalle 20</a>
+    <a href="/programmazione/weekend">Programmazione del weekend</a>
+    <a href="/prossimamente">Film in arrivo</a>
+  </nav>
+  <h3>Quali cinema puoi confrontare?</h3>
+  <ul class="guide-venues">
+    {#each data.venues as venue (venue.id)}
+      <li><a href={venue.path}>{venue.name}</a><span>{[venue.address, venue.city || venue.location].filter(Boolean).join(' · ')}</span></li>
+    {/each}
+  </ul>
+  <h3>Da dove arrivano gli orari?</h3>
+  <p>Leggiamo la programmazione pubblicata dalle sale sui loro siti ufficiali. {data.updatedLabel}. Se una fonte non risponde conserviamo gli ultimi dati disponibili: controlla sempre la data e conferma orari e disponibilità sulla biglietteria prima di partire.</p>
+  <h3>“Prossimamente” significa che posso già prenotare?</h3>
+  <p>No. Gli annunci dei cinema e le date di uscita italiane sono distinti dagli spettacoli con orario. Nella pagina <a href="/prossimamente">Prossimamente</a> trovi la fonte di ciascun annuncio e le date comunicate dalla sala, quando disponibili.</p>
+</section>
+
+<noscript>I film e gli orari pubblicati sono consultabili anche senza JavaScript. I filtri interattivi e i salvati richiedono JavaScript.</noscript>
+
+<style>
+  .local-guide { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); max-width: 850px; }
+  .local-guide h2 { font-size: 21px; margin-bottom: 12px; }
+  .local-guide h3 { font-size: 16px; margin: 24px 0 8px; }
+  .local-guide p { color: var(--muted); font-size: 14px; line-height: 1.75; }
+  .local-guide a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+  .guide-links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 12px 0; font-size: 13px; }
+  .guide-links a { display: inline-flex; align-items: center; min-height: 44px; }
+  .guide-venues { padding-left: 20px; }
+  .guide-venues li { padding: 8px 0; font-size: 14px; }
+  .guide-venues span { display: block; color: var(--muted); font-size: 12px; line-height: 1.6; }
+</style>

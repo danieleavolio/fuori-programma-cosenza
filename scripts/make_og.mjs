@@ -1,12 +1,11 @@
-// Genera le immagini Open Graph (1200x630) a partire dalle locandine pubblicate
-// dal bot. Scrive static/og/default.png, una immagine per film in
-// static/og/<slug>.jpg e l'elenco dei file riusciti in src/lib/og-manifest.json.
-// Se la rete non risponde il film viene omesso dal manifest: la pagina ricade
-// sull'immagine di default invece di mostrare un'anteprima rotta.
+// Genera immagini Open Graph 1200x630 per home, pagine e film. Il manifest
+// contiene URL versionati in base ai byte generati. Un CDN non raggiungibile
+// lascia una card film con titolo e brand, senza locandina.
 import { mkdir, writeFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
+import { createHash } from 'node:crypto';
 
 const root = path.resolve(import.meta.dirname, '..');
 const schedule = JSON.parse(readFileSync(path.join(root, 'data/schedule.json'), 'utf8'));
@@ -76,7 +75,7 @@ const mark = (x, y) => `
   <rect x="${x}" y="${y}" width="84" height="84" rx="6" fill="none" stroke="${TEXT}" stroke-opacity="0.35" stroke-width="2"/>
   <text x="${x + 42}" y="${y + 54}" font-family="${SANS}" font-size="34" font-weight="700" fill="${TEXT}" text-anchor="middle" letter-spacing="-1">fp</text>`;
 
-const venueNames = (schedule.venues || []).map((venue) => venue.name.toUpperCase()).join('  ·  ');
+const venueNames = 'ANDROMEDA RIVER · CITRIGNO · ITALIA TIERI · GARDEN · UNICAL';
 
 function defaultSvg() {
   return svgFrame(`
@@ -86,12 +85,30 @@ function defaultSvg() {
     <text x="122" y="392" font-family="${SANS}" font-size="30" fill="${MUTED}">Orari dei cinema a Cosenza, Rende e Zumpano</text>
     ${mark(1030, 92)}
     <line x1="86" y1="520" x2="1114" y2="520" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
-    <text x="86" y="566" font-family="${MONO}" font-size="19" fill="${MUTED}" letter-spacing="2">${escapeXml(venueNames)}</text>`);
+    <text x="86" y="566" font-family="${MONO}" font-size="18" fill="${MUTED}" letter-spacing="1">${escapeXml(venueNames)}</text>`);
+}
+
+function pageSvg(title, description) {
+  const lines = wrap(title, 66, 1000, 3);
+  const copyY = 220 + lines.length * 76;
+  return svgFrame(`
+    <text x="86" y="110" font-family="${SANS}" font-size="28" font-weight="700" fill="${TEXT}">fuori programma</text>
+    <text x="86" y="150" font-family="${MONO}" font-size="18" fill="${ACCENT}" letter-spacing="2">CINEMA A COSENZA, RENDE E ZUMPANO</text>
+    ${lines.map((line, index) => `<text x="86" y="${240 + index * 76}" font-family="${SANS}" font-size="66" font-weight="700" fill="${TEXT}" letter-spacing="-1">${escapeXml(line)}</text>`).join('')}
+    ${wrap(description, 27, 1000, 2).map((line, index) => `<text x="88" y="${copyY + 44 + index * 36}" font-family="${SANS}" font-size="27" fill="${MUTED}">${escapeXml(line)}</text>`).join('')}
+    <line x1="86" y1="538" x2="1114" y2="538" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="86" y="580" font-family="${MONO}" font-size="18" fill="${MUTED}">FILM · ORARI · BIGLIETTERIE UFFICIALI</text>`);
+}
+
+async function publish(filename, bytes) {
+  await writeFile(path.join(outDir, filename), bytes);
+  const version = createHash('sha256').update(bytes).digest('hex').slice(0, 12);
+  return `/og/${filename}?v=${version}`;
 }
 
 function filmSvg(movie) {
   const titleLines = wrap(movie.title, 56, 660, 3);
-  const startY = titleLines.length > 2 ? 214 : 236;
+  const startY = titleLines.length > 2 ? 194 : 220;
   const title = titleLines.map((line, index) => (
     `<text x="86" y="${startY + index * 66}" font-family="${SANS}" font-size="56" font-weight="700" fill="${TEXT}" letter-spacing="-1.5">${escapeXml(line)}</text>`
   )).join('');
@@ -99,9 +116,9 @@ function filmSvg(movie) {
   const meta = [movie.year, movie.duration, (movie.genres || []).slice(0, 3).join(' · ')].filter(Boolean).join('  ·  ');
   return svgFrame(`
     <rect x="86" y="150" width="7" height="${Math.max(120, titleLines.length * 66 + 70)}" fill="${ACCENT}"/>
-    <text x="86" y="140" font-family="${MONO}" font-size="18" fill="${ACCENT}" letter-spacing="3">IN PROGRAMMAZIONE</text>
+    <text x="86" y="130" font-family="${MONO}" font-size="18" fill="${ACCENT}" letter-spacing="3">FILM E ORARI</text>
     ${title}
-    <text x="88" y="${metaY}" font-family="${SANS}" font-size="24" fill="${MUTED}">${escapeXml(meta)}</text>
+    ${wrap(meta, 22, 650, 2).map((line, index) => `<text x="88" y="${metaY + index * 30}" font-family="${SANS}" font-size="22" fill="${MUTED}">${escapeXml(line)}</text>`).join('')}
     <text x="86" y="560" font-family="${SANS}" font-size="28" font-weight="700" fill="${TEXT}" letter-spacing="-1">fuori programma</text>
     <text x="86" y="594" font-family="${MONO}" font-size="17" fill="${MUTED}" letter-spacing="2">CINEMA A COSENZA E RENDE</text>`);
 }
@@ -115,23 +132,22 @@ async function download(url, budget) {
 async function buildFilm(movie) {
   const slug = filmSlug(movie);
   const base = await sharp(Buffer.from(filmSvg(movie))).png().toBuffer();
-  let poster;
+  let cover;
   try {
-    poster = await download(movie.poster, 12000);
+    const poster = movie.poster ? await download(movie.poster, 12000) : null;
+    if (poster) cover = await sharp(poster).resize(420, HEIGHT, { fit: 'cover', position: 'attention' })
+      .modulate({ brightness: 0.96 }).jpeg({ quality: 86 }).toBuffer();
   } catch {
-    return null;
+    // Mantiene una card con il titolo del film anche senza CDN della sala.
   }
-  const cover = await sharp(poster).resize(420, HEIGHT, { fit: 'cover', position: 'attention' })
-    .modulate({ brightness: 0.96 }).jpeg({ quality: 86 }).toBuffer();
   const composed = await sharp(base)
-    .composite([
+    .composite(cover ? [
       { input: cover, left: 780, top: 0 },
       { input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="4" height="${HEIGHT}"><rect width="4" height="${HEIGHT}" fill="#000000" fill-opacity="0.45"/></svg>`), left: 780, top: 0 }
-    ])
+    ] : [])
     .jpeg({ quality: 84, mozjpeg: true })
     .toBuffer();
-  await writeFile(path.join(outDir, `${slug}.jpg`), composed);
-  return `/og/${slug}.jpg`;
+  return publish(`${slug}.jpg`, composed);
 }
 
 async function pool(items, size, worker) {
@@ -148,10 +164,23 @@ async function pool(items, size, worker) {
 
 await mkdir(outDir, { recursive: true });
 
-await sharp(Buffer.from(defaultSvg())).png({ compressionLevel: 9 }).toFile(path.join(outDir, 'default.png'));
+const defaultImage = await publish('default.png', await sharp(Buffer.from(defaultSvg())).png({ compressionLevel: 9 }).toBuffer());
+
+const pageDefinitions = [
+  ['oggi', 'Cinema oggi', 'Film in sala e orari pubblicati dalle biglietterie ufficiali.'],
+  ['stasera', 'Cinema stasera', 'Cosa vedere dalle 20: film, sale e orari a confronto.'],
+  ['weekend', 'Al cinema nel weekend', 'Film e spettacoli di venerdì, sabato e domenica.'],
+  ['prossimamente', 'Prossimamente', 'I film in arrivo: locandine, date annunciate e fonti ufficiali.'],
+  ['calendario', 'Il cinema in agenda', 'Segui le tue sale con un calendario aggiornabile.'],
+  ...(schedule.venues || []).map((venue) => [venue.id, venue.name, `Film, orari e informazioni sulla sala a ${venue.location}.`])
+];
+const pages = {};
+for (const [key, title, description] of pageDefinitions) {
+  pages[key] = await publish(`page-${key}.jpg`, await sharp(Buffer.from(pageSvg(title, description))).jpeg({ quality: 88, mozjpeg: true }).toBuffer());
+}
 
 const films = {};
-const candidates = (schedule.movies || []).filter((movie) => movie.poster && movie.title);
+const candidates = (schedule.movies || []).filter((movie) => movie.title);
 const built = await pool(candidates, 4, async (movie) => {
   try {
     return await buildFilm(movie);
@@ -163,5 +192,5 @@ for (const { item, result } of built) {
   if (result) films[filmSlug(item)] = result;
 }
 
-await writeFile(manifestPath, `${JSON.stringify({ default: '/og/default.png', films }, null, 2)}\n`);
-console.log(`og: default.png + ${Object.keys(films).length}/${candidates.length} film`);
+await writeFile(manifestPath, `${JSON.stringify({ default: defaultImage, pages, films }, null, 2)}\n`);
+console.log(`og: default.png + ${Object.keys(pages).length} pagine + ${Object.keys(films).length}/${candidates.length} film`);

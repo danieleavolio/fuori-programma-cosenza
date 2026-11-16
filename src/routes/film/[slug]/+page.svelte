@@ -1,6 +1,7 @@
 <script lang="ts">
   import Breadcrumb from '../../../lib/Breadcrumb.svelte';
   import JsonLd from '../../../lib/JsonLd.svelte';
+  import Seo from '../../../lib/Seo.svelte';
   let { data } = $props();
 
   const byVenue = $derived.by(() => {
@@ -16,20 +17,8 @@
   });
 </script>
 
+<Seo title={`${data.movie.title}: orari a Cosenza e Rende`} description={`Trama, cast e spettacoli di ${data.movie.title} nei cinema di Cosenza, Rende e Zumpano. Consulta gli orari pubblicati e le biglietterie ufficiali.`} canonical={data.canonical} image={data.ogImage} imageAlt={`Locandina e scheda di ${data.movie.title} su Fuori programma`} type="video.movie" />
 <svelte:head>
-  <title>{data.movie.title} ({data.movie.year || 'film'}) — orari cinema | Fuori programma</title>
-  <meta name="description" content={`Trama, cast e orari di ${data.movie.title} nei cinema di Cosenza e Rende. Biglietti e spettacoli aggiornati.`} />
-  <link rel="canonical" href={data.canonical} />
-  <meta property="og:type" content="video.movie" />
-  <meta property="og:title" content={`${data.movie.title} — Fuori programma`} />
-  <meta property="og:description" content={data.movie.synopsis || `Scopri gli orari di ${data.movie.title} a Cosenza e Rende.`} />
-  <meta property="og:url" content={data.canonical} />
-  <meta property="og:image" content={data.ogImage} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content={`${data.movie.title} in programmazione a Cosenza e Rende`} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
 
@@ -42,7 +31,7 @@
 
 <article class="venue-schedule-block film-summary">
   {#if data.movie.poster}
-    <img class="film-summary-poster" src={data.movie.poster} alt={`Locandina di ${data.movie.title}`} />
+    <img class="film-summary-poster" src={data.movie.poster} alt={`Locandina di ${data.movie.title}`} width="300" height="450" fetchpriority="high" />
   {/if}
   <div class="film-summary-copy">
     <p class="movie-credits">

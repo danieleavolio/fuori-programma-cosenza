@@ -1,6 +1,7 @@
 <script lang="ts">
   import Breadcrumb from '../../../lib/Breadcrumb.svelte';
   import JsonLd from '../../../lib/JsonLd.svelte';
+  import Seo from '../../../lib/Seo.svelte';
   let { data } = $props();
 
   const byDay = $derived.by(() => {
@@ -14,20 +15,8 @@
   });
 </script>
 
+<Seo title={`${data.venue.name}: programmazione e orari a ${data.info.city || data.venue.location}`} description={`Film, orari, indirizzo e biglietteria di ${data.venue.name} a ${data.info.city || data.venue.location}. Consulta gli spettacoli pubblicati e le indicazioni per raggiungere la sala.`} canonical={data.canonical} image={data.ogImage} imageAlt={`${data.venue.name}: film e orari su Fuori programma`} />
 <svelte:head>
-  <title>{data.venue.name} — programmazione e orari | Fuori programma</title>
-  <meta name="description" content={`Film, orari, indirizzo e biglietti di ${data.venue.name} a ${data.info.city || data.venue.location}. Programmazione aggiornata.`} />
-  <link rel="canonical" href={data.canonical} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={`${data.venue.name} — cinema a Cosenza e Rende`} />
-  <meta property="og:description" content={`Programmazione, indirizzo e biglietti di ${data.venue.name}.`} />
-  <meta property="og:url" content={data.canonical} />
-  <meta property="og:image" content={data.ogImage} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content={`${data.venue.name}: programmazione e orari`} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
 

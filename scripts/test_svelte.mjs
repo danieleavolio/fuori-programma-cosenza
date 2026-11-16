@@ -8,13 +8,13 @@ const get = async (path) => {
 
 const home = await get('/');
 assert.equal(home.response.status, 200);
-assert.match(home.text, /<h1 id="page-title">Programmazione cinema<\/h1>/);
+assert.match(home.text, /<h1\b[^>]*id="page-title"[^>]*>Cinema a Cosenza e Rende<\/h1>/);
 assert.match(home.text, /<article class="movie-catalog-card/);
 assert.match(home.text, /id="movies-grid"/);
 assert.match(home.text, /src="\/app\.js\?v=[\w-]+"/);
 assert.match(home.text, /rel="canonical"/);
 assert.match(home.text, /property="og:title"/);
-assert.match(home.text, /property="og:image" content="[^"]+\/og\/default\.png"/);
+assert.match(home.text, /property="og:image" content="[^"]+\/og\/default\.png\?v=[a-f0-9]+"/);
 assert.match(home.text, /property="og:image:width" content="1200"/);
 // La home deve linkare le schede film: altrimenti i crawler le trovano solo
 // tramite la sitemap e non ricevono autorita' dai link interni.
@@ -64,7 +64,7 @@ const cinemaPage = await get(cinemaSlug);
 assert.match(cinemaPage.text, /<nav class="breadcrumb[^"]*"/);
 assert.match(cinemaPage.text, /"@type":"BreadcrumbList"/);
 const prossimamente = await get('/prossimamente');
-assert.match(prossimamente.text, /<h1 id="page-title">Prossimamente<\/h1>/);
+assert.match(prossimamente.text, /<h1\b[^>]*id="page-title"[^>]*>Prossimamente<\/h1>/);
 assert.match(prossimamente.text, /"@type":"ItemList"/);
 
 const sitemapFilm = sitemap.text.match(new RegExp(filmSlug.replaceAll('/', '\\/')));
@@ -81,7 +81,7 @@ assert.equal(manifest.response.status, 200);
 assert.equal(JSON.parse(manifest.text).start_url, './');
 
 const filmPageOg = filmPage.text;
-assert.match(filmPageOg, /property="og:image" content="[^"]+\/og\/[a-z0-9-]+\.(jpg|png)"/);
+assert.match(filmPageOg, /property="og:image" content="[^"]+\/og\/[a-z0-9-]+\.(jpg|png)\?v=[a-f0-9]+"/);
 assert.match(filmPageOg, /name="twitter:image"/);
 assert.match(filmPageOg, /property="og:image:height" content="630"/);
 const icsPath = filmPageOg.match(/href="(\/evento\.ics\?[^"]+)"/)?.[1]?.replaceAll('&amp;', '&');

@@ -7,8 +7,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
   const vercelEnv = process.env.VERCEL_ENV;
 
-  if (vercelEnv && vercelEnv !== 'production') {
-    response.headers.set('x-robots-tag', 'noindex, nofollow');
+  if ((vercelEnv && vercelEnv !== 'production') || event.url.pathname === '/legacy' || event.url.pathname.startsWith('/legacy/') || response.status >= 400) {
+    response.headers.set('x-robots-tag', 'noindex, follow');
   } else if (event.request.method === 'GET' && response.headers.get('content-type')?.includes('text/html')) {
     response.headers.set('cache-control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=600');
   }

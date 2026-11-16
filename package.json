@@ -14,7 +14,8 @@
     "legacy:sync": "node scripts/sync_legacy.mjs",
     "test:svelte": "npm run legacy:sync && node scripts/test_svelte.mjs",
     "test:svelte:browser": "node scripts/test_svelte_browser.mjs",
-    "test:preview": "node scripts/verify_preview.mjs"
+    "test:preview": "node scripts/verify_preview.mjs",
+    "test:seo": "node scripts/test_seo.mjs"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "8.0.1",

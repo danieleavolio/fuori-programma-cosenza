@@ -101,6 +101,12 @@ try {
   await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 3, mobile: true });
   await navigate(new URL('/', base).href, '.movie-title a');
   await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'programmazione caricata');
+  assert.ok(await evaluate(`(() => {
+    const movie = scheduleData.movies.find(movie => filmHref(movie));
+    const url = new URL(filmHref(movie), document.querySelector('link[rel="canonical"]').href).href;
+    return formatFilmShareMessage(movie).includes(url);
+  })()`), 'La condivisione deve includere la scheda film del sito');
+  assert.equal(await evaluate('document.querySelector(".movie-catalog-card img.poster").loading'), 'eager');
   const titleLink = await evaluate(`(() => {
     const link = document.querySelector('.movie-title a');
     const card = link.closest('.movie-catalog-card');
@@ -155,7 +161,7 @@ try {
   await cdp('Network.enable');
   await cdp('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0 });
   await navigate(new URL('/', base).href, '#page-title');
-  assert.equal(await evaluate('document.querySelector("#page-title").textContent.trim()'), 'Programmazione cinema');
+  assert.equal(await evaluate('document.querySelector("#page-title").textContent.trim()'), 'Cinema a Cosenza e Rende');
   await cdp('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
   // Navigazione interna (client-side) tra due pagine: la transizione Svelte non
   // deve impedire il render della pagina nuova.

@@ -21,6 +21,7 @@
   <meta name="theme-color" content="#15191e" media="(prefers-color-scheme: dark)" />
   <meta property="og:site_name" content="Fuori programma" />
   <meta property="og:locale" content="it_IT" />
+  <link rel="preconnect" href="https://cdn.18tickets.net" />
 </svelte:head>
 
 <a class="skip-link" href="#programmazione">Vai alla programmazione</a>

@@ -322,7 +322,9 @@ function formatFilmShareMessage(movie) {
     }
   }
 
-  lines.push('', movie.url);
+  const path = filmHref(movie);
+  const base = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
+  lines.push('', path ? new URL(path, base).href : movie.url);
   return lines.join('\n');
 }
 
@@ -1246,9 +1248,9 @@ function movieProgramming(movie) {
   return [...dates.values()];
 }
 
-function renderPosterLink(movie, { panelId, isExpanded }) {
+function renderPosterLink(movie, { panelId, isExpanded, priority = false }) {
   const image = movie.poster
-    ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="" loading="lazy" />`
+    ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="" width="300" height="450" loading="${priority ? 'eager' : 'lazy'}"${priority ? ' fetchpriority="high"' : ''} />`
     : `<span class="poster poster-missing" aria-hidden="true">${escapeHtml(movie.title.slice(0, 1))}</span>`;
 
   return `<button class="poster-link" type="button" data-card-open
@@ -1588,7 +1590,7 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
   moviesGrid.classList.toggle('movie-grid', movieLayout === 'grid');
 
   // Griglia e lista usano lo stesso markup: cambia solo il layout CSS.
-  moviesGrid.innerHTML = movies.map((movie) => catalogCardHtml(movie, { venuesMap, selectedVenue, todayString })).join('');
+  moviesGrid.innerHTML = movies.map((movie, index) => catalogCardHtml(movie, { venuesMap, selectedVenue, todayString, priority: index === 0 })).join('');
 }
 
 function catalogSelection(movie, selectedVenue, todayString) {
@@ -1607,11 +1609,11 @@ function catalogSelection(movie, selectedVenue, todayString) {
   return { shows: relevantShows, programming: relevantProgramming };
 }
 
-function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString }) {
-  return movieCardHtml(movie, { venuesMap, ...catalogSelection(movie, selectedVenue, todayString) });
+function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString, priority = false }) {
+  return movieCardHtml(movie, { venuesMap, ...catalogSelection(movie, selectedVenue, todayString), priority });
 }
 
-function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
+function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '', priority = false }) {
   const isFav = favorites.has(movie.id);
   const cardKey = `${dayDate ? 'day' : 'movies'}-${movie.id}`;
   const panelId = `schedule-${cardKey}`;
@@ -1639,7 +1641,7 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '' }) {
       id="${dayDate ? 'day-' : ''}film-${escapeHtml(movie.id)}" data-movie-id="${escapeHtml(movie.id)}"
       data-card-key="${escapeHtml(cardKey)}" style="view-transition-name: film-${escapeHtml(cardKey)}">
       <div class="movie-card-body">
-        ${renderPosterLink(movie, { panelId, isExpanded })}
+        ${renderPosterLink(movie, { panelId, isExpanded, priority })}
 
         <div class="movie-card-details">
           <div class="movie-title-row">

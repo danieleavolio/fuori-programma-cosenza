@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { dateISO, dateTimeISO, dateLabel, filmPath, movies, showUrl, venues, venueDetails } from '../../../lib/server/data';
-import { ogDefault } from '../../../lib/server/og';
+import { ogForPage } from '../../../lib/server/og';
+import { siteOrigin } from '../../../lib/server/site';
 import type { PageServerLoad } from './$types';
 
 function localISO(now: Date): string {
@@ -30,9 +31,9 @@ const PAGES: Record<string, { title: string; description: string }> = {
   }
 };
 
-export const load: PageServerLoad = ({ params, url }) => {
+export const load: PageServerLoad = ({ params }) => {
   const period = params.period;
-  if (!(period in PAGES)) error(404, 'Programmazione non trovata');
+  if (!Object.hasOwn(PAGES, period)) error(404, 'Programmazione non trovata');
   const today = localISO(new Date());
   const weekday = new Date(`${today}T12:00:00Z`).getUTCDay();
   let start = today;
@@ -60,9 +61,9 @@ export const load: PageServerLoad = ({ params, url }) => {
       .filter((item) => new Date(item.startDate).getTime() >= Date.now());
   })).sort((a, b) => `${a.dateISO} ${a.show.time}`.localeCompare(`${b.dateISO} ${b.show.time}`));
   const { title, description } = PAGES[period];
-  const canonical = `${url.origin}/programmazione/${period}`;
+  const canonical = `${siteOrigin}/programmazione/${period}`;
   return {
-    period, title, description, canonical, ogImage: `${url.origin}${ogDefault}`, start, end, screenings,
+    period, title, description, canonical, ogImage: `${siteOrigin}${ogForPage(period)}`, start, end, screenings,
     schema: {
       '@context': 'https://schema.org', '@type': 'ItemList', name: title,
       itemListElement: screenings.map((item, index) => ({

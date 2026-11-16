@@ -70,6 +70,11 @@ try {
     for (const pathname of ['/prossimamente', '/programmazione/oggi', '/programmazione/stasera', '/programmazione/weekend']) {
       await navigate(pathname);
       assert.equal(await evaluate('document.querySelectorAll("h1").length'), 1);
+      if (pathname === '/prossimamente') {
+        assert.equal(await evaluate('document.querySelectorAll(".period-nav").length'), 0);
+        assert.equal(await evaluate('document.querySelector("h1").textContent.trim()'), 'Prossimamente');
+        assert.ok(await evaluate('document.querySelector(".page-heading p").textContent.includes("film in arrivo")'));
+      }
       const cards = await evaluate('document.querySelectorAll(".movie-catalog-card").length');
       assert.ok(await evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), `${pathname} overflow ${width}`);
       if (cards) {

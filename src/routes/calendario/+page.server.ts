@@ -1,4 +1,5 @@
-import { ogDefault } from '../../lib/server/og';
+import { ogForPage } from '../../lib/server/og';
+import { siteOrigin } from '../../lib/server/site';
 import { venues } from '../../lib/server/data';
 import type { PageServerLoad } from './$types';
 
@@ -16,8 +17,8 @@ export const load: PageServerLoad = ({ url }) => {
   const name = 'Fuori programma — ' + venues.filter((venue) => selected.includes(venue.id)).map((venue) => venue.name).join(', ');
   return {
     venues, selected, feed,
-    canonical: `${url.origin}/calendario`,
-    ogImage: `${url.origin}${ogDefault}`,
+    canonical: `${siteOrigin}/calendario`,
+    ogImage: `${siteOrigin}${ogForPage('calendario')}`,
     apple: feed.replace(/^https:/, 'webcal:'),
     outlook: feed ? `https://outlook.live.com/calendar/0/addfromweb?${new URLSearchParams({ url: feed, name })}` : ''
   };

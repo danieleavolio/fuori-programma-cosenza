@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { breadcrumb, dateISO, dateTimeISO, dateLabel, filmPath, movies, showUrl, venues, venueDetails } from '../../../lib/server/data';
 import { ogForFilm } from '../../../lib/server/og';
+import { siteOrigin } from '../../../lib/server/site';
 import type { PageServerLoad } from './$types';
 
 function durationMinutes(value = ''): number {
@@ -9,7 +10,7 @@ function durationMinutes(value = ''): number {
   return hours * 60 + minutes;
 }
 
-export const load: PageServerLoad = ({ params, url }) => {
+export const load: PageServerLoad = ({ params }) => {
   const movie = movies.find((item) => filmPath(item) === `/film/${params.slug}`);
   if (!movie) error(404, 'Film non trovato');
 
@@ -40,18 +41,20 @@ export const load: PageServerLoad = ({ params, url }) => {
     });
   }).sort((a, b) => `${a.dateISO} ${a.time}`.localeCompare(`${b.dateISO} ${b.time}`));
 
-  const canonical = `${url.origin}${filmPath(movie)}`;
+  const canonical = `${siteOrigin}${filmPath(movie)}`;
   return {
     movie, screenings, canonical,
     crumb: breadcrumb([
       { name: 'Home', path: '/' },
       { name: 'Oggi al cinema', path: '/programmazione/oggi' },
       { name: movie.title }
-    ], url.origin),
-    ogImage: `${url.origin}${ogForFilm(params.slug)}`,
+    ], siteOrigin),
+    ogImage: `${siteOrigin}${ogForFilm(params.slug)}`,
     schema: {
       '@context': 'https://schema.org',
       '@type': 'Movie',
+      '@id': `${canonical}#movie`,
+      url: canonical,
       name: movie.title,
       ...(movie.year ? { dateCreated: movie.year } : {}),
       ...(movie.director ? { director: { '@type': 'Person', name: movie.director } } : {}),
@@ -63,7 +66,10 @@ export const load: PageServerLoad = ({ params, url }) => {
       subjectOf: screenings.map((item) => ({
         '@type': 'ScreeningEvent', name: `${movie.title} — ${item.venue.name}`,
         startDate: item.startDate,
-        location: { '@type': 'MovieTheater', name: item.venue.name, address: [item.info?.address, item.info?.city || item.venue.location].filter(Boolean).join(', ') },
+        workPresented: { '@id': `${canonical}#movie` },
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: { '@type': 'MovieTheater', name: item.venue.name, url: `${siteOrigin}/cinema/${item.venue.id}`, address: { '@type': 'PostalAddress', streetAddress: item.info?.address, addressLocality: item.info?.city || item.venue.location, addressCountry: 'IT' } },
         url: item.url
       }))
     }

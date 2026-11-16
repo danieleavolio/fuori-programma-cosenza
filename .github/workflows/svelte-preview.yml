@@ -13,6 +13,12 @@ on:
       - 'scripts/*svelte*'
       - 'scripts/verify_preview.mjs'
       - 'scripts/sync_legacy.mjs'
+      - 'scripts/make_og.mjs'
+      - 'scripts/test_seo.mjs'
+      - 'app.js'
+      - 'sw.js'
+      - 'index.html'
+      - 'styles.css'
       - '.github/workflows/svelte-preview.yml'
   workflow_dispatch:
 

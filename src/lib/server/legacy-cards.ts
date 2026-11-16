@@ -172,9 +172,9 @@ function movieProgramming(movie: Movie) {
   return [...dates.values()];
 }
 
-function renderPosterLink(movie: Movie, panelId: string) {
+function renderPosterLink(movie: Movie, panelId: string, priority = false) {
   const image = movie.poster
-    ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="" loading="lazy" />`
+    ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="" width="300" height="450" loading="${priority ? 'eager' : 'lazy'}"${priority ? ' fetchpriority="high"' : ''} />`
     : `<span class="poster poster-missing" aria-hidden="true">${escapeHtml(movie.title.slice(0, 1))}</span>`;
 
   return `<button class="poster-link" type="button" data-card-open
@@ -247,6 +247,7 @@ function movieCardHtml(
   selection: { shows: ShowGroup[]; programming: { date: string; venue: string }[] },
   now: Date,
   paths: Record<string, string> = {},
+  priority = false,
 ) {
   const { shows, programming } = selection;
   const cardKey = `movies-${movie.id}`;
@@ -275,7 +276,7 @@ function movieCardHtml(
       id="film-${escapeHtml(movie.id)}" data-movie-id="${escapeHtml(movie.id)}"
       data-card-key="${escapeHtml(cardKey)}" style="view-transition-name: film-${escapeHtml(cardKey)}">
       <div class="movie-card-body">
-        ${renderPosterLink(movie, panelId)}
+        ${renderPosterLink(movie, panelId, priority)}
 
         <div class="movie-card-details">
           <div class="movie-title-row">
@@ -378,6 +379,6 @@ export function buildCatalogHtml(movies: Movie[], venues: Venue[], now: Date, pa
   });
 
   const totalShows = visible.reduce((sum, item) => sum + item.selection.shows.reduce((total, group) => total + group.shows.length, 0), 0);
-  const html = visible.map((item) => movieCardHtml(item.movie, venuesMap, item.selection, now, paths)).join('');
+  const html = visible.map((item, index) => movieCardHtml(item.movie, venuesMap, item.selection, now, paths, index === 0)).join('');
   return { html, films: visible.length, shows: totalShows };
 }

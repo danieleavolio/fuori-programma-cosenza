@@ -1,7 +1,7 @@
 <script lang="ts">
   import Breadcrumb from '../../lib/Breadcrumb.svelte';
   import JsonLd from '../../lib/JsonLd.svelte';
-  import PeriodNav from '../../lib/PeriodNav.svelte';
+  import Seo from '../../lib/Seo.svelte';
   import MovieCollection, { type CatalogEntry } from '../../lib/MovieCollection.svelte';
   import CatalogLayout from '../../lib/CatalogLayout.svelte';
   let { data } = $props();
@@ -35,30 +35,17 @@
   }
 </script>
 
+<Seo title={data.title} description="I film in arrivo nei cinema di Cosenza, Rende e Zumpano: locandine, date annunciate e fonti ufficiali, divisi per cinema." canonical={data.canonical} image={data.ogImage} imageAlt="Prossimamente: film in arrivo nei cinema di Cosenza, Rende e Zumpano" />
 <svelte:head>
-  <title>{data.title} | Fuori programma</title>
-  <meta name="description" content="Film in arrivo nei cinema di Cosenza, Rende e Zumpano: locandine, annunci per cinema e fonti ufficiali." />
-  <link rel="canonical" href={data.canonical} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={data.title} />
-  <meta property="og:description" content="Film in arrivo, locandine e annunci ufficiali divisi per cinema." />
-  <meta property="og:url" content={data.canonical} />
-  <meta property="og:image" content={data.ogImage} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Prossimamente al cinema a Cosenza e Rende" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
 
 <Breadcrumb schema={data.crumb.schema} trail={data.crumb.trail} />
-<section class="page-heading" aria-labelledby="page-title">
+<section class="page-heading coming-heading" aria-labelledby="page-title">
   <h1 id="page-title">Prossimamente</h1>
-  <p>{data.localAnnouncements.reduce((total, group) => total + group.movies.length, 0)} annunci dalle sale · {data.upcoming.length} uscite con data italiana</p>
+  <p>I film in arrivo nei cinema di Cosenza, Rende e Zumpano, con locandine, date annunciate e fonti ufficiali.</p>
 </section>
 
-<PeriodNav current="prossimamente" />
 <CatalogLayout bind:layout />
 
 <p class="source-note">Film annunciati dalle sale, divisi per cinema. Le date pubblicate dal cinema sono distinte dalle uscite italiane e non indicano necessariamente orari già prenotabili.</p>
@@ -88,6 +75,8 @@
 </section>
 
 <style>
+  .coming-heading { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .coming-heading p { max-width: 760px; line-height: 1.6; }
   .source-note { margin: 0 0 20px; color: var(--muted); font-size: 13px; line-height: 1.6; }
   .section-heading { flex-wrap: wrap; gap: 8px 16px; }
   a.section-note { min-height: 44px; display: inline-flex; align-items: center; color: var(--link); }

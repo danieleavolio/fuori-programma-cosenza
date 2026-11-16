@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Seo from '../../lib/Seo.svelte';
   let { data } = $props();
   let feedback = $state('');
 
@@ -12,21 +13,7 @@
   }
 </script>
 
-<svelte:head>
-  <title>Calendario cinema aggiornabile | Fuori programma</title>
-  <meta name="description" content="Segui la programmazione dei cinema di Cosenza e Rende con un calendario aggiornabile. Istruzioni per Apple Calendario, Google Calendar e Outlook." />
-  <link rel="canonical" href={data.canonical} />
-  <meta property="og:title" content="Segui i tuoi cinema nel calendario" />
-  <meta property="og:description" content="Scegli i cinema e copia il link per un calendario aggiornabile." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={data.canonical} />
-  <meta property="og:image" content={data.ogImage} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Calendario aggiornabile dei cinema di Cosenza e Rende" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={data.ogImage} />
-</svelte:head>
+<Seo title="Calendario cinema a Cosenza e Rende" description="Segui la programmazione dei cinema di Cosenza e Rende con un calendario aggiornabile. Istruzioni per Apple Calendario, Google Calendar e Outlook." canonical={data.canonical} image={data.ogImage} imageAlt="Segui i cinema di Cosenza e Rende nel calendario: Apple, Google e Outlook" />
 
 <section class="page-heading" aria-labelledby="page-title">
   <h1 id="page-title">Segui i tuoi cinema</h1>

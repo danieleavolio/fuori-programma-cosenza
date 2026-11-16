@@ -1,5 +1,6 @@
 <script lang="ts">
   import JsonLd from '../../../lib/JsonLd.svelte';
+  import Seo from '../../../lib/Seo.svelte';
   import PeriodNav from '../../../lib/PeriodNav.svelte';
   import MovieCollection, { type CatalogEntry } from '../../../lib/MovieCollection.svelte';
   import CatalogLayout from '../../../lib/CatalogLayout.svelte';
@@ -39,20 +40,8 @@
   }
 </script>
 
+<Seo title={data.title} description={data.description} canonical={data.canonical} image={data.ogImage} imageAlt={`${data.title}: film, locandine e orari`} />
 <svelte:head>
-  <title>{data.title} | Fuori programma</title>
-  <meta name="description" content={data.description} />
-  <link rel="canonical" href={data.canonical} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={data.title} />
-  <meta property="og:description" content={data.description} />
-  <meta property="og:url" content={data.canonical} />
-  <meta property="og:image" content={data.ogImage} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content={`${data.title}: film e orari dei cinema di Cosenza e Rende`} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={data.ogImage} />
   <JsonLd schema={data.schema} />
 </svelte:head>
 

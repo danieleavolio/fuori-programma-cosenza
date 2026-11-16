@@ -6,6 +6,12 @@ const films = manifest.films as Record<string, string>;
 
 export const ogDefault: string = manifest.default;
 
+const pages = (manifest as { pages?: Record<string, string> }).pages || {};
+
+export function ogForPage(key: string): string {
+  return pages[key] ?? ogDefault;
+}
+
 export function ogForFilm(slug: string): string {
   return films[slug] ?? ogDefault;
 }

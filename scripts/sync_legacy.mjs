@@ -1,4 +1,4 @@
-import { cp, mkdir, rm } from 'node:fs/promises';
+import { cp, mkdir, rm, readFile, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +17,13 @@ await mkdir(legacy, { recursive: true });
 for (const item of ['index.html', 'app.js', 'styles.css', 'sw.js', 'manifest.webmanifest', 'icon.svg', 'icons', 'calendars']) {
   await cp(path.join(root, item), path.join(legacy, item), { recursive: true });
 }
+// Gli asset statici possono aggirare gli hook SSR: il vecchio ingresso deve
+// dichiarare noindex nell'HTML, non solo negli header dell'applicazione.
+const legacyIndex = path.join(legacy, 'index.html');
+const legacyHtml = (await readFile(legacyIndex, 'utf8'))
+  .replace(/\s*<link rel="canonical"[^>]*>/, '')
+  .replace('</head>', '  <meta name="robots" content="noindex, follow" />\n  </head>');
+await writeFile(legacyIndex, legacyHtml);
 await mkdir(path.join(legacy, 'data'), { recursive: true });
 for (const item of ['schedule.json', 'venues-info.json']) {
   await cp(path.join(root, 'data', item), path.join(legacy, 'data', item));
