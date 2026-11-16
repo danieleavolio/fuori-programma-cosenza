@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T04:15:03.040916+00:00",
+  "updatedAt": "2026-11-16T17:47:10.432986+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -7,7 +7,7 @@
       "location": "Zumpano",
       "source": "https://zumpano.andromeda.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "available"
+      "status": "stale"
     },
     {
       "id": "citrigno",
@@ -357,17 +357,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "16/11/2026",
-          "shows": [
-            {
-              "time": "16:45",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/a458cee0-4fbc-4fb9-b789-f01f3266e7bd#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
           "date": "17/11/2026",
           "shows": [
             {
@@ -541,17 +530,6 @@
           "venue": "citrigno"
         },
         {
-          "date": "16/11/2026",
-          "shows": [
-            {
-              "time": "17:15",
-              "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/108706/aec0b8c5-ee60-4740-97cb-dcbf1e0534b7#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
           "date": "17/11/2026",
           "shows": [
             {
@@ -622,20 +600,7 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "16/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "17/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "18/11/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-04T15:11:13.874288+00:00",
       "external": {
         "source": "MYmovies",
@@ -886,11 +851,6 @@
           "date": "16/11/2026",
           "shows": [
             {
-              "time": "17:15",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109960/118782ca-2cae-4a85-8745-d7096e43defa#theater-init"
-            },
-            {
               "time": "19:30",
               "room": "Sala 2",
               "url": "https://citrigno.cosenzacinema.18tickets.it/film/109960/3552def7-74e4-4fa4-a158-2e513a90baca#theater-init"
@@ -1033,17 +993,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "16/11/2026",
-          "shows": [
-            {
-              "time": "18:00",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/109927/dca16f56-d7ee-45f8-8360-fd307264cb57#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
           "date": "17/11/2026",
           "shows": [
             {
@@ -1066,20 +1015,7 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "16/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "17/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "18/11/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-10T11:11:11.859356+00:00",
       "external": {
         "source": "MYmovies",
@@ -1238,11 +1174,6 @@
         {
           "date": "16/11/2026",
           "shows": [
-            {
-              "time": "18:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/fe5cb980-fdeb-4bb9-a1f6-25449784c867#theater-init"
-            },
             {
               "time": "22:15",
               "room": "Sala 1",
@@ -1438,20 +1369,7 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "16/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "17/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "18/11/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-11T22:26:35.753472+00:00",
       "external": {
         "source": "MYmovies",
@@ -1559,20 +1477,7 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "16/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "17/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "18/11/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-11T22:26:35.753472+00:00",
       "external": {
         "source": "MYmovies",
@@ -1657,11 +1562,6 @@
           "date": "16/11/2026",
           "shows": [
             {
-              "time": "18:30",
-              "room": "Sala FILM",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/110488/501ebb23-6fd8-4345-98da-10274d1d7440#theater-init"
-            },
-            {
               "time": "20:30",
               "room": "Sala FILM",
               "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/110488/e5fc3705-bb5b-4731-8608-6652069d9632#theater-init"
@@ -1670,12 +1570,7 @@
           "venue": "cinema-teatro-italia"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "16/11/2026",
-          "venue": "cinema-teatro-italia"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-12T16:29:51.796773+00:00",
       "external": {
         "source": "MYmovies",
@@ -1781,12 +1676,7 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "18/11/2026",
-          "venue": "cinema-teatro-italia"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-04T15:11:13.874288+00:00",
       "external": {
         "source": "MYmovies",
@@ -1857,20 +1747,7 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "16/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "17/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "18/11/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-04T15:11:13.874288+00:00",
       "external": {
         "source": "MYmovies",
@@ -1907,8 +1784,8 @@
     },
     {
       "title": "IL FUOCO CHE TI PORTI DENTRO",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/93974",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90345/standard_575b2729-96bb-45af-b545-ebd42b34d43c.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/90345",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
@@ -1931,6 +1808,24 @@
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
       "localDate": "2026-11-19"
+    },
+    {
+      "title": "RAMAYANA - LA NASCITA DI UNA LEGGENDA",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94271/standard_81b0739f-906a-4fba-9c47-52977ddd63e7.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/94271",
+      "venue": "andromeda-river",
+      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
+      "sourceName": "Andromeda River",
+      "localDate": "2026-11-19"
+    },
+    {
+      "title": "BTS WORLD TOUR 'ARIRANG' IN KAOHSIUNG: LIVE VIEWING",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94272/standard_84aefa35-9fd2-4638-ab75-429250251064.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/94272",
+      "venue": "andromeda-river",
+      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
+      "sourceName": "Andromeda River",
+      "localDate": "2026-11-21"
     },
     {
       "title": "LE NUOVE DISAVVENTURE DI CLIFF BOOT",
@@ -2067,7 +1962,7 @@
     },
     {
       "title": "Ti presento i Fotter",
-      "poster": "https://cdn.cinemagarden.net/TI PRESENTO I FOTTER.jpg",
+      "poster": "https://cdn.cinemagarden.net/TI%20PRESENTO%20I%20FOTTER.jpg",
       "url": "https://www.cinemagarden.net/default.aspx#prossimamente",
       "venue": "garden",
       "source": "https://www.cinemagarden.net/default.aspx#prossimamente",
@@ -2082,5 +1977,21 @@
       "sourceName": "Cinema Garden"
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "type": "source-failed",
+      "venue": "andromeda-river",
+      "message": "[Andromeda River] Errore di rete su https://zumpano.andromeda.18tickets.it/: il browser non ha risposto"
+    },
+    {
+      "type": "announced-failed",
+      "venue": "cinema-teatro-italia",
+      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
+    },
+    {
+      "type": "announced-failed",
+      "venue": "unical",
+      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
+    }
+  ]
 }

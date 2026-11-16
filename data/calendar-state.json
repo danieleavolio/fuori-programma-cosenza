@@ -454,19 +454,6 @@
     "sequence": 2,
     "modified": "20261115T151321Z"
   },
-  "7791d5032471e963869ca2e16ce16e5d@fuori-programma-cosenza": {
-    "title": "IL GATTO COL CAPPELLO",
-    "venueId": "citrigno",
-    "venue": "Citrigno",
-    "start": "2026-11-16T16:45:00",
-    "room": "Sala 1",
-    "location": "Via Adige 13, Cosenza (CS)",
-    "minutes": 105,
-    "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/a458cee0-4fbc-4fb9-b789-f01f3266e7bd#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 0,
-    "modified": "20261116T025814Z"
-  },
   "01630951aed971003e887f7985cc4a28@fuori-programma-cosenza": {
     "title": "IL GATTO COL CAPPELLO",
     "venueId": "citrigno",
@@ -645,19 +632,6 @@
     "location": "Via Adige 13, Cosenza (CS)",
     "minutes": 106,
     "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/e4d51b01-fd85-4cbc-8c2b-3da088834ed6#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 0,
-    "modified": "20261115T204437Z"
-  },
-  "475676e258eb8e57435cf61ee7c6c213@fuori-programma-cosenza": {
-    "title": "SE DOMANI NON TORNO",
-    "venueId": "unical",
-    "venue": "Unical Cinema",
-    "start": "2026-11-16T17:15:00",
-    "room": "Sala 2",
-    "location": "Piazza Vermicelli, Campus Universitario, Arcavacata di Rende (CS)",
-    "minutes": 106,
-    "url": "https://unical.cosenzacinema.18tickets.it/film/108706/aec0b8c5-ee60-4740-97cb-dcbf1e0534b7#theater-init",
     "status": "CONFIRMED",
     "sequence": 0,
     "modified": "20261115T204437Z"
@@ -1078,19 +1052,6 @@
     "sequence": 2,
     "modified": "20261115T151321Z"
   },
-  "c3eb96ff9f94b4e7f643db1f467e3030@fuori-programma-cosenza": {
-    "title": "IL RUMORE DELLE COSE NUOVE",
-    "venueId": "citrigno",
-    "venue": "Citrigno",
-    "start": "2026-11-16T17:15:00",
-    "room": "Sala 2",
-    "location": "Via Adige 13, Cosenza (CS)",
-    "minutes": 113,
-    "url": "https://citrigno.cosenzacinema.18tickets.it/film/109960/118782ca-2cae-4a85-8745-d7096e43defa#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 0,
-    "modified": "20261115T204437Z"
-  },
   "a8870750f9bf10bd3b2908f9c8e02260@fuori-programma-cosenza": {
     "title": "IL RUMORE DELLE COSE NUOVE",
     "venueId": "citrigno",
@@ -1273,19 +1234,6 @@
     "sequence": 2,
     "modified": "20261115T151321Z"
   },
-  "b91ef50cd5fe23b2f70c9aca34f96750@fuori-programma-cosenza": {
-    "title": "GODZILLA MINUS ZERO",
-    "venueId": "unical",
-    "venue": "Unical Cinema",
-    "start": "2026-11-16T18:00:00",
-    "room": "Sala 1",
-    "location": "Piazza Vermicelli, Campus Universitario, Arcavacata di Rende (CS)",
-    "minutes": 135,
-    "url": "https://unical.cosenzacinema.18tickets.it/film/109927/dca16f56-d7ee-45f8-8360-fd307264cb57#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 0,
-    "modified": "20261115T204437Z"
-  },
   "5f19f14b7753e8bff98edbc65fe7e361@fuori-programma-cosenza": {
     "title": "GODZILLA MINUS ZERO",
     "venueId": "unical",
@@ -1428,19 +1376,6 @@
     "status": "CONFIRMED",
     "sequence": 4,
     "modified": "20261115T151321Z"
-  },
-  "c4f0b23e6acb80afb6ec24f396e59676@fuori-programma-cosenza": {
-    "title": "SCROOGE E GLI SPIRITI DEL NATALE",
-    "venueId": "citrigno",
-    "venue": "Citrigno",
-    "start": "2026-11-16T18:30:00",
-    "room": "Sala 1",
-    "location": "Via Adige 13, Cosenza (CS)",
-    "minutes": 118,
-    "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/fe5cb980-fdeb-4bb9-a1f6-25449784c867#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 0,
-    "modified": "20261115T204437Z"
   },
   "a93eb12ddf2c1537bcbcbff5cc4e2b5b@fuori-programma-cosenza": {
     "title": "SCROOGE E GLI SPIRITI DEL NATALE",
@@ -1754,19 +1689,6 @@
     "sequence": 0,
     "modified": "20261113T162927Z"
   },
-  "b08bd584ff1c758c7b492aeaa716b434@fuori-programma-cosenza": {
-    "title": "KONTINENTAL '25",
-    "venueId": "cinema-teatro-italia",
-    "venue": "Cinema Teatro Italia A. Tieri",
-    "start": "2026-11-16T18:30:00",
-    "room": "Sala FILM",
-    "location": "Piazza Giovanni Amendola, Cosenza (CS)",
-    "minutes": 109,
-    "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/110488/501ebb23-6fd8-4345-98da-10274d1d7440#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 0,
-    "modified": "20261113T162927Z"
-  },
   "a2464b8ca3be3ca7c485f6f2b8719675@fuori-programma-cosenza": {
     "title": "KONTINENTAL '25",
     "venueId": "cinema-teatro-italia",
@@ -1935,6 +1857,84 @@
     "status": "CONFIRMED",
     "sequence": 0,
     "modified": "20261115T204437Z"
+  },
+  "7791d5032471e963869ca2e16ce16e5d@fuori-programma-cosenza": {
+    "title": "IL GATTO COL CAPPELLO",
+    "venueId": "citrigno",
+    "venue": "Citrigno",
+    "start": "2026-11-16T16:45:00",
+    "room": "Sala 1",
+    "location": "Via Adige 13, Cosenza (CS)",
+    "minutes": 105,
+    "url": "https://citrigno.cosenzacinema.18tickets.it/film/107980/a458cee0-4fbc-4fb9-b789-f01f3266e7bd#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261116T025814Z"
+  },
+  "475676e258eb8e57435cf61ee7c6c213@fuori-programma-cosenza": {
+    "title": "SE DOMANI NON TORNO",
+    "venueId": "unical",
+    "venue": "Unical Cinema",
+    "start": "2026-11-16T17:15:00",
+    "room": "Sala 2",
+    "location": "Piazza Vermicelli, Campus Universitario, Arcavacata di Rende (CS)",
+    "minutes": 106,
+    "url": "https://unical.cosenzacinema.18tickets.it/film/108706/aec0b8c5-ee60-4740-97cb-dcbf1e0534b7#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261115T204437Z"
+  },
+  "c3eb96ff9f94b4e7f643db1f467e3030@fuori-programma-cosenza": {
+    "title": "IL RUMORE DELLE COSE NUOVE",
+    "venueId": "citrigno",
+    "venue": "Citrigno",
+    "start": "2026-11-16T17:15:00",
+    "room": "Sala 2",
+    "location": "Via Adige 13, Cosenza (CS)",
+    "minutes": 113,
+    "url": "https://citrigno.cosenzacinema.18tickets.it/film/109960/118782ca-2cae-4a85-8745-d7096e43defa#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261115T204437Z"
+  },
+  "b91ef50cd5fe23b2f70c9aca34f96750@fuori-programma-cosenza": {
+    "title": "GODZILLA MINUS ZERO",
+    "venueId": "unical",
+    "venue": "Unical Cinema",
+    "start": "2026-11-16T18:00:00",
+    "room": "Sala 1",
+    "location": "Piazza Vermicelli, Campus Universitario, Arcavacata di Rende (CS)",
+    "minutes": 135,
+    "url": "https://unical.cosenzacinema.18tickets.it/film/109927/dca16f56-d7ee-45f8-8360-fd307264cb57#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261115T204437Z"
+  },
+  "c4f0b23e6acb80afb6ec24f396e59676@fuori-programma-cosenza": {
+    "title": "SCROOGE E GLI SPIRITI DEL NATALE",
+    "venueId": "citrigno",
+    "venue": "Citrigno",
+    "start": "2026-11-16T18:30:00",
+    "room": "Sala 1",
+    "location": "Via Adige 13, Cosenza (CS)",
+    "minutes": 118,
+    "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/fe5cb980-fdeb-4bb9-a1f6-25449784c867#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261115T204437Z"
+  },
+  "b08bd584ff1c758c7b492aeaa716b434@fuori-programma-cosenza": {
+    "title": "KONTINENTAL '25",
+    "venueId": "cinema-teatro-italia",
+    "venue": "Cinema Teatro Italia A. Tieri",
+    "start": "2026-11-16T18:30:00",
+    "room": "Sala FILM",
+    "location": "Piazza Giovanni Amendola, Cosenza (CS)",
+    "minutes": 109,
+    "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/110488/501ebb23-6fd8-4345-98da-10274d1d7440#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261113T162927Z"
   },
   "d757567c43a4aeff47886466dd160071@fuori-programma-cosenza": {
     "title": "IL RUMORE DELLE COSE NUOVE",
