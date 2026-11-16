@@ -406,7 +406,8 @@ noscript { display: block; padding: 20px; text-align: center; }
   .view-pill { flex: 1; }
   .masthead-actions { margin-left: auto; gap: 6px; }
   .fav-badge-btn, .top-link, .calendar-btn { min-height: 44px; padding: 6px 9px; font-size: 11px; }
-  .top-link, .calendar-label { display: none; }
+  .top-link:not(.coming-soon-link), .calendar-label { display: none; }
+  .coming-soon-link { display: inline-flex; }
   main { padding: 12px 12px 42px; }
   .page-heading { align-items: flex-start; flex-direction: column; gap: 2px; margin-bottom: 10px; }
   .page-heading h1 { font-size: 21px; }

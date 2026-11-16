@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="/styles.css?v=20261114c" />
+  <link rel="stylesheet" href="/styles.css?v=20261116a" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -47,6 +47,7 @@
   {/if}
 
   <div class="masthead-actions">
+    <a class="top-link coming-soon-link" href="/prossimamente">Prossimamente</a>
     {#if isHome}
       <button class="calendar-btn" id="calendar-open" type="button" aria-haspopup="dialog" aria-controls="calendar-dialog" aria-label="Segui i tuoi cinema nel calendario">
         <svg class="icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="16" y1="2" x2="16" y2="7"></line><line x1="8" y1="2" x2="8" y2="7"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="13" x2="12" y2="19"></line><line x1="9" y1="16" x2="15" y2="16"></line></svg>

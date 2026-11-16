@@ -224,6 +224,7 @@ class ScheduleIntegrationTests(unittest.TestCase):
                 patch.object(upd, "load_previous", return_value={}),
                 patch.object(upd, "parse_source", side_effect=lambda source: [movie]),
                 patch.object(upd, "parse_announced_dates", return_value=[]),
+                patch.object(upd, "parse_coming_soon", return_value=[]),
                 patch.object(
                     upd,
                     "enrich_schedule",

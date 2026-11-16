@@ -152,6 +152,7 @@ def test_source_failure_keeps_previous_data() -> None:
         original_parse = upd.parse_source
         original_details = upd.get_movie_details
         original_announced = upd.parse_announced_dates
+        original_coming_soon = upd.parse_coming_soon
         original_fetch = upd.fetch
         original_enrich = upd.enrich_schedule
         upd.enrich_schedule = lambda *args, **kwargs: None
@@ -163,6 +164,7 @@ def test_source_failure_keeps_previous_data() -> None:
             "year": "",
         }
         upd.parse_announced_dates = lambda url, venue_id: []
+        upd.parse_coming_soon = lambda url, venue_id: []
 
         def offline_fetch(url, attempts=1, timeout=25):
             raise RuntimeError("rete non disponibile")
@@ -196,6 +198,7 @@ def test_source_failure_keeps_previous_data() -> None:
             upd.parse_source = original_parse
             upd.get_movie_details = original_details
             upd.parse_announced_dates = original_announced
+            upd.parse_coming_soon = original_coming_soon
             upd.fetch = original_fetch
             upd.enrich_schedule = original_enrich
 
@@ -222,7 +225,9 @@ def test_all_sources_failing_keeps_file() -> None:
 
         original_file = upd.SCHEDULE_FILE
         original_parse = upd.parse_source
+        original_coming_soon = upd.parse_coming_soon
         upd.SCHEDULE_FILE = schedule_file
+        upd.parse_coming_soon = lambda url, venue_id: []
 
         def fake_parse(source):
             raise RuntimeError("host irraggiungibile")
@@ -237,6 +242,7 @@ def test_all_sources_failing_keeps_file() -> None:
         finally:
             upd.SCHEDULE_FILE = original_file
             upd.parse_source = original_parse
+            upd.parse_coming_soon = original_coming_soon
 
         assert schedule_file.read_text(encoding="utf-8") == before
         print("  ok tutte le fonti fallite: file precedente intatto")
@@ -306,6 +312,53 @@ def test_placeholder_times_are_dropped() -> None:
     print("  ok orari segnaposto: esclusi dai dati")
 
 
+def test_coming_soon_parsers_keep_venue_and_source() -> None:
+    original_fetch = upd.fetch
+    try:
+        upd.fetch = lambda _url: (
+            '<a name="prossimamente"></a><ul id="sliderProssimamente">'
+            '<li><img src="https://cdn.cinemagarden.net/hunger.jpg"></li>'
+            '<li><img src="https://cdn.cinemagarden.net/E\' ANDATA COSI.jpg"></li>'
+            '<li><img src="https://cdn.cinemagarden.net/HEXE.jpg"></li></ul>'
+        )
+        garden = upd.parse_coming_soon(upd.COMING_SOON_SOURCES["garden"], "garden")
+        assert [item["title"] for item in garden] == [
+            "Hunger Games: L'alba sulla mietitura",
+            "È andata così",
+            "Hexe",
+        ], garden
+        assert "%20ANDATA%20COSI.jpg" in garden[1]["poster"]
+        assert all(
+            item["venue"] == "garden" and item["sourceName"] == "Cinema Garden"
+            for item in garden
+        )
+
+        local_date = _future(4)
+        upd.fetch = lambda _url: (
+            "<div class='row movie my-3'><div class='movie__images'>"
+            "<a href='https://example.18tickets.it/film/123'><img alt='FILM ESEMPIO' "
+            "src='https://cdn.example.test/poster.jpg'></a></div>"
+            "<h5 class='page-heading'><div class='badge badge-danger'>"
+            + local_date
+            + "</div>FILM ESEMPIO (1H43')</h5></div>"
+            "<div class='row movie my-3'><img src='https://cdn-assets.18tickets.net/images/films/noposter.standard.png'>"
+            "<h5 class='page-heading'><div class='badge badge-danger'>"
+            + local_date
+            + "</div>PRIMA VISIONE 2</h5></div>"
+        )
+        for venue_id in upd.COMING_SOON_SOURCES:
+            if venue_id == "garden":
+                continue
+            movies = upd.parse_coming_soon(upd.COMING_SOON_SOURCES[venue_id], venue_id)
+            assert [item["title"] for item in movies] == ["FILM ESEMPIO"], movies
+            assert movies[0]["venue"] == venue_id
+            assert movies[0]["localDate"] == upd.parse_it_date(local_date).isoformat()
+            assert movies[0]["poster"].endswith("poster.jpg")
+    finally:
+        upd.fetch = original_fetch
+    print("  ok prossimamente: fonti ufficiali e attribuzione per cinema")
+
+
 def main() -> int:
     tests = [
         test_fetch_retries_on_429,
@@ -316,6 +369,7 @@ def main() -> int:
         test_carry_over_ignores_finished_movies,
         test_release_date_hint,
         test_placeholder_times_are_dropped,
+        test_coming_soon_parsers_keep_venue_and_source,
     ]
     failures = 0
     for test in tests:

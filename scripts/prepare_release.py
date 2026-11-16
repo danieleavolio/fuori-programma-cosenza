@@ -9,6 +9,8 @@ def main():
     latest = load_previous() or local
     if not latest.get("movies") or not latest.get("venues"):
         raise SystemExit("Programmazione mancante: deploy interrotto")
+    if "comingSoon" not in latest and isinstance(local.get("comingSoon"), list):
+        latest["comingSoon"] = local["comingSoon"]
     try:
         enrich_schedule(latest, local)
     except Exception as error:

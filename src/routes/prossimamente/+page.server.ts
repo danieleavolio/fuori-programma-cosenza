@@ -1,4 +1,4 @@
-import { breadcrumb, daysUntil, filmPath, isoDateLabel, movies, romeDateISO } from '../../lib/server/data';
+import { breadcrumb, comingSoon, daysUntil, filmPath, isoDateLabel, movies, romeDateISO, venues } from '../../lib/server/data';
 import { ogDefault } from '../../lib/server/og';
 import type { PageServerLoad } from './$types';
 
@@ -22,6 +22,25 @@ export const load: PageServerLoad = ({ url }) => {
       };
     });
 
+  const localAnnouncements = venues
+    .map((venue) => ({
+      venue,
+      movies: comingSoon
+        .filter((item) => item.venue === venue.id)
+        .map((item) => {
+          const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('it').replace(/[^a-z0-9]+/g, ' ').trim();
+          const match = movies.find((movie) => normalize(movie.title) === normalize(item.title));
+          return {
+            ...item,
+            releaseDate: match?.releaseDateIT,
+            releaseLabel: match?.releaseDateIT ? isoDateLabel(match.releaseDateIT) : undefined,
+            localDateLabel: item.localDate ? isoDateLabel(item.localDate) : undefined,
+            href: match ? filmPath(match) : undefined
+          };
+        })
+    }))
+    .filter((group) => group.movies.length > 0);
+
   const title = 'Prossimamente al cinema a Cosenza e Rende';
   const canonical = `${url.origin}/prossimamente`;
   const crumb = breadcrumb([{ name: 'Home', path: '/' }, { name: 'Prossimamente' }], url.origin);
@@ -30,6 +49,7 @@ export const load: PageServerLoad = ({ url }) => {
     canonical,
     ogImage: `${url.origin}${ogDefault}`,
     upcoming,
+    localAnnouncements,
     crumb,
     schema: {
       '@context': 'https://schema.org',

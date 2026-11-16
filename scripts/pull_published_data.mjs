@@ -1,4 +1,4 @@
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 // In produzione la programmazione arriva dal sito pubblicato dal bot: un deploy
 // del solo codice non deve riportare online orari vecchi. Se la rete o il file
@@ -23,6 +23,12 @@ for (const file of files) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     if (!file.valid(data)) throw new Error('formato inatteso');
+    // Durante il primo deploy il feed pubblicato può non avere ancora gli
+    // annunci. Conserva solo questo campo, senza sostituire gli orari più nuovi.
+    if (file.path === 'data/schedule.json' && !Object.hasOwn(data, 'comingSoon')) {
+      const local = JSON.parse(await readFile(file.path, 'utf8'));
+      if (Array.isArray(local.comingSoon)) data.comingSoon = local.comingSoon;
+    }
     if (!dryRun) await writeFile(file.path, `${JSON.stringify(data, null, 2)}\n`);
     console.log(`Programmazione pubblicata: ${file.path} (${dryRun ? 'verifica' : 'aggiornato'})`);
   } catch (error) {

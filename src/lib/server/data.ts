@@ -42,9 +42,19 @@ export type Movie = {
   shows: ScreeningGroup[];
 };
 export type Venue = { id: string; name: string; location: string; source: string; status: string };
+export type ComingSoon = {
+  title: string;
+  poster?: string;
+  url: string;
+  venue: string;
+  source: string;
+  sourceName: string;
+  localDate?: string;
+};
 
 export const movies = schedule.movies as unknown as Movie[];
 export const venues = schedule.venues as unknown as Venue[];
+export const comingSoon = ((schedule as unknown as { comingSoon?: ComingSoon[] }).comingSoon || []);
 export const updatedAt = schedule.updatedAt as string;
 export const venueDetails = venueInfo as Record<string, { address?: string; city?: string; mapsUrl?: string; phone?: string; phoneHref?: string; features?: string[] }>;
 

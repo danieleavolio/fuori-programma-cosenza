@@ -129,7 +129,15 @@ Il workflow `.github/workflows/update-schedule.yml` aggiorna automaticamente gli
 
 La migrazione è affiancata alla PWA esistente: GitHub Pages e i suoi URL non vengono sostituiti. L'applicazione SvelteKit usa rendering server-side per home, pagine film, cinema e programmazione di oggi/stasera/weekend e per `/prossimamente`; espone `robots.txt`, `sitemap.xml` (con le locandine come `image:image`), canonical, Open Graph, percorsi di navigazione strutturati e dati strutturati. Le viste di programmazione sono collegate tra loro da `/programmazione/oggi`, `/programmazione/stasera`, `/programmazione/weekend` e `/prossimamente`. La PWA completa, con preferiti locali, filtri e calendari multi-cinema, viene copiata durante la build in `/legacy/`.
 
-`/programmazione/stasera` elenca solo gli spettacoli di oggi dalle 20 in poi; `/prossimamente` legge `releaseDateIT` dalla programmazione e mostra le uscite con data italiana futura, con "domani"/"dopodomani" quando mancano uno o due giorni. Entrambe le pagine si aggiornano da sole a ogni scraping: nessun elenco manuale da mantenere.
+`/programmazione/stasera` elenca solo gli spettacoli di oggi dalle 20 in poi. Oggi, Stasera, Weekend e Prossimamente condividono card con locandina e selettore griglia/lista. Gli spettacoli sono raggruppati per film e giorno.
+
+`/prossimamente`, raggiungibile dalla barra principale anche su mobile, mostra gli annunci ufficiali divisi per cinema (`comingSoon`), con fonte e link alla scheda: `/coming_soon` delle quattro sale 18Tickets e la sezione Prossimamente del Garden. Le date pubblicate dalle sale sono separate da `releaseDateIT`, la data italiana. Gli annunci non creano spettacoli o eventi calendario. Se una fonte fallisce si conserva la sua lista precedente; una lista vuota valida la sostituisce. I titoli dei poster Garden abbreviati sono normalizzati nello scraper. Le uscite italiane future restano in una sezione distinta.
+
+Verifica browser delle quattro pagine, griglia/lista, caricamento locandine e larghezze 320/390/1280 px (server locale attivo):
+
+```powershell
+node scripts/test_catalog_browser.mjs http://127.0.0.1:5173
+```
 
 Per lo sviluppo locale:
 

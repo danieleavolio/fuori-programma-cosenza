@@ -14,7 +14,7 @@ from html import unescape as html_unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 from urllib.request import Request, urlopen
 from movie_metadata import enrich_schedule
 
@@ -75,6 +75,14 @@ ANNOUNCED_SCHEDULES = {
     "cinema-teatro-italia": "https://cosenzacinema.it/programmazione-cinema-italia-tieri/",
     "unical": "https://cosenzacinema.it/programmazione-sale-unical/",
 }
+COMING_SOON_SOURCES = {
+    source["id"]: urljoin(source["url"], "/coming_soon")
+    for source in SOURCES
+    if source["kind"] == "18tickets"
+}
+COMING_SOON_SOURCES["garden"] = (
+    "https://www.cinemagarden.net/default.aspx#prossimamente"
+)
 
 HEADERS = {
     "User-Agent": (
@@ -571,6 +579,126 @@ def parse_announced_dates(url: str, venue_id: str) -> list[dict]:
     if not announced:
         raise RuntimeError(f"Nessuna data annunciata valida trovata su {url}")
     return announced
+
+
+def parse_coming_soon(url: str, venue_id: str) -> list[dict]:
+    """Reads local, undated announcements from official cinema listings."""
+    html = fetch(url)
+    announcements = []
+
+    if venue_id == "garden":
+        section = re.search(
+            r'<ul[^>]+id=["\']sliderProssimamente["\'][^>]*>(.*?)</ul>',
+            html,
+            re.I | re.S,
+        )
+        if not section:
+            raise RuntimeError("Sezione Prossimamente del Garden non trovata")
+        for _quote, image in re.findall(
+            r'<img[^>]+src\s*=\s*(["\'])(.*?)\1', section.group(1), re.I | re.S
+        ):
+            image_url = urljoin(url, html_unescape(image.strip()))
+            image_url = image_url.replace(" ", "%20")
+            filename = unquote(urlparse(image_url).path.rsplit("/", 1)[-1])
+            title = re.sub(r"\.[^.]+$", "", filename)
+            title = " ".join(html_unescape(title.replace("_", " ")).split())
+            known_titles = {
+                "hunger": "Hunger Games: L'alba sulla mietitura",
+                "e' andata cosi": "È andata così",
+                "ti presento i fotter": "Ti presento i Fotter",
+                "hexe": "Hexe",
+            }
+            title = known_titles.get(title.casefold(), title.title())
+            if not title:
+                continue
+            announcements.append(
+                {
+                    "title": title,
+                    "poster": image_url,
+                    "url": COMING_SOON_SOURCES[venue_id],
+                    "venue": venue_id,
+                    "source": COMING_SOON_SOURCES[venue_id],
+                    "sourceName": "Cinema Garden",
+                }
+            )
+    elif venue_id in {
+        source["id"] for source in SOURCES if source["kind"] == "18tickets"
+    }:
+        # 18Tickets pubblica cards con poster, link scheda e badge data.
+        cards = re.split(
+            r"(?=<div[^>]+class=['\"][^'\"]*\brow\s+movie\b)", html, flags=re.I
+        )
+        for card in cards:
+            title_block = re.search(
+                r"<h5[^>]+class=['\"][^'\"]*page-heading[^'\"]*['\"][^>]*>(.*?)</h5>",
+                card,
+                re.I | re.S,
+            )
+            poster = re.search(r"<img[^>]+src=['\"]([^'\"]+)['\"]", card, re.I)
+            movie_url = re.search(
+                r"<a[^>]+href=['\"](https?://[^'\"]+/film/[^'\"]+)['\"]", card, re.I
+            )
+            if not title_block or not poster or not movie_url:
+                continue
+            raw_title = title_block.group(1)
+            date_match = re.search(
+                r"<div[^>]+class=['\"][^'\"]*badge-danger[^'\"]*['\"][^>]*>(.*?)</div>",
+                raw_title,
+                re.I | re.S,
+            )
+            local_date = None
+            if date_match:
+                parsed_date = parse_it_date(_html_text(date_match.group(1)))
+                if parsed_date:
+                    if parsed_date < today_date():
+                        continue
+                    local_date = parsed_date.isoformat()
+            title = re.sub(
+                r"<div[^>]*class=['\"][^'\"]*badge-danger[^>]*>.*?</div>",
+                " ",
+                raw_title,
+                flags=re.I | re.S,
+            )
+            title, _duration = clean_title_for_display(_html_text(title))
+            title = re.sub(
+                r"\s*(?:[-–—]\s*)?(?:V\.?O\.?|2D\s+IMAX|IMAX|3D)\s*$",
+                "",
+                title,
+                flags=re.I,
+            ).strip()
+            poster_url = urljoin(url, html_unescape(poster.group(1)))
+            if (
+                not title
+                or title.casefold().startswith("prima visione")
+                or "noposter" in poster_url.casefold()
+            ):
+                continue
+            announcements.append(
+                {
+                    "title": title,
+                    "poster": poster_url,
+                    "url": html_unescape(movie_url.group(1)),
+                    "venue": venue_id,
+                    "source": COMING_SOON_SOURCES[venue_id],
+                    "sourceName": next(
+                        source["name"] for source in SOURCES if source["id"] == venue_id
+                    ),
+                    **({"localDate": local_date} if local_date else {}),
+                }
+            )
+    else:
+        raise ValueError(f"Fonte Coming Soon non configurata per {venue_id}")
+
+    # Deduplicazione conservando ordine e link ufficiali.
+    unique = {}
+    for item in announcements:
+        key = title_key(item["title"])
+        if key:
+            if key not in unique or (
+                not unique[key].get("localDate") and item.get("localDate")
+            ):
+                unique[key] = item
+    return list(unique.values())
 
 
 class TicketsParser(HTMLParser):
@@ -1148,6 +1276,24 @@ def main() -> None:
                 }
             )
 
+    coming_soon_by_venue: dict[str, list[dict]] = {}
+    previous_coming_soon = previous.get("comingSoon", [])
+    for venue_id, url in COMING_SOON_SOURCES.items():
+        try:
+            coming_soon_by_venue[venue_id] = parse_coming_soon(url, venue_id)
+            print(
+                f"    - {venue_id}: {len(coming_soon_by_venue[venue_id])} "
+                "film senza data locale"
+            )
+        except Exception as error:
+            print(f"[!] Annunci prossimamente non letti da {url}: {error}")
+            warnings.append(
+                {"type": "coming-soon-failed", "venue": venue_id, "message": str(error)}
+            )
+            coming_soon_by_venue[venue_id] = [
+                item for item in previous_coming_soon if item.get("venue") == venue_id
+            ]
+
     combined: dict[str, dict] = {}
     venue_counts: dict[str, int] = {}
 
@@ -1300,6 +1446,11 @@ def main() -> None:
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "venues": venues_output,
         "movies": movies_output,
+        "comingSoon": [
+            item
+            for venue_id in COMING_SOON_SOURCES
+            for item in coming_soon_by_venue.get(venue_id, [])
+        ],
         "warnings": warnings,
     }
     # Le valutazioni non devono mai impedire la pubblicazione degli orari.
