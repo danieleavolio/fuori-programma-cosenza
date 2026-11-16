@@ -14,7 +14,7 @@ export const load: PageServerLoad = () => {
     '@graph': [
       {
         '@type': 'WebSite', '@id': `${base}/#website`, name: 'Fuori programma',
-        alternateName: 'Fuori programma Cosenza', url: `${base}/`, inLanguage: 'it-IT',
+        alternateName: ['Fuori programma Cosenza', new URL(base).hostname], url: `${base}/`, inLanguage: 'it-IT',
         description: 'Guida indipendente alla programmazione dei cinema di Cosenza, Rende e Zumpano.'
       },
       {

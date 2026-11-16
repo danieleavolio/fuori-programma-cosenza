@@ -37,6 +37,28 @@ La home GitHub Pages indica la home Vercel come canonical senza interrompere dat
 
 ## Immagini social
 
+### Nome e icona nei risultati Google
+
+La home dichiara `Fuori programma` in un unico nodo WebSite e in `og:site_name`.
+I nomi alternativi sono `Fuori programma Cosenza` e, come ultima riserva,
+l'hostname pubblico in minuscolo, secondo le indicazioni Google. Il dominio
+di hosting non deve essere scambiato per il nome del progetto.
+
+Oltre all'SVG per i browser, dichiariamo esplicitamente il logo PNG 192×192
+già disponibile a `/icons/icon-192.png`, con URL stabile e accessibile a
+Googlebot-Image. La documentazione Google Search elenca PNG e altri formati
+raster tra i formati favicon supportati. Il test SEO verifica nome, fallback,
+download e dimensioni della favicon.
+
+Google sceglie autonomamente nome del sito, favicon e snippet. Dopo un deploy
+richiedere una nuova scansione della home, se non già richiesta, e attendere
+la rielaborazione: anche giorni o settimane. Non è necessario ripetere la
+richiesta ogni giorno o cambiare continuamente i metadati. Vedere
+[nomi dei siti](https://developers.google.com/search/docs/appearance/site-names) e
+[favicon](https://developers.google.com/search/docs/appearance/favicon-in-search).
+
+### Card di condivisione
+
 `npm run og:build` genera immagini 1200×630 per home, le cinque sale,
 Oggi, Stasera, Weekend, Prossimamente, Calendario e ogni film disponibile.
 Le schede film mostrano titolo e locandina; se il CDN non risponde restano

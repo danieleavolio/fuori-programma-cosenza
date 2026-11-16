@@ -65,9 +65,29 @@ for (const url of urls) {
   assert.equal(meta(head, 'og:image:width'), '1200');
   assert.equal(meta(head, 'og:image:height'), '630');
   images.set(image, meta(head, 'og:image:type'));
+  const schemas = [];
   for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
     const schema = JSON.parse(match[1]);
     assert.equal(schema['@context'], 'https://schema.org');
+    schemas.push(...(schema['@graph'] || [schema]));
+  }
+  if (path === '/') {
+    const websites = schemas.filter((schema) => schema['@type'] === 'WebSite');
+    assert.equal(websites.length, 1, 'Una sola identita WebSite sulla home');
+    assert.equal(websites[0].name, meta(head, 'og:site_name'));
+    assert.equal(websites[0].url, `${origin}/`);
+    assert.ok(websites[0].alternateName.includes(new URL(origin).hostname), 'Hostname come nome alternativo di riserva');
+    const icons = [...head.matchAll(/<link\b[^>]*>/g)].map((match) => attributes(match[0])).filter((tag) => tag.rel === 'icon');
+    const png = icons.find((icon) => icon.type === 'image/png' && icon.sizes === '192x192');
+    assert.ok(png, 'Favicon PNG esplicita per Google Search');
+    assert.equal(png.href, '/icons/icon-192.png');
+    const iconResponse = await get(png.href, 'Googlebot-Image/1.0');
+    assert.equal(iconResponse.status, 200);
+    assert.match(iconResponse.headers.get('content-type'), /image\/png/);
+    assert.doesNotMatch(iconResponse.headers.get('x-robots-tag') || '', /noindex/);
+    const iconMetadata = await sharp(Buffer.from(await iconResponse.arrayBuffer())).metadata();
+    assert.equal(iconMetadata.width, 192);
+    assert.equal(iconMetadata.height, 192);
   }
   if (path !== '/calendario') assert.match(html, /application\/ld\+json/, path);
   if (path === '/prossimamente') {
