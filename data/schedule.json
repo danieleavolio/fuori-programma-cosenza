@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T23:34:47.934034+00:00",
+  "updatedAt": "2026-11-18T04:39:59.282705+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -358,12 +358,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/godzilla-minus-zero/",
-        "rating": 2.66,
-        "ratingCount": 11,
+        "rating": 3.21,
+        "ratingCount": 12,
         "reviewCount": 9,
         "criticsRating": 3.31,
+        "audienceRating": 4.33,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -612,13 +613,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/un-weekend-artificiale/",
-        "rating": 2.23,
-        "ratingCount": 11,
+        "rating": 2.13,
+        "ratingCount": 12,
         "reviewCount": 6,
         "criticsRating": 1.4,
-        "audienceRating": 2.8,
+        "audienceRating": 2.5,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -812,7 +813,7 @@
         "reviewCount": 7,
         "criticsRating": 3.17,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -992,13 +993,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/il-rumore-delle-cose-nuove/",
-        "rating": 2.57,
+        "rating": 2.56,
         "ratingCount": 21,
         "reviewCount": 9,
         "criticsRating": 2.0,
-        "audienceRating": 3.7,
+        "audienceRating": 3.69,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1295,12 +1296,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
-        "rating": 3.15,
-        "ratingCount": 8,
+        "rating": 3.66,
+        "ratingCount": 9,
         "reviewCount": 6,
         "criticsRating": 3.3,
+        "audienceRating": 4.67,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1367,7 +1369,7 @@
         "reviewCount": 2,
         "audienceRating": 3.79,
         "releaseDateIT": "2026-11-16",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-16"
     },
@@ -1600,13 +1602,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/se-domani-non-torno/",
-        "rating": 3.42,
-        "ratingCount": 20,
+        "rating": 3.43,
+        "ratingCount": 21,
         "reviewCount": 11,
         "criticsRating": 2.7,
-        "audienceRating": 4.56,
+        "audienceRating": 4.6,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -1671,11 +1673,11 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/1968/2001odisseanellospazio/",
         "rating": 4.68,
-        "ratingCount": 295,
+        "ratingCount": 296,
         "reviewCount": 9,
         "audienceRating": 4.03,
         "releaseDateIT": "2026-11-16",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-16"
     },
@@ -2050,7 +2052,7 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -2231,7 +2233,7 @@
         "reviewCount": 8,
         "criticsRating": 3.08,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -2275,7 +2277,7 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
         "releaseDateIT": "2026-12-16",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-12-16"
     },
@@ -2392,13 +2394,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dio-ride/",
-        "rating": 3.5,
+        "rating": 3.49,
         "ratingCount": 40,
         "reviewCount": 16,
         "criticsRating": 2.97,
-        "audienceRating": 4.02,
+        "audienceRating": 4.01,
         "releaseDateIT": "2026-10-29",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-10-29"
     },
@@ -2447,12 +2449,12 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/wild-horse-nine/",
         "rating": 3.86,
-        "ratingCount": 61,
+        "ratingCount": 62,
         "reviewCount": 25,
         "criticsRating": 4.04,
-        "audienceRating": 3.54,
+        "audienceRating": 3.55,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-17T02:44:49.876831+00:00"
+        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -2600,12 +2602,12 @@
   "comingSoon": [
     {
       "title": "HUNGER GAMES L'ALBA SULLA MIETITURA",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92557/standard_638e102f-e18a-423c-8d41-077b7a0a3223.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/92557",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/91533/standard_5ad85228-5510-4958-b010-5a2a4244be9d.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/91533",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
-      "localDate": "2026-11-18"
+      "localDate": "2026-11-19"
     },
     {
       "title": "FJORD",
@@ -2618,8 +2620,8 @@
     },
     {
       "title": "IL FUOCO CHE TI PORTI DENTRO",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/93974",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90345/standard_575b2729-96bb-45af-b545-ebd42b34d43c.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/90345",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
@@ -2672,8 +2674,8 @@
     },
     {
       "title": "YOUR NAME (10TH ANNIVERSARY) 4K",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94238/standard_c2a10a35-5269-4e81-bd36-b137ebd58028.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/94238",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94205/standard_d3ee4a7e-e91c-4012-91de-6d38a9955a08.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/94205",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
@@ -2681,8 +2683,8 @@
     },
     {
       "title": "TI PRESENTO I FOTTER",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93844/standard_0dba84c4-34f7-4cef-b2f7-6cbc09116798.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/93844",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94469/standard_292a16fb-7c1c-44ec-8de6-76978b1511a0.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/94469",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
@@ -2779,15 +2781,6 @@
       "localDate": "2026-12-16"
     },
     {
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA",
-      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111610/standard_98fd3c5c-daef-43fa-9095-fa9ea6c5f5fb.jpg",
-      "url": "https://citrigno.cosenzacinema.18tickets.it/film/111610",
-      "venue": "citrigno",
-      "source": "https://citrigno.cosenzacinema.18tickets.it/coming_soon",
-      "sourceName": "Citrigno",
-      "localDate": "2026-11-18"
-    },
-    {
       "title": "AVENGERS: DOOMSDAY",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/98245/standard_f44170dd-0600-4c57-8d54-22d06800eabb.jpg",
       "url": "https://citrigno.cosenzacinema.18tickets.it/film/98245",
@@ -2797,15 +2790,6 @@
       "localDate": "2026-12-15"
     },
     {
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA",
-      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111610/standard_98fd3c5c-daef-43fa-9095-fa9ea6c5f5fb.jpg",
-      "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610",
-      "venue": "cinema-teatro-italia",
-      "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/coming_soon",
-      "sourceName": "Cinema Teatro Italia A. Tieri",
-      "localDate": "2026-11-18"
-    },
-    {
       "title": "AVENGERS: DOOMSDAY",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/98245/standard_f44170dd-0600-4c57-8d54-22d06800eabb.jpg",
       "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/98245",
@@ -2813,15 +2797,6 @@
       "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/coming_soon",
       "sourceName": "Cinema Teatro Italia A. Tieri",
       "localDate": "2026-12-15"
-    },
-    {
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA",
-      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111610/standard_98fd3c5c-daef-43fa-9095-fa9ea6c5f5fb.jpg",
-      "url": "https://unical.cosenzacinema.18tickets.it/film/111610",
-      "venue": "unical",
-      "source": "https://unical.cosenzacinema.18tickets.it/coming_soon",
-      "sourceName": "Unical Cinema",
-      "localDate": "2026-11-18"
     },
     {
       "title": "AVENGERS: DOOMSDAY",
