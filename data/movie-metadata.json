@@ -234,5 +234,19 @@
       "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
     "retryAt": "2026-11-20T12:25:32.692664+00:00"
+  },
+  "fatherland:2026": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/fatherland/",
+      "rating": 4.04,
+      "ratingCount": 45,
+      "reviewCount": 21,
+      "criticsRating": 3.98,
+      "audienceRating": 4.14,
+      "releaseDateIT": "2026-10-16",
+      "checkedAt": "2026-11-19T22:52:56.553590+00:00"
+    },
+    "retryAt": "2026-11-20T22:52:56.553590+00:00"
   }
 }
