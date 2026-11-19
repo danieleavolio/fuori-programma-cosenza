@@ -1,7 +1,7 @@
 {
   "avengersdoomsday:2026": {
     "data": {},
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "ilgattocolcappello:2026": {
     "data": {
@@ -11,51 +11,51 @@
       "reviewCount": 7,
       "criticsRating": 3.17,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "sedomaninontorno:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/se-domani-non-torno/",
-      "rating": 3.43,
-      "ratingCount": 21,
+      "rating": 3.34,
+      "ratingCount": 23,
       "reviewCount": 11,
       "criticsRating": 2.7,
-      "audienceRating": 4.6,
+      "audienceRating": 4.33,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "unweekendartificiale:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/un-weekend-artificiale/",
-      "rating": 2.13,
-      "ratingCount": 12,
+      "rating": 2.11,
+      "ratingCount": 13,
       "reviewCount": 6,
       "criticsRating": 1.4,
-      "audienceRating": 2.5,
+      "audienceRating": 2.43,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "ilrumoredellecosenuove:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/il-rumore-delle-cose-nuove/",
-      "rating": 2.56,
-      "ratingCount": 21,
+      "rating": 2.53,
+      "ratingCount": 22,
       "reviewCount": 9,
       "criticsRating": 2.0,
-      "audienceRating": 3.69,
+      "audienceRating": 3.59,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "godzillaminuszero:2026": {
     "data": {
@@ -81,9 +81,9 @@
       "criticsRating": 2.97,
       "audienceRating": 4.01,
       "releaseDateIT": "2026-10-29",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "hope:2026": {
     "data": {
@@ -103,15 +103,15 @@
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
-      "rating": 3.66,
-      "ratingCount": 9,
+      "rating": 3.43,
+      "ratingCount": 11,
       "reviewCount": 6,
       "criticsRating": 3.3,
-      "audienceRating": 4.67,
+      "audienceRating": 4.0,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "lastoriainfinitaried:1984": {
     "data": {
@@ -144,9 +144,9 @@
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
       "releaseDateIT": "2026-12-16",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "kontinental25:2025": {
     "data": {
@@ -180,10 +180,13 @@
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
+      "rating": 3.0,
+      "ratingCount": 2,
+      "reviewCount": 1,
       "releaseDateIT": "2026-11-19",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "ilfuocochetiportidentro:2026": {
     "data": {
@@ -193,17 +196,17 @@
       "reviewCount": 8,
       "criticsRating": 3.08,
       "releaseDateIT": "2026-11-19",
-      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
     },
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "lookback:2026": {
     "data": {},
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "lessereamatoelserquerido:2026": {
     "data": {},
-    "retryAt": "2026-11-19T04:39:59.283050+00:00"
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   },
   "hungergameslalbasullamietitura:": {
     "data": {
@@ -217,5 +220,19 @@
   "lessereamato:": {
     "data": {},
     "retryAt": "2026-11-20T01:37:48.706709+00:00"
+  },
+  "fatherland:": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/fatherland/",
+      "rating": 4.04,
+      "ratingCount": 45,
+      "reviewCount": 21,
+      "criticsRating": 3.98,
+      "audienceRating": 4.14,
+      "releaseDateIT": "2026-10-16",
+      "checkedAt": "2026-11-19T12:25:32.692664+00:00"
+    },
+    "retryAt": "2026-11-20T12:25:32.692664+00:00"
   }
 }

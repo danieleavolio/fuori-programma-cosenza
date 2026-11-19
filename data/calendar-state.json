@@ -1546,19 +1546,6 @@
     "sequence": 4,
     "modified": "20261119T013754Z"
   },
-  "f4409e52b06f131d969d9795429b075f@fuori-programma-cosenza": {
-    "title": "IL RUMORE DELLE COSE NUOVE",
-    "venueId": "andromeda-river",
-    "venue": "Andromeda River",
-    "start": "2026-11-19T21:30:00",
-    "room": "Sala 5",
-    "location": "c/o River Village, Via Beato Francesco Marino 47, Zumpano (CS)",
-    "minutes": 113,
-    "url": "https://zumpano.andromeda.18tickets.it/film/89849/c642e87f-82f7-422c-925b-17efad97928d#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 4,
-    "modified": "20261119T013754Z"
-  },
   "b2e8fd9f7790d95c9b7b65138bd51dfc@fuori-programma-cosenza": {
     "title": "IL RUMORE DELLE COSE NUOVE",
     "venueId": "andromeda-river",
@@ -2807,19 +2794,6 @@
     "sequence": 2,
     "modified": "20261117T233448Z"
   },
-  "1aeafc12792b713c21f3c88388b9e6f6@fuori-programma-cosenza": {
-    "title": "SE DOMANI NON TORNO",
-    "venueId": "citrigno",
-    "venue": "Citrigno",
-    "start": "2026-11-19T09:30:00",
-    "room": "Sala 1",
-    "location": "Via Adige 13, Cosenza (CS)",
-    "minutes": 106,
-    "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/30144024-0bf9-4585-b4bf-008dccb1936c#theater-init",
-    "status": "CONFIRMED",
-    "sequence": 0,
-    "modified": "20261118T165332Z"
-  },
   "a8921b92ee3c4fe71e2e31f3bfbdd55e@fuori-programma-cosenza": {
     "title": "SE DOMANI NON TORNO",
     "venueId": "garden",
@@ -2962,6 +2936,32 @@
     "status": "CONFIRMED",
     "sequence": 2,
     "modified": "20261117T233448Z"
+  },
+  "8e15f5a0dd40cd6ddaa8442a558203d2@fuori-programma-cosenza": {
+    "title": "FATHERLAND",
+    "venueId": "cinema-teatro-italia",
+    "venue": "Cinema Teatro Italia A. Tieri",
+    "start": "2026-11-24T18:30:00",
+    "room": "Sala FILM",
+    "location": "Piazza Giovanni Amendola, Cosenza (CS)",
+    "minutes": 82,
+    "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/112633/d7f0ad15-a0b4-464d-a494-28609f71823e#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261119T122614Z"
+  },
+  "55761acd32e0999966282928e6789ca1@fuori-programma-cosenza": {
+    "title": "FATHERLAND",
+    "venueId": "cinema-teatro-italia",
+    "venue": "Cinema Teatro Italia A. Tieri",
+    "start": "2026-11-24T20:30:00",
+    "room": "Sala FILM",
+    "location": "Piazza Giovanni Amendola, Cosenza (CS)",
+    "minutes": 82,
+    "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/112633/cf365b58-1593-415d-8fe1-ab3c55806c4c#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261119T122614Z"
   },
   "740a2c368e0e8662ca46130fe43acc93@fuori-programma-cosenza": {
     "title": "LOOK BACK",
@@ -3157,6 +3157,32 @@
     "status": "CONFIRMED",
     "sequence": 0,
     "modified": "20261119T013754Z"
+  },
+  "f4409e52b06f131d969d9795429b075f@fuori-programma-cosenza": {
+    "title": "IL RUMORE DELLE COSE NUOVE",
+    "venueId": "andromeda-river",
+    "venue": "Andromeda River",
+    "start": "2026-11-19T21:30:00",
+    "room": "Sala 5",
+    "location": "c/o River Village, Via Beato Francesco Marino 47, Zumpano (CS)",
+    "minutes": 113,
+    "url": "https://zumpano.andromeda.18tickets.it/film/89849/c642e87f-82f7-422c-925b-17efad97928d#theater-init",
+    "status": "CANCELLED",
+    "sequence": 5,
+    "modified": "20261119T122614Z"
+  },
+  "1aeafc12792b713c21f3c88388b9e6f6@fuori-programma-cosenza": {
+    "title": "SE DOMANI NON TORNO",
+    "venueId": "citrigno",
+    "venue": "Citrigno",
+    "start": "2026-11-19T09:30:00",
+    "room": "Sala 1",
+    "location": "Via Adige 13, Cosenza (CS)",
+    "minutes": 106,
+    "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/30144024-0bf9-4585-b4bf-008dccb1936c#theater-init",
+    "status": "CONFIRMED",
+    "sequence": 0,
+    "modified": "20261118T165332Z"
   },
   "788655aff91867679952a35cff7171e1@fuori-programma-cosenza": {
     "title": "GODZILLA MINUS ZERO",

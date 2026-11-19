@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T04:26:05.301364+00:00",
+  "updatedAt": "2026-11-19T12:25:32.692379+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -683,8 +683,11 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
+        "rating": 3.0,
+        "ratingCount": 2,
+        "reviewCount": 1,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -1008,13 +1011,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
-        "rating": 3.66,
-        "ratingCount": 9,
+        "rating": 3.43,
+        "ratingCount": 11,
         "reviewCount": 6,
         "criticsRating": 3.3,
-        "audienceRating": 4.67,
+        "audienceRating": 4.0,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1046,11 +1049,6 @@
               "time": "17:00",
               "room": "Sala 5",
               "url": "https://zumpano.andromeda.18tickets.it/film/89849/59037a5e-3e8b-4d59-bcc3-f3ef6142f1c9#theater-init"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/c642e87f-82f7-422c-925b-17efad97928d#theater-init"
             }
           ],
           "venue": "andromeda-river"
@@ -1241,13 +1239,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/il-rumore-delle-cose-nuove/",
-        "rating": 2.56,
-        "ratingCount": 21,
+        "rating": 2.53,
+        "ratingCount": 22,
         "reviewCount": 9,
         "criticsRating": 2.0,
-        "audienceRating": 3.69,
+        "audienceRating": 3.59,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1493,7 +1491,7 @@
         "reviewCount": 8,
         "criticsRating": 3.08,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -1664,7 +1662,7 @@
         "reviewCount": 7,
         "criticsRating": 3.17,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -1887,13 +1885,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/un-weekend-artificiale/",
-        "rating": 2.13,
-        "ratingCount": 12,
+        "rating": 2.11,
+        "ratingCount": 13,
         "reviewCount": 6,
         "criticsRating": 1.4,
-        "audienceRating": 2.5,
+        "audienceRating": 2.43,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1903,12 +1901,9 @@
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_6173535a-3620-4493-b598-af273220de43.jpeg",
       "url": "https://zumpano.andromeda.18tickets.it/film/86088",
       "duration": "1h 46m",
-      "tags": [
-        "Scuole"
-      ],
+      "tags": [],
       "venueUrls": {
         "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/86088",
-        "citrigno": "https://citrigno.cosenzacinema.18tickets.it/film/108706",
         "garden": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
       },
       "genres": [
@@ -2002,17 +1997,6 @@
           "date": "19/11/2026",
           "shows": [
             {
-              "time": "09:30",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/108706/30144024-0bf9-4585-b4bf-008dccb1936c#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "19/11/2026",
-          "shows": [
-            {
               "time": "18:30",
               "room": "Sala B",
               "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
@@ -2095,13 +2079,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/se-domani-non-torno/",
-        "rating": 3.43,
-        "ratingCount": 21,
+        "rating": 3.34,
+        "ratingCount": 23,
         "reviewCount": 11,
         "criticsRating": 2.7,
-        "audienceRating": 4.6,
+        "audienceRating": 4.33,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -2145,12 +2129,64 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
         "releaseDateIT": "2026-12-16",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-12-16"
     },
     {
       "id": "10",
+      "title": "FATHERLAND",
+      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
+      "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/112633",
+      "duration": "1h 22m",
+      "tags": [
+        "FILM RASSEGNA"
+      ],
+      "venueUrls": {
+        "cinema-teatro-italia": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/112633"
+      },
+      "genres": [],
+      "director": "P. Pawlikowski",
+      "year": "",
+      "language": "",
+      "cast": "",
+      "trailer": "",
+      "synopsis": "LO SCRITTORE PREMIO NOBEL THOMAS MANN (HANNS ZISCHLER) E SUA FIGLIA ERIKA (SANDRA HÜLLER), ATTRICE, SCRITTRICE E PILOTA DI RALLY, NELL’ESTATE DEL 1949, AL CULMINE DELLA GUERRA FREDDA, A BORDO DI UNA",
+      "shows": [
+        {
+          "date": "24/11/2026",
+          "shows": [
+            {
+              "time": "18:30",
+              "room": "Sala FILM",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/112633/d7f0ad15-a0b4-464d-a494-28609f71823e#theater-init"
+            },
+            {
+              "time": "20:30",
+              "room": "Sala FILM",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/112633/cf365b58-1593-415d-8fe1-ab3c55806c4c#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        }
+      ],
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-19T12:25:32.692379+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/fatherland/",
+        "rating": 4.04,
+        "ratingCount": 45,
+        "reviewCount": 21,
+        "criticsRating": 3.98,
+        "audienceRating": 4.14,
+        "releaseDateIT": "2026-10-16",
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
+      },
+      "releaseDateIT": "2026-10-16"
+    },
+    {
+      "id": "11",
       "title": "LOOK BACK",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
       "url": "https://unical.cosenzacinema.18tickets.it/film/111644",
@@ -2229,40 +2265,11 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "19/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "20/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "21/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "23/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "24/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
-      "id": "11",
+      "id": "12",
       "title": "L'ESSERE AMATO (EL SER QUERIDO)",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111643/standard_a62c8167-f3d6-49cf-b896-242613ea6d39.jpg",
       "url": "https://unical.cosenzacinema.18tickets.it/film/111643",
@@ -2319,7 +2326,7 @@
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
-      "id": "12",
+      "id": "13",
       "title": "DIO RIDE",
       "poster": "https://cdn.cinemagarden.net/DIO%20RIDE.jpg",
       "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965",
@@ -2405,128 +2412,9 @@
         "criticsRating": 2.97,
         "audienceRating": 4.01,
         "releaseDateIT": "2026-10-29",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+        "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-10-29"
-    },
-    {
-      "id": "13",
-      "title": "Hunger Games: L’Alba sulla Mietitura",
-      "poster": "",
-      "url": "https://cosenzacinema.it/movie/hunger-games-lalba-sulla-mietitura/",
-      "duration": "",
-      "tags": [],
-      "venueUrls": {},
-      "genres": [],
-      "director": "",
-      "year": "",
-      "language": "",
-      "cast": "",
-      "trailer": "",
-      "shows": [],
-      "announcedDates": [
-        {
-          "date": "19/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "20/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "21/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "19/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "20/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "21/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "23/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "24/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        }
-      ],
-      "synopsis": "",
-      "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
-      "external": {
-        "source": "MYmovies",
-        "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-        "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
-      },
-      "releaseDateIT": "2026-11-19"
-    },
-    {
-      "id": "14",
-      "title": "L’Essere Amato",
-      "poster": "",
-      "url": "https://cosenzacinema.it/movie/lessere-amato/",
-      "duration": "",
-      "tags": [],
-      "venueUrls": {},
-      "genres": [],
-      "director": "",
-      "year": "",
-      "language": "",
-      "cast": "",
-      "trailer": "",
-      "shows": [],
-      "announcedDates": [
-        {
-          "date": "20/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "21/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "23/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "24/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        }
-      ],
-      "synopsis": "",
-      "firstSeenAt": "2026-11-19T01:37:48.706403+00:00"
     }
   ],
   "comingSoon": [
@@ -2666,6 +2554,15 @@
       "localDate": "2026-12-16"
     },
     {
+      "title": "FATHERLAND",
+      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
+      "url": "https://citrigno.cosenzacinema.18tickets.it/film/112633",
+      "venue": "citrigno",
+      "source": "https://citrigno.cosenzacinema.18tickets.it/coming_soon",
+      "sourceName": "Citrigno",
+      "localDate": "2026-11-24"
+    },
+    {
       "title": "AVENGERS: DOOMSDAY",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/98245/standard_f44170dd-0600-4c57-8d54-22d06800eabb.jpg",
       "url": "https://citrigno.cosenzacinema.18tickets.it/film/98245",
@@ -2675,6 +2572,15 @@
       "localDate": "2026-12-15"
     },
     {
+      "title": "FATHERLAND",
+      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
+      "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/112633",
+      "venue": "cinema-teatro-italia",
+      "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/coming_soon",
+      "sourceName": "Cinema Teatro Italia A. Tieri",
+      "localDate": "2026-11-24"
+    },
+    {
       "title": "AVENGERS: DOOMSDAY",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/98245/standard_f44170dd-0600-4c57-8d54-22d06800eabb.jpg",
       "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/98245",
@@ -2682,6 +2588,15 @@
       "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/coming_soon",
       "sourceName": "Cinema Teatro Italia A. Tieri",
       "localDate": "2026-12-15"
+    },
+    {
+      "title": "FATHERLAND",
+      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
+      "url": "https://unical.cosenzacinema.18tickets.it/film/112633",
+      "venue": "unical",
+      "source": "https://unical.cosenzacinema.18tickets.it/coming_soon",
+      "sourceName": "Unical Cinema",
+      "localDate": "2026-11-24"
     },
     {
       "title": "AVENGERS: DOOMSDAY",
@@ -2717,5 +2632,16 @@
       "sourceName": "Cinema Garden"
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "type": "announced-failed",
+      "venue": "cinema-teatro-italia",
+      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
+    },
+    {
+      "type": "announced-failed",
+      "venue": "unical",
+      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
+    }
+  ]
 }
