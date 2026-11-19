@@ -204,5 +204,18 @@
   "lessereamatoelserquerido:2026": {
     "data": {},
     "retryAt": "2026-11-19T04:39:59.283050+00:00"
+  },
+  "hungergameslalbasullamietitura:": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
+      "releaseDateIT": "2026-11-19",
+      "checkedAt": "2026-11-18T04:39:59.283050+00:00"
+    },
+    "retryAt": "2026-11-20T01:37:48.706709+00:00"
+  },
+  "lessereamato:": {
+    "data": {},
+    "retryAt": "2026-11-20T01:37:48.706709+00:00"
   }
 }
