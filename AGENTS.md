@@ -111,6 +111,23 @@ Ricordati che questo sovrascrive `data/schedule.json` con i dati online.
 
 ## Deploy e verifica
 
+### Cambio dominio
+
+L'origine pubblica è una sola: `siteOrigin` in `src/lib/server/site.ts`, che legge
+`FP_SITE_URL`. Per passare a un dominio nuovo:
+
+1. aggiungere il dominio su Vercel (Settings → Domains) e configurare il CNAME;
+2. impostare `FP_SITE_URL=https://<dominio>` nelle variabili d'ambiente di Vercel;
+3. ridispiegare: canonical, sitemap, JSON-LD e immagini social seguono da soli;
+4. aggiungere la proprietà in Search Console, inviare la sitemap e chiedere l'indicizzazione;
+5. tenere il vecchio `*.vercel.app` in redirect 301, così i link condivisi non si rompono.
+
+La favicon è `/favicon.ico` (16/32/48 px, generata da `npm run icons:build`) più
+`/icon.svg` e `/icons/icon-192.png`. Sui sottodomini di host condivisi Google può
+mostrare nome e icona dell'host: non è un problema di meta tag, si risolve col dominio.
+
+### Comandi
+
 ```powershell
 git push origin main
 gh api repos/danieleavolio/fuori-programma-cosenza/commits/<sha>/status `

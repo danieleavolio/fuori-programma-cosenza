@@ -22,6 +22,10 @@ assert.match(home.text, /property="og:image:width" content="1200"/);
 assert.match(home.text, /<h3 class="movie-title"[^>]*><a href="\/film\/[^"]+">/);
 assert.match(home.text, /application\/ld\+json/);
 assert.match(home.text, /rel="manifest" href="\/manifest\.webmanifest"/);
+assert.match(home.text, /rel="icon" href="\/favicon\.ico" sizes="16x16 32x32 48x48"/);
+const favicon = await fetch(new URL('/favicon.ico', base));
+assert.equal(favicon.status, 200);
+assert.ok((await favicon.arrayBuffer()).byteLength > 1000, 'favicon.ico vuota');
 assert.doesNotMatch(home.text, /href="\/legacy\//);
 
 // La stessa copia alimenta SSR e app.js: non devono esserci schede doppie

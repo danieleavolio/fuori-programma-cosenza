@@ -625,12 +625,53 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "20/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "21/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "22/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "20/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "21/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "22/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "23/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-        "rating": 3.0,
+        "rating": 3,
         "ratingCount": 2,
         "reviewCount": 1,
         "releaseDateIT": "2026-11-19",
@@ -925,7 +966,7 @@
         "ratingCount": 11,
         "reviewCount": 6,
         "criticsRating": 3.3,
-        "audienceRating": 4.0,
+        "audienceRating": 4,
         "releaseDateIT": "2026-11-12",
         "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
@@ -1120,7 +1161,7 @@
         "rating": 2.53,
         "ratingCount": 22,
         "reviewCount": 9,
-        "criticsRating": 2.0,
+        "criticsRating": 2,
         "audienceRating": 3.59,
         "releaseDateIT": "2026-11-12",
         "checkedAt": "2026-11-19T12:25:32.692664+00:00"
@@ -2146,7 +2187,32 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "20/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "21/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "22/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "23/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -2239,117 +2305,6 @@
         "checkedAt": "2026-11-19T12:25:32.692664+00:00"
       },
       "releaseDateIT": "2026-10-29"
-    },
-    {
-      "id": "14",
-      "title": "Hunger Games: L’Alba sulla Mietitura",
-      "poster": "",
-      "url": "https://cosenzacinema.it/movie/hunger-games-lalba-sulla-mietitura/",
-      "duration": "",
-      "tags": [],
-      "venueUrls": {},
-      "genres": [],
-      "director": "",
-      "year": "",
-      "language": "",
-      "cast": "",
-      "trailer": "",
-      "shows": [],
-      "announcedDates": [
-        {
-          "date": "20/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "21/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "20/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "21/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "23/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "24/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        }
-      ],
-      "synopsis": "",
-      "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
-      "external": {
-        "source": "MYmovies",
-        "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-        "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-18T04:39:59.283050+00:00"
-      },
-      "releaseDateIT": "2026-11-19"
-    },
-    {
-      "id": "15",
-      "title": "L’Essere Amato",
-      "poster": "",
-      "url": "https://cosenzacinema.it/movie/lessere-amato/",
-      "duration": "",
-      "tags": [],
-      "venueUrls": {},
-      "genres": [],
-      "director": "",
-      "year": "",
-      "language": "",
-      "cast": "",
-      "trailer": "",
-      "shows": [],
-      "announcedDates": [
-        {
-          "date": "20/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "21/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "23/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "24/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        }
-      ],
-      "synopsis": "",
-      "firstSeenAt": "2026-11-19T01:37:48.706403+00:00"
     }
   ],
   "comingSoon": [
