@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T22:52:56.553291+00:00",
+  "updatedAt": "2026-11-20T04:12:04.140867+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -449,27 +449,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/29d5fb4e-b67e-4790-9363-2c6a7df25ab7#theater-init"
-            },
-            {
-              "time": "19:00",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/30a9018b-4c15-467d-a342-71e25dbcfe5b#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/d4210e70-4ab3-4260-ab10-dcde5bff4616#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
           "date": "20/11/2026",
           "shows": [
             {
@@ -513,22 +492,6 @@
               "time": "20:45",
               "room": "",
               "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/940a87ff-0068-46d3-9ad1-b10291b5e153#theater-init"
-            }
-          ],
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "18:00",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/3598f824-a416-43f2-b41c-c0fe0e2245ce#theater-init"
-            },
-            {
-              "time": "20:45",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/a91a25e9-4b10-4685-97b0-97f74d6ca5d4#theater-init"
             }
           ],
           "venue": "cinema-teatro-italia"
@@ -582,38 +545,6 @@
           "venue": "unical"
         },
         {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "17:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/d06e119d-c318-4197-9789-7a300477665c#theater-init"
-            },
-            {
-              "time": "20:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/7cf73249-ceba-4cb3-8a9e-26db4d88dc1b#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "18:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27133"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27133"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "20/11/2026",
           "shows": [
             {
@@ -663,6 +594,22 @@
         },
         {
           "date": "23/11/2026",
+          "shows": [
+            {
+              "time": "18:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27133"
+            },
+            {
+              "time": "21:15",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27133"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "24/11/2026",
           "shows": [
             {
               "time": "18:30",
@@ -889,38 +836,6 @@
           "venue": "citrigno"
         },
         {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "18:45",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/38a94131-f43f-47db-999f-7445cab04627#theater-init"
-            },
-            {
-              "time": "22:15",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/b9bb1ccb-02e8-4ff3-bccd-ab389b502e3c#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27068"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27068"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "20/11/2026",
           "shows": [
             {
@@ -970,6 +885,22 @@
         },
         {
           "date": "23/11/2026",
+          "shows": [
+            {
+              "time": "19:30",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27068"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27068"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "24/11/2026",
           "shows": [
             {
               "time": "19:30",
@@ -1497,17 +1428,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "20/11/2026",
           "shows": [
             {
@@ -1542,6 +1462,17 @@
         },
         {
           "date": "23/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala A",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "24/11/2026",
           "shows": [
             {
               "time": "16:30",
@@ -1683,22 +1614,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
-            },
-            {
-              "time": "20:20",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "20/11/2026",
           "shows": [
             {
@@ -1748,6 +1663,22 @@
         },
         {
           "date": "23/11/2026",
+          "shows": [
+            {
+              "time": "17:00",
+              "room": "Sala Garden",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
+            },
+            {
+              "time": "20:20",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "24/11/2026",
           "shows": [
             {
               "time": "17:00",
@@ -1866,22 +1797,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "18:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "20/11/2026",
           "shows": [
             {
@@ -1931,6 +1846,22 @@
         },
         {
           "date": "23/11/2026",
+          "shows": [
+            {
+              "time": "18:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
+            },
+            {
+              "time": "22:00",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
+            }
+          ],
+          "venue": "garden"
+        },
+        {
+          "date": "24/11/2026",
           "shows": [
             {
               "time": "18:30",
@@ -2135,10 +2066,6 @@
       ],
       "announcedDates": [
         {
-          "date": "19/11/2026",
-          "venue": "unical"
-        },
-        {
           "date": "20/11/2026",
           "venue": "unical"
         },
@@ -2243,17 +2170,6 @@
       "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
       "shows": [
         {
-          "date": "19/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "20/11/2026",
           "shows": [
             {
@@ -2296,6 +2212,17 @@
             }
           ],
           "venue": "garden"
+        },
+        {
+          "date": "24/11/2026",
+          "shows": [
+            {
+              "time": "16:30",
+              "room": "Sala B",
+              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
+            }
+          ],
+          "venue": "garden"
         }
       ],
       "announcedDates": [],
@@ -2330,10 +2257,6 @@
       "shows": [],
       "announcedDates": [
         {
-          "date": "19/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
           "date": "20/11/2026",
           "venue": "cinema-teatro-italia"
         },
@@ -2348,10 +2271,6 @@
         {
           "date": "25/11/2026",
           "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "19/11/2026",
-          "venue": "unical"
         },
         {
           "date": "20/11/2026",
@@ -2656,30 +2575,5 @@
       "sourceName": "Cinema Garden"
     }
   ],
-  "warnings": [
-    {
-      "type": "carried-over",
-      "venue": "andromeda-river",
-      "date": "19/11/2026",
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
-    },
-    {
-      "type": "carried-over",
-      "venue": "citrigno",
-      "date": "19/11/2026",
-      "title": "SCROOGE E GLI SPIRITI DEL NATALE (EBENEZER)"
-    },
-    {
-      "type": "carried-over",
-      "venue": "cinema-teatro-italia",
-      "date": "19/11/2026",
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
-    },
-    {
-      "type": "carried-over",
-      "venue": "unical",
-      "date": "19/11/2026",
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
-    }
-  ]
+  "warnings": []
 }
