@@ -359,6 +359,21 @@ def test_coming_soon_parsers_keep_venue_and_source() -> None:
     print("  ok prossimamente: fonti ufficiali e attribuzione per cinema")
 
 
+def test_title_key_merges_typographic_apostrophes() -> None:
+    pairs = [
+        ("HUNGER GAMES L'ALBA SULLA MIETITURA", "Hunger Games: L’Alba sulla Mietitura"),
+        ("L'ESSERE AMATO (EL SER QUERIDO)", "L’Essere Amato"),
+    ]
+    for existing, announced in pairs:
+        assert upd.title_key(existing) == upd.title_key(announced), (
+            existing,
+            announced,
+            upd.title_key(existing),
+            upd.title_key(announced),
+        )
+    print("  ok chiavi titolo: apostrofi diritti e tipografici si uniscono")
+
+
 def main() -> int:
     tests = [
         test_fetch_retries_on_429,
@@ -370,6 +385,7 @@ def main() -> int:
         test_release_date_hint,
         test_placeholder_times_are_dropped,
         test_coming_soon_parsers_keep_venue_and_source,
+        test_title_key_merges_typographic_apostrophes,
     ]
     failures = 0
     for test in tests:

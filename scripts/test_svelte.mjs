@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { titleToken } from './normalize_schedule.mjs';
 
 const base = process.argv[2] || 'http://127.0.0.1:5173';
 const get = async (path) => {
@@ -22,6 +23,19 @@ assert.match(home.text, /<h3 class="movie-title"[^>]*><a href="\/film\/[^"]+">/)
 assert.match(home.text, /application\/ld\+json/);
 assert.match(home.text, /rel="manifest" href="\/manifest\.webmanifest"/);
 assert.doesNotMatch(home.text, /href="\/legacy\//);
+
+// La stessa copia alimenta SSR e app.js: non devono esserci schede doppie
+// nate da apostrofi tipografici o titoli con sottotitolo tra parentesi.
+const schedule = JSON.parse((await get('/data/schedule.json')).text);
+assert.ok(Array.isArray(schedule.movies) && schedule.movies.length);
+const seenTitles = [];
+for (const movie of schedule.movies) {
+  const token = titleToken(movie.title);
+  const duplicate = seenTitles.find((item) => item.token === token
+    && (!item.year || !movie.year || String(item.year) === String(movie.year)));
+  assert.equal(duplicate, undefined, `Film duplicato in programmazione: ${movie.title}`);
+  seenTitles.push({ token, year: movie.year });
+}
 
 const sitemap = await get('/sitemap.xml');
 assert.equal(sitemap.response.status, 200);

@@ -6,16 +6,18 @@
   "scripts": {
     "dev": "vite dev",
     "preview": "vite preview",
-    "build": "npm run data:pull && npm run legacy:sync && npm run og:build && vite build",
+    "build": "npm run data:pull && npm run data:normalize && npm run legacy:sync && npm run og:build && vite build",
     "og:build": "node scripts/make_og.mjs",
     "data:pull": "node scripts/pull_published_data.mjs",
+    "data:normalize": "node scripts/normalize_schedule.mjs",
     "data:pull:check": "node scripts/pull_published_data.mjs --dry-run",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "legacy:sync": "node scripts/sync_legacy.mjs",
     "test:svelte": "npm run legacy:sync && node scripts/test_svelte.mjs",
     "test:svelte:browser": "node scripts/test_svelte_browser.mjs",
     "test:preview": "node scripts/verify_preview.mjs",
-    "test:seo": "node scripts/test_seo.mjs"
+    "test:seo": "node scripts/test_seo.mjs",
+    "test:normalize": "node scripts/test_normalize.mjs"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "8.0.1",

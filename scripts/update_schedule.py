@@ -527,6 +527,10 @@ def title_key(title: str) -> str:
     t = title
     t = re.sub(r"\(THE CAT IN THE HAT\)", "", t, flags=re.I)
     t = re.sub(r"\(.*?\)", "", t)
+    # Gli apostrofi tipografici (’) verrebbero eliminati dal passaggio ASCII e
+    # produrrebbero chiavi diverse da quelle con apostrofo dritto ('): la stessa
+    # sala annuncerebbe un film gia' presente in programmazione come duplicato.
+    t = re.sub(r"[’'`´‘]", " ", t)
     t = re.sub(r"[–—\-]", " ", t)
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode().casefold()
     return re.sub(r"[^a-z0-9]+", " ", t).strip()

@@ -35,6 +35,7 @@ try {
     await setTimeout(100);
   }
   if (!ready) throw new Error(`Preview non disponibile: ${output}`);
+  await run('scripts/test_normalize.mjs');
   await run('scripts/test_svelte.mjs');
   await run('scripts/test_seo.mjs');
   if (process.argv.includes('--browser')) await run('scripts/test_svelte_browser.mjs');
