@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T12:13:31.827727+00:00",
+  "updatedAt": "2026-11-22T21:27:56.129881+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -323,27 +323,6 @@
       "synopsis": "Ventiquattro anni prima delle vicende di Katniss Everdeen, il giovane Haymitch Abernathy viene scelto come tributo del Distretto 12 per i cinquantesimi Hunger Games, la seconda Edizione della Memoria. Nell’arena dovrà lottare per sopravvivere contro avversari e un sistema spietato.",
       "shows": [
         {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/babb28c2-e3e0-4dd3-8e04-ec94bbf30b57#theater-init"
-            },
-            {
-              "time": "19:00",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/325e6626-b293-4bdf-99db-aec8852ef20a#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/9135b765-1c60-4c32-a98f-f8cf7b48649c#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
           "date": "23/11/2026",
           "shows": [
             {
@@ -410,6 +389,43 @@
           "date": "22/11/2026",
           "shows": [
             {
+              "time": "16:50",
+              "room": "Sala 4",
+              "url": "https://zumpano.andromeda.18tickets.it/film/92557/babb28c2-e3e0-4dd3-8e04-ec94bbf30b57#theater-init"
+            },
+            {
+              "time": "19:00",
+              "room": "Sala 2",
+              "url": "https://zumpano.andromeda.18tickets.it/film/92557/325e6626-b293-4bdf-99db-aec8852ef20a#theater-init"
+            },
+            {
+              "time": "21:15",
+              "room": "Sala 1",
+              "url": "https://zumpano.andromeda.18tickets.it/film/92557/9135b765-1c60-4c32-a98f-f8cf7b48649c#theater-init"
+            }
+          ],
+          "venue": "andromeda-river"
+        },
+        {
+          "date": "25/11/2026",
+          "shows": [
+            {
+              "time": "18:00",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/c106d25a-7313-4746-a06d-7716f2bd8f77#theater-init"
+            },
+            {
+              "time": "20:45",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/2ff7bcec-9c08-4269-a09a-a5e6c4775310#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "22/11/2026",
+          "shows": [
+            {
               "time": "18:00",
               "room": "",
               "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/a13ebdec-5af8-48e6-9ee6-27acd916812a#theater-init"
@@ -421,6 +437,54 @@
             }
           ],
           "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "23/11/2026",
+          "shows": [
+            {
+              "time": "17:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/702a19f4-a580-417e-aa23-66fce20dedc7#theater-init"
+            },
+            {
+              "time": "20:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/d2bc8392-8f48-4f3d-805b-b3286010c1f0#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "shows": [
+            {
+              "time": "17:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/3dd4437f-af2f-4c3d-9775-4a911c5d7531#theater-init"
+            },
+            {
+              "time": "20:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/d7b4a6d8-a07d-4008-a86c-adfa80e22972#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "shows": [
+            {
+              "time": "17:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/4ce1ab92-1db4-4856-9fbd-9297a9ee52ba#theater-init"
+            },
+            {
+              "time": "20:30",
+              "room": "Sala 1",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/ae16914e-f57f-42ab-a0c0-1c400031b510#theater-init"
+            }
+          ],
+          "venue": "unical"
         },
         {
           "date": "22/11/2026",
@@ -533,11 +597,12 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-        "rating": 3.0,
-        "ratingCount": 2,
+        "rating": 3.63,
+        "ratingCount": 5,
         "reviewCount": 1,
+        "audienceRating": 4.25,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -564,27 +629,6 @@
       "trailer": "https://www.youtube.com/watch?v=FATCofGu-6k",
       "synopsis": "UN'EMOZIONANTE STORIA DI FANTASMI AMBIENTATA NELLA LONDRA DI DICKENS, CHE SEGUE IL VIAGGIO SOPRANNATURALE DI UN UOMO PER AFFRONTARE IL SUO PASSATO, PRESENTE E FUTURO MENTRE LOTTA PER UNA SECONDA POSSI",
       "shows": [
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/0bbea8d9-d638-4b2f-926e-5c0af021325d#theater-init"
-            },
-            {
-              "time": "19:30",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/7ad48a18-023c-4a1c-bd70-08f3b460cb9f#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 3",
-              "url": "https://zumpano.andromeda.18tickets.it/film/88595/9ed56a42-8d6c-49fc-9ad1-fc7b9c86896f#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "23/11/2026",
           "shows": [
@@ -649,22 +693,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "18:45",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/dbf380b6-6158-4e79-9895-f655708322e8#theater-init"
-            },
-            {
-              "time": "22:15",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/6a7f52d4-3469-41d8-a8c9-f01a19c4f741#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
           "date": "23/11/2026",
           "shows": [
             {
@@ -708,6 +736,22 @@
               "time": "22:15",
               "room": "Sala 1",
               "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/5829d33a-886f-4744-bc9a-14fc14112e5d#theater-init"
+            }
+          ],
+          "venue": "citrigno"
+        },
+        {
+          "date": "22/11/2026",
+          "shows": [
+            {
+              "time": "18:45",
+              "room": "Sala 1",
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/dbf380b6-6158-4e79-9895-f655708322e8#theater-init"
+            },
+            {
+              "time": "22:15",
+              "room": "Sala 1",
+              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/6a7f52d4-3469-41d8-a8c9-f01a19c4f741#theater-init"
             }
           ],
           "venue": "citrigno"
@@ -782,13 +826,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
-        "rating": 3.43,
-        "ratingCount": 13,
+        "rating": 3.48,
+        "ratingCount": 14,
         "reviewCount": 6,
         "criticsRating": 3.3,
-        "audienceRating": 4.0,
+        "audienceRating": 4.13,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -813,22 +857,6 @@
       "trailer": "https://www.youtube.com/watch?v=KKWO4jLB24U",
       "synopsis": "Andrea è un fotografo, Andreina un’infermiera, e se oggi Andrea è ancora vivo è perché Andreina gli ha donato un pezzo di sé. Umberto al lavoro allevia il dolore e a casa lo infligge ad Alba, che aveva sogni semplici e ora ha smesso di sognare. Ralph di mestiere riproduce suoni, Viola è un’attrice che ha scelto di recitare anche nella vita. E poi c’è Mirko, che ha dieci anni ma fa tanto rumore. Tre famiglie, che per anni si sono sfiorate nelle strade di Milano senza conoscersi, trascorrono le loro esistenze fra rancori, bugie e momenti di felicità finché un incontro imprevisto non stravolge tutto. Allora il caos prende il sopravvento sul fragile equilibrio che le regge e rischia di spazzarle via.",
       "shows": [
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/d7d9421b-1b96-4984-b0c9-1367a0605151#theater-init"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/89849/42247b24-44c4-4d77-bc2a-382daf748e87#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "23/11/2026",
           "shows": [
@@ -876,27 +904,6 @@
             }
           ],
           "venue": "andromeda-river"
-        },
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:15",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109960/db6ebc58-afd2-46ab-9d76-48222df800f8#theater-init"
-            },
-            {
-              "time": "19:30",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109960/5c7c07f7-33a1-4861-8f3b-1b84526f6dd2#theater-init"
-            },
-            {
-              "time": "21:30",
-              "room": "Sala 2",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109960/6885f0ca-526f-40cb-98e4-6f7c59bf7d35#theater-init"
-            }
-          ],
-          "venue": "citrigno"
         },
         {
           "date": "23/11/2026",
@@ -973,7 +980,7 @@
         "criticsRating": 2.0,
         "audienceRating": 3.57,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -998,27 +1005,6 @@
       "trailer": "",
       "synopsis": "LEI ARRIVA PER NATALE E CIÒ CHE DOVREBBE ESSERE UN INCONTRO FAMILIARE DIVENTA RAPIDAMENTE UN CAMPO DI BATTAGLIA EMOTIVO, COMICO E FEROCE.",
       "shows": [
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/93974/9041e1a1-db87-4b8f-860c-8926b1e8641a#theater-init"
-            },
-            {
-              "time": "20:00",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/93974/3415bedb-447d-44d3-be50-a2a390e338f5#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/93974/6e282615-531e-4161-937b-65f75f8e314d#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "23/11/2026",
           "shows": [
@@ -1083,22 +1069,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/112204/06a76ef2-e044-46e1-bd93-7746f99268f7#theater-init"
-            },
-            {
-              "time": "20:45",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/112204/7e8d315b-ed9b-41ba-9c01-6b96879167c6#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
           "date": "23/11/2026",
           "shows": [
             {
@@ -1153,10 +1123,11 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/il-fuoco-che-ti-porti-dentro/",
         "rating": 3.54,
+        "ratingCount": 9,
         "reviewCount": 8,
         "criticsRating": 3.08,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -1185,17 +1156,6 @@
       "trailer": "https://www.youtube.com/watch?v=bCZo-8YVjgs",
       "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima.",
       "shows": [
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86057/98186c92-b125-40ba-8ebd-ea13cb306cd6#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "23/11/2026",
           "shows": [
@@ -1283,7 +1243,7 @@
         "reviewCount": 7,
         "criticsRating": 3.17,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -1308,22 +1268,6 @@
       "trailer": "",
       "synopsis": "UN GRUPPO DI PERSONE PARTECIPA A UN ESPERIMENTO IN CUI DEVE SCOPRIRE CHI, TRA LORO, È UN UMANOIDE CREATO DALL'INTELLIGENZA ARTIFICIALE. DURANTE UN WEEKEND RICCO DI SOSPETTI, EQUIVOCI E COLPI DI SCENA,",
       "shows": [
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/90344/f876163d-2b32-4c28-9e0d-fae90b77e316#theater-init"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/90344/6afd75c3-6b04-42cf-a3b7-3ba85039c78f#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "23/11/2026",
           "shows": [
@@ -1448,7 +1392,7 @@
         "criticsRating": 1.4,
         "audienceRating": 2.33,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1473,17 +1417,6 @@
       "trailer": "https://www.youtube.com/watch?v=M4T73uO9VxQ",
       "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
       "shows": [
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "19:15",
-              "room": "Sala 5",
-              "url": "https://zumpano.andromeda.18tickets.it/film/86088/bbd2a063-38bb-45b0-92ae-b09c715077c6#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
         {
           "date": "23/11/2026",
           "shows": [
@@ -1593,7 +1526,7 @@
         "criticsRating": 2.7,
         "audienceRating": 4.36,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -1637,7 +1570,7 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
         "releaseDateIT": "2026-12-16",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-12-16"
     },
@@ -1721,17 +1654,49 @@
       "synopsis": "Fujino, adolescente determinata e piena di talento, sogna di diventare una mangaka. Kyomoto, schiva e solitaria, vive quasi sempre chiusa nella sua stanza, dedicando ogni istante al disegno. Unite dalla stessa passione, le due ragazze, cresciute in una piccola città, inseguono per tredici anni il sogno di diventare autrici di manga.",
       "shows": [
         {
-          "date": "22/11/2026",
+          "date": "23/11/2026",
           "shows": [
             {
               "time": "17:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/b1ee2283-f80a-4b58-a951-074900eaa6b2#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/351d44ad-3f9d-4b71-9887-33890fd34100#theater-init"
             },
             {
               "time": "21:45",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/aa3b3347-6758-4133-afaa-78f4fd2662be#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/f5c49d52-57c6-450d-9d0f-e2f53792a9b3#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "Sala 2",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/e1e3fee6-927d-49c5-870e-2030b27d6d04#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 2",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/c620bfe6-e2ec-4566-b25f-92f0e360ba6a#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "shows": [
+            {
+              "time": "17:15",
+              "room": "Sala 2",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/8f90cd2d-1f26-4a81-8253-c4a1cb07800f#theater-init"
+            },
+            {
+              "time": "21:45",
+              "room": "Sala 2",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111644/9d0a4ddc-2052-4b6a-8d0f-61348a80d589#theater-init"
             }
           ],
           "venue": "unical"
@@ -1778,12 +1743,34 @@
       "synopsis": "RACCONTA LA STORIA DELL’ACCLAMATO REGISTA ESTEBAN MARTÍNEZ CHE DOPO ANNI DI SILENZIO, SI RITROVA A LAVORARE CON LA FIGLIA EMILIA, ATTRICE IN CERCA DI NOTORIETÀ DOPO UN PERIODO DIFFICILE.",
       "shows": [
         {
-          "date": "22/11/2026",
+          "date": "23/11/2026",
           "shows": [
             {
               "time": "19:15",
               "room": "Sala 2",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/111643/4860a7c4-25a3-41b9-a5e9-e50e6704c6c0#theater-init"
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111643/300a37de-1067-4c2b-98b9-d6209954af6f#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "Sala 2",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111643/bba426c0-bf18-414a-a1e1-8b407f2759ed#theater-init"
+            }
+          ],
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "shows": [
+            {
+              "time": "19:15",
+              "room": "Sala 2",
+              "url": "https://unical.cosenzacinema.18tickets.it/film/111643/f6b77654-d31d-46f8-908d-7655f0f070ac#theater-init"
             }
           ],
           "venue": "unical"
@@ -1885,7 +1872,7 @@
         "criticsRating": 2.97,
         "audienceRating": 3.99,
         "releaseDateIT": "2026-10-29",
-        "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+        "checkedAt": "2026-11-22T21:27:56.130185+00:00"
       },
       "releaseDateIT": "2026-10-29"
     }
@@ -1980,6 +1967,24 @@
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
       "localDate": "2026-11-30"
+    },
+    {
+      "title": "BUDDY",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95690/standard_3613d059-601d-4aee-b964-3d3a0214bb6e.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/95690",
+      "venue": "andromeda-river",
+      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
+      "sourceName": "Andromeda River",
+      "localDate": "2026-12-02"
+    },
+    {
+      "title": "NOVEMBRE 1963 - L'ASSASSINIO DI J.F. KENNEDY",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95723/standard_de68eba4-c40e-4a68-901a-9eed823342ce.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/95723",
+      "venue": "andromeda-river",
+      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
+      "sourceName": "Andromeda River",
+      "localDate": "2026-12-03"
     },
     {
       "title": "SUCCEDERA' QUESTA NOTTE",
@@ -2122,5 +2127,30 @@
       "sourceName": "Cinema Garden"
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "type": "carried-over",
+      "venue": "andromeda-river",
+      "date": "22/11/2026",
+      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
+    },
+    {
+      "type": "carried-over",
+      "venue": "citrigno",
+      "date": "22/11/2026",
+      "title": "SCROOGE E GLI SPIRITI DEL NATALE (EBENEZER)"
+    },
+    {
+      "type": "carried-over",
+      "venue": "cinema-teatro-italia",
+      "date": "22/11/2026",
+      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
+    },
+    {
+      "type": "carried-over",
+      "venue": "unical",
+      "date": "22/11/2026",
+      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
+    }
+  ]
 }

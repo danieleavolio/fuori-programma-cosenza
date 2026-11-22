@@ -1,7 +1,7 @@
 {
   "avengersdoomsday:2026": {
     "data": {},
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "ilgattocolcappello:2026": {
     "data": {
@@ -11,9 +11,9 @@
       "reviewCount": 7,
       "criticsRating": 3.17,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "sedomaninontorno:2026": {
     "data": {
@@ -25,9 +25,9 @@
       "criticsRating": 2.7,
       "audienceRating": 4.36,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "unweekendartificiale:2026": {
     "data": {
@@ -39,9 +39,9 @@
       "criticsRating": 1.4,
       "audienceRating": 2.33,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "ilrumoredellecosenuove:2026": {
     "data": {
@@ -53,9 +53,9 @@
       "criticsRating": 2.0,
       "audienceRating": 3.57,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "godzillaminuszero:2026": {
     "data": {
@@ -81,9 +81,9 @@
       "criticsRating": 2.97,
       "audienceRating": 3.99,
       "releaseDateIT": "2026-10-29",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "hope:2026": {
     "data": {
@@ -103,15 +103,15 @@
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
-      "rating": 3.43,
-      "ratingCount": 13,
+      "rating": 3.48,
+      "ratingCount": 14,
       "reviewCount": 6,
       "criticsRating": 3.3,
-      "audienceRating": 4.0,
+      "audienceRating": 4.13,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "lastoriainfinitaried:1984": {
     "data": {
@@ -144,9 +144,9 @@
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
       "releaseDateIT": "2026-12-16",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "kontinental25:2025": {
     "data": {
@@ -180,33 +180,35 @@
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-      "rating": 3.0,
-      "ratingCount": 2,
+      "rating": 3.63,
+      "ratingCount": 5,
       "reviewCount": 1,
+      "audienceRating": 4.25,
       "releaseDateIT": "2026-11-19",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "ilfuocochetiportidentro:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/il-fuoco-che-ti-porti-dentro/",
       "rating": 3.54,
+      "ratingCount": 9,
       "reviewCount": 8,
       "criticsRating": 3.08,
       "releaseDateIT": "2026-11-19",
-      "checkedAt": "2026-11-21T18:49:46.557104+00:00"
+      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
     },
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "lookback:2026": {
     "data": {},
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "lessereamatoelserquerido:2026": {
     "data": {},
-    "retryAt": "2026-11-22T18:49:46.557104+00:00"
+    "retryAt": "2026-11-23T21:27:56.130185+00:00"
   },
   "hungergameslalbasullamietitura:": {
     "data": {
