@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T00:01:47.527593+00:00",
+  "updatedAt": "2026-11-22T03:24:22.074492+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -503,7 +503,32 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "22/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "22/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "23/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
       "external": {
         "source": "MYmovies",
@@ -1655,7 +1680,12 @@
           "venue": "cinema-teatro-italia"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "24/11/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ],
       "firstSeenAt": "2026-11-19T12:25:32.692379+00:00",
       "external": {
         "source": "MYmovies",
@@ -1666,7 +1696,7 @@
         "criticsRating": 3.98,
         "audienceRating": 4.14,
         "releaseDateIT": "2026-10-16",
-        "checkedAt": "2026-11-21T01:01:46.973681+00:00"
+        "checkedAt": "2026-11-22T03:24:22.074800+00:00"
       },
       "releaseDateIT": "2026-10-16"
     },
@@ -1707,7 +1737,24 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "22/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "23/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -1742,7 +1789,24 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "22/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "23/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -2058,16 +2122,5 @@
       "sourceName": "Cinema Garden"
     }
   ],
-  "warnings": [
-    {
-      "type": "announced-failed",
-      "venue": "cinema-teatro-italia",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
-    },
-    {
-      "type": "announced-failed",
-      "venue": "unical",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
-    }
-  ]
+  "warnings": []
 }
