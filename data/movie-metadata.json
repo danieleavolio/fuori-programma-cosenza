@@ -250,5 +250,45 @@
       "checkedAt": "2026-11-23T03:55:35.782782+00:00"
     },
     "retryAt": "2026-11-24T03:55:35.782782+00:00"
+  },
+  "tipresentoifotter:2026": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/ti-presento-i-fotter/",
+      "releaseDateIT": "2026-11-26",
+      "checkedAt": "2026-11-23T19:45:17.011729+00:00"
+    },
+    "retryAt": "2026-11-24T19:45:17.011729+00:00"
+  },
+  "hexeilregnodellestreghe:2026": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/hexe-il-regno-delle-streghe/",
+      "releaseDateIT": "2026-11-26",
+      "checkedAt": "2026-11-23T19:45:17.011729+00:00"
+    },
+    "retryAt": "2026-11-24T19:45:17.011729+00:00"
+  },
+  "lanottedellefragole:2026": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/la-notte-delle-fragole/",
+      "rating": 3.0,
+      "reviewCount": 1,
+      "releaseDateIT": "2026-11-26",
+      "checkedAt": "2026-11-23T19:45:17.011729+00:00"
+    },
+    "retryAt": "2026-11-24T19:45:17.011729+00:00"
+  },
+  "lorenzolincredibileavventuradijovanotti:2026": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/lorenzo-lincredibile-avventura-di-jovanotti/",
+      "rating": 3.0,
+      "reviewCount": 1,
+      "releaseDateIT": "2026-11-26",
+      "checkedAt": "2026-11-23T19:45:17.011729+00:00"
+    },
+    "retryAt": "2026-11-24T19:45:17.011729+00:00"
   }
 }
