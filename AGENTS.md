@@ -11,6 +11,26 @@ Istruzioni operative per chi lavora su **Fuori programma Cosenza**.
   (`https://danieleavolio.github.io/fuori-programma-cosenza/`).
 - Vercel ricostruisce il sito e, in build, scarica i dati appena pubblicati.
 - `README.md` descrive prodotto e dati. `SEO.md` descrive SEO, canonical e anteprime social.
+- Vercel è il sito principale. GitHub Pages serve solo come backend statico di dati e feed calendario.
+
+## Lavorare con pochi token
+
+- Parti da questo file; apri `README.md` o `SEO.md` solo per la sezione che ti serve (`grep -n "^#"`).
+- **Non leggere per intero** `app.js` (~100 KB), `styles.css` (~45 KB), `data/*.json`,
+  `package-lock.json`, `src/lib/server/posters.generated.json`, `src/lib/og-manifest.json`,
+  `.svelte-kit/`, `static/`, `calendars/`. Cerca con `grep -n` e leggi solo le righe utili;
+  per i dati usa uno script (`python -c` / `node -e`) che stampi chiavi e conteggi.
+- Mappa rapida: route in `src/routes/<pagina>/`, dati e helper SSR in `src/lib/server/data.ts`,
+  metadati in `src/lib/Seo.svelte`, sitemap in `src/routes/sitemap.xml/+server.ts`,
+  immagini social in `scripts/make_og.mjs`, header e navigazione in `src/routes/+layout.svelte`.
+- Stili di una pagina nuova: `<style>` del componente, con le variabili CSS di `styles.css`
+  (`--ink`, `--muted`, `--line`, `--surface`, `--blue`, `--link`, `--focus`…). Così non serve
+  toccare `styles.css` né aggiornare la versione del service worker.
+- Verifica proporzionata: per logica pura uno script mirato; poi `npm run check`;
+  `npm run build` + `npm run test:preview` solo prima di chiudere il lavoro.
+- Shell Linux su questa cartella (es. agenti remoti): i `node_modules` installati da Windows
+  non funzionano (binding nativi di rolldown/sharp). Copia il progetto fuori dalla cartella
+  senza `node_modules`, esegui `npm ci` lì e verifica sulla copia.
 
 ## Comandi essenziali
 
@@ -61,6 +81,15 @@ Per un annuncio senza anno, `announcementPosters` deve indicare le URL esatte
 delle locandine della sala già abbinate manualmente all'edizione corretta.
 
 ## Trappole ricorrenti
+
+### Maratona
+
+`/maratona` calcola le sequenze di spettacoli compatibili nello stesso giorno. La logica è in
+`src/lib/marathon.ts` (puro, usato in SSR e browser); lo stato vive solo nell'URL
+(`giorno`, `film`, `viaggio`, `pubblicita`) e il cambio di selezione non richiama il server.
+Gli slug dei film sono quelli di `filmPath()` e includono l'anno (es. `dio-ride-2026`).
+Non presentare la fine stimata come certa e non inventare durate: senza durata si usa
+`FALLBACK_DURATION` e la pagina lo dichiara.
 
 ### Titoli duplicati
 
@@ -150,7 +179,9 @@ Il messaggio `Cannot update this protected ref` è normale: il push passa comunq
 Dopo il deploy verificare anche che la programmazione pubblicata sia stata normalizzata
 (nessuna card vuota o duplicata).
 
-## Skill utili
+## Skill utili (OpenCode)
+
+Queste skill esistono solo nell'ambiente OpenCode; altrove ignorale.
 
 - **windows-shell**: caricala quando un comando contiene quote, `$`, backtick, JSON,
   newline o testo non ASCII. Meglio scrivere un file `.ps1`/`.py` che litigare con

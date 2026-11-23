@@ -18,7 +18,18 @@
     <h1 id="page-title">Cinema a Cosenza e Rende</h1>
     <p>Film, orari e biglietti · anche a Zumpano</p>
   </div>
-  <a class="today-cta" href="/programmazione/oggi">Oggi in sala <span aria-hidden="true">→</span></a>
+  <div class="home-ctas">
+    <a class="today-cta" href="/programmazione/oggi">
+      <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <span class="cta-text"><strong>Oggi in sala</strong><small>Tutti gli orari di oggi</small></span>
+      <span class="cta-arrow" aria-hidden="true">→</span>
+    </a>
+    <a class="today-cta marathon-cta" href="/maratona">
+      <span class="cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="7" height="12" rx="1.5"/><rect x="14" y="6" width="7" height="12" rx="1.5"/><path d="M10 12h4"/></svg></span>
+      <span class="cta-text"><strong>Maratona</strong><small>Più film nella stessa sera</small></span>
+      <span class="cta-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
 </section>
 
 <section class="airing-now" id="airing-now" aria-labelledby="airing-now-title" hidden>
@@ -234,6 +245,24 @@
 <noscript>I film e gli orari pubblicati sono consultabili anche senza JavaScript. I filtri interattivi e i salvati richiedono JavaScript.</noscript>
 
 <style>
+  .home-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+  :global(.home-ctas .today-cta) { position: relative; justify-content: flex-start; gap: 12px; min-height: 58px; padding: 9px 14px 9px 10px; border-radius: 14px; text-align: left; transition: transform 160ms var(--ease), box-shadow 160ms ease, background-color 160ms ease; }
+  :global(.home-ctas .today-cta:hover) { transform: translateY(-1px); box-shadow: 0 8px 22px rgb(0 0 0 / .18); border-color: var(--blue); background: var(--blue); color: var(--on-blue); }
+  :global(.home-ctas .cta-icon) { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: rgb(255 255 255 / .16); }
+  :global(.home-ctas .cta-text) { display: grid; gap: 1px; line-height: 1.15; }
+  :global(.home-ctas .cta-text strong) { font-size: 15px; }
+  :global(.home-ctas .cta-text small) { font-size: 12px; font-weight: 500; opacity: .85; }
+  :global(.home-ctas .cta-arrow) { margin-left: 6px; font-size: 18px; transition: transform 160ms var(--ease); }
+  :global(.home-ctas .today-cta:hover .cta-arrow) { transform: translateX(3px); }
+  :global(.home-ctas .marathon-cta) { border-color: var(--line); background: var(--surface); color: var(--ink); }
+  :global(.home-ctas .marathon-cta .cta-icon) { background: linear-gradient(135deg, #c25a1c, #8250c4); color: #fff; }
+  :global(.home-ctas .marathon-cta:hover) { border-color: var(--ink); background: var(--surface); color: var(--ink); }
+  @media (max-width: 699px) {
+    .home-ctas { display: grid; grid-template-columns: 1fr 1fr; align-self: stretch; gap: 8px; }
+    :global(.home-ctas .today-cta) { padding: 8px 10px 8px 8px; gap: 9px; }
+    :global(.home-ctas .cta-icon) { width: 32px; height: 32px; }
+    :global(.home-ctas .cta-text small), :global(.home-ctas .cta-arrow) { display: none; }
+  }
   .venue-directory { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr)); gap: 10px; }
   .venue-tile { display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
   .venue-tile:hover { border-color: var(--link); background: var(--surface-alt); }

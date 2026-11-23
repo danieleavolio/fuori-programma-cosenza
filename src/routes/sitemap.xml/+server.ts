@@ -14,6 +14,7 @@ export const GET: RequestHandler = () => {
     { path: '/programmazione/weekend' },
     { path: '/prossimamente' },
     { path: '/calendario' },
+    { path: '/maratona' },
     ...venues.map((venue) => ({ path: cinemaPath(venue) })),
     ...filmPages.map((movie) => ({ path: filmPath(movie), poster: movie.poster, title: movie.title }))
   ];

@@ -1,6 +1,11 @@
 # Fuori programma
 
-Web app statica per confrontare la programmazione dei cinema di Cosenza e Rende in un'unica vista.
+Web app per confrontare la programmazione dei cinema di Cosenza e Rende in un'unica vista.
+
+- **Sito pubblico (principale):** <https://fuori-programma-cosenza.vercel.app/> — SvelteKit su Vercel.
+- **GitHub Pages** (<https://danieleavolio.github.io/fuori-programma-cosenza/>) è il backend statico: pubblica `data/schedule.json` e i feed calendario `.ics` che Vercel e gli abbonamenti leggono. La copia della vecchia app lì presente punta a Vercel come canonical.
+
+Istruzioni operative per chi sviluppa (anche agenti): [AGENTS.md](AGENTS.md). SEO: [SEO.md](SEO.md).
 
 ## Cinema supportati
 
@@ -12,14 +17,12 @@ Web app statica per confrontare la programmazione dei cinema di Cosenza e Rende 
 
 ## Avvio locale
 
-Apri la cartella con un server statico, per esempio:
-
 ```powershell
-python scripts/build_calendars.py
-python -m http.server 8000
+npm ci
+npm run dev          # http://127.0.0.1:5173
 ```
 
-Poi visita `http://localhost:8000`. L’app legge i dati da `data/schedule.json`.
+I dati vengono da `data/schedule.json` del repository. La vecchia app statica resta servibile anche da sola (`python scripts/build_calendars.py` e poi `python -m http.server 8000`), ma lo sviluppo avviene su SvelteKit.
 
 ## Aggiornamento dati
 
@@ -103,31 +106,35 @@ node --check sw.js
 
 I test Python dei metadati e dei calendari sono deterministici, senza rete o dipendenze aggiuntive, e coprono abbinamenti errati, dati mancanti, cache, indisponibilità, 31 selezioni, UID, modifiche, cancellazioni e ripristino degli eventi. Non sono configurati build o linter di framework.
 
+## Maratona (più film di fila)
+
+`/maratona` aiuta a capire quali film si possono vedere uno dopo l'altro nello stesso giorno. Si sceglie un giorno e fino a cinque film; la pagina cerca tutte le sequenze di spettacoli compatibili e mostra prima quelle comode, poi quelle con meno attesa.
+
+- La fine di uno spettacolo è `inizio + durata del film`, più i minuti di pubblicità e trailer se l'utente li conta (0, 10, 15 o 20; predefinito 0). Senza durata pubblicata si usano 120 minuti e lo si dice.
+- Fra due sale diverse si aggiunge lo spostamento (predefinito 15 minuti, selezionabile); nella stessa sala no. Un margine inferiore a 10 minuti è segnalato come «stretto».
+- Se non ci stanno tutti i film scelti, si mostrano le combinazioni con il numero massimo possibile.
+- Oggi contano solo gli spettacoli non ancora iniziati. Ogni orario porta alla biglietteria della sala.
+- Lo stato è nell'URL (`?giorno=AAAA-MM-GG&film=<slug>&viaggio=15&pubblicita=0`), quindi il piano si può condividere; il calcolo avviene nel browser senza richieste al server. Funziona anche senza JavaScript tramite il pulsante «Calcola».
+
+La logica è in `src/lib/marathon.ts` (modulo puro, condiviso fra SSR e browser); i dati del giorno li prepara `src/routes/maratona/+page.server.ts`.
+
 ## Offline e installazione
 
 Il sito è una PWA: `manifest.webmanifest` e `sw.js` mettono in cache la shell e i dati (`data/schedule.json`, `data/venues-info.json`), quindi l'app si apre e resta consultabile anche senza rete. La versione della cache va aggiornata in `sw.js` a ogni modifica di file della shell o dei dati. Da Chrome o Safari si può aggiungere alla schermata Home; le scorciatoie del manifest aprono direttamente la programmazione (`?view=schedule`) o i film salvati (`?view=favorites`).
 
-## Headroom locale
-
-Headroom comprime il contesto tra OpenCode e il provider, ma richiede un endpoint compatibile e la relativa chiave API. L'installazione locale usa `uv` e non modifica il PATH o la configurazione globale:
-
-```powershell
-$env:UV_TOOL_DIR = (Join-Path (Get-Location) 'tools\headroom\uv-tools')
-$env:UV_TOOL_BIN_DIR = (Join-Path (Get-Location) 'tools\headroom\bin')
-uv tool install --python 3.10 'headroom-ai[proxy]==0.42.0'
-```
-
-Il comando `headroom` è disponibile in `tools\headroom\bin`. Per attivare il proxy in OpenCode occorre prima scegliere il provider/upstream e impostare la sua chiave API nell'ambiente, senza salvarla nella repo. Guida: <https://docs.headroomlabs.ai/docs/opencode-deepseek>.
-
 ## Pubblicazione
 
-Il sito è composto da file statici e viene pubblicato tramite GitHub Pages. Il workflow `.github/workflows/pages.yml` verifica il codice, conserva la programmazione pubblicata più recente tramite `scripts/prepare_release.py`, arricchisce i metadati e genera i feed prima del deploy.
+Il flusso è: **bot GitHub → GitHub Pages (dati) → Vercel (sito)**.
 
-Il workflow `.github/workflows/update-schedule.yml` aggiorna automaticamente gli orari ogni quattro ore, i metadati e i calendari e pubblica direttamente l'artifact anche se il push del bot non è consentito. I due workflow condividono la stessa coda di deploy. Nessun task Windows o API key è necessario.
+1. `.github/workflows/update-schedule.yml` ogni quattro ore aggiorna orari, metadati e calendari, pubblica l'artifact su GitHub Pages (anche se il push del bot non è consentito) e chiama il deploy hook di Vercel.
+2. `.github/workflows/pages.yml` verifica il codice e ripubblica su Pages conservando la programmazione più recente (`scripts/prepare_release.py`). I due workflow condividono la stessa coda.
+3. La build Vercel (`npm run build`) scarica i dati appena pubblicati su Pages (`data:pull`), li normalizza e genera locandine, icone e immagini social prima di `vite build`.
 
-## Preview SvelteKit e Vercel
+Nessun task Windows o API key è necessario.
 
-La migrazione è affiancata alla PWA esistente: GitHub Pages e i suoi URL non vengono sostituiti. L'applicazione SvelteKit usa rendering server-side per home, pagine film, cinema e programmazione di oggi/stasera/weekend e per `/prossimamente`; espone `robots.txt`, `sitemap.xml` (con le locandine come `image:image`), canonical, Open Graph, percorsi di navigazione strutturati e dati strutturati. Le viste di programmazione sono collegate tra loro da `/programmazione/oggi`, `/programmazione/stasera`, `/programmazione/weekend` e `/prossimamente`. La PWA completa, con preferiti locali, filtri e calendari multi-cinema, viene copiata durante la build in `/legacy/`.
+## SvelteKit su Vercel
+
+L'applicazione SvelteKit usa rendering server-side per home, pagine film, cinema e programmazione di oggi/stasera/weekend e per `/prossimamente`; espone `robots.txt`, `sitemap.xml` (con le locandine come `image:image`), canonical, Open Graph, percorsi di navigazione strutturati e dati strutturati. Le viste di programmazione sono collegate tra loro da `/programmazione/oggi`, `/programmazione/stasera`, `/programmazione/weekend` e `/prossimamente`. La PWA completa, con preferiti locali, filtri e calendari multi-cinema, viene copiata durante la build in `/legacy/`.
 
 `/programmazione/stasera` elenca solo gli spettacoli di oggi dalle 20 in poi. Oggi, Stasera, Weekend e Prossimamente condividono card con locandina e selettore griglia/lista. Gli spettacoli sono raggruppati per film e giorno.
 
@@ -150,9 +157,9 @@ npm run build
 npm run test:preview -- --browser
 ```
 
-Importare questa repository in Vercel con preset SvelteKit e Node.js 22. `@sveltejs/adapter-auto` seleziona Vercel durante il deploy. Non cambiare il dominio attuale finché la preview e i flussi PWA/calendario non sono verificati; una preview Vercel risponde con `robots.txt` che blocca l'indicizzazione.
+Il progetto Vercel usa il preset SvelteKit e Node.js 22; `@sveltejs/adapter-auto` seleziona Vercel durante il deploy. Le preview Vercel rispondono con `robots.txt` che blocca l'indicizzazione. Per un dominio personale vedere «Cambio dominio» in [AGENTS.md](AGENTS.md).
 
-La build esegue `scripts/build_calendars.py` e include nell'app legacy l'ultima programmazione presente in `data/schedule.json`. Per mantenere aggiornato anche Vercel, collegare il repository GitHub al progetto Vercel (così i commit periodici del workflow creano deployment). Se il secret `SCHEDULE_TOKEN` non permette di salvare un aggiornamento nel repository, GitHub Pages pubblica ugualmente il dato acquisito nell'artifact, ma Vercel continuerà a leggere il JSON dell'ultimo commit: configurare un token di scrittura oppure un deploy hook con dati aggiornati prima di affidargli il dominio.
+La build include nell'app legacy (`/legacy/`) la programmazione scaricata. Se il secret `SCHEDULE_TOKEN` non permette al bot di salvare `data/schedule.json` nel repository, il sito resta comunque aggiornato perché Vercel legge i dati pubblicati su Pages.
 
 Le immagini Open Graph sono generate da `scripts/make_og.mjs` (fase `og:build`, prima di `vite build`): home, viste temporali, Prossimamente, Calendario, cinque cinema e schede film hanno immagini 1200×630 dedicate. Se una locandina non risponde si conserva una card film con titolo e brand. Il manifest versiona gli URL in base al contenuto per rinnovare le anteprime social. Canonical, sitemap e metadati usano il dominio pubblico unico, configurabile con `FP_SITE_URL`; preview e ingresso legacy non devono essere indicizzati. Procedura di verifica e attività Search Console in [SEO.md](SEO.md).
 

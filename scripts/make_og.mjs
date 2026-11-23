@@ -172,6 +172,7 @@ const pageDefinitions = [
   ['weekend', 'Al cinema nel weekend', 'Film e spettacoli di venerdì, sabato e domenica.'],
   ['prossimamente', 'Prossimamente', 'I film in arrivo: locandine, date annunciate e fonti ufficiali.'],
   ['calendario', 'Il cinema in agenda', 'Segui le tue sale con un calendario aggiornabile.'],
+  ['maratona', 'Più film di fila', 'Scegli i film del giorno e scopri quali riesci a vedere uno dopo l’altro.'],
   ...(schedule.venues || []).map((venue) => [venue.id, venue.name, `Film, orari e informazioni sulla sala a ${venue.location}.`])
 ];
 const pages = {};

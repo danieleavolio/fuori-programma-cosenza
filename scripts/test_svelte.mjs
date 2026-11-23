@@ -12,7 +12,7 @@ const home = await get('/');
 assert.equal(home.response.status, 200);
 assert.match(home.text, /<h1\b[^>]*id="page-title"[^>]*>Cinema a Cosenza e Rende<\/h1>/);
 assert.match(home.text, /<title>Cinema a Cosenza e Rende: programmazione e orari \| Fuori programma<\/title>/);
-assert.match(home.text, /<a class="today-cta" href="\/programmazione\/oggi">Oggi in sala/);
+assert.match(home.text, /<a class="today-cta" href="\/programmazione\/oggi">[\s\S]*?Oggi in sala/);
 assert.doesNotMatch(home.text, /data-chip=|class="quick-chips/);
 assert.equal([...home.text.matchAll(/class="venue-tile[^"]*" href="\/cinema\//g)].length, 5, 'Schede delle sale visibili senza JavaScript');
 assert.doesNotMatch(home.text, /class="local-guide/);
@@ -52,7 +52,7 @@ assert.equal(sitemap.response.status, 200);
 assert.match(sitemap.text, /<urlset/);
 assert.match(sitemap.text, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
 assert.match(sitemap.text, /<image:image><image:loc>https?:\/\/[^<]+<\/image:loc>/);
-for (const path of ['/programmazione/oggi', '/programmazione/stasera', '/programmazione/weekend', '/prossimamente']) {
+for (const path of ['/programmazione/oggi', '/programmazione/stasera', '/programmazione/weekend', '/prossimamente', '/maratona']) {
   assert.match(sitemap.text, new RegExp(`<loc>[^<]*${path}</loc>`), path);
 }
 const filmSlug = sitemap.text.match(/<loc>[^<]*?(\/film\/[^<]+)<\/loc>/)?.[1];
@@ -60,7 +60,7 @@ const cinemaSlug = sitemap.text.match(/<loc>[^<]*?(\/cinema\/[^<]+)<\/loc>/)?.[1
 assert.ok(filmSlug);
 assert.ok(cinemaSlug);
 
-for (const path of [filmSlug, cinemaSlug, '/programmazione/oggi', '/programmazione/stasera', '/programmazione/weekend', '/prossimamente']) {
+for (const path of [filmSlug, cinemaSlug, '/programmazione/oggi', '/programmazione/stasera', '/programmazione/weekend', '/prossimamente', '/maratona']) {
   const page = await get(path);
   assert.equal(page.response.status, 200, `${path} should render`);
   assert.match(page.text, /rel="canonical"/);
@@ -187,6 +187,18 @@ assert.equal(leap.response.status, 200);
 assert.match(leap.text, /DTSTART;TZID=Europe\/Rome:20280229T120000/);
 const safe = await get('/evento.ics?title=Test%0DEND%3AVEVENT&venue=Test&date=2027-01-05&time=09%3A00');
 assert.equal((safe.text.match(/^END:VEVENT\r?$/gm) || []).length, 1);
+
+const marathon = await get('/maratona');
+assert.match(marathon.text, /Seleziona almeno due film/);
+const marathonDay = marathon.text.match(/name="giorno" value="(\d{4}-\d{2}-\d{2})"[^>]*checked/)?.[1];
+const marathonFilms = [...marathon.text.matchAll(/name="film" value="([^"]+)"/g)].map((match) => match[1]);
+if (marathonDay && marathonFilms.length >= 2) {
+  const query = new URLSearchParams([['giorno', marathonDay], ['film', marathonFilms[0]], ['film', marathonFilms[1]], ['viaggio', '15']]);
+  const planned = await get(`/maratona?${query}`);
+  assert.equal(planned.response.status, 200);
+  assert.match(planned.text, /Puoi vederli tutti|non ci stanno|non si incastrano/);
+  assert.match(planned.text, /<link rel="canonical" href="[^"?]*\/maratona"/);
+}
 
 const calendar = await get('/calendario');
 assert.equal(calendar.response.status, 200);
