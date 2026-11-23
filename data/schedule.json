@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T21:27:56.129881+00:00",
+  "updatedAt": "2026-11-23T03:55:35.782429+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -386,27 +386,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "16:50",
-              "room": "Sala 4",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/babb28c2-e3e0-4dd3-8e04-ec94bbf30b57#theater-init"
-            },
-            {
-              "time": "19:00",
-              "room": "Sala 2",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/325e6626-b293-4bdf-99db-aec8852ef20a#theater-init"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala 1",
-              "url": "https://zumpano.andromeda.18tickets.it/film/92557/9135b765-1c60-4c32-a98f-f8cf7b48649c#theater-init"
-            }
-          ],
-          "venue": "andromeda-river"
-        },
-        {
           "date": "25/11/2026",
           "shows": [
             {
@@ -418,22 +397,6 @@
               "time": "20:45",
               "room": "",
               "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/2ff7bcec-9c08-4269-a09a-a5e6c4775310#theater-init"
-            }
-          ],
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "18:00",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/a13ebdec-5af8-48e6-9ee6-27acd916812a#theater-init"
-            },
-            {
-              "time": "20:45",
-              "room": "",
-              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/111610/940a87ff-0068-46d3-9ad1-b10291b5e153#theater-init"
             }
           ],
           "venue": "cinema-teatro-italia"
@@ -487,38 +450,6 @@
           "venue": "unical"
         },
         {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/2689370e-193c-43fd-b101-43eea79b2e2b#theater-init"
-            },
-            {
-              "time": "20:30",
-              "room": "Sala 1",
-              "url": "https://unical.cosenzacinema.18tickets.it/film/111610/0dfd06a7-04f7-4713-979a-cc7f6a1bf548#theater-init"
-            }
-          ],
-          "venue": "unical"
-        },
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "18:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27133"
-            },
-            {
-              "time": "21:15",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27133"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "23/11/2026",
           "shows": [
             {
@@ -569,16 +500,8 @@
       ],
       "announcedDates": [
         {
-          "date": "22/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
           "date": "25/11/2026",
           "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "22/11/2026",
-          "venue": "unical"
         },
         {
           "date": "23/11/2026",
@@ -739,38 +662,6 @@
             }
           ],
           "venue": "citrigno"
-        },
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "18:45",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/dbf380b6-6158-4e79-9895-f655708322e8#theater-init"
-            },
-            {
-              "time": "22:15",
-              "room": "Sala 1",
-              "url": "https://citrigno.cosenzacinema.18tickets.it/film/109894/6a7f52d4-3469-41d8-a8c9-f01a19c4f741#theater-init"
-            }
-          ],
-          "venue": "citrigno"
-        },
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "19:30",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27068"
-            },
-            {
-              "time": "21:45",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27068"
-            }
-          ],
-          "venue": "garden"
         },
         {
           "date": "23/11/2026",
@@ -1190,17 +1081,6 @@
           "venue": "andromeda-river"
         },
         {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala A",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26966"
-            }
-          ],
-          "venue": "garden"
-        },
-        {
           "date": "23/11/2026",
           "shows": [
             {
@@ -1315,22 +1195,6 @@
             }
           ],
           "venue": "andromeda-river"
-        },
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "17:00",
-              "room": "Sala Garden",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
-            },
-            {
-              "time": "20:20",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27067"
-            }
-          ],
-          "venue": "garden"
         },
         {
           "date": "23/11/2026",
@@ -1449,22 +1313,6 @@
             }
           ],
           "venue": "andromeda-river"
-        },
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "18:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
-            },
-            {
-              "time": "22:00",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26961"
-            }
-          ],
-          "venue": "garden"
         },
         {
           "date": "23/11/2026",
@@ -1629,7 +1477,7 @@
         "criticsRating": 3.98,
         "audienceRating": 4.14,
         "releaseDateIT": "2026-10-16",
-        "checkedAt": "2026-11-22T03:24:22.074800+00:00"
+        "checkedAt": "2026-11-23T03:55:35.782782+00:00"
       },
       "releaseDateIT": "2026-10-16"
     },
@@ -1704,10 +1552,6 @@
       ],
       "announcedDates": [
         {
-          "date": "22/11/2026",
-          "venue": "unical"
-        },
-        {
           "date": "23/11/2026",
           "venue": "unical"
         },
@@ -1778,10 +1622,6 @@
       ],
       "announcedDates": [
         {
-          "date": "22/11/2026",
-          "venue": "unical"
-        },
-        {
           "date": "23/11/2026",
           "venue": "unical"
         },
@@ -1816,17 +1656,6 @@
       "trailer": "https://www.youtube.com/watch?v=GyQz-5xlIsc",
       "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
       "shows": [
-        {
-          "date": "22/11/2026",
-          "shows": [
-            {
-              "time": "16:30",
-              "room": "Sala B",
-              "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965"
-            }
-          ],
-          "venue": "garden"
-        },
         {
           "date": "23/11/2026",
           "shows": [
@@ -1879,27 +1708,9 @@
   ],
   "comingSoon": [
     {
-      "title": "HOLY WOOD DUST",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95228/standard_bff359bb-d2b0-420b-b4f7-597b6eb66941.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/95228",
-      "venue": "andromeda-river",
-      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
-      "sourceName": "Andromeda River",
-      "localDate": "2026-11-23"
-    },
-    {
-      "title": "YOUR NAME (10TH ANNIVERSARY) 4K",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94205/standard_d3ee4a7e-e91c-4012-91de-6d38a9955a08.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/94205",
-      "venue": "andromeda-river",
-      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
-      "sourceName": "Andromeda River",
-      "localDate": "2026-11-23"
-    },
-    {
       "title": "TI PRESENTO I FOTTER",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94469/standard_292a16fb-7c1c-44ec-8de6-76978b1511a0.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/94469",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93844/standard_0dba84c4-34f7-4cef-b2f7-6cbc09116798.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/93844",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
@@ -1925,8 +1736,8 @@
     },
     {
       "title": "LA NOTTE DELLE FRAGOLE",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93908/standard_3b18afca-33f0-45ee-8c3e-ab3e1da24778.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/93908",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94865/standard_466a4413-4611-4b64-ad15-120d3d53c28f.jpg",
+      "url": "https://zumpano.andromeda.18tickets.it/film/94865",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
       "sourceName": "Andromeda River",
@@ -1952,7 +1763,7 @@
     },
     {
       "title": "VA' SENTIERO",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90278/standard_027dc161-55fd-4a0b-a4b9-d3e8f9a3bd1b.JPG",
+      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90278/standard_3b1ef3c2-e48c-4102-a167-2f10ddff4de6.JPG",
       "url": "https://zumpano.andromeda.18tickets.it/film/90278",
       "venue": "andromeda-river",
       "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
@@ -2127,30 +1938,5 @@
       "sourceName": "Cinema Garden"
     }
   ],
-  "warnings": [
-    {
-      "type": "carried-over",
-      "venue": "andromeda-river",
-      "date": "22/11/2026",
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
-    },
-    {
-      "type": "carried-over",
-      "venue": "citrigno",
-      "date": "22/11/2026",
-      "title": "SCROOGE E GLI SPIRITI DEL NATALE (EBENEZER)"
-    },
-    {
-      "type": "carried-over",
-      "venue": "cinema-teatro-italia",
-      "date": "22/11/2026",
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
-    },
-    {
-      "type": "carried-over",
-      "venue": "unical",
-      "date": "22/11/2026",
-      "title": "HUNGER GAMES L'ALBA SULLA MIETITURA"
-    }
-  ]
+  "warnings": []
 }
