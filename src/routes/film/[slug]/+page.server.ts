@@ -61,7 +61,7 @@ export const load: PageServerLoad = ({ params }) => {
       ...(movie.cast ? { actor: movie.cast.split(',').filter((name) => !/\.\.\.|…/.test(name)).map((name) => ({ '@type': 'Person', name: name.trim() })) } : {}),
       ...(movie.genres?.length ? { genre: movie.genres } : {}),
       ...(movie.synopsis ? { description: movie.synopsis } : {}),
-      ...(movie.poster ? { image: movie.poster } : {}),
+      ...(movie.poster ? { image: new URL(movie.poster, siteOrigin).href } : {}),
       inLanguage: 'it-IT',
       subjectOf: screenings.map((item) => ({
         '@type': 'ScreeningEvent', name: `${movie.title} — ${item.venue.name}`,

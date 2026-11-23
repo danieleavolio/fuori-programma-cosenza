@@ -23,7 +23,7 @@ export const GET: RequestHandler = () => {
     // <image:image> segnala la locandina che compare nella scheda: e' quella
     // che Google puo' mostrare nei risultati immagini.
     const image = entry.poster
-      ? `<image:image><image:loc>${escapeXml(entry.poster)}</image:loc><image:title>${escapeXml(`Locandina di ${entry.title}`)}</image:title></image:image>`
+      ? `<image:image><image:loc>${escapeXml(new URL(entry.poster, siteOrigin).href)}</image:loc><image:title>${escapeXml(`Locandina di ${entry.title}`)}</image:title></image:image>`
       : '';
     return `<url><loc>${escapeXml(siteOrigin + entry.path)}</loc><lastmod>${lastmod}</lastmod>${image}</url>`;
   }).join('');

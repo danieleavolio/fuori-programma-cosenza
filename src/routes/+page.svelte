@@ -7,15 +7,18 @@
 <svelte:head>
   <meta name="google-site-verification" content="pcJ4_jepxpSEoTyEsHGYJ2XLyoelCmPYbdCb5JisBgE" />
   <JsonLd schema={data.schema} />
-  {@html `<script>window.__FP_FILM_PATHS__=${JSON.stringify(data.paths).replace(/</g, '\\u003c')}</script>`}
-  <script src="/app.js?v=20261116b" defer></script>
+  {@html `<script>window.__FP_FILM_PATHS__=${JSON.stringify(data.paths).replace(/</g, '\\u003c')};window.__FP_POSTERS__=${JSON.stringify(data.posters).replace(/</g, '\\u003c')}</script>`}
+  <script src="/app.js?v=20261123b" defer></script>
 </svelte:head>
 
-<Seo title="Cinema a Cosenza e Rende: film, orari e biglietti" description="Confronta film e orari di Andromeda River, Citrigno, Italia Tieri, Garden e Unical. Programmazione di oggi, stasera, weekend e film in arrivo." canonical={data.canonical} image={data.ogImage} imageAlt="Fuori programma: film e orari dei cinema a Cosenza, Rende e Zumpano" />
+<Seo title={data.title} description="Scopri cosa c’è al cinema oggi a Cosenza, Rende e Zumpano. Confronta film e orari di Andromeda River, Citrigno, Italia Tieri, Garden e Unical." canonical={data.canonical} image={data.ogImage} imageAlt="Fuori programma: film e orari dei cinema a Cosenza, Rende e Zumpano" />
 
-<section class="page-heading" aria-labelledby="page-title">
-  <h1 id="page-title">Cinema a Cosenza e Rende</h1>
-  <p>Film, orari e biglietti · anche a Zumpano</p>
+<section class="page-heading home-heading" aria-labelledby="page-title">
+  <div class="home-heading-copy">
+    <h1 id="page-title">Cinema a Cosenza e Rende</h1>
+    <p>Film, orari e biglietti · anche a Zumpano</p>
+  </div>
+  <a class="today-cta" href="/programmazione/oggi">Oggi in sala <span aria-hidden="true">→</span></a>
 </section>
 
 <section class="airing-now" id="airing-now" aria-labelledby="airing-now-title" hidden>
@@ -43,16 +46,6 @@
     <div class="search-box">
       <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <input id="search" type="search" placeholder="Cerca un film…" autocomplete="off" aria-label="Cerca un film, un regista o un cinema" />
-    </div>
-
-    <div class="quick-chips">
-      <button type="button" class="chip active" data-chip="all" aria-pressed="true">Tutti</button>
-      <button type="button" class="chip" data-chip="today" aria-pressed="false">Oggi</button>
-      <button type="button" class="chip" data-chip="tonight" aria-pressed="false">Stasera</button>
-      <button type="button" class="chip" data-chip="weekend" aria-pressed="false">Weekend</button>
-      <button type="button" class="chip" data-chip="favorites" aria-pressed="false">
-        Salvati (<span id="chip-fav-count">0</span>)
-      </button>
     </div>
 
     <div class="filter-row">
@@ -131,10 +124,26 @@
 
 <section class="cinema-section" id="cinema" aria-labelledby="cinema-title">
   <div class="section-heading">
-    <h2 id="cinema-title">Cinema</h2>
-    <p class="section-note">Orari, indirizzo e indicazioni per le cinque sale.</p>
+    <h2 id="cinema-title">Le sale</h2>
+    <p class="section-note">Cosenza, Rende e Zumpano</p>
   </div>
-  <div class="cinema-list" id="cinema-list"></div>
+  <div class="venue-directory" id="cinema-list" data-ssr>
+    {#each data.venues as venue (venue.id)}
+      <a class="venue-tile" href={venue.path}>
+        <span class="venue-tile-name">{venue.name} <span aria-hidden="true">→</span></span>
+        <span class="venue-tile-address">{[venue.address, venue.city || venue.location].filter(Boolean).join(' · ')}</span>
+        <span class="venue-tile-today" data-venue-today={venue.id}></span>
+        {#if venue.status === 'stale' || venue.status === 'unavailable'}
+          <span class="venue-tile-today">{venue.status === 'stale' ? 'Dati non aggiornati' : 'Fonte non disponibile'}</span>
+        {/if}
+      </a>
+    {/each}
+  </div>
+  <details class="venue-source-note">
+    <summary>Da dove arrivano gli orari?</summary>
+    <p>Fuori programma confronta gli orari pubblicati dalle sale di Cosenza, Rende e Zumpano. È una guida indipendente: orari e disponibilità si confermano sulla biglietteria ufficiale del cinema.</p>
+    <p>Se una fonte non risponde, manteniamo gli ultimi dati disponibili. Le date degli annunci senza orario sono in <a href="/prossimamente">Prossimamente</a>.</p>
+  </details>
 </section>
 
 <div class="showtime-menu" id="showtime-menu" role="menu" aria-label="Azioni per questo orario" hidden>
@@ -222,38 +231,18 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-<section class="local-guide" aria-labelledby="local-guide-title">
-  <h2 id="local-guide-title">La programmazione dei cinema, in un solo posto</h2>
-  <p>Fuori programma è una guida indipendente ai cinema di Cosenza, Rende e Zumpano. Confronta i film in sala, scegli l’orario e apri la biglietteria ufficiale del cinema: non vendiamo biglietti e non siamo il sito ufficiale delle sale.</p>
-  <nav class="guide-links" aria-label="Quando andare al cinema">
-    <a href="/programmazione/oggi">Film e orari di oggi</a>
-    <a href="/programmazione/stasera">Cinema stasera, dalle 20</a>
-    <a href="/programmazione/weekend">Programmazione del weekend</a>
-    <a href="/prossimamente">Film in arrivo</a>
-  </nav>
-  <h3>Quali cinema puoi confrontare?</h3>
-  <ul class="guide-venues">
-    {#each data.venues as venue (venue.id)}
-      <li><a href={venue.path}>{venue.name}</a><span>{[venue.address, venue.city || venue.location].filter(Boolean).join(' · ')}</span></li>
-    {/each}
-  </ul>
-  <h3>Da dove arrivano gli orari?</h3>
-  <p>Leggiamo la programmazione pubblicata dalle sale sui loro siti ufficiali. {data.updatedLabel}. Se una fonte non risponde conserviamo gli ultimi dati disponibili: controlla sempre la data e conferma orari e disponibilità sulla biglietteria prima di partire.</p>
-  <h3>“Prossimamente” significa che posso già prenotare?</h3>
-  <p>No. Gli annunci dei cinema e le date di uscita italiane sono distinti dagli spettacoli con orario. Nella pagina <a href="/prossimamente">Prossimamente</a> trovi la fonte di ciascun annuncio e le date comunicate dalla sala, quando disponibili.</p>
-</section>
-
 <noscript>I film e gli orari pubblicati sono consultabili anche senza JavaScript. I filtri interattivi e i salvati richiedono JavaScript.</noscript>
 
 <style>
-  .local-guide { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); max-width: 850px; }
-  .local-guide h2 { font-size: 21px; margin-bottom: 12px; }
-  .local-guide h3 { font-size: 16px; margin: 24px 0 8px; }
-  .local-guide p { color: var(--muted); font-size: 14px; line-height: 1.75; }
-  .local-guide a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
-  .guide-links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 12px 0; font-size: 13px; }
-  .guide-links a { display: inline-flex; align-items: center; min-height: 44px; }
-  .guide-venues { padding-left: 20px; }
-  .guide-venues li { padding: 8px 0; font-size: 14px; }
-  .guide-venues span { display: block; color: var(--muted); font-size: 12px; line-height: 1.6; }
+  .venue-directory { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr)); gap: 10px; }
+  .venue-tile { display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  .venue-tile:hover { border-color: var(--link); background: var(--surface-alt); }
+  .venue-tile-name { display: flex; justify-content: space-between; gap: 12px; font-weight: 700; }
+  .venue-tile-name span, .venue-tile-today { color: var(--link); }
+  .venue-tile-address { color: var(--muted); font-size: 13px; }
+  .venue-tile-today { margin-top: auto; padding-top: 4px; font-size: 12px; }
+  .venue-tile-today:empty { display: none; }
+  .venue-source-note { margin-top: 16px; max-width: 720px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .venue-source-note summary { min-height: 44px; align-content: center; cursor: pointer; }
+  .venue-source-note a { color: var(--link); text-decoration: underline; }
 </style>

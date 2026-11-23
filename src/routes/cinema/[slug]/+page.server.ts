@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { breadcrumb, cinemaPath, dateISO, dateLabel, filmPath, movies, showUrl, venues, venueDetails } from '../../../lib/server/data';
+import { breadcrumb, cinemaPath, dateISO, dateLabel, dateTimeISO, filmPath, movies, romeDateISO, showUrl, venues, venueDetails } from '../../../lib/server/data';
 import { ogForPage } from '../../../lib/server/og';
 import { siteOrigin } from '../../../lib/server/site';
 import type { PageServerLoad } from './$types';
@@ -8,9 +8,12 @@ export const load: PageServerLoad = ({ params }) => {
   const venue = venues.find((item) => item.id === params.slug);
   if (!venue) error(404, 'Cinema non trovato');
   const info = venueDetails[venue.id] || {};
-  const screenings = movies.flatMap((movie) => movie.shows.filter((group) => group.venue === venue.id)
+  const now = new Date();
+  const today = romeDateISO(now);
+  const screenings = movies.flatMap((movie) => movie.shows.filter((group) => group.venue === venue.id && dateISO(group.date) >= today)
     .flatMap((group) => group.shows.map((show) => ({
-      movie, group, show, dateISO: dateISO(group.date), dateLabel: dateLabel(group.date),
+      movie, show, venue, dateISO: dateISO(group.date), dateLabel: dateLabel(group.date),
+      hasStarted: Date.parse(dateTimeISO(group.date, show.time)) < now.getTime(),
       filmPath: filmPath(movie), url: showUrl(movie, venue.id, show)
     })))).sort((a, b) => `${a.dateISO} ${a.show.time}`.localeCompare(`${b.dateISO} ${b.show.time}`));
   const canonical = `${siteOrigin}${cinemaPath(venue)}`;
@@ -20,7 +23,7 @@ export const load: PageServerLoad = ({ params }) => {
     ...(info.phone ? { telephone: info.phone } : {}),
     sameAs: [venue.source, info.mapsUrl].filter(Boolean)
   };
-  return { venue, info, screenings, canonical, ogImage: `${siteOrigin}${ogForPage(venue.id)}`, schema,
+  return { venue, info, screenings, today, canonical, ogImage: `${siteOrigin}${ogForPage(venue.id)}`, schema,
     crumb: breadcrumb([
       { name: 'Home', path: '/' },
       { name: 'Sale', path: '/#cinema' },

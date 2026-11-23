@@ -18,7 +18,7 @@ Istruzioni operative per chi lavora su **Fuori programma Cosenza**.
 | --- | --- | --- |
 | Sviluppo | `npm run dev` | `http://127.0.0.1:5173` |
 | Type check | `npm run check` | `svelte-check`, non serve il server |
-| Build produzione | `npm run build` | include `data:pull`, `data:normalize`, `legacy:sync`, `og:build` |
+| Build produzione | `npm run build` | prepara dati, asset, locandine e anteprime prima di Vite |
 | Test completi | `npm run build && npm run test:preview -- --browser` | avvia `vite preview` sulla porta 4387 |
 | SEO su server attivo | `npm run test:seo` | default `http://127.0.0.1:5173`, oppure `node scripts/test_seo.mjs <url>` |
 | Griglia, liste e locandine | `node scripts/test_catalog_browser.mjs <url>` | richiede Chrome/Chromium |
@@ -26,6 +26,7 @@ Istruzioni operative per chi lavora su **Fuori programma Cosenza**.
 | Test metadati | `python scripts/test_enrichment.py` | cache, voti e date italiane |
 | Sintassi app legacy | `node --check app.js` | |
 | Rigenera anteprime social | `npm run og:build` | immagini 1200×630 in `static/og/` |
+| Ottimizza locandine | `npm run posters:build` | confronta le sale, The Space, MYmovies e fonti curate; serve le migliori in WebP |
 | Normalizza i dati | `npm run data:normalize` | unisce film duplicati in `data/schedule.json` |
 
 `npm run test:svelte` e `npm run test:seo` hanno bisogno di un server già acceso.
@@ -41,14 +42,23 @@ Istruzioni operative per chi lavora su **Fuori programma Cosenza**.
    - `data:pull`: scarica la programmazione pubblicata (solo su Vercel);
    - `data:normalize`: unisce le schede duplicate;
    - `legacy:sync`: copia dati e asset in `static/`;
+   - `posters:build`, `icons:build`: prepara le locandine ottimizzate e la favicon;
    - `og:build`: genera le immagini social;
    - `vite build`.
 4. `src/lib/server/data.ts` importa `data/schedule.json` per l'SSR.
    `app.js` scarica `/data/schedule.json` nel browser: le due copie devono restare allineate.
 
 I file generati non vanno modificati a mano:
+`static/posters/`, `src/lib/server/posters.generated.json`,
 `static/data/`, `static/legacy/`, `static/app.js`, `static/styles.css`,
 `static/sw.js`, `static/icons/`, `static/calendars/`, `static/og/*.jpg`, `calendars/`.
+
+`data/poster-sources.json` contiene alternative verificate a mano (titolo, anno,
+pagina della fonte e URL della locandina; es. UCI). The Space e MYmovies vengono
+consultati automaticamente quando c'è una corrispondenza verificabile. Non usare
+foto di scena o titoli ambigui; se nessuna variante migliora la resa, resta il feed.
+Per un annuncio senza anno, `announcementPosters` deve indicare le URL esatte
+delle locandine della sala già abbinate manualmente all'edizione corretta.
 
 ## Trappole ricorrenti
 

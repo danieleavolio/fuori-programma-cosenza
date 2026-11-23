@@ -7,7 +7,7 @@
   {#each trail as item, index (item.name)}
     {#if index > 0}<span class="breadcrumb-sep" aria-hidden="true">›</span>{/if}
     {#if item.href}
-      <a href={item.href}>{item.name}</a>
+      <a href={item.href} data-sveltekit-reload={item.href === '/' || item.href.startsWith('/#') ? true : undefined}>{item.name}</a>
     {:else}
       <span aria-current="page">{item.name}</span>
     {/if}

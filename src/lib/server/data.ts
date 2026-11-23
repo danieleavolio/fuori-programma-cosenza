@@ -52,9 +52,20 @@ export type ComingSoon = {
   localDate?: string;
 };
 
-export const movies = schedule.movies as unknown as Movie[];
+const generated = import.meta.glob<Record<string, string>>('./posters.generated.json', { eager: true, import: 'default' });
+const posterVariants = generated['./posters.generated.json'] ?? {};
+const sourceMovies = schedule.movies as unknown as Movie[];
+export const moviePosterVariants = Object.fromEntries(sourceMovies.flatMap(({ poster }) =>
+  poster && posterVariants[poster] ? [[poster, posterVariants[poster]]] : []));
+
+function withPoster<T extends { poster?: string }>(entry: T): T {
+  const variant = entry.poster && posterVariants[entry.poster];
+  return variant ? { ...entry, poster: variant } : entry;
+}
+
+export const movies = sourceMovies.map(withPoster);
 export const venues = schedule.venues as unknown as Venue[];
-export const comingSoon = ((schedule as unknown as { comingSoon?: ComingSoon[] }).comingSoon || []);
+export const comingSoon = ((schedule as unknown as { comingSoon?: ComingSoon[] }).comingSoon || []).map(withPoster);
 export const updatedAt = schedule.updatedAt as string;
 export const venueDetails = venueInfo as Record<string, { address?: string; city?: string; mapsUrl?: string; phone?: string; phoneHref?: string; features?: string[] }>;
 

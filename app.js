@@ -14,7 +14,6 @@ const resultSummary = $('#result-summary');
 const updatedAtEl = $('#updated-at');
 const favToggleBtn = $('#fav-toggle-btn');
 const favCountEl = $('#fav-count');
-const chipFavCountEl = $('#chip-fav-count');
 const toastEl = $('#toast');
 const emptyState = $('#empty-state');
 const airingNowSection = $('#airing-now');
@@ -25,6 +24,8 @@ let venueInfo = {};
 // Sul sito SvelteKit la pagina fornisce le URL delle schede film; sul sito
 // storico la mappa non esiste e i titoli restano testo semplice.
 const filmPaths = window.__FP_FILM_PATHS__ || {};
+const moviePosterVariants = window.__FP_POSTERS__ || {};
+const posterForMovie = (movie) => moviePosterVariants[movie.poster] || movie.poster;
 
 // Ogni ridisegno della griglia deve conservare il link al film: se la mappa non
 // ha la voce (o manca del tutto) si riusa l'href gia' presente nel markup, che
@@ -38,8 +39,8 @@ function filmHref(movie) {
 // State
 let scheduleData = { venues: [], movies: [], updatedAt: '' };
 let currentView = 'movies'; // 'movies' | 'schedule'
-let activeChip = 'all';
-let showPastShowsToday = false; // 'all' | 'today' | 'favorites'
+let showingFavorites = false;
+let showPastShowsToday = false;
 let selectedDate = '';
 let movieLayout = 'grid';
 let dayLayout = 'grid';
@@ -62,7 +63,10 @@ function withViewTransition(update) {
     update();
     return null;
   }
-  return document.startViewTransition(update);
+  const transition = document.startViewTransition(update);
+  // Chrome può saltare l'animazione durante una navigazione, ma esegue update.
+  transition.ready.catch(() => {});
+  return transition;
 }
 
 // --- Date & String Utilities ---
@@ -155,7 +159,6 @@ function saveFavorites() {
 function updateFavoritesBadge() {
   const count = favorites.size;
   if (favCountEl) favCountEl.textContent = count;
-  if (chipFavCountEl) chipFavCountEl.textContent = count;
   if (favToggleBtn) favToggleBtn.classList.toggle('has-favorites', count > 0);
 }
 
@@ -329,8 +332,9 @@ function formatFilmShareMessage(movie) {
 }
 
 async function getPosterFile(movie) {
-  if (!movie.poster) throw new Error('Locandina non disponibile');
-  const response = await fetch(movie.poster);
+  const poster = posterForMovie(movie);
+  if (!poster) throw new Error('Locandina non disponibile');
+  const response = await fetch(poster);
   if (!response.ok) throw new Error(`Download locandina non riuscito (${response.status})`);
   const blob = await response.blob();
   const extension = blob.type === 'image/png' ? 'png' : 'jpg';
@@ -1076,6 +1080,10 @@ function renderVenuesInfo(venues) {
 
   const cinemaList = $('#cinema-list');
   if (!cinemaList) return;
+  if (cinemaList.hasAttribute('data-ssr')) {
+    updateVenueTodayTexts();
+    return;
+  }
 
   const statusLabels = { available: 'Fonte attiva', stale: 'Dati non aggiornati', unavailable: 'Fonte non disponibile' };
   cinemaList.innerHTML = venues.map((venue) => {
@@ -1136,8 +1144,7 @@ function showVenueSchedule(venueId) {
   writeStore('fp_venue_filter', venueId);
   if (searchInput) searchInput.value = '';
   if (genreFilter) genreFilter.value = 'all';
-  $$('.chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.chip === 'all'));
-  activeChip = 'all';
+  showingFavorites = false;
   showPastShowsToday = false;
 
   selectedDate = venueNextDate(venueId) || getTodayString();
@@ -1249,8 +1256,9 @@ function movieProgramming(movie) {
 }
 
 function renderPosterLink(movie, { panelId, isExpanded, priority = false }) {
-  const image = movie.poster
-    ? `<img class="poster" src="${escapeHtml(movie.poster)}" alt="" width="300" height="450" loading="${priority ? 'eager' : 'lazy'}"${priority ? ' fetchpriority="high"' : ''} />`
+  const poster = posterForMovie(movie);
+  const image = poster
+    ? `<img class="poster" src="${escapeHtml(poster)}" alt="" width="300" height="450" loading="${priority ? 'eager' : 'lazy'}"${priority ? ' fetchpriority="high"' : ''} />`
     : `<span class="poster poster-missing" aria-hidden="true">${escapeHtml(movie.title.slice(0, 1))}</span>`;
 
   return `<button class="poster-link" type="button" data-card-open
@@ -1295,20 +1303,15 @@ function render() {
   const selectedVenue = venueFilter?.value || 'all';
   const selectedGenre = genreFilter?.value || 'all';
   const venuesMap = Object.fromEntries(scheduleData.venues.map((v) => [v.id, v]));
-  const todayString = getTodayString();
   const isMovies = currentView === 'movies';
   $('#movie-sort').value = isMovies ? moviesSort : scheduleSort;
-  $$('.chip').forEach((chip) => {
-    const selected = chip.dataset.chip === activeChip;
-    chip.classList.toggle('active', selected);
-    chip.setAttribute('aria-pressed', String(selected));
-  });
+  favToggleBtn?.setAttribute('aria-pressed', String(showingFavorites));
   const filteredMovies = scheduleData.movies.filter((movie) => {
     const fields = [movie.title, movie.synopsis, movie.director, movie.year, movie.cast, ...(movie.genres || []),
       ...movieProgramming(movie).map((item) => venuesMap[item.venue]?.name)];
     if (!fields.some((field) => String(field || '').toLocaleLowerCase('it').includes(query))) return false;
     if (selectedGenre !== 'all' && !(movie.genres || []).includes(selectedGenre)) return false;
-    if (activeChip === 'favorites' && !favorites.has(movie.id)) return false;
+    if (showingFavorites && !favorites.has(movie.id)) return false;
     return true;
   });
   if (isMovies) {
@@ -1316,8 +1319,8 @@ function render() {
     controlsPerDay.hidden = true;
     moviesGrid.hidden = false;
     filmList.hidden = true;
-    const movies = filteredMovies.filter((movie) => catalogSelection(movie, selectedVenue, todayString).programming.length);
-    renderMoviesCatalogView(sortMovies(movies, moviesSort, (movie) => catalogSelection(movie, selectedVenue, todayString).shows), venuesMap, selectedVenue);
+    const movies = filteredMovies.filter((movie) => catalogSelection(movie, selectedVenue).programming.length);
+    renderMoviesCatalogView(sortMovies(movies, moviesSort, (movie) => catalogSelection(movie, selectedVenue).shows), venuesMap, selectedVenue);
     const hints = {
       release: 'Uscita italiana più recente; le prossime uscite seguono i film già usciti.',
       added: 'Prima comparsa nella programmazione del sito, non data di uscita.',
@@ -1334,9 +1337,11 @@ function render() {
     renderDaysStrip();
     renderScheduleDayView(filteredMovies, venuesMap, selectedDate);
   }
-  $('#empty-msg').textContent = selectedVenue === 'preferred' && !preferredVenues.size
-    ? 'Scegli prima le sale in “I miei cinema”, oppure mostra tutte le sale.'
-    : 'Nessuna proiezione corrisponde ai filtri selezionati.';
+  $('#empty-msg').textContent = showingFavorites && !favorites.size
+    ? 'Non hai ancora salvato film. Usa il segnalibro su una scheda per ritrovarla qui.'
+    : selectedVenue === 'preferred' && !preferredVenues.size
+      ? 'Scegli prima le sale in “I miei cinema”, oppure mostra tutte le sale.'
+      : 'Nessuna proiezione corrisponde ai filtri selezionati.';
 }
 
 function showtimeFormats(entry) {
@@ -1346,18 +1351,6 @@ function showtimeFormats(entry) {
   if (entry.subtitles || /\b(?:sottotitol[io]|sub(?:\s*ita)?)\b/i.test(declared)) flags.push('Sottotitoli');
   if (/\b3D\b/i.test(declared)) flags.push('3D');
   return flags;
-}
-
-function periodDateMatches(dateStr, period = activeChip, now = new Date()) {
-  if (period === 'today' || period === 'tonight') return dateStr === dateString(now);
-  if (period !== 'weekend') return !isPastDate(dateStr);
-  const friday = new Date(now);
-  const weekday = now.getDay();
-  friday.setDate(now.getDate() + (weekday === 0 ? -2 : weekday === 6 ? -1 : (5 - weekday + 7) % 7));
-  friday.setHours(0, 0, 0, 0);
-  const monday = new Date(friday);
-  monday.setDate(friday.getDate() + 3);
-  return parseDate(dateStr) >= friday && parseDate(dateStr) < monday;
 }
 
 function ratingInfo(movie) {
@@ -1556,8 +1549,7 @@ function revealFilm(movieId) {
     if (searchInput) searchInput.value = '';
     if (venueFilter) venueFilter.value = 'all';
     if (genreFilter) genreFilter.value = 'all';
-    $$('.chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.chip === 'all'));
-    activeChip = 'all';
+    showingFavorites = false;
     render();
   }
 
@@ -1574,9 +1566,8 @@ function revealFilm(movieId) {
 // VISTA 1: Catalogo per Film (Card Espandibili)
 // ==========================================
 function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
-  const todayString = getTodayString();
   const totalShows = movies.reduce((sum, movie) => sum
-    + catalogSelection(movie, selectedVenue, todayString).shows.reduce((total, group) => total + group.shows.length, 0), 0);
+    + catalogSelection(movie, selectedVenue).shows.reduce((total, group) => total + group.shows.length, 0), 0);
   resultSummary.innerHTML = `<strong>${movies.length}</strong> ${movies.length === 1 ? 'film in cartellone' : 'film in cartellone'} <span>&middot;</span> <strong>${totalShows}</strong> spettacoli totali`;
 
   if (movies.length === 0) {
@@ -1590,27 +1581,26 @@ function renderMoviesCatalogView(movies, venuesMap, selectedVenue) {
   moviesGrid.classList.toggle('movie-grid', movieLayout === 'grid');
 
   // Griglia e lista usano lo stesso markup: cambia solo il layout CSS.
-  moviesGrid.innerHTML = movies.map((movie, index) => catalogCardHtml(movie, { venuesMap, selectedVenue, todayString, priority: index === 0 })).join('');
+  moviesGrid.innerHTML = movies.map((movie, index) => catalogCardHtml(movie, { venuesMap, selectedVenue, priority: index === 0 })).join('');
 }
 
-function catalogSelection(movie, selectedVenue, todayString) {
+function catalogSelection(movie, selectedVenue) {
   const venueShows = (movie.shows || []).filter((s) => matchesVenue(s.venue, selectedVenue));
   const venueProgramming = movieProgramming(movie).filter((item) => matchesVenue(item.venue, selectedVenue));
   const now = new Date();
-  const relevantShows = venueShows.filter((group) => periodDateMatches(group.date)).map((group) => ({
+  const relevantShows = venueShows.filter((group) => !isPastDate(group.date)).map((group) => ({
       ...group,
-      shows: group.shows.filter((entry) => (showPastShowsToday || wallClockDate(group.date, entry.time) >= now)
-        && (activeChip !== 'tonight' || entry.time >= '18:00')),
+      shows: group.shows.filter((entry) => wallClockDate(group.date, entry.time) >= now),
     })).filter((group) => group.shows.length);
-  const relevantProgramming = venueProgramming.filter((item) => periodDateMatches(item.date)).filter((item) =>
+  const relevantProgramming = venueProgramming.filter((item) => !isPastDate(item.date)).filter((item) =>
     relevantShows.some((group) => group.date === item.date && group.venue === item.venue)
-    || (activeChip !== 'tonight' && !venueShows.some((group) => group.date === item.date && group.venue === item.venue && group.shows.length))
+    || !venueShows.some((group) => group.date === item.date && group.venue === item.venue && group.shows.length)
   );
   return { shows: relevantShows, programming: relevantProgramming };
 }
 
-function catalogCardHtml(movie, { venuesMap, selectedVenue, todayString, priority = false }) {
-  return movieCardHtml(movie, { venuesMap, ...catalogSelection(movie, selectedVenue, todayString), priority });
+function catalogCardHtml(movie, { venuesMap, selectedVenue, priority = false }) {
+  return movieCardHtml(movie, { venuesMap, ...catalogSelection(movie, selectedVenue), priority });
 }
 
 function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '', priority = false }) {
@@ -1869,34 +1859,32 @@ async function loadSchedule({ fresh = false } = {}) {
 // Switcher Viste (Per Film | Per Giorno)
 $$('.view-pill').forEach((btn) => {
   btn.addEventListener('click', () => {
-    $$('.view-pill').forEach((b) => {
-      b.classList.remove('active');
-      b.setAttribute('aria-selected', 'false');
-    });
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-    currentView = btn.dataset.view;
-    if (currentView === 'schedule' && ['today', 'tonight', 'weekend'].includes(activeChip)) activeChip = 'all';
-    render();
+    const update = () => {
+      $$('.view-pill').forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-selected', String(b === btn));
+      });
+      currentView = btn.dataset.view;
+      showingFavorites = false;
+      render();
+    };
+    if (currentView !== btn.dataset.view) {
+      withViewTransition(update);
+    } else {
+      update();
+    }
   });
 });
 
-// Quick Chips in "Per Film"
-$$('.chip').forEach((chip) => {
-  chip.addEventListener('click', () => {
-    $$('.chip').forEach((c) => c.classList.remove('active'));
-    chip.classList.add('active');
-    activeChip = chip.dataset.chip;
-    if (['today', 'tonight', 'weekend', 'favorites'].includes(activeChip)) {
-      currentView = 'movies';
-      $$('.view-pill').forEach((button) => {
-        const selected = button.dataset.view === currentView;
-        button.classList.toggle('active', selected);
-        button.setAttribute('aria-selected', String(selected));
-      });
-    }
-    render();
-  });
+// La copia statica non ha la pagina SSR /programmazione/oggi.
+$('#legacy-today')?.addEventListener('click', () => {
+  searchInput.value = '';
+  venueFilter.value = 'all';
+  genreFilter.value = 'all';
+  selectedDate = getTodayString();
+  showPastShowsToday = true;
+  $('#btn-view-schedule').click();
+  $('.schedule-controls').scrollIntoView({ block: 'start' });
 });
 
 // Click su Day strip in "Per Giorno"
@@ -1913,25 +1901,31 @@ if (daysNavStrip) {
 
 $$('[data-layout]').forEach((button) => {
   button.addEventListener('click', () => {
-    dayLayout = button.dataset.layout;
-    $$('[data-layout]').forEach((item) => {
-      const active = item.dataset.layout === dayLayout;
-      item.classList.toggle('active', active);
-      item.setAttribute('aria-pressed', String(active));
+    if (dayLayout === button.dataset.layout) return;
+    withViewTransition(() => {
+      dayLayout = button.dataset.layout;
+      $$('[data-layout]').forEach((item) => {
+        const active = item.dataset.layout === dayLayout;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      render();
     });
-    render();
   });
 });
 
 $$('[data-movie-layout]').forEach((button) => {
   button.addEventListener('click', () => {
-    movieLayout = button.dataset.movieLayout;
-    $$('[data-movie-layout]').forEach((item) => {
-      const active = item.dataset.movieLayout === movieLayout;
-      item.classList.toggle('active', active);
-      item.setAttribute('aria-pressed', String(active));
+    if (movieLayout === button.dataset.movieLayout) return;
+    withViewTransition(() => {
+      movieLayout = button.dataset.movieLayout;
+      $$('[data-movie-layout]').forEach((item) => {
+        const active = item.dataset.movieLayout === movieLayout;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      render();
     });
-    render();
   });
 });
 
@@ -1942,15 +1936,19 @@ function showFavoritesView() {
     b.classList.toggle('active', b.dataset.view === 'movies');
     b.setAttribute('aria-selected', String(b.dataset.view === 'movies'));
   });
-  $$('.chip').forEach((c) => c.classList.remove('active'));
-  const favChip = $('.chip[data-chip="favorites"]');
-  if (favChip) favChip.classList.add('active');
-  activeChip = 'favorites';
+  showingFavorites = true;
   render();
 }
 
 if (favToggleBtn) {
-  favToggleBtn.addEventListener('click', showFavoritesView);
+  favToggleBtn.addEventListener('click', () => {
+    if (!showingFavorites) {
+      showFavoritesView();
+    } else {
+      showingFavorites = false;
+      render();
+    }
+  });
 }
 
 // Input filtri
@@ -2026,9 +2024,7 @@ $('#clear-filters').addEventListener('click', () => {
   if (venueFilter) venueFilter.value = 'all';
   writeStore('fp_venue_filter', 'all');
   if (genreFilter) genreFilter.value = 'all';
-  $$('.chip').forEach((c) => c.classList.remove('active'));
-  $('[data-chip="all"]').classList.add('active');
-  activeChip = 'all';
+  showingFavorites = false;
   render();
 });
 
@@ -2169,7 +2165,7 @@ document.addEventListener('click', (e) => {
       button.setAttribute('aria-label', saved ? 'Rimuovi dai salvati' : 'Salva film');
       button.title = saved ? 'Rimuovi dai salvati' : 'Salva film';
     });
-    if (activeChip === 'favorites') {
+    if (showingFavorites) {
       render();
     }
     return;
@@ -2222,8 +2218,7 @@ function applyBootView() {
       button.classList.toggle('active', active);
       button.setAttribute('aria-selected', String(active));
     });
-    $$('.chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.chip === 'favorites'));
-    activeChip = 'favorites';
+    showingFavorites = true;
   }
 }
 

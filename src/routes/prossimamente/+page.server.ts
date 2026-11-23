@@ -64,7 +64,7 @@ export const load: PageServerLoad = () => {
           name: entry.movie.title,
            url: `${siteOrigin}${entry.href}`,
            releasedEvent: { '@type': 'PublicationEvent', startDate: entry.releaseDate, location: { '@type': 'Country', name: 'Italia' } },
-          ...(entry.movie.poster ? { image: entry.movie.poster } : {}),
+           ...(entry.movie.poster ? { image: new URL(entry.movie.poster, siteOrigin).href } : {}),
           ...(entry.movie.genres?.length ? { genre: entry.movie.genres } : {}),
           ...(entry.movie.synopsis ? { description: entry.movie.synopsis } : {})
         }

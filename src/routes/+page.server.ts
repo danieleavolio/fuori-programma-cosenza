@@ -1,8 +1,10 @@
-import { cinemaPath, filmPath, movies, romeNow, venues, venueDetails, updatedAt } from '../lib/server/data';
+import { cinemaPath, filmPath, movies, moviePosterVariants, romeNow, venues, venueDetails, updatedAt } from '../lib/server/data';
 import { buildCatalogHtml } from '../lib/server/legacy-cards';
 import { ogDefault } from '../lib/server/og';
 import { siteOrigin } from '../lib/server/site';
 import type { PageServerLoad } from './$types';
+
+const title = 'Cinema a Cosenza e Rende: programmazione e orari';
 
 export const load: PageServerLoad = () => {
   const base = siteOrigin;
@@ -19,7 +21,7 @@ export const load: PageServerLoad = () => {
       },
       {
         '@type': 'CollectionPage', '@id': `${base}/#webpage`, url: `${base}/`,
-        name: 'Cinema a Cosenza e Rende: film, orari e biglietti', inLanguage: 'it-IT',
+        name: title, inLanguage: 'it-IT',
         isPartOf: { '@id': `${base}/#website` },
         about: ['Cosenza', 'Rende', 'Zumpano'].map((name) => ({ '@type': 'City', name })),
         mainEntity: {
@@ -45,8 +47,10 @@ export const load: PageServerLoad = () => {
     updatedLabel,
     gridHtml: catalog.html,
     paths,
+    posters: moviePosterVariants,
     filmCount: catalog.films,
     showCount: catalog.shows,
+    title,
     canonical: `${base}/`,
     ogImage: `${base}${ogDefault}`,
     schema

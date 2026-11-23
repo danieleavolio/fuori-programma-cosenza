@@ -118,7 +118,7 @@ try {
   const frames = () => evaluate('new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))');
   const assertContrast = async (context) => {
     const problems = await evaluate(`(() => {
-      const selectors='.movie-state,.rating-source,.rating-unavailable,.movie-rating,.view-hint,.filter-dropdown label,.chip.active,.layout-button.active,.card-genres,.film-duration,.preview-label,.preview-time,.showtime-room,.showtime-end,.calendar-dialog-kicker,.calendar-dialog-intro,.calendar-app-link,.calendar-app-link small,.calendar-summary';
+      const selectors='.movie-state,.rating-source,.rating-unavailable,.movie-rating,.view-hint,.filter-dropdown label,.today-cta,.layout-button.active,.card-genres,.film-duration,.preview-label,.preview-time,.showtime-room,.showtime-end,.calendar-dialog-kicker,.calendar-dialog-intro,.calendar-app-link,.calendar-app-link small,.calendar-summary';
       const rgb=value=>(value.match(/[\\d.]+/g)||[]).map(Number);
       const lum=values=>{const v=values.slice(0,3).map(x=>x/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return v[0]*.2126+v[1]*.7152+v[2]*.0722;};
       return [...document.querySelectorAll(selectors)].filter(e=>e.getBoundingClientRect().height &&
@@ -389,20 +389,12 @@ try {
       renderRatingDetails({external:{...source,rating:3,criticsRating:4,audienceRating:2,ratingCount:2}}).includes('Campione ancora piccolo');
   })()`), 'Ordinamenti e voti mancanti/non attendibili');
   assert(await evaluate(`(() => {
-    activeChip='tonight'; currentView='movies'; venueFilter.value='all'; render();
-    if(![...moviesGrid.querySelectorAll('[data-showtime]')].every(b=>b.dataset.eventDate===getTodayString() && b.dataset.eventTime>='18:00')) return false;
-    activeChip='weekend'; render();
-    if(![...moviesGrid.querySelectorAll('[data-showtime]')].every(b=>[0,5,6].includes(parseDate(b.dataset.eventDate).getDay()))) return false;
-    const sunday=new Date(2026,10,15,12);
-    if(!periodDateMatches('15/11/2026','weekend',sunday) || periodDateMatches('20/11/2026','weekend',sunday)) return false;
-    activeChip='all'; render();
-    const first=scheduleData.movies.find(m=>parseDurationMinutes(m.duration));
     const wrap=document.createElement('div');
     wrap.innerHTML=showtimeChipHtml({title:'Test',duration:'2h 10m'}, {id:'test',name:'Test'},getTodayString(),{time:'23:30',version:'OV',subtitles:true,format:'3D'},'showtime');
     const labels=wrap.textContent;
     return labels.includes('01:40') && labels.includes('V.O.') && labels.includes('Sottotitoli') && labels.includes('3D') &&
       showtimeFormats({language:'Italiano'}).length===0 && showtimeFormats({room:'Sala 1'}).length===0;
-  })()`), 'Stasera, weekend, fine indicativa e formati dichiarati');
+  })()`), 'Fine indicativa e formati dichiarati');
   assert(await evaluate(`(() => {
     const inputs=[...document.querySelectorAll('#preferred-venues input')];
     inputs[0].checked=true;inputs[0].dispatchEvent(new Event('change',{bubbles:true}));

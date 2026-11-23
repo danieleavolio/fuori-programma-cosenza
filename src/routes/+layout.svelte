@@ -1,14 +1,26 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { prefersReducedMotion } from 'svelte/motion';
-  import { fly } from 'svelte/transition';
+  import { onNavigate } from '$app/navigation';
 
   let { children } = $props();
   const isHome = $derived(page.url.pathname === '/');
+
+  onNavigate((navigation) => {
+    if (navigation.from?.url.pathname === navigation.to?.url.pathname
+      || !document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    return new Promise<void>((resolve) => {
+      const transition = document.startViewTransition(async () => {
+        resolve();
+        await navigation.complete;
+      });
+      transition.types?.add('route');
+      transition.ready.catch(() => {});
+    });
+  });
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="/styles.css?v=20261116a" />
+  <link rel="stylesheet" href="/styles.css?v=20261123b" />
   <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
   <link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192" />
@@ -30,7 +42,7 @@
 
 <header class="masthead">
   <div class="masthead-brand">
-    <a class="wordmark" href="/" aria-label="Fuori programma, home">
+    <a class="wordmark" href="/" data-sveltekit-reload aria-label="Fuori programma, home">
       <span class="mark">fp</span>
       <span class="wordmark-text">fuori<br />programma</span>
     </a>
@@ -44,8 +56,8 @@
     </div>
   {:else}
     <nav class="view-switcher" aria-label="Programmazione">
-      <a class="view-pill" href="/">Per Film</a>
-      <a class="view-pill" href="/?view=schedule">Per Giorno</a>
+      <a class="view-pill" href="/" data-sveltekit-reload>Per Film</a>
+      <a class="view-pill" href="/?view=schedule" data-sveltekit-reload>Per Giorno</a>
     </nav>
   {/if}
 
@@ -56,9 +68,8 @@
         <svg class="icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="16" y1="2" x2="16" y2="7"></line><line x1="8" y1="2" x2="8" y2="7"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="13" x2="12" y2="19"></line><line x1="9" y1="16" x2="15" y2="16"></line></svg>
         <span class="calendar-label">Calendario</span>
       </button>
-      <button class="fav-badge-btn" id="fav-toggle-btn" type="button" aria-label="Mostra film salvati">
+      <button class="fav-badge-btn" id="fav-toggle-btn" type="button" aria-label="Film salvati" title="Film salvati" aria-pressed="false">
         <svg class="icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-        <span class="fav-label">Salvati</span>
         <span class="fav-count" id="fav-count">0</span>
       </button>
     {:else}
@@ -66,18 +77,17 @@
         <svg class="icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="16" y1="2" x2="16" y2="7"></line><line x1="8" y1="2" x2="8" y2="7"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="13" x2="12" y2="19"></line><line x1="9" y1="16" x2="15" y2="16"></line></svg>
         <span class="calendar-label">Calendario</span>
       </a>
-      <a class="fav-badge-btn" href="/?view=favorites" aria-label="Mostra film salvati">
+      <a class="fav-badge-btn" href="/?view=favorites" data-sveltekit-reload aria-label="Film salvati" title="Film salvati">
         <svg class="icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-        <span class="fav-label">Salvati</span>
       </a>
     {/if}
-    <a class="top-link" href="/#cinema">Sale &rarr;</a>
+    <a class="top-link" href={isHome ? '#cinema' : '/#cinema'} data-sveltekit-reload={isHome ? undefined : true}>Sale &rarr;</a>
   </div>
 </header>
 
 <main id="programmazione">
   {#key page.url.pathname}
-    <div class="page-enter" in:fly={{ y: 12, duration: prefersReducedMotion.current ? 0 : 220 }}>
+    <div class="page-enter">
       {@render children()}
     </div>
   {/key}

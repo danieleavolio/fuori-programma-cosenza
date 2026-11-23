@@ -18,8 +18,8 @@ function offsetDate(iso: string, days: number): string {
 
 const PAGES: Record<string, { title: string; description: string }> = {
   oggi: {
-    title: 'Cinema oggi a Cosenza e Rende',
-    description: 'Tutti gli spettacoli di oggi nei cinema di Cosenza, Rende e Zumpano: orari aggiornati e biglietti ufficiali.'
+    title: 'Cinema oggi a Cosenza e Rende: film e orari',
+    description: 'Cosa c’è al cinema oggi a Cosenza, Rende e Zumpano? Tutti i film e gli orari della giornata, con link alle biglietterie per i prossimi spettacoli.'
   },
   stasera: {
     title: 'Cinema stasera a Cosenza e Rende',
@@ -34,7 +34,8 @@ const PAGES: Record<string, { title: string; description: string }> = {
 export const load: PageServerLoad = ({ params }) => {
   const period = params.period;
   if (!Object.hasOwn(PAGES, period)) error(404, 'Programmazione non trovata');
-  const today = localISO(new Date());
+  const now = new Date();
+  const today = localISO(now);
   const weekday = new Date(`${today}T12:00:00Z`).getUTCDay();
   let start = today;
   let end = today;
@@ -53,12 +54,13 @@ export const load: PageServerLoad = ({ params }) => {
       return {
         movie, group, show, venue, info: venueDetails[venue.id],
         dateISO: iso, dateLabel: dateLabel(group.date), startDate,
+        hasStarted: new Date(startDate).getTime() < now.getTime(),
         filmPath: filmPath(movie), url: showUrl(movie, venue.id, show)
       };
     })
       // "Stasera" e' la fascia serale: dalle 20 in poi, sempre di oggi.
       .filter((item) => period !== 'stasera' || item.show.time >= '20:00')
-      .filter((item) => new Date(item.startDate).getTime() >= Date.now());
+      .filter((item) => period === 'oggi' || !item.hasStarted);
   })).sort((a, b) => `${a.dateISO} ${a.show.time}`.localeCompare(`${b.dateISO} ${b.show.time}`));
   const { title, description } = PAGES[period];
   const canonical = `${siteOrigin}/programmazione/${period}`;

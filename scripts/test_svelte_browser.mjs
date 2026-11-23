@@ -43,7 +43,10 @@ try {
       if (message.error) item.reject(new Error(JSON.stringify(message.error)));
       else item.resolve(message.result);
     }
-    if (message.method === 'Runtime.exceptionThrown') runtimeErrors.push(message.params.exceptionDetails.text);
+    if (message.method === 'Runtime.exceptionThrown') {
+      const details = message.params.exceptionDetails;
+      runtimeErrors.push(details.exception?.description || details.text);
+    }
     if (message.method === 'Page.loadEventFired') {
       for (const resolve of loaded) resolve();
       loaded.clear();
@@ -89,7 +92,7 @@ try {
   let layouts = 0;
   for (const width of [320, 390, 768, 1280]) {
     await cdp('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width < 700 });
-    for (const pathname of ['/', '/calendario', '/programmazione/stasera', '/prossimamente']) {
+    for (const pathname of ['/', '/calendario', '/programmazione/oggi', '/programmazione/stasera', '/prossimamente', '/cinema/andromeda-river']) {
       await navigate(new URL(pathname, base).href, 'h1');
       assert.ok(await evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), `Overflow ${pathname} at ${width}px`);
       assert.equal(await evaluate('document.querySelectorAll("h1").length'), 1);
@@ -101,6 +104,14 @@ try {
   await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 3, mobile: true });
   await navigate(new URL('/', base).href, '.movie-title a');
   await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'programmazione caricata');
+  // Il nuovo accesso ai salvati è un toggle: un secondo click riporta al catalogo.
+  const catalogSize = await evaluate('document.querySelectorAll("#movies-grid .movie-catalog-card").length');
+  await evaluate('document.querySelector("#movies-grid [data-fav-id]").click()');
+  await evaluate('document.querySelector("#fav-toggle-btn").click()');
+  assert.equal(await evaluate('document.querySelector("#fav-toggle-btn").getAttribute("aria-pressed")'), 'true');
+  assert.equal(await evaluate('document.querySelectorAll("#movies-grid .movie-catalog-card").length'), 1);
+  await evaluate('document.querySelector("#fav-toggle-btn").click()');
+  assert.equal(await evaluate('document.querySelectorAll("#movies-grid .movie-catalog-card").length'), catalogSize);
   assert.ok(await evaluate(`(() => {
     const movie = scheduleData.movies.find(movie => filmHref(movie));
     const url = new URL(filmHref(movie), document.querySelector('link[rel="canonical"]').href).href;
@@ -134,6 +145,28 @@ try {
   await evaluate('document.querySelector(".wordmark").click()');
   await waitFor('document.querySelectorAll("#venue-filter option").length > 1', 'home interattiva dopo il ritorno');
   assert.ok(await evaluate('document.querySelectorAll(".movie-catalog-card").length > 0'));
+  // La home non è idratata da Svelte: entrambi i link devono riavviare app.js
+  // e i filtri devono rispondere dopo ogni ritorno da Prossimamente.
+  for (const view of ['schedule', 'movies']) {
+    await evaluate('document.querySelector(".coming-soon-link").click()');
+    await waitFor('location.pathname === "/prossimamente" && document.querySelector("#page-title")?.textContent === "Prossimamente"', 'apertura Prossimamente');
+    await evaluate(`document.querySelector('.view-switcher a[href="${view === 'schedule' ? '/?view=schedule' : '/'}"]').click()`);
+    await waitFor(`location.pathname === '/' && document.querySelector('#venue-filter')?.options.length > 1 && document.querySelector('[data-view="${view}"]')?.getAttribute('aria-selected') === 'true'`, `ritorno a ${view}`);
+    await evaluate(`const search = document.querySelector('#search'); search.value = '_titolo_inesistente_'; search.dispatchEvent(new Event('input'));`);
+    assert.equal(await evaluate('document.querySelector("#empty-state").hidden'), false, `filtro attivo in ${view}`);
+    await evaluate('document.querySelector("#clear-filters").click()');
+    const selector = view === 'schedule' ? '#day-layout-list' : '#movie-layout-list';
+    await evaluate(`document.querySelector('${selector}').click()`);
+    await waitFor(`document.querySelector('${selector}').getAttribute('aria-pressed') === 'true'`, `animazione Lista in ${view}`);
+  }
+  const optimizedPosters = await evaluate(`(async () => {
+    const image = document.querySelector('img.poster[src^="/posters/"]');
+    if (!image) return 0;
+    image.loading = 'eager';
+    await image.decode();
+    return image.naturalWidth;
+  })()`);
+  if (optimizedPosters) assert.ok(optimizedPosters > 450, 'L’immagine in home usa la locandina più nitida');
   await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
 
   // Il pulsante calendario scarica il file .ics sia da telefono sia da computer.
@@ -165,18 +198,30 @@ try {
   await cdp('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
   // Navigazione interna (client-side) tra due pagine: la transizione Svelte non
   // deve impedire il render della pagina nuova.
-  await navigate(new URL('/programmazione/oggi', base).href, '.page-enter h1');
+  await navigate(new URL('/', base).href, '.today-cta');
+  await evaluate(`document.querySelector("#search").value = "nessun titolo"; document.querySelector("#search").dispatchEvent(new Event("input")); document.querySelector(".today-cta").click()`);
+  await waitFor('location.pathname === "/programmazione/oggi" && document.querySelector("#page-title")?.textContent.includes("Cinema oggi")', 'Oggi in sala apre la pagina dedicata');
+  assert.equal(await evaluate('document.querySelectorAll(".period-nav, .quick-chips").length'), 0);
+  if (await evaluate('Boolean(document.querySelector(".movie-catalog-card"))')) {
+    const cards = await evaluate('document.querySelectorAll(".movie-catalog-card").length');
+    await waitFor(`(() => { const list = [...document.querySelectorAll(".layout-button")].find(b => b.textContent.trim() === "Lista"); list?.click(); return list?.getAttribute("aria-pressed") === "true"; })()`, 'lista interattiva in Oggi');
+    assert.equal(await evaluate('document.querySelectorAll(".movie-catalog-card").length'), cards);
+    assert.equal(await evaluate('document.querySelectorAll(".movie-grid").length'), 0);
+  }
   await evaluate('document.querySelector("a.calendar-btn").click()');
   await waitFor('location.pathname === "/calendario" && document.querySelector(".page-enter h1")', 'navigazione interna a /calendario');
   assert.equal(await evaluate('document.querySelectorAll("h1").length'), 1);
   await cdp('Emulation.setScriptExecutionDisabled', { value: true });
+  await navigate(new URL('/', base).href, '.today-cta');
+  assert.equal(await evaluate('document.querySelector(".today-cta").getAttribute("href")'), '/programmazione/oggi');
+  assert.equal(await evaluate('document.querySelectorAll("#cinema-list a.venue-tile").length'), 5);
   await navigate(new URL('/calendario?cinema=garden', base).href, 'form');
   assert.equal(await evaluate('document.querySelectorAll("input[type=checkbox]:checked").length'), 1);
   assert.ok(await evaluate('document.querySelector("input[type=url]").value.endsWith("/garden.ics")'));
   assert.ok(await evaluate('document.querySelector("a[href^=webcal]").getAttribute("href").endsWith("/garden.ics")'));
   assert.ok(await evaluate('[...document.querySelectorAll("a.calendar-app-link")].some((a) => a.getAttribute("href")?.endsWith("/garden.ics"))'));
   assert.equal(runtimeErrors.length, 0, runtimeErrors.join('\n'));
-  console.log(JSON.stringify({ layouts, widths: [320, 390, 768, 1280], calendarWithoutJavaScript: true, runtimeErrors }));
+  console.log(JSON.stringify({ layouts, widths: [320, 390, 768, 1280], comingSoonReturn: ['schedule', 'movies'], optimizedPosterWidth: optimizedPosters, calendarWithoutJavaScript: true, runtimeErrors }));
 } finally {
   socket?.close();
   chrome.kill();

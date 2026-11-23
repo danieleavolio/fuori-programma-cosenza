@@ -1,13 +1,13 @@
 // Service worker: la programmazione deve restare leggibile anche senza rete.
 // La shell viene precaricata, i dati sono serviti prima dalla rete e poi dalla cache.
-const VERSION = 'fp-20261116-2';
+const VERSION = 'fp-20261123-2';
 const SHELL = `${VERSION}-shell`;
 const DATA = `${VERSION}-data`;
 
 const SHELL_ASSETS = [
   './',
-  './styles.css?v=20261116a',
-  './app.js?v=20261116b',
+  './styles.css?v=20261123b',
+  './app.js?v=20261123b',
   './icon.svg',
   './manifest.webmanifest',
   './icons/icon-192.png',
@@ -101,6 +101,9 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(networkFirst(request, DATA));
     return;
   }
+
+  // I payload del router dipendono dal deploy e dai parametri di invalidazione.
+  if (url.pathname.endsWith('/__data.json')) return;
 
   event.respondWith(cacheFirst(request));
 });

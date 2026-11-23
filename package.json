@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite dev",
     "preview": "vite preview",
-    "build": "npm run data:pull && npm run data:normalize && npm run legacy:sync && npm run icons:build && npm run og:build && vite build",
+    "build": "npm run data:pull && npm run data:normalize && npm run legacy:sync && npm run posters:build && npm run icons:build && npm run og:build && vite build",
+    "posters:build": "node scripts/build_posters.mjs",
     "icons:build": "node scripts/make_icons.mjs",
     "og:build": "node scripts/make_og.mjs",
     "data:pull": "node scripts/pull_published_data.mjs",

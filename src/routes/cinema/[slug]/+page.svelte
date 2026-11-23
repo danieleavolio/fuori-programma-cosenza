@@ -2,20 +2,17 @@
   import Breadcrumb from '../../../lib/Breadcrumb.svelte';
   import JsonLd from '../../../lib/JsonLd.svelte';
   import Seo from '../../../lib/Seo.svelte';
+  import CatalogLayout from '../../../lib/CatalogLayout.svelte';
+  import ScreeningCatalog from '../../../lib/ScreeningCatalog.svelte';
   let { data } = $props();
+  let layout = $state<'grid' | 'list'>('grid');
+  const city = $derived((data.info.city || data.venue.location).replace(/\s*\([A-Z]{2}\)$/, ''));
+  const cinemaName = $derived(data.venue.id === 'cinema-teatro-italia' ? 'Cinema Italia Tieri'
+    : ['citrigno', 'garden'].includes(data.venue.id) ? `Cinema ${data.venue.name}` : data.venue.name);
 
-  const byDay = $derived.by(() => {
-    const days = new Map<string, typeof data.screenings>();
-    for (const item of data.screenings) {
-      const list = days.get(item.dateISO) || [];
-      list.push(item);
-      days.set(item.dateISO, list);
-    }
-    return [...days.entries()];
-  });
 </script>
 
-<Seo title={`${data.venue.name}: programmazione e orari a ${data.info.city || data.venue.location}`} description={`Film, orari, indirizzo e biglietteria di ${data.venue.name} a ${data.info.city || data.venue.location}. Consulta gli spettacoli pubblicati e le indicazioni per raggiungere la sala.`} canonical={data.canonical} image={data.ogImage} imageAlt={`${data.venue.name}: film e orari su Fuori programma`} />
+<Seo title={`${cinemaName} a ${city}: programmazione e orari`} description={`Film, orari, indirizzo e biglietteria di ${data.venue.name} a ${city}. Consulta gli spettacoli pubblicati e le indicazioni per raggiungere la sala.`} canonical={data.canonical} image={data.ogImage} imageAlt={`${data.venue.name}: film e orari su Fuori programma`} />
 <svelte:head>
   <JsonLd schema={data.schema} />
 </svelte:head>
@@ -24,12 +21,12 @@
 
 <section class="page-heading" aria-labelledby="page-title">
   <h1 id="page-title">{data.venue.name}</h1>
-  <p>{[data.info.address, data.info.city || data.venue.location].filter(Boolean).join(' · ')}</p>
+  <p>{city}</p>
 </section>
 
 <section class="venue-schedule-block" aria-label="Informazioni sulla sala">
   <div class="venue-info-row">
-    <p class="venue-info-address">{data.info.address}{#if data.info.city}, {data.info.city}{/if}</p>
+    <p class="venue-info-address">{[data.info.address, data.info.city || data.venue.location].filter(Boolean).join(' · ')}</p>
     <div class="venue-info-actions">
       {#if data.info.mapsUrl}<a href={data.info.mapsUrl} target="_blank" rel="noopener">Indicazioni ↗</a>{/if}
       {#if data.info.phone}<a href={`tel:${data.info.phoneHref || data.info.phone}`}>{data.info.phone}</a>{/if}
@@ -41,43 +38,16 @@
   {/if}
 </section>
 
-<section class="cinema-section" aria-labelledby="screenings-title">
-  <div class="section-heading">
-    <h2 id="screenings-title">Programmazione pubblicata</h2>
-    <p class="section-note">{data.screenings.length} spettacoli</p>
-  </div>
-
-  {#if byDay.length}
-    {#each byDay as [iso, shows] (iso)}
-      <div class="venue-date-row">
-        <h6>{shows[0].dateLabel}</h6>
-        <div class="times-buttons">
-          {#each shows as show (show.movie.id + show.show.time + show.url)}
-            <div class="show-entry">
-              <a class="showtime" href={show.filmPath} aria-label={`${show.movie.title}, orari e sale`}>
-                <strong>{show.show.time}</strong>
-                <span class="showtime-room">{show.movie.title}</span>
-              </a>
-              <div class="show-entry-links">
-                <a href={show.url} target="_blank" rel="nofollow noopener">Biglietti</a>
-              </div>
-            </div>
-          {/each}
-        </div>
-      </div>
-    {/each}
-  {:else}
-    <p class="no-times-note">Non risultano spettacoli pubblicati al momento.</p>
-  {/if}
-</section>
+{#if data.screenings.length}
+  <CatalogLayout bind:layout hint="Film e orari pubblicati da oggi in poi." />
+  <ScreeningCatalog screenings={data.screenings} today={data.today} {layout} showVenue={false} />
+{:else}
+  <p class="no-times-note">Non risultano spettacoli pubblicati da oggi in poi. <a href="/programmazione/oggi">Vedi gli orari delle altre sale</a>.</p>
+{/if}
 
 <style>
   .venue-info-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
   .venue-info-address { margin: 0; }
   .venue-info-actions { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; font-weight: 600; }
   .venue-info-actions a { text-decoration: underline; text-underline-offset: 3px; }
-  .show-entry { display: flex; flex-direction: column; gap: 4px; }
-  .show-entry-links { display: flex; justify-content: center; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
-  .show-entry-links a:hover { color: var(--ink); text-decoration: underline; }
-  .showtime-room { max-width: 150px; text-align: center; }
 </style>

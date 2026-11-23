@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { titleToken } from './normalize_schedule.mjs';
 
 const base = process.argv[2] || 'http://127.0.0.1:5173';
@@ -10,6 +11,11 @@ const get = async (path) => {
 const home = await get('/');
 assert.equal(home.response.status, 200);
 assert.match(home.text, /<h1\b[^>]*id="page-title"[^>]*>Cinema a Cosenza e Rende<\/h1>/);
+assert.match(home.text, /<title>Cinema a Cosenza e Rende: programmazione e orari \| Fuori programma<\/title>/);
+assert.match(home.text, /<a class="today-cta" href="\/programmazione\/oggi">Oggi in sala/);
+assert.doesNotMatch(home.text, /data-chip=|class="quick-chips/);
+assert.equal([...home.text.matchAll(/class="venue-tile[^"]*" href="\/cinema\//g)].length, 5, 'Schede delle sale visibili senza JavaScript');
+assert.doesNotMatch(home.text, /class="local-guide/);
 assert.match(home.text, /<article class="movie-catalog-card/);
 assert.match(home.text, /id="movies-grid"/);
 assert.match(home.text, /src="\/app\.js\?v=[\w-]+"/);
@@ -46,7 +52,7 @@ assert.equal(sitemap.response.status, 200);
 assert.match(sitemap.text, /<urlset/);
 assert.match(sitemap.text, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
 assert.match(sitemap.text, /<image:image><image:loc>https?:\/\/[^<]+<\/image:loc>/);
-for (const path of ['/programmazione/stasera', '/prossimamente']) {
+for (const path of ['/programmazione/oggi', '/programmazione/stasera', '/programmazione/weekend', '/prossimamente']) {
   assert.match(sitemap.text, new RegExp(`<loc>[^<]*${path}</loc>`), path);
 }
 const filmSlug = sitemap.text.match(/<loc>[^<]*?(\/film\/[^<]+)<\/loc>/)?.[1];
@@ -60,17 +66,29 @@ for (const path of [filmSlug, cinemaSlug, '/programmazione/oggi', '/programmazio
   assert.match(page.text, /rel="canonical"/);
   assert.match(page.text, /application\/ld\+json/);
   assert.match(page.text, /<h1/);
+  assert.doesNotMatch(page.text, /class="period-nav/);
   for (const match of page.text.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
     const schema = JSON.parse(match[1]);
     assert.equal(schema['@context'], 'https://schema.org');
   }
 }
 
-// Stasera: solo la fascia serale, e il collegamento attivo tra le viste.
+// Oggi deve includere tutti gli spettacoli con un orario, anche quelli già iniziati.
+const today = new Intl.DateTimeFormat('it-IT', {
+  timeZone: 'Europe/Rome', day: '2-digit', month: '2-digit', year: 'numeric'
+}).format(new Date());
+const todayPage = await get('/programmazione/oggi');
+assert.match(todayPage.text, /<title>Cinema oggi a Cosenza e Rende: film e orari \| Fuori programma<\/title>/);
+const todayEvents = JSON.parse(todayPage.text.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]).itemListElement;
+const todayShows = schedule.movies.flatMap(movie => movie.shows)
+  .filter(group => group.date === today && schedule.venues.some(venue => venue.id === group.venue))
+  .flatMap(group => group.shows);
+assert.equal(todayEvents.length, todayShows.length, 'Tutti gli spettacoli di oggi');
+assert.doesNotMatch(todayPage.text, /<a [^>]*>[^<]*Già iniziato/);
+
+// Stasera resta raggiungibile e contiene solo la fascia serale.
 const stasera = await get('/programmazione/stasera');
-assert.match(stasera.text, /<nav class="period-nav[^"]*"/);
-assert.match(stasera.text, /aria-current="page"[^>]*>Stasera</);
-for (const match of stasera.text.matchAll(/<strong>(\d{2}:\d{2})<\/strong>/g)) {
+for (const match of stasera.text.matchAll(/"startDate":"[^T]+T(\d{2}:\d{2}):/g)) {
   assert.ok(match[1] >= '20:00', `spettacolo serale ${match[1]}`);
 }
 
@@ -81,9 +99,37 @@ assert.match(filmPage.text, /"@type":"BreadcrumbList"/);
 const cinemaPage = await get(cinemaSlug);
 assert.match(cinemaPage.text, /<nav class="breadcrumb[^"]*"/);
 assert.match(cinemaPage.text, /"@type":"BreadcrumbList"/);
+const tieri = await get('/cinema/cinema-teatro-italia');
+assert.match(tieri.text, /<title>Cinema Italia Tieri a Cosenza: programmazione e orari \| Fuori programma<\/title>/);
+const todayISO = today.split('/').reverse().join('-');
+for (const date of tieri.text.matchAll(/<time datetime="(\d{4}-\d\d-\d\d)"/g)) {
+  assert.ok(date[1] >= todayISO, 'La scheda cinema mostra solo date da oggi in poi');
+}
+if (tieri.text.includes('class="movie-catalog-card"')) {
+  assert.match(tieri.text, /class="poster-link[^>]*href="\/film\//);
+  assert.match(tieri.text, />Griglia<\/button>/);
+  assert.match(tieri.text, />Lista<\/button>/);
+}
 const prossimamente = await get('/prossimamente');
 assert.match(prossimamente.text, /<h1\b[^>]*id="page-title"[^>]*>Prossimamente<\/h1>/);
 assert.match(prossimamente.text, /"@type":"ItemList"/);
+const poster = `${home.text}${prossimamente.text}`.match(/src="(\/posters\/[a-f0-9]+\.webp)"/)?.[1];
+if (['127.0.0.1', 'localhost'].includes(new URL(base).hostname)) {
+  const variants = JSON.parse(await readFile(new URL('../src/lib/server/posters.generated.json', import.meta.url), 'utf8').catch(error => {
+    if (error.code !== 'ENOENT') throw error;
+    return '{}';
+  }));
+  if (Object.keys(variants).length) assert.ok(poster, 'La build deve usare le locandine WebP generate');
+  const announced = (schedule.comingSoon || []).map(item => variants[item.poster]).filter(Boolean);
+  for (const src of new Set(announced)) {
+    assert.ok(prossimamente.text.includes(`src="${src}"`), `Locandina ottimizzata mancante in Prossimamente: ${src}`);
+  }
+}
+if (poster) {
+  const image = await fetch(new URL(poster, base));
+  assert.equal(image.status, 200, 'Locandina ottimizzata disponibile');
+  assert.match(image.headers.get('content-type'), /^image\/webp/);
+}
 
 const sitemapFilm = sitemap.text.match(new RegExp(filmSlug.replaceAll('/', '\\/')));
 assert.ok(sitemapFilm);
@@ -118,6 +164,8 @@ assert.equal(eventAgain.text.match(/^UID:(.+)$/m)?.[1], eventUid);
 
 const legacy = await get('/legacy/index.html');
 assert.equal(legacy.response.status, 200);
+assert.match(legacy.text, /id="legacy-today">Oggi in sala/);
+assert.doesNotMatch(legacy.text, /data-chip=|class="quick-chips/);
 assert.match(legacy.text, /Per Film/);
 const legacyRoot = await fetch(new URL('/legacy/?view=movies', base), { redirect: 'manual' });
 assert.ok([200, 307, 308].includes(legacyRoot.status));
