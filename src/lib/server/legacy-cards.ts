@@ -224,34 +224,46 @@ function showtimeChipHtml(movie: Movie, cinema: { id: string; name: string; loca
 }
 
 /**
- * Film proiettati oggi per l'ultima volta. Stessa logica di lastDayMovieIds()
- * in app.js: tenerle allineate.
- * Un film è all'ultimo giorno solo se ha spettacoli oggi, nessuna data dopo
- * oggi e ogni sala che lo proietta oggi ha già pubblicato gli orari di domani
- * (altrimenti "nessuna data domani" vuol dire solo "non ancora pubblicato").
+ * Ultimo giorno di proiezione di ogni film (id → "gg/mm/aaaa"), da oggi in poi.
+ * Stessa logica di lastShowDates() in app.js: tenerle allineate.
+ * Il giorno D è l'ultimo solo se è l'ultima data del film, ha spettacoli e
+ * ogni sala che lo proietta in D ha già pubblicato gli orari del giorno dopo
+ * (altrimenti "nessuna data dopo D" vuol dire solo "non ancora pubblicato").
+ * Il giorno dopo conta come pubblicato se la sala ha almeno tanti film quanti
+ * in D (al massimo 2): un solo evento (anteprima, proiezione speciale) in una
+ * sala che di solito ne ha di più non è la programmazione del giorno, mentre
+ * per le sale con un film al giorno (Cinema Italia) basta un film.
+ * Le anteprime prima dell'uscita italiana non sono mai un "ultimo giorno".
  */
-export function lastDayMovieIds(movies: Movie[], now: Date): Set<string> {
-  const today = dateString(now);
-  const next = new Date(now);
-  next.setDate(next.getDate() + 1);
-  const tomorrow = dateString(next);
-  const todayTime = parseDate(today).getTime();
-  const publishedTomorrow = new Set<string>();
+export function lastShowDates(movies: Movie[], now: Date): Map<string, string> {
+  const todayTime = parseDate(dateString(now)).getTime();
+  const filmsByVenueDay = new Map<string, Set<string>>();
   for (const movie of movies) {
     for (const group of movie.shows || []) {
-      if (group.date === tomorrow && (group.shows || []).length) publishedTomorrow.add(group.venue);
+      if (!(group.shows || []).length) continue;
+      const key = `${group.venue}|${group.date}`;
+      if (!filmsByVenueDay.has(key)) filmsByVenueDay.set(key, new Set());
+      filmsByVenueDay.get(key)!.add(movie.id);
     }
   }
-  const ids = new Set<string>();
+  const result = new Map<string, string>();
   for (const movie of movies) {
-    const todayVenues = new Set((movie.shows || [])
-      .filter((group) => group.date === today && (group.shows || []).length)
+    const dates = movieProgramming(movie).map((item) => item.date);
+    if (!dates.length) continue;
+    const last = dates.reduce((max, date) => (parseDate(date) > parseDate(max) ? date : max));
+    if (parseDate(last).getTime() < todayTime) continue;
+    if (movie.releaseDateIT && movie.releaseDateIT > last.split('/').reverse().join('-')) continue;
+    const venues = new Set((movie.shows || [])
+      .filter((group) => group.date === last && (group.shows || []).length)
       .map((group) => group.venue));
-    if (!todayVenues.size) continue;
-    if (movieProgramming(movie).some((item) => parseDate(item.date).getTime() > todayTime)) continue;
-    if ([...todayVenues].every((venue) => publishedTomorrow.has(venue))) ids.add(movie.id);
+    if (!venues.size) continue;
+    const following = parseDate(last);
+    following.setDate(following.getDate() + 1);
+    const day = dateString(following);
+    const films = (venue: string, date: string) => filmsByVenueDay.get(`${venue}|${date}`)?.size || 0;
+    if ([...venues].every((venue) => films(venue, day) >= Math.min(2, films(venue, last)))) result.set(movie.id, last);
   }
-  return ids;
+  return result;
 }
 
 function periodDateMatches(dateStr: string, now: Date) {
@@ -294,7 +306,11 @@ function movieCardHtml(
     ...entry, date: group.date, venue: group.venue,
   }))).sort((a, b) => wallClockDate(a.date, a.time).getTime() - wallClockDate(b.date, b.time).getTime())[0];
   const preview = next || first;
-  const previewTitle = next ? 'Prossimo spettacolo' : preview ? 'Spettacolo iniziato' : 'Data annunciata';
+  // Come in app.js: "Ultimo spettacolo" se oggi è l'ultimo giorno e resta un solo orario.
+  const todayLabel = getTodayString(now);
+  const finalShow = lastDay && next?.date === todayLabel
+    && shows.filter((group) => group.date === todayLabel).reduce((sum, group) => sum + group.shows.length, 0) === 1;
+  const previewTitle = finalShow ? 'Ultimo spettacolo' : next ? 'Prossimo spettacolo' : preview ? 'Spettacolo iniziato' : 'Data annunciata';
   const previewDate = preview ? formatDayLabel(preview.date, now) : dates.length ? formatDayLabel(dates[0], now) : 'Orari in arrivo';
   const previewVenue = preview ? (venuesMap[preview.venue]?.name || preview.venue) : 'Orari non ancora pubblicati';
   const publishedDates = [...new Set(movieProgramming(movie).map((item) => item.date))].sort((a, b) => parseDate(a).getTime() - parseDate(b).getTime());
@@ -305,7 +321,7 @@ function movieCardHtml(
     : age >= 0 && age < 7 * 86400000 ? 'Nuovo sul sito' : '';
 
   return `
-    <article class="movie-catalog-card "
+    <article class="movie-catalog-card ${lastDay ? 'is-last-day' : ''}"
       id="film-${escapeHtml(movie.id)}" data-movie-id="${escapeHtml(movie.id)}"
       data-card-key="${escapeHtml(cardKey)}" style="view-transition-name: film-${escapeHtml(cardKey)}">
       <div class="movie-card-body">
@@ -412,7 +428,8 @@ export function buildCatalogHtml(movies: Movie[], venues: Venue[], now: Date, pa
   });
 
   const totalShows = visible.reduce((sum, item) => sum + item.selection.shows.reduce((total, group) => total + group.shows.length, 0), 0);
-  const lastDay = lastDayMovieIds(movies, now);
-  const html = visible.map((item, index) => movieCardHtml(item.movie, venuesMap, item.selection, now, paths, index === 0, lastDay.has(item.movie.id))).join('');
+  const lastDates = lastShowDates(movies, now);
+  const today = getTodayString(now);
+  const html = visible.map((item, index) => movieCardHtml(item.movie, venuesMap, item.selection, now, paths, index === 0, lastDates.get(item.movie.id) === today)).join('');
   return { html, films: visible.length, shows: totalShows };
 }

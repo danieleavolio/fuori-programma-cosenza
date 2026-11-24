@@ -1256,41 +1256,62 @@ function movieProgramming(movie) {
 }
 
 /**
- * Film proiettati oggi per l'ultima volta. Stessa logica di lastDayMovieIds()
- * in src/lib/server/legacy-cards.ts: tenerle allineate.
- * Un film è all'ultimo giorno solo se ha spettacoli oggi, nessuna data dopo
- * oggi e ogni sala che lo proietta oggi ha già pubblicato gli orari di domani
- * (altrimenti "nessuna data domani" vuol dire solo "non ancora pubblicato").
+ * Ultimo giorno di proiezione di ogni film (id → "gg/mm/aaaa"), da oggi in poi.
+ * Stessa logica di lastShowDates() in src/lib/server/legacy-cards.ts: tenerle allineate.
+ * Il giorno D è l'ultimo solo se è l'ultima data del film, ha spettacoli e
+ * ogni sala che lo proietta in D ha già pubblicato gli orari del giorno dopo
+ * (altrimenti "nessuna data dopo D" vuol dire solo "non ancora pubblicato").
+ * Il giorno dopo conta come pubblicato se la sala ha almeno tanti film quanti
+ * in D (al massimo 2): un solo evento (anteprima, proiezione speciale) in una
+ * sala che di solito ne ha di più non è la programmazione del giorno, mentre
+ * per le sale con un film al giorno (Cinema Italia) basta un film.
+ * Le anteprime prima dell'uscita italiana non sono mai un "ultimo giorno".
  */
-function lastDayMovieIds(movies, now = new Date()) {
-  const today = dateString(now);
-  const next = new Date(now);
-  next.setDate(next.getDate() + 1);
-  const tomorrow = dateString(next);
-  const todayTime = parseDate(today).getTime();
-  const publishedTomorrow = new Set();
+function lastShowDates(movies, now = new Date()) {
+  const todayTime = parseDate(dateString(now)).getTime();
+  const filmsByVenueDay = new Map();
   for (const movie of movies || []) {
     for (const group of movie.shows || []) {
-      if (group.date === tomorrow && (group.shows || []).length) publishedTomorrow.add(group.venue);
+      if (!(group.shows || []).length) continue;
+      const key = `${group.venue}|${group.date}`;
+      if (!filmsByVenueDay.has(key)) filmsByVenueDay.set(key, new Set());
+      filmsByVenueDay.get(key).add(movie.id);
     }
   }
-  const ids = new Set();
+  const result = new Map();
   for (const movie of movies || []) {
-    const todayVenues = new Set((movie.shows || [])
-      .filter((group) => group.date === today && (group.shows || []).length)
+    const dates = movieProgramming(movie).map((item) => item.date);
+    if (!dates.length) continue;
+    const last = dates.reduce((max, date) => (parseDate(date) > parseDate(max) ? date : max));
+    if (parseDate(last).getTime() < todayTime) continue;
+    if (movie.releaseDateIT && movie.releaseDateIT > last.split('/').reverse().join('-')) continue;
+    const venues = new Set((movie.shows || [])
+      .filter((group) => group.date === last && (group.shows || []).length)
       .map((group) => group.venue));
-    if (!todayVenues.size) continue;
-    if (movieProgramming(movie).some((item) => parseDate(item.date).getTime() > todayTime)) continue;
-    if ([...todayVenues].every((venue) => publishedTomorrow.has(venue))) ids.add(movie.id);
+    if (!venues.size) continue;
+    const following = parseDate(last);
+    following.setDate(following.getDate() + 1);
+    const day = dateString(following);
+    const films = (venue, date) => filmsByVenueDay.get(`${venue}|${date}`)?.size || 0;
+    if ([...venues].every((venue) => films(venue, day) >= Math.min(2, films(venue, last)))) result.set(movie.id, last);
   }
-  return ids;
+  return result;
 }
 
-let lastDayCache = { key: '', ids: new Set() };
-function isLastDay(movie) {
+let lastDayCache = { key: '', dates: new Map() };
+/** Data dell'ultimo giorno del film, se è certa (vedi lastShowDates). */
+function lastShowDate(movie) {
   const key = `${scheduleData.updatedAt}|${dateString(new Date())}`;
-  if (lastDayCache.key !== key) lastDayCache = { key, ids: lastDayMovieIds(scheduleData.movies) };
-  return lastDayCache.ids.has(movie.id);
+  if (lastDayCache.key !== key) lastDayCache = { key, dates: lastShowDates(scheduleData.movies) };
+  return lastDayCache.dates.get(movie.id) || '';
+}
+
+/** Spettacoli ancora da iniziare del film in una data, in tutte le sale. */
+function remainingShowsOn(movieId, date) {
+  const movie = scheduleData.movies.find((item) => item.id === movieId);
+  const now = new Date();
+  return (movie?.shows || []).filter((group) => group.date === date)
+    .flatMap((group) => group.shows || []).filter((entry) => wallClockDate(date, entry.time) >= now).length;
 }
 
 function renderPosterLink(movie, { panelId, isExpanded, priority = false }) {
@@ -1655,19 +1676,23 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '', pri
     ...entry, date: group.date, venue: group.venue,
   }))).sort((a, b) => wallClockDate(a.date, a.time) - wallClockDate(b.date, b.time))[0];
   const preview = next || first;
-  const previewTitle = next ? 'Prossimo spettacolo' : preview ? 'Spettacolo iniziato' : 'Data annunciata';
+  // Ultimo giorno del film = il giorno che si sta guardando (oggi in "Per Film",
+  // il giorno scelto in "Per Giorno").
+  const lastDate = lastShowDate(movie);
+  const lastDay = Boolean(lastDate) && lastDate === (dayDate || getTodayString());
+  const finalShow = lastDay && next?.date === lastDate && remainingShowsOn(movie.id, lastDate) === 1;
+  const previewTitle = finalShow ? 'Ultimo spettacolo' : next ? 'Prossimo spettacolo' : preview ? 'Spettacolo iniziato' : 'Data annunciata';
   const previewDate = preview ? formatDayLabel(preview.date) : dates.length ? formatDayLabel(dates[0]) : 'Orari in arrivo';
   const previewVenue = preview ? (venuesMap[preview.venue]?.name || preview.venue) : 'Orari non ancora pubblicati';
   const fullProgramming = movieProgramming(movie).filter((item) => matchesVenue(item.venue));
   const publishedDates = [...new Set(fullProgramming.map((item) => item.date))].sort((a, b) => parseDate(a) - parseDate(b));
   const age = Date.now() - Date.parse(movie.firstSeenAt);
-  const lastDay = isLastDay(movie);
   const state = lastDay ? 'Ultimo giorno'
     : movie.releaseDateIT > dateString(new Date()).split('/').reverse().join('-') ? 'Prossimamente'
     : age >= 0 && age < 7 * 86400000 ? 'Nuovo sul sito' : '';
 
   return `
-    <article class="movie-catalog-card ${dayDate ? 'day-card' : ''} ${isExpanded ? 'is-expanded' : ''}"
+    <article class="movie-catalog-card ${dayDate ? 'day-card' : ''} ${isExpanded ? 'is-expanded' : ''} ${lastDay ? 'is-last-day' : ''}"
       id="${dayDate ? 'day-' : ''}film-${escapeHtml(movie.id)}" data-movie-id="${escapeHtml(movie.id)}"
       data-card-key="${escapeHtml(cardKey)}" style="view-transition-name: film-${escapeHtml(cardKey)}">
       <div class="movie-card-body">

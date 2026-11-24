@@ -95,12 +95,15 @@ Non presentare la fine stimata come certa e non inventare durate: senza durata s
 
 ### Ultimo giorno
 
-Il badge «Ultimo giorno» nelle card della home è calcolato da `lastDayMovieIds()`,
-duplicata in `app.js` e `src/lib/server/legacy-cards.ts`: cambiarle insieme.
-Un film è all'ultimo giorno solo se ha spettacoli oggi, nessuna data dopo oggi
-e **ogni sala che lo proietta oggi ha già pubblicato gli orari di domani**.
-Non semplificarlo in «ultima data pubblicata = oggi»: molte sale pubblicano
-un giorno alla volta e il badge comparirebbe su quasi tutti i film.
+La card rossa «Ultimo giorno» usa `lastShowDates()` (id film → data dell'ultimo
+giorno), duplicata in `app.js` e `src/lib/server/legacy-cards.ts`: cambiarle insieme.
+Compare quando quella data è il giorno che si guarda: oggi in «Per Film», il giorno
+scelto in «Per Giorno». Il giorno D è l'ultimo solo se è l'ultima data del film, ha
+spettacoli e **ogni sala che lo proietta in D ha già pubblicato il giorno dopo**
+(almeno tanti film quanti in D, massimo 2: un'anteprima isolata non conta).
+Le anteprime prima di `releaseDateIT` sono escluse. Se resta un solo orario, il
+riquadro dice «Ultimo spettacolo». Non semplificarlo in «ultima data pubblicata»:
+molte sale pubblicano un giorno alla volta e il badge comparirebbe ovunque.
 
 ### Archivio dei film
 
