@@ -1,7 +1,7 @@
 {
   "avengersdoomsday:2026": {
     "data": {},
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "ilgattocolcappello:2026": {
     "data": {
@@ -11,23 +11,23 @@
       "reviewCount": 7,
       "criticsRating": 3.17,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "sedomaninontorno:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/se-domani-non-torno/",
-      "rating": 3.35,
-      "ratingCount": 25,
+      "rating": 3.21,
+      "ratingCount": 27,
       "reviewCount": 11,
       "criticsRating": 2.7,
-      "audienceRating": 4.36,
+      "audienceRating": 3.94,
       "releaseDateIT": "2026-11-05",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "unweekendartificiale:2026": {
     "data": {
@@ -39,23 +39,23 @@
       "criticsRating": 1.4,
       "audienceRating": 2.33,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "ilrumoredellecosenuove:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/il-rumore-delle-cose-nuove/",
-      "rating": 2.52,
-      "ratingCount": 25,
+      "rating": 2.54,
+      "ratingCount": 26,
       "reviewCount": 9,
       "criticsRating": 2.0,
-      "audienceRating": 3.57,
+      "audienceRating": 3.61,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "godzillaminuszero:2026": {
     "data": {
@@ -76,14 +76,14 @@
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/dio-ride/",
       "rating": 3.49,
-      "ratingCount": 42,
+      "ratingCount": 43,
       "reviewCount": 16,
       "criticsRating": 2.97,
       "audienceRating": 3.99,
       "releaseDateIT": "2026-10-29",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "hope:2026": {
     "data": {
@@ -103,15 +103,15 @@
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
-      "rating": 3.48,
-      "ratingCount": 14,
-      "reviewCount": 6,
-      "criticsRating": 3.3,
-      "audienceRating": 4.13,
+      "rating": 3.46,
+      "ratingCount": 17,
+      "reviewCount": 7,
+      "criticsRating": 3.17,
+      "audienceRating": 4.2,
       "releaseDateIT": "2026-11-12",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "lastoriainfinitaried:1984": {
     "data": {
@@ -144,9 +144,9 @@
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
       "releaseDateIT": "2026-12-16",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "kontinental25:2025": {
     "data": {
@@ -180,35 +180,36 @@
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-      "rating": 3.63,
-      "ratingCount": 5,
-      "reviewCount": 1,
+      "rating": 3.31,
+      "ratingCount": 7,
+      "reviewCount": 3,
+      "criticsRating": 2.67,
       "audienceRating": 4.25,
       "releaseDateIT": "2026-11-19",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "ilfuocochetiportidentro:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/il-fuoco-che-ti-porti-dentro/",
-      "rating": 3.54,
-      "ratingCount": 9,
-      "reviewCount": 8,
-      "criticsRating": 3.08,
+      "rating": 3.6,
+      "ratingCount": 16,
+      "reviewCount": 14,
+      "criticsRating": 3.19,
       "releaseDateIT": "2026-11-19",
-      "checkedAt": "2026-11-22T21:27:56.130185+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "lookback:2026": {
     "data": {},
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "lessereamatoelserquerido:2026": {
     "data": {},
-    "retryAt": "2026-11-23T21:27:56.130185+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "hungergameslalbasullamietitura:": {
     "data": {
@@ -242,14 +243,14 @@
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/fatherland/",
       "rating": 4.04,
-      "ratingCount": 45,
-      "reviewCount": 21,
+      "ratingCount": 46,
+      "reviewCount": 22,
       "criticsRating": 3.98,
       "audienceRating": 4.14,
       "releaseDateIT": "2026-10-16",
-      "checkedAt": "2026-11-23T03:55:35.782782+00:00"
+      "checkedAt": "2026-11-24T04:35:01.124691+00:00"
     },
-    "retryAt": "2026-11-24T03:55:35.782782+00:00"
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   },
   "tipresentoifotter:2026": {
     "data": {
@@ -290,5 +291,9 @@
       "checkedAt": "2026-11-23T19:45:17.011729+00:00"
     },
     "retryAt": "2026-11-24T19:45:17.011729+00:00"
+  },
+  "spidermanbrandnewdayvo:2026": {
+    "data": {},
+    "retryAt": "2026-11-25T04:35:01.124691+00:00"
   }
 }
