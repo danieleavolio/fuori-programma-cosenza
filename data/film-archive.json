@@ -144,10 +144,10 @@
     "hash": "ca6ab5855b488988"
   },
   "dio-ride-2026": {
-    "id": "18",
+    "id": "19",
     "title": "Dio Ride",
     "year": "2026",
-    "poster": "https://cdn.cinemagarden.net/DIO%20RIDE.jpg",
+    "poster": "https://cdn.cinemagarden.net/dio%20ride.jpg",
     "director": "Giovanni Veronesi",
     "duration": "1h 54m",
     "genres": [
@@ -162,8 +162,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "d7a2ba7b8f281a32"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "480a4d94880a1a19"
   },
   "dio-ride-3": {
     "id": "3",
@@ -241,7 +241,7 @@
     "hash": "5a70974701b34f2b"
   },
   "dune-parte-tre-2026": {
-    "id": "13",
+    "id": "14",
     "title": "Dune - Parte Tre",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
@@ -256,8 +256,8 @@
       "andromeda-river"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-23T19:45:37.000Z",
-    "hash": "28e8528307c4b0d9",
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "8c5e1a76a3012dc4",
     "duration": "2h 20m"
   },
   "dune-parte-tre-anteprima-17": {
@@ -273,6 +273,19 @@
     "firstSeenAt": "2026-11-04T15:11:37.000Z",
     "changedAt": "2026-11-04T15:39:52.000Z",
     "hash": "43ad7ae5e522a8fc"
+  },
+  "e-andata-cosi-20": {
+    "id": "20",
+    "title": "E' Andata Cosi'",
+    "poster": "https://cdn.cinemagarden.net/E",
+    "firstDate": "2026-11-26",
+    "lastDate": "2026-11-28",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-24T19:18:21.672Z",
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "b568cf305670ceec"
   },
   "fast-furious-25th-anniversary-10": {
     "id": "10",
@@ -332,7 +345,7 @@
     "hash": "b5a94e0711cc5dc3"
   },
   "fatherland-2026": {
-    "id": "14",
+    "id": "15",
     "title": "Fatherland",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
@@ -348,8 +361,8 @@
       "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-19T22:52:59.000Z",
-    "changedAt": "2026-11-23T19:45:37.000Z",
-    "hash": "361d7cbe3c706924"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "7501f493294943f1"
   },
   "george-michael-the-faith-tour-10": {
     "id": "10",
@@ -465,7 +478,7 @@
     "duration": "2h 15m"
   },
   "hexe-il-regno-delle-streghe-2026": {
-    "id": "10",
+    "id": "11",
     "title": "Hexe: Il Regno delle Streghe",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95592/standard_ebb0c6ff-debe-4e7e-b155-4c43680cc733.jpg",
@@ -480,14 +493,15 @@
     ],
     "synopsis": "Billie Doe, un'adolescente impulsiva e non convenzionale, scopre di avere abilità magiche che la portano dalla periferia a Hexe, un regno di streghe. Con la cauta madre Alice indaga sui segreti di famiglia legati al mondo delle streghe.",
     "firstDate": "2026-11-26",
-    "lastDate": "2026-11-29",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river",
-      "citrigno"
+      "citrigno",
+      "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "4140ef87f0dc79e4"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "2b5e80298438e481"
   },
   "hope-13": {
     "id": "13",
@@ -568,7 +582,7 @@
     ],
     "synopsis": "Ventiquattro anni prima delle vicende di Katniss Everdeen, il giovane Haymitch Abernathy viene scelto come tributo del Distretto 12 per i cinquantesimi Hunger Games, la seconda Edizione della Memoria. Nell’arena dovrà lottare per sopravvivere contro avversari e un sistema spietato.",
     "firstDate": "2026-11-19",
-    "lastDate": "2026-12-01",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river",
       "cinema-teatro-italia",
@@ -576,8 +590,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "9ad6349ca3f9e9c0"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "6a42c235eb353442"
   },
   "ice-cream-man-11": {
     "id": "11",
@@ -611,7 +625,7 @@
     "hash": "a552915aaebb6c86"
   },
   "il-fuoco-che-ti-porti-dentro-2026": {
-    "id": "7",
+    "id": "5",
     "title": "Il Fuoco Che Ti Porti Dentro",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
@@ -622,14 +636,14 @@
     ],
     "synopsis": "LEI ARRIVA PER NATALE E CIÒ CHE DOVREBBE ESSERE UN INCONTRO FAMILIARE DIVENTA RAPIDAMENTE UN CAMPO DI BATTAGLIA EMOTIVO, COMICO E FEROCE.",
     "firstDate": "2026-11-19",
-    "lastDate": "2026-11-29",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river",
       "citrigno"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "4ee7bd6cbf9dfe0a"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "523c666839536677"
   },
   "il-gatto-col-cappello-11": {
     "id": "11",
@@ -664,7 +678,7 @@
     "hash": "6da1344e155ae4fe"
   },
   "il-gatto-col-cappello-2026": {
-    "id": "5",
+    "id": "8",
     "title": "Il Gatto col Cappello",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
@@ -686,8 +700,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "b145e82a2e56f19d"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "447ffbbf5dcc5cb7"
   },
   "il-gatto-col-cappello-3": {
     "id": "3",
@@ -733,7 +747,7 @@
     "hash": "6d5c785c319ba0bd"
   },
   "il-rumore-delle-cose-nuove-2026": {
-    "id": "6",
+    "id": "4",
     "title": "Il Rumore delle Cose Nuove",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89849/standard_781ef62b-bb64-460e-952f-f681a6176ce4.jpg",
@@ -750,8 +764,8 @@
       "citrigno"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "e5a946f09b0624ce"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "7e215fdea541e148"
   },
   "it-ends-4": {
     "id": "4",
@@ -830,6 +844,28 @@
     "changedAt": "2026-11-04T16:03:26.000Z",
     "hash": "2bcd30e3304c536b"
   },
+  "ken-il-guerriero-il-film-40-anniversario-v-o-1986": {
+    "id": "13",
+    "title": "Ken il Guerriero - Il Film (40° Anniversario) V.O.",
+    "year": "1986",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/96449/standard_f8fa009e-558d-4f08-8861-e3b17423de6b.jpg",
+    "director": "芦田豊雄",
+    "duration": "1h 50m",
+    "genres": [
+      "Animazione",
+      "Fantascienza",
+      "Azione"
+    ],
+    "synopsis": "Dopo una guerra nucleare che ha trasformato la Terra in un immenso deserto senza vita, il mondo è piombato nel caos e nella violenza. I maestri di Hokuto e di Nanto, due potenti scuole di arti marziali, si fronteggiano fra loro. Kenshiro, legittimo successore della scuola di Hokuto, va in cerca dell'amata Julia che è stata rapita da Shin di Nanto; ma deve anche fronteggiare l'ambizione di Raoul, suo fratello adottivo, che intende dominare il mondo con la forza.",
+    "firstDate": "2026-11-30",
+    "lastDate": "2026-12-02",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-24T19:18:21.672Z",
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "d21664807ab3330c"
+  },
   "kontinental-25-13": {
     "id": "13",
     "title": "Kontinental '25",
@@ -904,7 +940,7 @@
     "hash": "263835073f2c5b5a"
   },
   "l-essere-amato-el-ser-querido-2026": {
-    "id": "16",
+    "id": "17",
     "title": "L'Essere Amato (El Ser Querido)",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111643/standard_a62c8167-f3d6-49cf-b896-242613ea6d39.jpg",
@@ -920,11 +956,11 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "ef420df466d11087"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "32ac70c2cd7651b1"
   },
   "la-notte-delle-fragole-2026": {
-    "id": "11",
+    "id": "10",
     "title": "La Notte delle Fragole",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93908/standard_3b18afca-33f0-45ee-8c3e-ab3e1da24778.jpg",
@@ -935,14 +971,15 @@
     ],
     "synopsis": "Valentino (Valentino Picone) ha una vita perfettamente organizzata, accanto alla moglie Elena (Anna Foglietta) e a Carolina (Giovanna Rosace), la figlia adolescente di lei. Il suo equilibrio viene però stravolto dall’arrivo di Salvo (Salvo Ficarra), ex marito di Elena e padre di Carolina, un uomo impulsivo, disordinato e imprevedibile. Dopo una lite con la compagna Tania (Giulia Fiume), Salvo chiede ospitalità per una sola notte, ma finisce per stabilirsi in casa, scatenando una serie di equivoci, bugie e situazioni esilaranti. L’arrivo di Francesca (Vittoria Puccini), la sua nuova fiamma, complica ulteriormente la situazione, mettendo a dura prova i già fragili equilibri familiari. Tra convivenze impossibili, amori inattesi e seconde possibilità, i protagonisti scopriranno che la vita, soprattutto in amore, raramente segue i piani prestabiliti.",
     "firstDate": "2026-11-26",
-    "lastDate": "2026-11-29",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river",
-      "citrigno"
+      "citrigno",
+      "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "5cdcbce5ef7f0c9f"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "0863c3b6933fe921"
   },
   "la-storia-infinita-die-unendliche-geschichte-ried-15": {
     "id": "15",
@@ -997,7 +1034,7 @@
     "hash": "0ad5605aa69c699c"
   },
   "look-back-2026": {
-    "id": "15",
+    "id": "16",
     "title": "Look Back",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
@@ -1008,13 +1045,13 @@
     ],
     "synopsis": "Fujino, adolescente determinata e piena di talento, sogna di diventare una mangaka. Kyomoto, schiva e solitaria, vive quasi sempre chiusa nella sua stanza, dedicando ogni istante al disegno. Unite dalla stessa passione, le due ragazze, cresciute in una piccola città, inseguono per tredici anni il sogno di diventare autrici di manga.",
     "firstDate": "2026-11-19",
-    "lastDate": "2026-12-01",
+    "lastDate": "2026-12-02",
     "venues": [
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "28b95c3ce115348b"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "e4c1e6f7e7f8a3ad"
   },
   "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
     "id": "12",
@@ -1028,14 +1065,14 @@
     ],
     "synopsis": "IL PRIMO DOCUFILM DEDICATO A JOVANOTTI, UN ARTISTA CHE HA SAPUTO ATTRAVERSARE EPOCHE E GENERAZIONI SENZA MAI SMETTERE DI REINVENTARSI.",
     "firstDate": "2026-11-26",
-    "lastDate": "2026-12-01",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river",
       "unical"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "8de64b86bc192342"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "b9fedc0d3b7dc405"
   },
   "ragione-e-sentimento-18": {
     "id": "18",
@@ -1095,7 +1132,7 @@
     "hash": "6fc28b222d98a8ce"
   },
   "scrooge-e-gli-spiriti-del-natale-2026": {
-    "id": "4",
+    "id": "6",
     "title": "Scrooge e gli Spiriti del Natale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
@@ -1107,15 +1144,15 @@
     ],
     "synopsis": "UN'EMOZIONANTE STORIA DI FANTASMI AMBIENTATA NELLA LONDRA DI DICKENS, CHE SEGUE IL VIAGGIO SOPRANNATURALE DI UN UOMO PER AFFRONTARE IL SUO PASSATO, PRESENTE E FUTURO MENTRE LOTTA PER UNA SECONDA POSSI",
     "firstDate": "2026-11-12",
-    "lastDate": "2026-11-29",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river",
       "citrigno",
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "8a403839ae52a608"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "5d107bf2e2ff4908"
   },
   "se-domani-non-torno-12": {
     "id": "12",
@@ -1149,7 +1186,7 @@
     "hash": "c1a2ac5608ed21dd"
   },
   "se-domani-non-torno-2026": {
-    "id": "8",
+    "id": "9",
     "title": "Se Domani Non Torno",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_6173535a-3620-4493-b598-af273220de43.jpeg",
@@ -1160,7 +1197,7 @@
     ],
     "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
     "firstDate": "2026-11-05",
-    "lastDate": "2026-11-25",
+    "lastDate": "2026-11-26",
     "venues": [
       "andromeda-river",
       "citrigno",
@@ -1168,8 +1205,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "c1ec05c0065a808e"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "fdc5e25778973d1b"
   },
   "se-domani-non-torno-4": {
     "id": "4",
@@ -1274,7 +1311,7 @@
     "hash": "3bdae79a11b59a04"
   },
   "spider-man-brand-new-day-v-o-2026": {
-    "id": "17",
+    "id": "18",
     "title": "Spider-Man: Brand New Day - V. O.",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
@@ -1290,8 +1327,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-24T04:35:28.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "b4b91146029dadb2"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "5f550776b5c8d236"
   },
   "ti-presento-i-fotter-2026": {
     "id": "2",
@@ -1306,13 +1343,13 @@
     ],
     "synopsis": "Un giovane di nome Henry, figlio di Greg e Pam Focker, si ritrova ad affrontare il caos familiare quando decide di sposare una donna volitiva che sembra essere completamente diversa dalla sua fidanzata ideale.",
     "firstDate": "2026-11-26",
-    "lastDate": "2026-11-29",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-23T19:45:37.000Z",
-    "hash": "d9e05ef88b7ed026"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "36f66bb6d84cf92d"
   },
   "un-tranquillo-funerale-di-famiglia-2026": {
     "id": "9",
@@ -1353,7 +1390,7 @@
     "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
   },
   "un-weekend-artificiale-2026": {
-    "id": "9",
+    "id": "7",
     "title": "Un Weekend Artificiale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90344/standard_74acad47-c983-4eeb-97e2-1c881eedf2e4.jpeg",
@@ -1370,8 +1407,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-24T04:35:28.000Z",
-    "hash": "eb505844c244b8d9"
+    "changedAt": "2026-11-24T19:18:21.672Z",
+    "hash": "fc54e245f4f6045e"
   },
   "wild-horse-nine-14": {
     "id": "14",
