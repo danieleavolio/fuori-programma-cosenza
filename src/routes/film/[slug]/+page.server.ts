@@ -1,6 +1,6 @@
-import { error } from '@sveltejs/kit';
-import { breadcrumb, dateISO, dateTimeISO, dateLabel, filmPath, movies, showUrl, venues, venueDetails } from '../../../lib/server/data';
-import { ogForFilm } from '../../../lib/server/og';
+import { error, redirect } from '@sveltejs/kit';
+import { breadcrumb, dateISO, dateTimeISO, dateLabel, filmPath, isoDateLabel, lookupArchive, movies, romeDateISO, showUrl, venues, venueDetails } from '../../../lib/server/data';
+import { ogDefault, ogForFilm } from '../../../lib/server/og';
 import { siteOrigin } from '../../../lib/server/site';
 import type { PageServerLoad } from './$types';
 
@@ -12,7 +12,36 @@ function durationMinutes(value = ''): number {
 
 export const load: PageServerLoad = ({ params }) => {
   const movie = movies.find((item) => filmPath(item) === `/film/${params.slug}`);
-  if (!movie) error(404, 'Film non trovato');
+  if (!movie) {
+    // Film uscito dalle sale: la scheda resta raggiungibile (200) per chi arriva
+    // da un link condiviso o dai risultati di ricerca; dopo sei mesi 410.
+    const archived = lookupArchive(params.slug);
+    if (archived.kind === 'redirect') redirect(301, archived.path);
+    if (archived.kind === 'gone') error(410, 'Film non più in programmazione');
+    if (archived.kind === 'missing') error(404, 'Film non trovato');
+    const { film } = archived;
+    const canonical = `${siteOrigin}/film/${params.slug}`;
+    const today = romeDateISO();
+    const ended = Boolean(film.lastDate && film.lastDate < today);
+    return {
+      ended: {
+        film, ended,
+        period: ended && film.firstDate
+          ? film.firstDate === film.lastDate
+            ? `Proiettato il ${isoDateLabel(film.firstDate, { day: 'numeric', month: 'long', year: 'numeric' })}`
+            : `In sala dal ${isoDateLabel(film.firstDate)} al ${isoDateLabel(film.lastDate, { day: 'numeric', month: 'long', year: 'numeric' })}`
+          : '',
+        venues: film.venues.map((id) => venues.find((item) => item.id === id)).filter((item) => item !== undefined)
+      },
+      canonical,
+      crumb: breadcrumb([
+        { name: 'Home', path: '/' },
+        { name: 'Oggi al cinema', path: '/programmazione/oggi' },
+        { name: film.title }
+      ], siteOrigin),
+      ogImage: `${siteOrigin}${ogDefault}`
+    };
+  }
 
   const screenings = movie.shows.flatMap((group) => {
     const venue = venues.find((item) => item.id === group.venue);
@@ -43,6 +72,7 @@ export const load: PageServerLoad = ({ params }) => {
 
   const canonical = `${siteOrigin}${filmPath(movie)}`;
   return {
+    ended: null,
     movie, screenings, canonical,
     crumb: breadcrumb([
       { name: 'Home', path: '/' },

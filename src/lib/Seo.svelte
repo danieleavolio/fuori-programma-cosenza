@@ -1,11 +1,12 @@
 <script lang="ts">
-  let { title, description, canonical, image, imageAlt, type = 'website' }: {
+  let { title, description, canonical, image, imageAlt, type = 'website', robots = 'index, follow, max-image-preview:large' }: {
     title: string;
     description: string;
     canonical: string;
     image: string;
     imageAlt: string;
     type?: 'website' | 'video.movie';
+    robots?: string;
   } = $props();
   const imageType = $derived(new URL(image).pathname.endsWith('.png') ? 'image/png' : 'image/jpeg');
 </script>
@@ -13,7 +14,7 @@
 <svelte:head>
   <title>{title} | Fuori programma</title>
   <meta name="description" content={description} />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="robots" content={robots} />
   <link rel="canonical" href={canonical} />
   <meta property="og:type" content={type} />
   <meta property="og:title" content={title} />

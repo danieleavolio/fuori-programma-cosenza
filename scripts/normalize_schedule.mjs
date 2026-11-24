@@ -20,6 +20,37 @@ export function titleToken(value) {
     .trim();
 }
 
+// Le sale pubblicano quasi sempre i titoli in MAIUSCOLO: nei risultati di
+// ricerca e nelle schede si leggono male. Un titolo tutto maiuscolo diventa
+// "Title Case" all'italiana (articoli e preposizioni minuscoli, salvo in testa
+// o dopo ":" / " - " / "("); i titoli già scritti con le minuscole restano.
+// Lo slug non cambia: slugify() lavora sul minuscolo.
+const MINOR_WORDS = new Set([
+  'il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'uno', 'una', 'di', 'a', 'da', 'in', 'con', 'su', 'per', 'tra', 'fra',
+  'e', 'o', 'ed', 'del', 'dello', 'della', 'dei', 'degli', 'delle', 'al', 'allo', 'alla', 'ai', 'agli', 'alle',
+  'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle', 'sul',
+  'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'col', 'coi', 'l', 'd', 'dell', 'nell', 'all', 'sull', 'dall',
+  'of', 'the', 'and', 'an', 'to', 'on', 'at', 'for', 'or', 'vs',
+]);
+const ROMAN = /^(?:II|III|IV|VI|VII|VIII|IX|XI|XII)$/;
+
+export function displayTitle(value) {
+  const title = String(value || '').replace(/\s+/g, ' ').trim();
+  if (!title || /\p{Ll}/u.test(title)) return title;
+  return title.replace(/[\p{L}\p{N}]+/gu, (word, offset) => {
+    const before = title.slice(0, offset);
+    const after = title[offset + word.length] || '';
+    const lower = word.toLocaleLowerCase('it');
+    const capital = lower.charAt(0).toLocaleUpperCase('it') + lower.slice(1);
+    if (ROMAN.test(word)) return word;
+    if (word.length === 1 && after === '.') return word; // sigle come "V. O."
+    const start = !before.trim() || /(?::|\s[-–]|\()\s*$/.test(before);
+    if (/['’]$/.test(before)) return word.length === 1 ? lower : capital; // L'Alba, ma Lady's
+    if (start) return capital;
+    return MINOR_WORDS.has(lower) ? lower : capital;
+  });
+}
+
 const showCount = (movie) => (movie.shows || []).reduce((total, group) => total + (group.shows || []).length, 0);
 
 const yearsCompatible = (left, right) =>
@@ -94,7 +125,14 @@ if (isMain) {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   const file = process.argv[2] ? path.resolve(process.argv[2]) : path.join(root, 'data/schedule.json');
   const original = JSON.parse(await readFile(file, 'utf8'));
-  const normalized = normalizeSchedule(original);
+  const merged = normalizeSchedule(original);
+  const normalized = {
+    ...merged,
+    movies: merged.movies.map((movie) => ({ ...movie, title: displayTitle(movie.title) })),
+    ...(Array.isArray(merged.comingSoon)
+      ? { comingSoon: merged.comingSoon.map((item) => ({ ...item, title: displayTitle(item.title) })) }
+      : {}),
+  };
   const removed = (original.movies || []).length - normalized.movies.length;
   await writeFile(file, `${JSON.stringify(normalized, null, 2)}\n`);
   const skipped = normalized.movies.filter((movie) => showCount(movie) === 0).length;

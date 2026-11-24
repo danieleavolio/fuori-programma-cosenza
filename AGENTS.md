@@ -60,7 +60,8 @@ Istruzioni operative per chi lavora su **Fuori programma Cosenza**.
    e chiama il deploy hook di Vercel.
 3. La build Vercel esegue, in ordine:
    - `data:pull`: scarica la programmazione pubblicata (solo su Vercel);
-   - `data:normalize`: unisce le schede duplicate;
+   - `data:normalize`: unisce le schede duplicate e porta i titoli MAIUSCOLI in maiuscole/minuscole;
+   - `archive:update`: aggiorna `data/film-archive.json`;
    - `legacy:sync`: copia dati e asset in `static/`;
    - `posters:build`, `icons:build`: prepara le locandine ottimizzate e la favicon;
    - `og:build`: genera le immagini social;
@@ -90,6 +91,23 @@ delle locandine della sala già abbinate manualmente all'edizione corretta.
 Gli slug dei film sono quelli di `filmPath()` e includono l'anno (es. `dio-ride-2026`).
 Non presentare la fine stimata come certa e non inventare durate: senza durata si usa
 `FALLBACK_DURATION` e la pagina lo dichiara.
+
+### Ultimo giorno
+
+Il badge «Ultimo giorno» nelle card della home è calcolato da `lastDayMovieIds()`,
+duplicata in `app.js` e `src/lib/server/legacy-cards.ts`: cambiarle insieme.
+Un film è all'ultimo giorno solo se ha spettacoli oggi, nessuna data dopo oggi
+e **ogni sala che lo proietta oggi ha già pubblicato gli orari di domani**.
+Non semplificarlo in «ultima data pubblicata = oggi»: molte sale pubblicano
+un giorno alla volta e il badge comparirebbe su quasi tutti i film.
+
+### Archivio dei film
+
+`data/film-archive.json` (chiave = slug della scheda) conserva i film già visti
+sul sito: lo aggiorna `scripts/update_archive.mjs` nel workflow del bot e in build
+(`archive:update`). Serve alle schede «Non più in sala» e al `lastmod` della
+sitemap (`changedAt`). Non cancellare voci a mano; per ricostruirlo dalla storia
+git c'è `node scripts/backfill_archive.mjs`. Dettagli in SEO.md.
 
 ### Titoli duplicati
 

@@ -1,5 +1,6 @@
 import schedule from '../../../data/schedule.json';
 import venueInfo from '../../../data/venues-info.json';
+import filmArchive from '../../../data/film-archive.json';
 
 export type Show = {
   time: string;
@@ -76,6 +77,58 @@ export function slugify(value: string): string {
 
 export function filmPath(movie: Movie): string {
   return `/film/${slugify(movie.title)}-${movie.year || movie.id}`;
+}
+
+/** Scheda dell'archivio (scripts/update_archive.mjs): chiave = slug della pagina film. */
+export type ArchivedFilm = {
+  id?: string;
+  title: string;
+  year?: string;
+  poster?: string;
+  director?: string;
+  duration?: string;
+  genres?: string[];
+  synopsis?: string;
+  firstDate: string;
+  lastDate: string;
+  venues: string[];
+  firstSeenAt: string;
+  changedAt: string;
+};
+export const archive = filmArchive as unknown as Record<string, ArchivedFilm>;
+
+/** Data dell'ultima modifica reale di una scheda film, per la sitemap. */
+export function filmChangedAt(movie: Movie): string {
+  return archive[filmPath(movie).slice('/film/'.length)]?.changedAt || updatedAt;
+}
+
+export type ArchiveLookup =
+  | { kind: 'redirect'; path: string }
+  | { kind: 'ended'; film: ArchivedFilm; slug: string }
+  | { kind: 'gone' }
+  | { kind: 'missing' };
+
+/** Dopo sei mesi una scheda chiusa risponde 410: il film non tornerà. */
+export const ARCHIVE_GONE_DAYS = 183;
+
+/**
+ * Cosa fare con uno slug che non è più in programmazione.
+ * Gli slug vecchi senza anno (es. dio-ride-3) rimandano alla scheda attuale
+ * dello stesso film o a quella con l'anno; i film davvero usciti dalle sale
+ * restano raggiungibili con «Non più in sala».
+ */
+export function lookupArchive(slug: string, today = romeDateISO()): ArchiveLookup {
+  const film = archive[slug];
+  if (!film) return { kind: 'missing' };
+  const titleSlug = slugify(film.title);
+  const current = movies.find((movie) => slugify(movie.title) === titleSlug && (!film.year || !movie.year || film.year === movie.year));
+  if (current) return { kind: 'redirect', path: filmPath(current) };
+  if (!film.year) {
+    const canonical = Object.entries(archive).find(([key, item]) => key !== slug && item.year && slugify(item.title) === titleSlug);
+    if (canonical) return { kind: 'redirect', path: `/film/${canonical[0]}` };
+  }
+  if (film.lastDate && daysUntil(film.lastDate, today) < -ARCHIVE_GONE_DAYS) return { kind: 'gone' };
+  return { kind: 'ended', film, slug };
 }
 
 export function cinemaPath(venue: Venue): string {

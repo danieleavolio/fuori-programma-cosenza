@@ -196,9 +196,40 @@ if (marathonDay && marathonFilms.length >= 2) {
   const query = new URLSearchParams([['giorno', marathonDay], ['film', marathonFilms[0]], ['film', marathonFilms[1]], ['viaggio', '15']]);
   const planned = await get(`/maratona?${query}`);
   assert.equal(planned.response.status, 200);
-  assert.match(planned.text, /Puoi vederli tutti|non ci stanno|non si incastrano/);
+  assert.match(planned.text, /per vederli tutti|non si incastrano|Al massimo \d+ su \d+/);
   assert.match(planned.text, /<link rel="canonical" href="[^"?]*\/maratona"/);
 }
+
+// Schede dei film usciti dalle sale (data/film-archive.json): 200 «Non più in sala»
+// in noindex, slug vecchi senza anno in 301 verso la scheda attuale, 404 per il resto.
+const archive = JSON.parse(await readFile(new URL('../data/film-archive.json', import.meta.url), 'utf8'));
+const scheduleNow = JSON.parse(await readFile(new URL('../data/schedule.json', import.meta.url), 'utf8'));
+const slugOf = (value) => String(value).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const currentTitles = new Set(scheduleNow.movies.map((movie) => slugOf(movie.title)));
+const archivedEntries = Object.entries(archive);
+const endedSlug = archivedEntries.find(([, film]) => film.year && !currentTitles.has(slugOf(film.title))
+  && Date.parse(`${film.lastDate}T12:00:00Z`) > Date.now() - 150 * 86_400_000)?.[0];
+if (endedSlug) {
+  const ended = await get(`/film/${endedSlug}`);
+  assert.equal(ended.response.status, 200, `/film/${endedSlug}`);
+  assert.match(ended.text, /Non più in sala/);
+  assert.match(ended.text, /<meta name="robots" content="noindex, follow"/);
+  assert.match(ended.text, /href="\/programmazione\/oggi"/);
+}
+const movedSlug = archivedEntries.find(([, film]) => !film.year && currentTitles.has(slugOf(film.title)))?.[0];
+if (movedSlug) {
+  const moved = await fetch(new URL(`/film/${movedSlug}`, base), { redirect: 'manual' });
+  assert.equal(moved.status, 301, `/film/${movedSlug}`);
+  assert.match(moved.headers.get('location') || '', /^\/film\/[a-z0-9-]+-\d{4}$/);
+}
+assert.equal((await get('/film/film-che-non-esiste-1999')).response.status, 404);
+const currentFilm = await get(filmSlug);
+assert.match(currentFilm.text, /<title>[^<]+ al cinema a Cosenza: orari e biglietti \| Fuori programma<\/title>/);
+
+const lastmods = [...sitemap.text.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
+assert.ok(lastmods.length > 5 && lastmods.every((value) => !Number.isNaN(Date.parse(value))));
+assert.ok(new Set(lastmods).size > 1, 'lastmod diversi per pagina');
+if (endedSlug) assert.doesNotMatch(sitemap.text, new RegExp(`/film/${endedSlug}<`));
 
 const calendar = await get('/calendario');
 assert.equal(calendar.response.status, 200);

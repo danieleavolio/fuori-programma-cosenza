@@ -8,7 +8,7 @@
   <meta name="google-site-verification" content="pcJ4_jepxpSEoTyEsHGYJ2XLyoelCmPYbdCb5JisBgE" />
   <JsonLd schema={data.schema} />
   {@html `<script>window.__FP_FILM_PATHS__=${JSON.stringify(data.paths).replace(/</g, '\\u003c')};window.__FP_POSTERS__=${JSON.stringify(data.posters).replace(/</g, '\\u003c')}</script>`}
-  <script src="/app.js?v=20261123b" defer></script>
+  <script src="/app.js?v=20261124a" defer></script>
 </svelte:head>
 
 <Seo title={data.title} description="Scopri cosa c’è al cinema oggi a Cosenza, Rende e Zumpano. Confronta film e orari di Andromeda River, Citrigno, Italia Tieri, Garden e Unical." canonical={data.canonical} image={data.ogImage} imageAlt="Fuori programma: film e orari dei cinema a Cosenza, Rende e Zumpano" />

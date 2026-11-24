@@ -14,6 +14,8 @@ if (!process.env.VERCEL && !process.env.FP_PULL_PUBLISHED && !dryRun) {
 const files = [
   { path: 'data/schedule.json', valid: (data) => Array.isArray(data.movies) && data.movies.length > 0 && Array.isArray(data.venues) },
   { path: 'data/venues-info.json', valid: (data) => data && typeof data === 'object' && Object.keys(data).length > 0 },
+  // Archivio dei film passati: lo aggiorna il bot anche quando il push su main non riesce.
+  { path: 'data/film-archive.json', valid: (data) => data && typeof data === 'object' && !Array.isArray(data) && Object.keys(data).length > 0 },
 ];
 
 for (const file of files) {

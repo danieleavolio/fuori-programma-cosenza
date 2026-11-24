@@ -1255,6 +1255,44 @@ function movieProgramming(movie) {
   return [...dates.values()];
 }
 
+/**
+ * Film proiettati oggi per l'ultima volta. Stessa logica di lastDayMovieIds()
+ * in src/lib/server/legacy-cards.ts: tenerle allineate.
+ * Un film è all'ultimo giorno solo se ha spettacoli oggi, nessuna data dopo
+ * oggi e ogni sala che lo proietta oggi ha già pubblicato gli orari di domani
+ * (altrimenti "nessuna data domani" vuol dire solo "non ancora pubblicato").
+ */
+function lastDayMovieIds(movies, now = new Date()) {
+  const today = dateString(now);
+  const next = new Date(now);
+  next.setDate(next.getDate() + 1);
+  const tomorrow = dateString(next);
+  const todayTime = parseDate(today).getTime();
+  const publishedTomorrow = new Set();
+  for (const movie of movies || []) {
+    for (const group of movie.shows || []) {
+      if (group.date === tomorrow && (group.shows || []).length) publishedTomorrow.add(group.venue);
+    }
+  }
+  const ids = new Set();
+  for (const movie of movies || []) {
+    const todayVenues = new Set((movie.shows || [])
+      .filter((group) => group.date === today && (group.shows || []).length)
+      .map((group) => group.venue));
+    if (!todayVenues.size) continue;
+    if (movieProgramming(movie).some((item) => parseDate(item.date).getTime() > todayTime)) continue;
+    if ([...todayVenues].every((venue) => publishedTomorrow.has(venue))) ids.add(movie.id);
+  }
+  return ids;
+}
+
+let lastDayCache = { key: '', ids: new Set() };
+function isLastDay(movie) {
+  const key = `${scheduleData.updatedAt}|${dateString(new Date())}`;
+  if (lastDayCache.key !== key) lastDayCache = { key, ids: lastDayMovieIds(scheduleData.movies) };
+  return lastDayCache.ids.has(movie.id);
+}
+
 function renderPosterLink(movie, { panelId, isExpanded, priority = false }) {
   const poster = posterForMovie(movie);
   const image = poster
@@ -1623,7 +1661,9 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '', pri
   const fullProgramming = movieProgramming(movie).filter((item) => matchesVenue(item.venue));
   const publishedDates = [...new Set(fullProgramming.map((item) => item.date))].sort((a, b) => parseDate(a) - parseDate(b));
   const age = Date.now() - Date.parse(movie.firstSeenAt);
-  const state = movie.releaseDateIT > dateString(new Date()).split('/').reverse().join('-') ? 'Prossimamente'
+  const lastDay = isLastDay(movie);
+  const state = lastDay ? 'Ultimo giorno'
+    : movie.releaseDateIT > dateString(new Date()).split('/').reverse().join('-') ? 'Prossimamente'
     : age >= 0 && age < 7 * 86400000 ? 'Nuovo sul sito' : '';
 
   return `
@@ -1635,7 +1675,7 @@ function movieCardHtml(movie, { venuesMap, shows, programming, dayDate = '', pri
 
         <div class="movie-card-details">
           <div class="movie-title-row">
-            <span class="movie-state">${escapeHtml(state)}</span>
+            <span class="movie-state${lastDay ? ' is-last-day' : ''}">${escapeHtml(state)}</span>
             <h3 class="movie-title" title="${escapeHtml(movie.title)}">${filmHref(movie) ? `<a href="${escapeHtml(filmHref(movie))}">${escapeHtml(movie.title)}</a>` : escapeHtml(movie.title)}</h3>
           </div>
           <div class="badge-wrap card-facts">

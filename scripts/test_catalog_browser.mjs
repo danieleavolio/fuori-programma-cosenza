@@ -83,8 +83,8 @@ try {
         assert.equal(await evaluate('document.querySelectorAll(".movie-grid").length'), 0);
         assert.ok(await evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), `Lista ${pathname} overflow ${width}`);
         await evaluate(`[...document.querySelectorAll('.layout-button')].find(b => b.textContent.trim() === 'Griglia').click()`);
-        await evaluate('new Promise(resolve => requestAnimationFrame(resolve))');
-        assert.ok(await evaluate('document.querySelectorAll(".movie-grid").length > 0'));
+        // Il cambio di layout passa da una view transition: un solo frame non basta.
+        assert.ok(await evaluate(`new Promise(resolve => { const start = performance.now(); const ready = () => { if (document.querySelectorAll('.movie-grid').length) resolve(true); else if (performance.now() - start > 10000) resolve(false); else requestAnimationFrame(ready); }; ready(); })`), `Griglia ${pathname} ${width}`);
       }
       if (pathname === '/prossimamente' && width !== 320) {
         const screenshot = await cdp('Page.captureScreenshot', { format: 'png' });

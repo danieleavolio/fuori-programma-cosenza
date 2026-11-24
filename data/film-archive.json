@@ -1,0 +1,1503 @@
+{
+  "2001-odissea-nello-spazio-1968": {
+    "id": "7",
+    "title": "2001: Odissea nello Spazio",
+    "year": "1968",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92357/standard_12953b05-83f2-4390-b201-5137bfc6a7c0.jpg",
+    "director": "Stanley Kubrick",
+    "genres": [
+      "Avventura",
+      "Fantascienza",
+      "Mistero"
+    ],
+    "synopsis": "Un gigantesco monolite, individuato sulla superficie lunare, trasmette dei messaggi radio in direzione del pianeta Giove. Per seguire il fascio di onde elettromagnetiche viene organizzata una spedizione che ben presto però si trova in balia del computer che governa l'astronave. La lotta avrà un solo vincitore.",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "andromeda-river",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-11T22:26:35.000Z",
+    "changedAt": "2026-11-18T16:53:32.000Z",
+    "hash": "246de5684542e802",
+    "duration": "2h 21m"
+  },
+  "2001-odissea-nello-spazio-2001-a-space-odyssey-ried-1968": {
+    "id": "16",
+    "title": "2001: Odissea nello Spazio (2001 a Space Odyssey) (Ried.)",
+    "year": "1968",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/109102/standard_5e6d981e-e32a-445c-b240-20a49630295e.jpg",
+    "director": "Stanley Kubrick",
+    "genres": [
+      "Avventura",
+      "Fantascienza",
+      "Mistero"
+    ],
+    "synopsis": "Un gigantesco monolite, individuato sulla superficie lunare, trasmette dei messaggi radio in direzione del pianeta Giove. Per seguire il fascio di onde elettromagnetiche viene organizzata una spedizione che ben presto però si trova in balia del computer che governa l'astronave. La lotta avrà un solo vincitore.",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-10T11:11:32.000Z",
+    "changedAt": "2026-11-10T11:11:32.000Z",
+    "hash": "cc29a056e6cc4c90"
+  },
+  "avengers-doomsday-1": {
+    "id": "1",
+    "title": "Avengers: Doomsday",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/81401/standard_6d4e3fc6-2371-43e3-9942-b9e5c1a2fa80.jpeg",
+    "firstDate": "2026-12-16",
+    "lastDate": "2026-12-20",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "0644b5e0bae41def",
+    "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato."
+  },
+  "avengers-doomsday-2026": {
+    "id": "1",
+    "title": "Avengers: Doomsday",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/81401/standard_6d4e3fc6-2371-43e3-9942-b9e5c1a2fa80.jpeg",
+    "director": "Joe Russo, Anthony Russo",
+    "genres": [
+      "Avventura",
+      "Fantascienza",
+      "Azione"
+    ],
+    "synopsis": "Gli universi si scontrano e la Saga del Multiverso inizia il suo capitolo finale. Gli amati eroi di tre universi distinti si troveranno su una rotta di collisione mortale e dovranno affrontare una minaccia esistenziale diversa da qualsiasi altra abbiano mai incontrato.",
+    "firstDate": "2026-12-16",
+    "lastDate": "2026-12-20",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-10T11:11:32.000Z",
+    "hash": "a6bffc88f7e36616"
+  },
+  "clayface-3": {
+    "id": "3",
+    "title": "Clayface",
+    "poster": "https://cdn.cinemagarden.net/Clayface.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "706353d113eb1f2f"
+  },
+  "clayface-7": {
+    "id": "7",
+    "title": "Clayface",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/87572/standard_8629648c-189d-4d4b-8514-0f5f4b413b9f.jpg",
+    "duration": "1h 45m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T17:25:01.000Z",
+    "hash": "921b29bc179aaa22"
+  },
+  "clayface-9": {
+    "id": "9",
+    "title": "Clayface",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/87572/standard_8629648c-189d-4d4b-8514-0f5f4b413b9f.jpg",
+    "duration": "1H45’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden",
+      "unical",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T16:03:26.000Z",
+    "hash": "6ef6d3c600f145e7"
+  },
+  "dio-ride-2": {
+    "id": "2",
+    "title": "Dio Ride",
+    "poster": "https://cdn.cinemagarden.net/DIO%20RIDE.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-06",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "ca6ab5855b488988"
+  },
+  "dio-ride-2026": {
+    "id": "18",
+    "title": "Dio Ride",
+    "year": "2026",
+    "poster": "https://cdn.cinemagarden.net/DIO%20RIDE.jpg",
+    "director": "Giovanni Veronesi",
+    "duration": "1h 54m",
+    "genres": [
+      "Commedia"
+    ],
+    "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-25",
+    "venues": [
+      "andromeda-river",
+      "cinema-teatro-italia",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "d7a2ba7b8f281a32"
+  },
+  "dio-ride-3": {
+    "id": "3",
+    "title": "Dio Ride",
+    "poster": "https://cdn.cinemagarden.net/DIO%20RIDE.jpg",
+    "duration": "1H54’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden",
+      "unical",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-05T02:58:51.000Z",
+    "hash": "081638b7660c7499"
+  },
+  "dio-ride-4": {
+    "id": "4",
+    "title": "Dio Ride",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88991/standard_16e4e33a-dbe0-49a8-941c-d40cbae05dab.jpg",
+    "duration": "1h 54m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "719746cc37c6422a"
+  },
+  "dio-ride-6": {
+    "id": "6",
+    "title": "Dio Ride",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88991/standard_16e4e33a-dbe0-49a8-941c-d40cbae05dab.jpg",
+    "duration": "1h 54m",
+    "synopsis": "AMBIENTATO NEL CUORE DEL SEICENTO E LIBERAMENTE ISPIRATO A FATTI REALMENTE ACCADEDUTI, IL RACCONTO METTE AL CENTRO LA LIBERTÀ E IL RAPPORTO TRA L'UOMO E IL POTERE.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T09:07:04.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "87b99e53651d4fc2"
+  },
+  "dune-parte-tre-10": {
+    "id": "10",
+    "title": "Dune - Parte Tre",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
+    "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO",
+    "firstDate": "2026-12-15",
+    "lastDate": "2026-12-15",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-05T09:07:04.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "789246059eca5c9c"
+  },
+  "dune-parte-tre-16": {
+    "id": "16",
+    "title": "Dune - Parte Tre",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
+    "firstDate": "2026-12-15",
+    "lastDate": "2026-12-15",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "5a70974701b34f2b"
+  },
+  "dune-parte-tre-2026": {
+    "id": "13",
+    "title": "Dune - Parte Tre",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
+    "director": "D. Villeneuve",
+    "genres": [
+      "Fantascienza"
+    ],
+    "synopsis": "AMBIENTATO QUASI DUE DECENNI DOPO CHE PAUL ATREIDES HA PRESO IL CONTROLLO DELL’IMPERO. ORA UN IMPERATORE SPIETATO, PAUL DEVE AFFRONTARE LE CONSEGUENZE DEL SUO REGNO MENTRE VECCHI ALLEATI FANNO RITORNO",
+    "firstDate": "2026-12-15",
+    "lastDate": "2026-12-15",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-23T19:45:37.000Z",
+    "hash": "28e8528307c4b0d9",
+    "duration": "2h 20m"
+  },
+  "dune-parte-tre-anteprima-17": {
+    "id": "17",
+    "title": "Dune – Parte Tre #Anteprima",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
+    "firstDate": "2026-12-15",
+    "lastDate": "2026-12-15",
+    "venues": [
+      "andromeda-river",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T15:39:52.000Z",
+    "hash": "43ad7ae5e522a8fc"
+  },
+  "fast-furious-25th-anniversary-10": {
+    "id": "10",
+    "title": "Fast & Furious – 25th Anniversary",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86582/standard_85e9f6e5-cd7f-4187-b988-bc8dcd1f66fd.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T15:39:52.000Z",
+    "hash": "8f0f09cab13b21df"
+  },
+  "fast-furious-6": {
+    "id": "6",
+    "title": "Fast & Furious",
+    "poster": "https://cdn.cinemagarden.net/fast1.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "ebe8bf4c0f8f7f47"
+  },
+  "fast-furious-8": {
+    "id": "8",
+    "title": "Fast & Furious",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86582/standard_85e9f6e5-cd7f-4187-b988-bc8dcd1f66fd.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "1abc477e5858110c"
+  },
+  "fatherland-10": {
+    "id": "10",
+    "title": "Fatherland",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
+    "director": "P. Pawlikowski",
+    "duration": "1h 22m",
+    "synopsis": "LO SCRITTORE PREMIO NOBEL THOMAS MANN (HANNS ZISCHLER) E SUA FIGLIA ERIKA (SANDRA HÜLLER), ATTRICE, SCRITTRICE E PILOTA DI RALLY, NELL’ESTATE DEL 1949, AL CULMINE DELLA GUERRA FREDDA, A BORDO DI UNA",
+    "firstDate": "2026-11-24",
+    "lastDate": "2026-11-24",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-19T12:26:14.000Z",
+    "changedAt": "2026-11-19T12:26:14.000Z",
+    "hash": "b5a94e0711cc5dc3"
+  },
+  "fatherland-2026": {
+    "id": "14",
+    "title": "Fatherland",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
+    "director": "P. Pawlikowski",
+    "duration": "1h 22m",
+    "genres": [
+      "Drammatico"
+    ],
+    "synopsis": "LO SCRITTORE PREMIO NOBEL THOMAS MANN (HANNS ZISCHLER) E SUA FIGLIA ERIKA (SANDRA HÜLLER), ATTRICE, SCRITTRICE E PILOTA DI RALLY, NELL’ESTATE DEL 1949, AL CULMINE DELLA GUERRA FREDDA, A BORDO DI UNA",
+    "firstDate": "2026-11-24",
+    "lastDate": "2026-11-24",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-19T22:52:59.000Z",
+    "changedAt": "2026-11-23T19:45:37.000Z",
+    "hash": "361d7cbe3c706924"
+  },
+  "george-michael-the-faith-tour-10": {
+    "id": "10",
+    "title": "George Michael - The Faith Tour",
+    "poster": "https://cdn.cinemagarden.net/george%20mic.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-10",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "034bdcd2f79c0e80"
+  },
+  "george-michael-the-faith-tour-15": {
+    "id": "15",
+    "title": "George Michael: The Faith Tour",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/83218/standard_3c5705d7-f46c-4a54-94a0-f1f865056603.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "92856c608bac6b47"
+  },
+  "george-michael-the-faith-tour-2026": {
+    "id": "14",
+    "title": "George Michael - The Faith Tour",
+    "year": "2026",
+    "poster": "https://cdn.cinemagarden.net/george%20mic.jpg",
+    "director": "Andy Morahan, David Austin",
+    "genres": [
+      "Documentario",
+      "Musica"
+    ],
+    "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-11T22:26:35.000Z",
+    "hash": "bb276c212c18b3b0"
+  },
+  "george-michael-the-faith-tour-6": {
+    "id": "6",
+    "title": "George Michael - The Faith Tour",
+    "poster": "https://cdn.cinemagarden.net/george%20mic.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T02:58:51.000Z",
+    "changedAt": "2026-11-05T02:58:51.000Z",
+    "hash": "ae51b376943c8fe3"
+  },
+  "george-michael-the-faith-tour-9": {
+    "id": "9",
+    "title": "George Michael: The Faith Tour",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/83218/standard_3c5705d7-f46c-4a54-94a0-f1f865056603.jpg",
+    "synopsis": "ILM-CONCERTO RESTAURATO CHE RIPROPONE LE ESIBIZIONI DEL \"FAITH TOUR\" DI GEORGE MICHAEL AL PALAIS OMNISPORTS DE PARIS-BERCY DEL 1988, RIPRESE SU PELLICOLA DA 35 MM NEL CORSO DI DUE SERATE DELLA TAPPA E",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T09:07:04.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "6fe9c1dcc4f74d7a"
+  },
+  "george-michael-the-faith-tour-v-o-sott-16": {
+    "id": "16",
+    "title": "George Michael: The Faith Tour V.O. Sott.",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/83218/standard_3c5705d7-f46c-4a54-94a0-f1f865056603.jpg",
+    "firstDate": "2026-11-06",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T15:39:52.000Z",
+    "hash": "1d74e5c80275e186"
+  },
+  "godzilla-minus-zero-2026": {
+    "id": "2",
+    "title": "Godzilla Minus Zero",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89882/standard_789ba83b-3e30-49fe-bb0d-437285f18220.jpg",
+    "director": "Takashi Yamazaki",
+    "genres": [
+      "Fantascienza",
+      "Horror",
+      "Azione"
+    ],
+    "synopsis": "La vicenda è ambientata nel 1949, in un Giappone che sta ancora faticosamente cercando di ricostruirsi dopo i traumi della Seconda Guerra Mondiale e dopo il precedente passaggio del mostro. La ricomparsa di Godzilla costringerà i due protagonisti, l’ex pilota Kōichi (interpretato da Ryunosuke Kamiki) e Noriko (Minami Hamabe), a una nuova e disperata lotta per la sopravvivenza.",
+    "firstDate": "2026-11-12",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "andromeda-river",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-10T11:11:32.000Z",
+    "changedAt": "2026-11-18T16:53:32.000Z",
+    "hash": "3f2c4ad4df998d0b",
+    "duration": "2h 15m"
+  },
+  "hexe-il-regno-delle-streghe-2026": {
+    "id": "10",
+    "title": "Hexe: Il Regno delle Streghe",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95592/standard_ebb0c6ff-debe-4e7e-b155-4c43680cc733.jpg",
+    "director": "Jason Hand, ฝน วีระสุนทร",
+    "duration": "1h 49m",
+    "genres": [
+      "Animazione",
+      "Avventura",
+      "Commedia",
+      "Fantasy",
+      "Famiglia"
+    ],
+    "synopsis": "Billie Doe, un'adolescente impulsiva e non convenzionale, scopre di avere abilità magiche che la portano dalla periferia a Hexe, un regno di streghe. Con la cauta madre Alice indaga sui segreti di famiglia legati al mondo delle streghe.",
+    "firstDate": "2026-11-26",
+    "lastDate": "2026-11-29",
+    "venues": [
+      "andromeda-river",
+      "citrigno"
+    ],
+    "firstSeenAt": "2026-11-23T19:45:37.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "4140ef87f0dc79e4"
+  },
+  "hope-13": {
+    "id": "13",
+    "title": "Hope",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88925/standard_0da4a5df-4290-42a6-9e4f-7c3247aeffac.jpg",
+    "duration": "2h 45m",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "24105909da864a6f"
+  },
+  "hope-2026": {
+    "id": "7",
+    "title": "Hope",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88925/standard_0da4a5df-4290-42a6-9e4f-7c3247aeffac.jpg",
+    "director": "Na Hong Jin.",
+    "duration": "2h 45m",
+    "genres": [
+      "Fantascienza",
+      "Mistero",
+      "Azione"
+    ],
+    "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-16T02:58:14.000Z",
+    "hash": "1afd0948efea03e1"
+  },
+  "hope-2h45-14": {
+    "id": "14",
+    "title": "Hope ( 2h45')",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88925/standard_0da4a5df-4290-42a6-9e4f-7c3247aeffac.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T15:39:52.000Z",
+    "hash": "59bac74dbe70e388"
+  },
+  "hope-7": {
+    "id": "7",
+    "title": "Hope",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88925/standard_0da4a5df-4290-42a6-9e4f-7c3247aeffac.jpg",
+    "duration": "2h 45m",
+    "synopsis": "I rinforzi sono stati richiamati per fronteggiare i devastanti incendi boschivi e ogni comunicazione con l’esterno è stata interrotta. Nel piccolo posto di polizia di Hope, il comandante Bum-seok e l’agente Sung-ae lottano per proteggere un villaggio popolato quasi esclusivamente da anziani. Nel frattempo, tra le montagne, Sung-ki e gli abitanti del luogo partono sulle tracce della misteriosa creatura, ma la battuta di caccia si trasforma presto in un incubo e diventano loro stessi prede.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-05T09:07:04.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "925e7a677ac0f7ca"
+  },
+  "hunger-games-l-alba-sulla-mietitura-2026": {
+    "id": "3",
+    "title": "Hunger Games l'Alba sulla Mietitura",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92557/standard_638e102f-e18a-423c-8d41-077b7a0a3223.jpg",
+    "director": "Francis Lawrence",
+    "duration": "3h 08m",
+    "genres": [
+      "Avventura",
+      "Fantascienza",
+      "Azione"
+    ],
+    "synopsis": "Ventiquattro anni prima delle vicende di Katniss Everdeen, il giovane Haymitch Abernathy viene scelto come tributo del Distretto 12 per i cinquantesimi Hunger Games, la seconda Edizione della Memoria. Nell’arena dovrà lottare per sopravvivere contro avversari e un sistema spietato.",
+    "firstDate": "2026-11-19",
+    "lastDate": "2026-12-01",
+    "venues": [
+      "andromeda-river",
+      "cinema-teatro-italia",
+      "garden",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-17T02:45:17.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "9ad6349ca3f9e9c0"
+  },
+  "ice-cream-man-11": {
+    "id": "11",
+    "title": "Ice Cream Man",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86648/standard_7768b392-09aa-4fff-bd4b-5a9eeab4c035.jpg",
+    "duration": "1H26’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-08",
+    "venues": [
+      "andromeda-river",
+      "unical",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T16:03:26.000Z",
+    "hash": "eb915acdf96aaba9"
+  },
+  "ice-cream-man-9": {
+    "id": "9",
+    "title": "Ice Cream Man",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86648/standard_7768b392-09aa-4fff-bd4b-5a9eeab4c035.jpg",
+    "duration": "1h 26m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T17:25:01.000Z",
+    "hash": "a552915aaebb6c86"
+  },
+  "il-fuoco-che-ti-porti-dentro-2026": {
+    "id": "7",
+    "title": "Il Fuoco Che Ti Porti Dentro",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
+    "director": "E. De Angelis",
+    "duration": "1h 43m",
+    "genres": [
+      "Drammatico"
+    ],
+    "synopsis": "LEI ARRIVA PER NATALE E CIÒ CHE DOVREBBE ESSERE UN INCONTRO FAMILIARE DIVENTA RAPIDAMENTE UN CAMPO DI BATTAGLIA EMOTIVO, COMICO E FEROCE.",
+    "firstDate": "2026-11-19",
+    "lastDate": "2026-11-29",
+    "venues": [
+      "andromeda-river",
+      "citrigno"
+    ],
+    "firstSeenAt": "2026-11-17T02:45:17.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "4ee7bd6cbf9dfe0a"
+  },
+  "il-gatto-col-cappello-11": {
+    "id": "11",
+    "title": "Il Gatto col Cappello",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
+    "duration": "1h 45m",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "cd0e66d0594b30e4"
+  },
+  "il-gatto-col-cappello-13": {
+    "id": "13",
+    "title": "Il Gatto col Cappello",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
+    "duration": "1H45’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T16:03:26.000Z",
+    "hash": "6da1344e155ae4fe"
+  },
+  "il-gatto-col-cappello-2026": {
+    "id": "5",
+    "title": "Il Gatto col Cappello",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
+    "director": "Erica Rivinoja, Alessandro Carloni",
+    "duration": "1h 45m",
+    "genres": [
+      "Animazione",
+      "Avventura",
+      "Commedia",
+      "Fantasy",
+      "Famiglia"
+    ],
+    "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-25",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "b145e82a2e56f19d"
+  },
+  "il-gatto-col-cappello-3": {
+    "id": "3",
+    "title": "Il Gatto col Cappello",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
+    "duration": "1h 45m",
+    "synopsis": "Scopri Il Gatto col Cappello come non l’hai mai visto prima! Dal meraviglioso e stravagante mondo di Dr. Seuss, Il Gatto col Cappello arriva per la prima volta sul grande schermo da protagonista di un film d’animazione: un’avventura epica, inedita e piena di brio, dove regnano magia, caos e tanta allegria. Facendo ciò che gli riesce meglio, il Gatto porta gioia ai bambini con il suo umorismo esilarante, unico e irriverente, trasportandoli in un viaggio fantastico verso un mondo mai visto prima.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T09:07:04.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "854a789b42eb13f5"
+  },
+  "il-gatto-col-cappello-4": {
+    "id": "4",
+    "title": "Il Gatto col Cappello",
+    "poster": "https://cdn.cinemagarden.net/il%20gatto%20col%20cappello.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T02:58:51.000Z",
+    "changedAt": "2026-11-05T02:58:51.000Z",
+    "hash": "d1895affd56aee20"
+  },
+  "il-gatto-col-cappello-8": {
+    "id": "8",
+    "title": "Il Gatto col Cappello",
+    "poster": "https://cdn.cinemagarden.net/il%20gatto%20col%20cappello.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-10",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "6d5c785c319ba0bd"
+  },
+  "il-rumore-delle-cose-nuove-2026": {
+    "id": "6",
+    "title": "Il Rumore delle Cose Nuove",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89849/standard_781ef62b-bb64-460e-952f-f681a6176ce4.jpg",
+    "director": "Paolo Genovese",
+    "duration": "1h 53m",
+    "genres": [
+      "Dramma"
+    ],
+    "synopsis": "Andrea è un fotografo, Andreina un’infermiera, e se oggi Andrea è ancora vivo è perché Andreina gli ha donato un pezzo di sé. Umberto al lavoro allevia il dolore e a casa lo infligge ad Alba, che aveva sogni semplici e ora ha smesso di sognare. Ralph di mestiere riproduce suoni, Viola è un’attrice che ha scelto di recitare anche nella vita. E poi c’è Mirko, che ha dieci anni ma fa tanto rumore. Tre famiglie, che per anni si sono sfiorate nelle strade di Milano senza conoscersi, trascorrono le loro esistenze fra rancori, bugie e momenti di felicità finché un incontro imprevisto non stravolge tutto. Allora il caos prende il sopravvento sul fragile equilibrio che le regge e rischia di spazzarle via.",
+    "firstDate": "2026-11-12",
+    "lastDate": "2026-11-25",
+    "venues": [
+      "andromeda-river",
+      "citrigno"
+    ],
+    "firstSeenAt": "2026-11-10T11:11:32.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "e5a946f09b0624ce"
+  },
+  "it-ends-4": {
+    "id": "4",
+    "title": "It Ends",
+    "poster": "https://cdn.cinemagarden.net/it%20ends.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "8320febdf5f57f06"
+  },
+  "it-ends-6": {
+    "id": "6",
+    "title": "It Ends",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/82161/standard_4aca3f3f-703b-4e22-8e3a-dda86af0a3b0.jpg",
+    "duration": "1h 30m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "88f17356ec902352"
+  },
+  "it-ends-8": {
+    "id": "8",
+    "title": "It Ends",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/82161/standard_4aca3f3f-703b-4e22-8e3a-dda86af0a3b0.jpg",
+    "duration": "1H30’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T16:03:26.000Z",
+    "hash": "985117e7b0c1dffc"
+  },
+  "je-so-pazzo-3": {
+    "id": "3",
+    "title": "Je So' Pazzo",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/82094/standard_565e0ccb-7410-41c8-8ad0-d6243b4dd2ff.jpg",
+    "duration": "1h 44m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river",
+      "citrigno"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "2d4a938d5c8ebd68"
+  },
+  "je-so-pazzo-6": {
+    "id": "6",
+    "title": "Je So' Pazzo",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/82094/standard_565e0ccb-7410-41c8-8ad0-d6243b4dd2ff.jpg",
+    "duration": "1H44’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-08",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T16:03:26.000Z",
+    "hash": "2bcd30e3304c536b"
+  },
+  "kontinental-25-13": {
+    "id": "13",
+    "title": "Kontinental '25",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/110488/standard_7c40ded2-3db7-4608-9e79-afeb8d09736a.jpg",
+    "director": "Radu Jude",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-16",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-12T16:29:51.000Z",
+    "changedAt": "2026-11-12T16:29:51.000Z",
+    "hash": "bcaa9a7dabbc6796"
+  },
+  "kontinental-25-2025": {
+    "id": "12",
+    "title": "Kontinental '25",
+    "year": "2025",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/110488/standard_7c40ded2-3db7-4608-9e79-afeb8d09736a.jpg",
+    "director": "Radu Jude",
+    "duration": "1h 49m",
+    "genres": [
+      "Commedia",
+      "Dramma"
+    ],
+    "synopsis": "Dovrebbe essere un normale giorno di lavoro per Orsoloya, ufficiale addetta agli sfratti. Ma, quando caccia un senzatetto da un seminterrato in cui si era rifugiato, accade l’irreparabile: l’uomo si toglie la vita. Sopraffatta dal senso di colpa, Orsoloya si imbarca in una serie di incontri e situazioni sempre più assurdi per cercare goffamente di trovare una qualche forma di redenzione.",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-16",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-13T12:26:16.000Z",
+    "changedAt": "2026-11-16T17:47:13.000Z",
+    "hash": "148040693b3c38e6"
+  },
+  "kontinental-rsquo-25-15": {
+    "id": "15",
+    "title": "Kontinental &rsquo;25",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-16",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-12T16:29:51.000Z",
+    "changedAt": "2026-11-12T16:29:51.000Z",
+    "hash": "77817669f0b6b3d1"
+  },
+  "l-assurda-storia-della-gialappa-s-band-17": {
+    "id": "17",
+    "title": "L'Assurda Storia della Gialappa's Band",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/103726/standard_c03821f5-913e-4e15-ad6d-3797b3b27bad.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T17:25:01.000Z",
+    "hash": "52a9d23e1ea27049"
+  },
+  "l-assurda-storia-della-gialappa-s-band-18": {
+    "id": "18",
+    "title": "L'Assurda Storia della Gialappa's Band",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89203/standard_default.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-08",
+    "venues": [
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-04T16:03:26.000Z",
+    "changedAt": "2026-11-04T16:03:26.000Z",
+    "hash": "263835073f2c5b5a"
+  },
+  "l-essere-amato-el-ser-querido-2026": {
+    "id": "16",
+    "title": "L'Essere Amato (El Ser Querido)",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111643/standard_a62c8167-f3d6-49cf-b896-242613ea6d39.jpg",
+    "director": "Rodrigo Sorogoyen",
+    "duration": "2h 07m",
+    "genres": [
+      "Dramma"
+    ],
+    "synopsis": "RACCONTA LA STORIA DELL’ACCLAMATO REGISTA ESTEBAN MARTÍNEZ CHE DOPO ANNI DI SILENZIO, SI RITROVA A LAVORARE CON LA FIGLIA EMILIA, ATTRICE IN CERCA DI NOTORIETÀ DOPO UN PERIODO DIFFICILE.",
+    "firstDate": "2026-11-20",
+    "lastDate": "2026-11-25",
+    "venues": [
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-17T02:45:17.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "ef420df466d11087"
+  },
+  "la-notte-delle-fragole-2026": {
+    "id": "11",
+    "title": "La Notte delle Fragole",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93908/standard_3b18afca-33f0-45ee-8c3e-ab3e1da24778.jpg",
+    "director": "Alessandro Genovesi",
+    "duration": "1h 30m",
+    "genres": [
+      "Commedia"
+    ],
+    "synopsis": "Valentino (Valentino Picone) ha una vita perfettamente organizzata, accanto alla moglie Elena (Anna Foglietta) e a Carolina (Giovanna Rosace), la figlia adolescente di lei. Il suo equilibrio viene però stravolto dall’arrivo di Salvo (Salvo Ficarra), ex marito di Elena e padre di Carolina, un uomo impulsivo, disordinato e imprevedibile. Dopo una lite con la compagna Tania (Giulia Fiume), Salvo chiede ospitalità per una sola notte, ma finisce per stabilirsi in casa, scatenando una serie di equivoci, bugie e situazioni esilaranti. L’arrivo di Francesca (Vittoria Puccini), la sua nuova fiamma, complica ulteriormente la situazione, mettendo a dura prova i già fragili equilibri familiari. Tra convivenze impossibili, amori inattesi e seconde possibilità, i protagonisti scopriranno che la vita, soprattutto in amore, raramente segue i piani prestabiliti.",
+    "firstDate": "2026-11-26",
+    "lastDate": "2026-11-29",
+    "venues": [
+      "andromeda-river",
+      "citrigno"
+    ],
+    "firstSeenAt": "2026-11-23T19:45:37.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "5cdcbce5ef7f0c9f"
+  },
+  "la-storia-infinita-die-unendliche-geschichte-ried-15": {
+    "id": "15",
+    "title": "La Storia Infinita (Die Unendliche Geschichte)(Ried.)",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/109762/standard_d2daa533-e791-48c7-9f85-44c1bf2f79f4.jpg",
+    "director": "Wolfgang Petersen",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-10T21:36:36.000Z",
+    "changedAt": "2026-11-10T21:36:36.000Z",
+    "hash": "8ed481bca4073446"
+  },
+  "la-storia-infinita-ried-10": {
+    "id": "10",
+    "title": "La Storia Infinita (Ried.)",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92622/standard_354fae6f-a558-43a3-a315-b052ba040e14.jpg",
+    "director": "Wolfgang Petersen",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "andromeda-river",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-11T22:26:35.000Z",
+    "changedAt": "2026-11-11T22:26:35.000Z",
+    "hash": "0015709a2e63ba5a"
+  },
+  "la-storia-infinita-ried-1984": {
+    "id": "4",
+    "title": "La Storia Infinita (Ried.)",
+    "year": "1984",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92622/standard_354fae6f-a558-43a3-a315-b052ba040e14.jpg",
+    "director": "Wolfgang Petersen",
+    "duration": "1h 34m",
+    "genres": [
+      "Avventura",
+      "Fantasy",
+      "Famiglia"
+    ],
+    "synopsis": "Il piccolo Bastian che ha da poco perso la mamma, si rifugia nella soffitta della scuola a leggere un vecchio libro che si rivela magico; così Bastian “entra” nella storia e combatte contro il Nulla per difendere il mondo di Fantasia con l'aiuto di un drago volante e di un fanciullo guerriero. Suggestiva superproduzione tedesca, girata però in inglese, che all'epoca ottenne un grande successo grazie alla fiabesca vicenda del romanzo di Michael Ende (debitamente semplificata) e alla colonna sonora di Giorgio Moroder. Appassionante e non stucchevole.",
+    "firstDate": "2026-11-16",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "andromeda-river",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-13T12:26:16.000Z",
+    "changedAt": "2026-11-18T16:53:32.000Z",
+    "hash": "0ad5605aa69c699c"
+  },
+  "look-back-2026": {
+    "id": "15",
+    "title": "Look Back",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
+    "director": "Hirokazu Kore Eda",
+    "duration": "1h 40m",
+    "genres": [
+      "Dramma"
+    ],
+    "synopsis": "Fujino, adolescente determinata e piena di talento, sogna di diventare una mangaka. Kyomoto, schiva e solitaria, vive quasi sempre chiusa nella sua stanza, dedicando ogni istante al disegno. Unite dalla stessa passione, le due ragazze, cresciute in una piccola città, inseguono per tredici anni il sogno di diventare autrici di manga.",
+    "firstDate": "2026-11-19",
+    "lastDate": "2026-12-01",
+    "venues": [
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-17T02:45:17.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "28b95c3ce115348b"
+  },
+  "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
+    "id": "12",
+    "title": "Lorenzo - L'Incredibile Avventura di Jovanotti",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93909/standard_9c14f7c1-f312-43e9-8e70-f1bdd2c7ea63.jpg",
+    "director": "D. Zonta, C. Zoratti",
+    "duration": "1h 24m",
+    "genres": [
+      "Documentario"
+    ],
+    "synopsis": "IL PRIMO DOCUFILM DEDICATO A JOVANOTTI, UN ARTISTA CHE HA SAPUTO ATTRAVERSARE EPOCHE E GENERAZIONI SENZA MAI SMETTERE DI REINVENTARSI.",
+    "firstDate": "2026-11-26",
+    "lastDate": "2026-12-01",
+    "venues": [
+      "andromeda-river",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-23T19:45:37.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "8de64b86bc192342"
+  },
+  "ragione-e-sentimento-18": {
+    "id": "18",
+    "title": "Ragione e Sentimento",
+    "poster": "https://cdn.cinemagarden.net/RAGIONE%20E%20SENTIMENTO.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "d76b9baacdd2c4d4"
+  },
+  "ragione-e-sentimento-4": {
+    "id": "4",
+    "title": "Ragione e Sentimento",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86021/standard_71812bfb-d6fd-472c-8850-8fafb89ceb06.jpg",
+    "duration": "2H13’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-08",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T16:03:26.000Z",
+    "hash": "99f7c07eff3b01b4"
+  },
+  "ragione-e-sentimento-5": {
+    "id": "5",
+    "title": "Ragione e Sentimento",
+    "poster": "https://cdn.cinemagarden.net/RAGIONE%20E%20SENTIMENTO.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "f15d60cd0b085881"
+  },
+  "scrooge-e-gli-spiriti-del-natale-13": {
+    "id": "13",
+    "title": "Scrooge e gli Spiriti del Natale",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
+    "director": "Ti West",
+    "duration": "1h 58m",
+    "firstDate": "2026-11-12",
+    "lastDate": "2026-11-15",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-10T11:44:24.000Z",
+    "changedAt": "2026-11-10T11:44:24.000Z",
+    "hash": "6fc28b222d98a8ce"
+  },
+  "scrooge-e-gli-spiriti-del-natale-2026": {
+    "id": "4",
+    "title": "Scrooge e gli Spiriti del Natale",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
+    "director": "Ti West",
+    "duration": "1h 58m",
+    "genres": [
+      "Commedia",
+      "Fantasy"
+    ],
+    "synopsis": "UN'EMOZIONANTE STORIA DI FANTASMI AMBIENTATA NELLA LONDRA DI DICKENS, CHE SEGUE IL VIAGGIO SOPRANNATURALE DI UN UOMO PER AFFRONTARE IL SUO PASSATO, PRESENTE E FUTURO MENTRE LOTTA PER UNA SECONDA POSSI",
+    "firstDate": "2026-11-12",
+    "lastDate": "2026-11-29",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-10T11:11:32.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "8a403839ae52a608"
+  },
+  "se-domani-non-torno-12": {
+    "id": "12",
+    "title": "Se Domani Non Torno",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_2d0dc9ff-2023-4fa5-8bf8-2f43391e1232.jpg",
+    "duration": "1h 46m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden",
+      "unical",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "95bff4bf26006b1a"
+  },
+  "se-domani-non-torno-2": {
+    "id": "2",
+    "title": "Se Domani Non Torno",
+    "poster": "https://cdn.cinemagarden.net/se%20do.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T02:58:51.000Z",
+    "changedAt": "2026-11-05T02:58:51.000Z",
+    "hash": "c1a2ac5608ed21dd"
+  },
+  "se-domani-non-torno-2026": {
+    "id": "8",
+    "title": "Se Domani Non Torno",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_6173535a-3620-4493-b598-af273220de43.jpeg",
+    "director": "Paola Randi",
+    "duration": "1h 46m",
+    "genres": [
+      "Dramma"
+    ],
+    "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-25",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "c1ec05c0065a808e"
+  },
+  "se-domani-non-torno-4": {
+    "id": "4",
+    "title": "Se Domani Non Torno",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_2d0dc9ff-2023-4fa5-8bf8-2f43391e1232.jpg",
+    "duration": "1h 46m",
+    "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      "garden",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-05T09:07:04.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "82269f7643152bd2"
+  },
+  "se-domani-non-torno-7": {
+    "id": "7",
+    "title": "Se Domani Non Torno",
+    "poster": "https://cdn.cinemagarden.net/se%20do.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-10",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "7a64cc2c1d35c094"
+  },
+  "serpenti-2026": {
+    "id": "17",
+    "title": "Serpenti",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/108673/standard_f39b27fe-e580-4a32-afbf-3b083a3eb53a.jpg",
+    "director": "Roberto De Paolis",
+    "genres": [
+      "Commedia",
+      "Dramma"
+    ],
+    "synopsis": "Paolo Marra ha ucciso sua moglie, senza un perché. Divorato dal senso di colpa, decide di costituirsi: vuole pagare, scontare la pena, ridare dignità alla donna che ha ucciso e a sé stesso. Tra poliziotti distratti, avvocati zelanti, cartomanti e complicati cavilli burocratici, nessuno lo prende sul serio. L'uomo si scopre vittima di un paradosso kafkiano: per quanto lo desideri, non riesce a farsi arrestare. Il perfetto capro espiatorio di una società grottesca che ignora chi vuole redimersi.",
+    "firstDate": "2026-11-10",
+    "lastDate": "2026-11-10",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-10T11:11:32.000Z",
+    "changedAt": "2026-11-11T02:56:30.000Z",
+    "hash": "00016c6405e7a55c"
+  },
+  "shaun-vita-da-pecora-operazione-z-u-c-c-a-10": {
+    "id": "10",
+    "title": "Shaun Vita da Pecora - Operazione Z.U.C.C.a",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86813/standard_5124ddee-8c1e-417f-baf5-7a7556dd14e1.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "aff3d187bd6c6276"
+  },
+  "shaun-vita-da-pecora-operazione-z-u-c-c-a-2": {
+    "id": "2",
+    "title": "Shaun Vita da Pecora - Operazione Z.U.C.C.a",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86813/standard_5124ddee-8c1e-417f-baf5-7a7556dd14e1.jpg",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "57fc7f289fad0ace",
+    "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia."
+  },
+  "shaun-vita-da-pecora-operazione-z-u-c-c-a-2026": {
+    "id": "2",
+    "title": "Shaun Vita da Pecora - Operazione Z.U.C.C.a",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86813/standard_5124ddee-8c1e-417f-baf5-7a7556dd14e1.jpg",
+    "director": "Steve Cox, Matthew Walker",
+    "genres": [
+      "Animazione",
+      "Avventura",
+      "Commedia",
+      "Horror",
+      "Famiglia"
+    ],
+    "synopsis": "Halloween è alle porte. Shaun e tutti gli animali della fattoria si preparano per festeggiarlo al meglio coltivando un magnifico campo di zucche. Ma quando tutto sembrava ormai pronto, il contadino misteriosamente scompare e arriva dal bosco uno spaventoso mostro. Sarà compito di Shaun e i suoi amici salvare la fattoria dalla pelosa creatura e ritrovare l’amato contadino in tempo per la grande festa. Tra esperimenti impazziti e colpi di scena inaspettati, sarà un’avventura a tutta pecora per tutta la famiglia.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-11T02:56:30.000Z",
+    "hash": "3bdae79a11b59a04"
+  },
+  "spider-man-brand-new-day-v-o-2026": {
+    "id": "17",
+    "title": "Spider-Man: Brand New Day - V. O.",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
+    "director": "D. D. Cretton",
+    "duration": "2h 20m",
+    "genres": [
+      "Animazione"
+    ],
+    "synopsis": "PETER PARKER CERCA DI CONCENTRARSI SULL'UNIVERSITÀ E DI LASCIARSI SPIDER-MAN ALLE SPALLE. MA QUANDO UNA NUOVA MINACCIA METTE IN PERICOLO I SUOI AMICI, DEVE INFRANGERE LA PROMESSA E VESTIRSI NUOVAMENTE",
+    "firstDate": "2026-12-03",
+    "lastDate": "2026-12-06",
+    "venues": [
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-24T04:35:28.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "b4b91146029dadb2"
+  },
+  "ti-presento-i-fotter-2026": {
+    "id": "2",
+    "title": "Ti Presento i Fotter",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93844/standard_0dba84c4-34f7-4cef-b2f7-6cbc09116798.jpg",
+    "director": "John Hamburg",
+    "duration": "1h 46m",
+    "genres": [
+      "Commedia",
+      "Romance"
+    ],
+    "synopsis": "Un giovane di nome Henry, figlio di Greg e Pam Focker, si ritrova ad affrontare il caos familiare quando decide di sposare una donna volitiva che sembra essere completamente diversa dalla sua fidanzata ideale.",
+    "firstDate": "2026-11-26",
+    "lastDate": "2026-11-29",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-23T19:45:37.000Z",
+    "changedAt": "2026-11-23T19:45:37.000Z",
+    "hash": "d9e05ef88b7ed026"
+  },
+  "un-tranquillo-funerale-di-famiglia-2026": {
+    "id": "9",
+    "title": "Un Tranquillo Funerale di Famiglia",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86054/standard_d9b2b6d4-1b90-4813-9ad8-ceff62e7342d.jpg",
+    "director": "Massimiliano Bruno",
+    "duration": "1h 38m",
+    "genres": [
+      "Commedia"
+    ],
+    "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-10T21:36:36.000Z",
+    "hash": "435453e33db577c1"
+  },
+  "un-tranquillo-funerale-di-famiglia-5": {
+    "id": "5",
+    "title": "Un Tranquillo Funerale di Famiglia",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86054/standard_d9b2b6d4-1b90-4813-9ad8-ceff62e7342d.jpg",
+    "duration": "1h 38m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "citrigno",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "5e3ac8becdb4fc00",
+    "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
+  },
+  "un-weekend-artificiale-2026": {
+    "id": "9",
+    "title": "Un Weekend Artificiale",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90344/standard_74acad47-c983-4eeb-97e2-1c881eedf2e4.jpeg",
+    "director": "L. Pieraccioni",
+    "duration": "1h 40m",
+    "genres": [
+      "Commedia"
+    ],
+    "synopsis": "UN GRUPPO DI PERSONE PARTECIPA A UN ESPERIMENTO IN CUI DEVE SCOPRIRE CHI, TRA LORO, È UN UMANOIDE CREATO DALL'INTELLIGENZA ARTIFICIALE. DURANTE UN WEEKEND RICCO DI SOSPETTI, EQUIVOCI E COLPI DI SCENA,",
+    "firstDate": "2026-11-12",
+    "lastDate": "2026-11-29",
+    "venues": [
+      "andromeda-river",
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-10T11:11:32.000Z",
+    "changedAt": "2026-11-24T04:35:28.000Z",
+    "hash": "eb505844c244b8d9"
+  },
+  "wild-horse-nine-14": {
+    "id": "14",
+    "title": "Wild Horse Nine",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89717/standard_00638d12-91e6-4278-83b9-575bebc26d5a.jpg",
+    "duration": "1h 57m",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "7a940732b5afa2a2"
+  },
+  "wild-horse-nine-15": {
+    "id": "15",
+    "title": "Wild Horse Nine",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89717/standard_00638d12-91e6-4278-83b9-575bebc26d5a.jpg",
+    "duration": "1H57’",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T15:39:52.000Z",
+    "hash": "53959118774e592f"
+  },
+  "wild-horse-nine-2026": {
+    "id": "14",
+    "title": "Wild Horse Nine",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/108013/standard_3861bb03-6489-4516-a008-1d703c1d7283.jpg",
+    "director": "Martin McDonagh",
+    "duration": "1h 30m",
+    "genres": [
+      "Commedia",
+      "Thriller",
+      "Crime"
+    ],
+    "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-18",
+    "venues": [
+      "andromeda-river",
+      "garden",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-05T10:37:14.000Z",
+    "changedAt": "2026-11-17T23:34:49.000Z",
+    "hash": "c8c376c923c367cc"
+  },
+  "wild-horse-nine-5": {
+    "id": "5",
+    "title": "Wild Horse Nine",
+    "poster": "https://cdn.cinemagarden.net/WILD%20HORSE.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-05T02:58:51.000Z",
+    "changedAt": "2026-11-05T02:58:51.000Z",
+    "hash": "24a44cb3aa82fea1"
+  },
+  "wild-horse-nine-8": {
+    "id": "8",
+    "title": "Wild Horse Nine",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89717/standard_00638d12-91e6-4278-83b9-575bebc26d5a.jpg",
+    "duration": "1h 57m",
+    "synopsis": "Cile, 1973. Chris e Lee sono due agenti della CIA distaccati in Sud America, costretti ad affrontare un complicato viaggio da Santiago all'Isola di Pasqua che metterà a dura prova la loro fiducia reciproca.",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-11",
+    "venues": [
+      "andromeda-river",
+      "garden",
+      "unical"
+    ],
+    "firstSeenAt": "2026-11-05T09:07:04.000Z",
+    "changedAt": "2026-11-05T09:07:04.000Z",
+    "hash": "bfeee3c1094ee657"
+  },
+  "wild-horse-nine-9": {
+    "id": "9",
+    "title": "Wild Horse Nine",
+    "poster": "https://cdn.cinemagarden.net/WILD%20HORSE.jpg",
+    "firstDate": "2026-11-05",
+    "lastDate": "2026-11-10",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-04T17:42:26.000Z",
+    "changedAt": "2026-11-04T17:42:26.000Z",
+    "hash": "f59bbfb57a1f5c32"
+  },
+  "wildwood-i-segreti-del-bosco-proibito-2": {
+    "id": "2",
+    "title": "Wildwood - I Segreti del Bosco Proibito",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86023/standard_c0445320-bf5b-4ba6-ae06-fef7591768f9.jpg",
+    "duration": "2h 13m",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river"
+    ],
+    "firstSeenAt": "2026-11-04T16:22:05.000Z",
+    "changedAt": "2026-11-04T16:22:05.000Z",
+    "hash": "8142d2a9e476dfc1"
+  },
+  "wildwood-i-segreti-del-bosco-proibito-7": {
+    "id": "7",
+    "title": "Wildwood - I Segreti del Bosco Proibito",
+    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86023/standard_c0445320-bf5b-4ba6-ae06-fef7591768f9.jpg",
+    "duration": "2H13’",
+    "firstDate": "2026-11-04",
+    "lastDate": "2026-11-04",
+    "venues": [
+      "andromeda-river",
+      null
+    ],
+    "firstSeenAt": "2026-11-04T15:11:37.000Z",
+    "changedAt": "2026-11-04T15:39:52.000Z",
+    "hash": "8e15e8a2743e1c1a"
+  }
+}

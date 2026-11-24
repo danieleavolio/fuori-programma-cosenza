@@ -5,6 +5,7 @@
   let { data } = $props();
 
   const byVenue = $derived.by(() => {
+    if (data.ended) return [];
     const venues = new Map<string, { venue: typeof data.screenings[number]['venue']; info: typeof data.screenings[number]['info']; days: Map<string, typeof data.screenings> }>();
     for (const item of data.screenings) {
       const entry = venues.get(item.venue.id) || { venue: item.venue, info: item.info, days: new Map() };
@@ -17,10 +18,43 @@
   });
 </script>
 
-<Seo title={`${data.movie.title}: orari a Cosenza e Rende`} description={`Trama, cast e spettacoli di ${data.movie.title} nei cinema di Cosenza, Rende e Zumpano. Consulta gli orari pubblicati e le biglietterie ufficiali.`} canonical={data.canonical} image={data.ogImage} imageAlt={`Locandina e scheda di ${data.movie.title} su Fuori programma`} type="video.movie" />
 <svelte:head>
-  <JsonLd schema={data.schema} />
+  {#if !data.ended}<JsonLd schema={data.schema} />{/if}
 </svelte:head>
+
+{#if data.ended}
+{@const film = data.ended.film}
+<!-- Film uscito dalle sale: pagina utile per chi arriva da un link, ma fuori dall'indice. -->
+<Seo title={`${film.title}: non più in sala a Cosenza`} description={`${film.title} non è più in programmazione nei cinema di Cosenza, Rende e Zumpano. Guarda cosa danno oggi e i prossimi film in arrivo.`} canonical={data.canonical} image={data.ogImage} imageAlt="Fuori programma: i cinema di Cosenza e Rende" robots="noindex, follow" />
+
+<Breadcrumb schema={data.crumb.schema} trail={data.crumb.trail} />
+
+<section class="page-heading" aria-labelledby="page-title">
+  <p class="ended-kicker">Non più in sala</p>
+  <h1 id="page-title">{film.title}</h1>
+  <p>{[film.year, film.duration, (film.genres || []).join(' · ')].filter(Boolean).join(' · ')}</p>
+</section>
+
+<article class="venue-schedule-block film-summary">
+  {#if film.poster}
+    <!-- Locandina esterna (feed della sala): se non risponde più, la scheda resta pulita. -->
+    <img class="film-summary-poster" src={film.poster} alt={`Locandina di ${film.title}`} width="300" height="450" loading="lazy" referrerpolicy="no-referrer"
+      onerror={(event) => (event.currentTarget as HTMLImageElement).remove()} />
+  {/if}
+  <div class="film-summary-copy">
+    <p><strong>Al momento nessun cinema di Cosenza, Rende e Zumpano ha questo film in programmazione.</strong></p>
+    {#if data.ended.period}<p class="movie-credits">{data.ended.period}{data.ended.venues.length ? ` · ${data.ended.venues.map((venue) => venue.name).join(', ')}` : ''}</p>{/if}
+    {#if film.director}<p class="movie-credits">Regia: {film.director}</p>{/if}
+    {#if film.synopsis}<p>{film.synopsis}</p>{/if}
+    <div class="film-summary-actions">
+      <a class="film-action primary" href="/programmazione/oggi">Cosa danno oggi</a>
+      <a class="film-action" href="/prossimamente">Prossimamente</a>
+      <a class="film-action" href="/calendario">Segui i cinema nel calendario</a>
+    </div>
+  </div>
+</article>
+{:else}
+<Seo title={`${data.movie.title} al cinema a Cosenza: orari e biglietti`} description={`Trama, cast e spettacoli di ${data.movie.title} nei cinema di Cosenza, Rende e Zumpano. Consulta gli orari pubblicati e le biglietterie ufficiali.`} canonical={data.canonical} image={data.ogImage} imageAlt={`Locandina e scheda di ${data.movie.title} su Fuori programma`} type="video.movie" />
 
 <Breadcrumb schema={data.crumb.schema} trail={data.crumb.trail} />
 
@@ -90,6 +124,7 @@
     <p class="no-times-note">Al momento non risultano spettacoli pubblicati.</p>
   {/if}
 </section>
+{/if}
 
 <style>
   .film-summary { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: start; }
@@ -98,6 +133,10 @@
   .film-summary-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
   .film-action { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 12px; border: 1px solid var(--line); background: var(--surface); font-size: 12px; font-weight: 600; }
   .film-action:hover { background: var(--green); }
+  .film-action.primary { background: var(--blue); border-color: var(--blue); color: var(--on-blue); }
+  .film-action.primary:hover { background: var(--blue); text-decoration: underline; }
+  .film-summary:not(:has(.film-summary-poster)) { grid-template-columns: 1fr; }
+  .page-heading .ended-kicker { flex-basis: 100%; margin: 0; color: var(--live); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   .show-entry { display: flex; flex-direction: column; gap: 4px; }
   .show-entry-links { display: flex; gap: 8px; justify-content: center; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
   .show-entry-links a:hover { color: var(--ink); text-decoration: underline; }

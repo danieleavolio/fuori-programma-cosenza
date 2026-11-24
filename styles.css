@@ -193,6 +193,7 @@ main { width: min(1200px, 100%); margin: 0 auto; padding: 14px 20px 48px; }
 .movie-title a { color: inherit; }
 .movie-title a:hover { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
 .movie-state { display: block; min-height: 18px; margin-bottom: 4px; color: var(--link); font-size: 11px; line-height: 18px; font-weight: 650; }
+.movie-state.is-last-day { color: var(--live); text-transform: uppercase; letter-spacing: .04em; }
 .movie-grid .movie-catalog-card:not(.is-expanded) .movie-title-row { height: 72px; }
 .movie-grid .movie-catalog-card:not(.is-expanded) .movie-title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 .movie-credits, .movie-cast { margin: 0; color: var(--muted); font-size: 12px; line-height: 18px; }

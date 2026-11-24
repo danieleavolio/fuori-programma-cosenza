@@ -28,6 +28,18 @@ La home GitHub Pages indica la home Vercel come canonical senza interrompere dat
   di rich result Google; non si inventano prezzi, disponibilità o recensioni.
 - Sitemap: tutte le schede film disponibili, comprese quelle senza spettacoli,
   oltre alle sale e alle pagine di programmazione; URL assoluti e locandine.
+  `lastmod` è per pagina: liste del giorno = ultimo aggiornamento dei dati;
+  schede film = `changedAt` in `data/film-archive.json` (cambia solo quando
+  cambiano orari o dati di quel film); sale = il film cambiato più di recente;
+  `/calendario` senza `lastmod`.
+- Schede dei film usciti dalle sale: `data/film-archive.json` conserva i film
+  già visti sul sito. Lo slug di un film non più in programma risponde 200 con
+  «Non più in sala», `noindex, follow` e link a Oggi/Prossimamente; fuori dalla
+  sitemap. Dopo 6 mesi dall'ultima data risponde 410. Gli slug vecchi senza anno
+  (es. `dio-ride-3`) vanno in 301 alla scheda attuale o a quella con l'anno.
+- Titoli film: le sale li pubblicano in MAIUSCOLO; `data:normalize` li porta
+  in maiuscole/minuscole (`displayTitle()` in `scripts/normalize_schedule.mjs`).
+  Title della scheda: «Titolo al cinema a Cosenza: orari e biglietti».
 - Le pagine inesistenti restituiscono HTTP 404 e noindex, non un falso 200.
 - Il primo poster della griglia home è eager/high-priority in SSR e dopo il
   ridisegno JavaScript; le immagini hanno dimensioni dichiarate. Preconnect
@@ -106,6 +118,29 @@ Performance 99, SEO 100, LCP 2,0 s, CLS 0, TBT 100 ms. Una singola misura di
 laboratorio varia con macchina, rete, film e CDN; non è un dato Core Web Vitals
 reale né una prova di ranking. Il primo poster risultava lazy e senza priorità:
 questo è stato corretto nel codice.
+
+## Piano di miglioramento (novembre 2026)
+
+In ordine di impatto. Le prime tre voci sono nel codice dal 24 novembre 2026.
+
+1. **Fatto.** Schede dei film usciti: 200 «Non più in sala» invece di 404
+   (410 dopo 6 mesi). I link condivisi e quelli già scansionati non finiscono
+   tra gli errori 404 di Search Console; le pagine restano `noindex`.
+2. **Fatto.** `lastmod` reale per pagina nella sitemap (vedi Implementazione):
+   un `lastmod` uguale ovunque e sempre nuovo viene ignorato dai crawler.
+3. **Fatto.** Titoli in maiuscole/minuscole normali e title delle schede nel
+   formato «… al cinema a Cosenza: orari e biglietti», più vicino alle ricerche.
+4. **Fatto.** Badge «Ultimo giorno» nelle card della home: utile e cliccabile,
+   non è un segnale SEO diretto.
+5. Manuale: dominio personale (vedi AGENTS.md → «Cambio dominio»), con 301 dal
+   vecchio `*.vercel.app`.
+6. Manuale: Search Console (sezione seguente) — inviare di nuovo la sitemap
+   dopo il deploy e controllare il report «Pagine» per i 404 scomparsi.
+7. Manuale: link locali genuini (cinema, associazioni, università, pagine di
+   quartiere), senza acquistarli.
+
+Da valutare dopo 4 settimane di dati: quali query portano impressioni sulle
+schede film rispetto alle pagine di programmazione, prima di aggiungere testi.
 
 ## Da completare con il proprietario dopo il deploy
 
