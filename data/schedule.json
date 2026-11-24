@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T04:35:01.124406+00:00",
+  "updatedAt": "2026-11-24T07:20:50.142949+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -714,7 +714,20 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "25/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
       "external": {
         "source": "MYmovies",
@@ -2275,7 +2288,12 @@
           "venue": "cinema-teatro-italia"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "24/11/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ],
       "firstSeenAt": "2026-11-19T12:25:32.692379+00:00",
       "external": {
         "source": "MYmovies",
@@ -2409,7 +2427,16 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -2455,7 +2482,16 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "24/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -2882,16 +2918,5 @@
       "sourceName": "Cinema Garden"
     }
   ],
-  "warnings": [
-    {
-      "type": "announced-failed",
-      "venue": "cinema-teatro-italia",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
-    },
-    {
-      "type": "announced-failed",
-      "venue": "unical",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
-    }
-  ]
+  "warnings": []
 }
