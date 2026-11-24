@@ -4,7 +4,8 @@ Istruzioni operative per chi lavora su **Fuori programma Cosenza**.
 
 ## Contesto
 
-- Sito pubblico: `https://fuori-programma-cosenza.vercel.app/`
+- Sito pubblico: `https://fuoriprogramma.dpdns.org/` (dominio personale su Vercel, `FP_SITE_URL`);
+  il vecchio `https://fuori-programma-cosenza.vercel.app/` risponde con un redirect 301.
 - Stack: SvelteKit + Svelte 5, con la vecchia app `app.js` servita dalla stessa origine.
 - Dati statici in `data/schedule.json`; nessun database e nessuna API a runtime.
 - Il bot GitHub aggiorna la programmazione ogni 4 ore e la pubblica su GitHub Pages
@@ -171,10 +172,14 @@ Ricordati che questo sovrascrive `data/schedule.json` con i dati online.
 ### Cambio dominio
 
 L'origine pubblica è una sola: `siteOrigin` in `src/lib/server/site.ts`, che legge
-`FP_SITE_URL`. Per passare a un dominio nuovo:
+`FP_SITE_URL` (su Vercel: `https://fuoriprogramma.dpdns.org`; lo stesso valore è il
+default nel codice, così build e test locali usano l'origine di produzione).
+Per passare a un altro dominio:
 
 1. aggiungere il dominio su Vercel (Settings → Domains) e configurare il CNAME;
-2. impostare `FP_SITE_URL=https://<dominio>` nelle variabili d'ambiente di Vercel;
+2. impostare `FP_SITE_URL=https://<dominio>` nelle variabili d'ambiente di Vercel e
+   aggiornare i default in `src/lib/server/site.ts`, `scripts/test_seo.mjs` e il canonical
+   di `index.html` (copia GitHub Pages);
 3. ridispiegare: canonical, sitemap, JSON-LD e immagini social seguono da soli;
 4. aggiungere la proprietà in Search Console, inviare la sitemap e chiedere l'indicizzazione;
 5. tenere il vecchio `*.vercel.app` in redirect 301, così i link condivisi non si rompono.
@@ -189,8 +194,8 @@ mostrare nome e icona dell'host: non è un problema di meta tag, si risolve col 
 git push origin main
 gh api repos/danieleavolio/fuori-programma-cosenza/commits/<sha>/status `
   --jq '{state,statuses:[.statuses[]|{context,state,target_url}]}'
-node scripts/test_seo.mjs https://fuori-programma-cosenza.vercel.app
-node scripts/test_catalog_browser.mjs https://fuori-programma-cosenza.vercel.app
+node scripts/test_seo.mjs https://fuoriprogramma.dpdns.org
+node scripts/test_catalog_browser.mjs https://fuoriprogramma.dpdns.org
 ```
 
 Il messaggio `Cannot update this protected ref` è normale: il push passa comunque.

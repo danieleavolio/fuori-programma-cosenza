@@ -2,15 +2,16 @@
 
 ## Obiettivo e dominio
 
-Il sito pubblico di riferimento è `https://fuori-programma-cosenza.vercel.app/`.
+Il sito pubblico di riferimento è `https://fuoriprogramma.dpdns.org/` (dominio personale
+su Vercel). `https://fuori-programma-cosenza.vercel.app/` resta attivo con un redirect 301.
 La home risponde all'intento «cinema Cosenza / programmazione cinema Cosenza e Rende»;
 le pagine Oggi, Stasera, Weekend, film e singole sale rispondono a ricerche più specifiche.
 Non sono create pagine quasi identiche per accumulare parole chiave.
 
 `src/lib/server/site.ts` è la fonte per canonical, sitemap, breadcrumb e URL social.
-`FP_SITE_URL` consente di configurare un futuro dominio HTTPS, senza percorsi.
-Non cambiare questo valore prima di configurare dominio e redirect permanenti in Vercel.
-Aggiornare anche il canonical della copia GitHub Pages in `index.html` in caso di migrazione.
+`FP_SITE_URL` (origine HTTPS, senza percorsi) è impostata su Vercel al dominio personale;
+lo stesso valore è il default nel codice e il canonical della copia GitHub Pages in `index.html`.
+Per un nuovo cambio di dominio seguire AGENTS.md → «Cambio dominio».
 Le preview Vercel sono escluse tramite `X-Robots-Tag` e robots.txt.
 `/legacy/` resta funzionante ma non indicizzabile; la copia statica riceve anche
 il meta noindex, perché il server può servirla senza eseguire gli hook SvelteKit.
@@ -101,8 +102,8 @@ node scripts/test_catalog_browser.mjs http://127.0.0.1:5173
 Dopo la pubblicazione:
 
 ```powershell
-node scripts/test_seo.mjs https://fuori-programma-cosenza.vercel.app
-node scripts/test_catalog_browser.mjs https://fuori-programma-cosenza.vercel.app
+node scripts/test_seo.mjs https://fuoriprogramma.dpdns.org
+node scripts/test_catalog_browser.mjs https://fuoriprogramma.dpdns.org
 ```
 
 Il test SEO visita tutte le pagine della sitemap senza eseguire JavaScript,
@@ -132,8 +133,8 @@ In ordine di impatto. Le prime tre voci sono nel codice dal 24 novembre 2026.
    formato «… al cinema a Cosenza: orari e biglietti», più vicino alle ricerche.
 4. **Fatto.** Badge «Ultimo giorno» nelle card della home: utile e cliccabile,
    non è un segnale SEO diretto.
-5. Manuale: dominio personale (vedi AGENTS.md → «Cambio dominio»), con 301 dal
-   vecchio `*.vercel.app`.
+5. **Fatto.** Dominio personale `fuoriprogramma.dpdns.org`, con 301 dal vecchio
+   `*.vercel.app` (vedi AGENTS.md → «Cambio dominio»).
 6. Manuale: Search Console (sezione seguente) — inviare di nuovo la sitemap
    dopo il deploy e controllare il report «Pagine» per i 404 scomparsi.
 7. Manuale: link locali genuini (cinema, associazioni, università, pagine di
@@ -144,11 +145,14 @@ schede film rispetto alle pagine di programmazione, prima di aggiungere testi.
 
 ## Da completare con il proprietario dopo il deploy
 
-1. Aprire Google Search Console con l'account proprietario e selezionare la
-   proprietà prefisso URL `https://fuori-programma-cosenza.vercel.app/`.
-   Il token di verifica già presente nell'HTML è stato conservato: la sua presenza
-   da sola non prova che la proprietà sia verificata o che abbia dati.
-2. Inviare `https://fuori-programma-cosenza.vercel.app/sitemap.xml` nella sezione
+1. Aprire Google Search Console con l'account proprietario e aggiungere la
+   proprietà del nuovo dominio `https://fuoriprogramma.dpdns.org/` (proprietà
+   dominio con record DNS TXT, oppure prefisso URL). Il token di verifica già
+   presente nell'HTML è quello della vecchia proprietà
+   `https://fuori-programma-cosenza.vercel.app/`: non va rimosso, ma non verifica
+   da solo il nuovo dominio. Tenere anche la vecchia proprietà e, se entrambe sono
+   verificate, usare lo strumento «Cambio di indirizzo» da quella vecchia.
+2. Inviare `https://fuoriprogramma.dpdns.org/sitemap.xml` nella sezione
    Sitemap. In Ispezione URL controllare home, Prossimamente e una scheda cinema;
    confrontare canonical dichiarato e scelto da Google, eseguire il test live e
    richiedere indicizzazione per le pagine principali, non per ogni URL ogni giorno.

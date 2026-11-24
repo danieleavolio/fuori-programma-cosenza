@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import sharp from 'sharp';
 
 const base = process.argv[2] || 'http://127.0.0.1:5173';
-const origin = new URL(process.env.FP_SITE_URL || 'https://fuori-programma-cosenza.vercel.app').origin;
+const origin = new URL(process.env.FP_SITE_URL || 'https://fuoriprogramma.dpdns.org').origin;
 const decode = (value) => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'").replaceAll('&lt;', '<').replaceAll('&gt;', '>');
 const attributes = (tag) => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1], decode(match[2])]));
 const get = (path, userAgent) => fetch(new URL(path, base), { signal: AbortSignal.timeout(20000), headers: userAgent ? { 'user-agent': userAgent } : {} });

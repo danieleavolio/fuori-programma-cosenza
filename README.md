@@ -2,7 +2,7 @@
 
 Web app per confrontare la programmazione dei cinema di Cosenza e Rende in un'unica vista.
 
-- **Sito pubblico (principale):** <https://fuori-programma-cosenza.vercel.app/> — SvelteKit su Vercel.
+- **Sito pubblico (principale):** <https://fuoriprogramma.dpdns.org/> — SvelteKit su Vercel. Il vecchio indirizzo <https://fuori-programma-cosenza.vercel.app/> rimanda qui con un redirect 301.
 - **GitHub Pages** (<https://danieleavolio.github.io/fuori-programma-cosenza/>) è il backend statico: pubblica `data/schedule.json` e i feed calendario `.ics` che Vercel e gli abbonamenti leggono. La copia della vecchia app lì presente punta a Vercel come canonical.
 
 Istruzioni operative per chi sviluppa (anche agenti): [AGENTS.md](AGENTS.md). SEO: [SEO.md](SEO.md).
