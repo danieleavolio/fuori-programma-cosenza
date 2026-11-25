@@ -99,6 +99,26 @@
     "changedAt": "2026-11-25T13:48:46.700Z",
     "hash": "8ebabe4539d09911"
   },
+  "balcanica-2026": {
+    "id": "12",
+    "title": "Balcanica",
+    "year": "2026",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114581/standard_b81c51cc-96d4-4af0-8c9a-1173af4a3207.jpg",
+    "director": "Nicola Sorcinelli",
+    "duration": "1h 26m",
+    "genres": [
+      "Dramma"
+    ],
+    "synopsis": "Greta è una giovane dottoressa che affronta la sua prima missione umanitaria sulla rotta balcanica. L'incontro con Jalil e Nazar, musicisti afghani in fuga verso l'Italia, scuote profondamente le sue certezze, spingendola a un gesto estremo che potrebbe cambiare per sempre il suo destino e quello dei due musicisti.",
+    "firstDate": "2026-11-30",
+    "lastDate": "2026-11-30",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-25T23:58:09.226Z",
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "f8d286690eeeb514"
+  },
   "clayface-3": {
     "id": "3",
     "title": "Clayface",
@@ -257,7 +277,7 @@
     "hash": "5a70974701b34f2b"
   },
   "dune-parte-tre-2026": {
-    "id": "14",
+    "id": "11",
     "title": "Dune - Parte Tre",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/76088/standard_d58b5478-7d8e-46e8-9516-36d73e568bed.png",
@@ -272,8 +292,8 @@
       "andromeda-river"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "8c5e1a76a3012dc4",
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "e4f0029bc1e8d205",
     "duration": "2h 20m"
   },
   "dune-parte-tre-anteprima-17": {
@@ -289,6 +309,19 @@
     "firstSeenAt": "2026-11-04T15:11:37.000Z",
     "changedAt": "2026-11-04T15:39:52.000Z",
     "hash": "43ad7ae5e522a8fc"
+  },
+  "e-andata-cosi-15": {
+    "id": "15",
+    "title": "E' Andata Cosi'",
+    "poster": "https://cdn.cinemagarden.net/E",
+    "firstDate": "2026-11-26",
+    "lastDate": "2026-11-30",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-25T23:58:09.226Z",
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "d99fff6ec317af26"
   },
   "e-andata-cosi-19": {
     "id": "19",
@@ -507,7 +540,7 @@
     "duration": "2h 15m"
   },
   "hexe-il-regno-delle-streghe-2026": {
-    "id": "11",
+    "id": "3",
     "title": "Hexe: Il Regno delle Streghe",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95592/standard_ebb0c6ff-debe-4e7e-b155-4c43680cc733.jpg",
@@ -529,8 +562,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "2b5e80298438e481"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "a04c1e3492e9a00d"
   },
   "hope-13": {
     "id": "13",
@@ -598,7 +631,7 @@
     "hash": "925e7a677ac0f7ca"
   },
   "hunger-games-l-alba-sulla-mietitura-2026": {
-    "id": "3",
+    "id": "7",
     "title": "Hunger Games l'Alba sulla Mietitura",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92557/standard_638e102f-e18a-423c-8d41-077b7a0a3223.jpg",
@@ -619,8 +652,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T13:48:46.700Z",
-    "hash": "569eae5b1b49f0a0"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "166caba7c78b0281"
   },
   "ice-cream-man-11": {
     "id": "11",
@@ -654,7 +687,7 @@
     "hash": "a552915aaebb6c86"
   },
   "il-fuoco-che-ti-porti-dentro-2026": {
-    "id": "7",
+    "id": "5",
     "title": "Il Fuoco Che Ti Porti Dentro",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
@@ -671,8 +704,8 @@
       "citrigno"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "04b037e2c8676386"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "6d9f55847b6b0b66"
   },
   "il-gatto-col-cappello-11": {
     "id": "11",
@@ -874,7 +907,7 @@
     "hash": "2bcd30e3304c536b"
   },
   "ken-il-guerriero-il-film-40-anniversario-v-o-1986": {
-    "id": "13",
+    "id": "10",
     "title": "Ken il Guerriero - Il Film (40° Anniversario) V.O.",
     "year": "1986",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/96449/standard_f8fa009e-558d-4f08-8861-e3b17423de6b.jpg",
@@ -892,8 +925,8 @@
       "andromeda-river"
     ],
     "firstSeenAt": "2026-11-24T19:18:21.672Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "d21664807ab3330c"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "daf1beb0b59cd7ab"
   },
   "kontinental-25-13": {
     "id": "13",
@@ -989,7 +1022,7 @@
     "hash": "19a887937a846cab"
   },
   "la-notte-delle-fragole-2026": {
-    "id": "10",
+    "id": "4",
     "title": "La Notte delle Fragole",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93908/standard_3b18afca-33f0-45ee-8c3e-ab3e1da24778.jpg",
@@ -1007,8 +1040,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "3f756e3f447ee286"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "71ff33c67dd1fa01"
   },
   "la-storia-infinita-die-unendliche-geschichte-ried-15": {
     "id": "15",
@@ -1063,7 +1096,7 @@
     "hash": "0ad5605aa69c699c"
   },
   "look-back-2026": {
-    "id": "16",
+    "id": "13",
     "title": "Look Back",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
@@ -1079,11 +1112,11 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T13:48:46.700Z",
-    "hash": "b738e730b73b7c17"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "eb3f5ec4744f0fdc"
   },
   "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
-    "id": "12",
+    "id": "6",
     "title": "Lorenzo - L'Incredibile Avventura di Jovanotti",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93909/standard_9c14f7c1-f312-43e9-8e70-f1bdd2c7ea63.jpg",
@@ -1100,8 +1133,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "b9fedc0d3b7dc405"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "44afc70deec63b3f"
   },
   "ragione-e-sentimento-18": {
     "id": "18",
@@ -1161,7 +1194,7 @@
     "hash": "6fc28b222d98a8ce"
   },
   "scrooge-e-gli-spiriti-del-natale-2026": {
-    "id": "5",
+    "id": "9",
     "title": "Scrooge e gli Spiriti del Natale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
@@ -1180,8 +1213,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "aed01dc338c26814"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "c4770f5dfb21c31c"
   },
   "se-domani-non-torno-12": {
     "id": "12",
@@ -1215,10 +1248,10 @@
     "hash": "c1a2ac5608ed21dd"
   },
   "se-domani-non-torno-2026": {
-    "id": "9",
+    "id": "16",
     "title": "Se Domani Non Torno",
     "year": "2026",
-    "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86088/standard_6173535a-3620-4493-b598-af273220de43.jpeg",
+    "poster": "https://cdn.cinemagarden.net/se%20do.jpg",
     "director": "Paola Randi",
     "duration": "1h 46m",
     "genres": [
@@ -1226,7 +1259,7 @@
     ],
     "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
     "firstDate": "2026-11-05",
-    "lastDate": "2026-11-26",
+    "lastDate": "2026-11-30",
     "venues": [
       "andromeda-river",
       "citrigno",
@@ -1234,8 +1267,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "c3298f5c6d6a22ed"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "4de6896d55fedf50"
   },
   "se-domani-non-torno-4": {
     "id": "4",
@@ -1340,7 +1373,7 @@
     "hash": "3bdae79a11b59a04"
   },
   "spider-man-brand-new-day-v-o-2026": {
-    "id": "18",
+    "id": "14",
     "title": "Spider-Man: Brand New Day - V. O.",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
@@ -1356,8 +1389,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-24T04:35:28.000Z",
-    "changedAt": "2026-11-25T13:48:46.700Z",
-    "hash": "5f550776b5c8d236"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "c8864f77b5561fc7"
   },
   "ti-presento-i-fotter-2026": {
     "id": "2",
@@ -1378,8 +1411,8 @@
       "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-25T13:48:46.700Z",
-    "hash": "c01f1446aa8c8b36"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "ebeeef66d86ef3b6"
   },
   "un-tranquillo-funerale-di-famiglia-2026": {
     "id": "9",
@@ -1437,8 +1470,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "4fa269a5a1c97711"
+    "changedAt": "2026-11-25T23:58:09.226Z",
+    "hash": "2d5a6df0a81401a5"
   },
   "wild-horse-nine-14": {
     "id": "14",
