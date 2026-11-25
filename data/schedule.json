@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T03:19:19.182936+00:00",
+  "updatedAt": "2026-11-25T05:38:02.613488+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -775,55 +775,18 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "25/11/2026",
-          "venue": "cinema-teatro-italia"
-        },
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "26/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "27/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "28/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "29/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "30/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "01/12/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "02/12/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-        "rating": 3.31,
-        "ratingCount": 7,
-        "reviewCount": 3,
-        "criticsRating": 2.67,
-        "audienceRating": 4.25,
+        "rating": 3.3,
+        "ratingCount": 9,
+        "reviewCount": 4,
+        "criticsRating": 2.5,
+        "audienceRating": 4.4,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -884,7 +847,7 @@
         "reviewCount": 7,
         "criticsRating": 3.17,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -1127,13 +1090,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/scrooge-e-gli-spiriti-del-natale/",
-        "rating": 3.46,
-        "ratingCount": 17,
-        "reviewCount": 7,
-        "criticsRating": 3.17,
-        "audienceRating": 4.2,
+        "rating": 3.33,
+        "ratingCount": 22,
+        "reviewCount": 12,
+        "criticsRating": 3.0,
+        "audienceRating": 3.98,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1205,9 +1168,9 @@
         "ratingCount": 26,
         "reviewCount": 9,
         "criticsRating": 2.0,
-        "audienceRating": 3.61,
+        "audienceRating": 3.63,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1396,12 +1359,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/il-fuoco-che-ti-porti-dentro/",
-        "rating": 3.6,
-        "ratingCount": 16,
-        "reviewCount": 14,
-        "criticsRating": 3.19,
+        "rating": 3.55,
+        "ratingCount": 19,
+        "reviewCount": 16,
+        "criticsRating": 3.23,
+        "audienceRating": 3.42,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -1508,13 +1472,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/un-weekend-artificiale/",
-        "rating": 2.08,
-        "ratingCount": 15,
-        "reviewCount": 6,
-        "criticsRating": 1.4,
-        "audienceRating": 2.33,
+        "rating": 1.91,
+        "ratingCount": 16,
+        "reviewCount": 7,
+        "criticsRating": 1.33,
+        "audienceRating": 1.89,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -1583,13 +1547,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/se-domani-non-torno/",
-        "rating": 3.21,
-        "ratingCount": 27,
-        "reviewCount": 11,
-        "criticsRating": 2.7,
-        "audienceRating": 3.94,
+        "rating": 3.22,
+        "ratingCount": 28,
+        "reviewCount": 12,
+        "criticsRating": 2.82,
+        "audienceRating": 3.85,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -2534,7 +2498,7 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
         "releaseDateIT": "2026-12-16",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-12-16"
     },
@@ -2641,40 +2605,7 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "26/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "27/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "28/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "29/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "30/11/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "01/12/2026",
-          "venue": "unical"
-        },
-        {
-          "date": "02/12/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -2709,12 +2640,7 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [
-        {
-          "date": "25/11/2026",
-          "venue": "unical"
-        }
-      ],
+      "announcedDates": [],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -2824,13 +2750,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dio-ride/",
-        "rating": 3.49,
+        "rating": 3.48,
         "ratingCount": 43,
         "reviewCount": 16,
         "criticsRating": 2.97,
-        "audienceRating": 3.99,
+        "audienceRating": 3.98,
         "releaseDateIT": "2026-10-29",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
+        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
       },
       "releaseDateIT": "2026-10-29"
     },
@@ -2888,39 +2814,6 @@
       ],
       "announcedDates": [],
       "firstSeenAt": "2026-11-24T19:18:13.672687+00:00"
-    },
-    {
-      "id": "20",
-      "title": "Fatherland",
-      "poster": "",
-      "url": "https://cosenzacinema.it/movie/fatherland/",
-      "duration": "1h 22m",
-      "tags": [],
-      "venueUrls": {},
-      "genres": [
-        "Drammatico"
-      ],
-      "director": "P. Pawlikowski",
-      "year": "2026",
-      "language": "Italiano",
-      "cast": "H. Zischler, S. Hüller, A. Diehl",
-      "trailer": "",
-      "shows": [],
-      "announcedDates": [],
-      "synopsis": "LO SCRITTORE PREMIO NOBEL THOMAS MANN (HANNS ZISCHLER) E SUA FIGLIA ERIKA (SANDRA HÜLLER), ATTRICE, SCRITTRICE E PILOTA DI RALLY, NELL’ESTATE DEL 1949, AL CULMINE DELLA GUERRA FREDDA, A BORDO DI UNA",
-      "firstSeenAt": "2026-11-19T12:25:32.692379+00:00",
-      "external": {
-        "source": "MYmovies",
-        "url": "https://www.mymovies.it/film/2026/fatherland/",
-        "rating": 4.04,
-        "ratingCount": 46,
-        "reviewCount": 22,
-        "criticsRating": 3.98,
-        "audienceRating": 4.14,
-        "releaseDateIT": "2026-10-16",
-        "checkedAt": "2026-11-24T04:35:01.124691+00:00"
-      },
-      "releaseDateIT": "2026-10-16"
     }
   ],
   "comingSoon": [
@@ -3183,6 +3076,16 @@
     }
   ],
   "warnings": [
+    {
+      "type": "announced-failed",
+      "venue": "cinema-teatro-italia",
+      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
+    },
+    {
+      "type": "announced-failed",
+      "venue": "unical",
+      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
+    },
     {
       "type": "coming-soon-failed",
       "venue": "garden",
