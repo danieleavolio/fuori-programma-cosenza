@@ -83,6 +83,22 @@
     "changedAt": "2026-11-10T11:11:32.000Z",
     "hash": "a6bffc88f7e36616"
   },
+  "balcanica-15": {
+    "id": "15",
+    "title": "Balcanica",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114581/standard_b81c51cc-96d4-4af0-8c9a-1173af4a3207.jpg",
+    "director": "Nicola Sorcinelli",
+    "duration": "1h 26m",
+    "synopsis": "Greta è una giovane dottoressa che affronta la sua prima missione umanitaria sulla rotta balcanica. L'incontro con Jalil e Nazar, musicisti afghani in fuga verso l'Italia, scuote profondamente le sue certezze, spingendola a un gesto estremo che potrebbe cambiare per sempre il suo destino e quello dei due musicisti.",
+    "firstDate": "2026-11-30",
+    "lastDate": "2026-11-30",
+    "venues": [
+      "cinema-teatro-italia"
+    ],
+    "firstSeenAt": "2026-11-25T13:48:46.700Z",
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "8ebabe4539d09911"
+  },
   "clayface-3": {
     "id": "3",
     "title": "Clayface",
@@ -144,7 +160,7 @@
     "hash": "ca6ab5855b488988"
   },
   "dio-ride-2026": {
-    "id": "18",
+    "id": "19",
     "title": "Dio Ride",
     "year": "2026",
     "poster": "https://cdn.cinemagarden.net/dio%20ride.jpg",
@@ -162,8 +178,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "cdeb30fee48246e4"
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "480a4d94880a1a19"
   },
   "dio-ride-3": {
     "id": "3",
@@ -292,13 +308,13 @@
     "title": "E' Andata Cosi'",
     "poster": "https://cdn.cinemagarden.net/E",
     "firstDate": "2026-11-26",
-    "lastDate": "2026-11-28",
+    "lastDate": "2026-11-29",
     "venues": [
       "garden"
     ],
     "firstSeenAt": "2026-11-24T19:18:21.672Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "b568cf305670ceec"
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "c6c5c4eaf03639ed"
   },
   "fast-furious-25th-anniversary-10": {
     "id": "10",
@@ -603,8 +619,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T05:38:34.496Z",
-    "hash": "ba690e4bd78a6a95"
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "569eae5b1b49f0a0"
   },
   "ice-cream-man-11": {
     "id": "11",
@@ -953,7 +969,7 @@
     "hash": "263835073f2c5b5a"
   },
   "l-essere-amato-el-ser-querido-2026": {
-    "id": "16",
+    "id": "17",
     "title": "L'Essere Amato (El Ser Querido)",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111643/standard_a62c8167-f3d6-49cf-b896-242613ea6d39.jpg",
@@ -969,8 +985,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "6332ea154507a008"
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "19a887937a846cab"
   },
   "la-notte-delle-fragole-2026": {
     "id": "10",
@@ -1047,7 +1063,7 @@
     "hash": "0ad5605aa69c699c"
   },
   "look-back-2026": {
-    "id": "15",
+    "id": "16",
     "title": "Look Back",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
@@ -1063,8 +1079,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T05:38:34.496Z",
-    "hash": "cb7e8ccf8f45593c"
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "b738e730b73b7c17"
   },
   "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
     "id": "12",
@@ -1324,7 +1340,7 @@
     "hash": "3bdae79a11b59a04"
   },
   "spider-man-brand-new-day-v-o-2026": {
-    "id": "17",
+    "id": "18",
     "title": "Spider-Man: Brand New Day - V. O.",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
@@ -1340,8 +1356,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-24T04:35:28.000Z",
-    "changedAt": "2026-11-25T03:19:26.305Z",
-    "hash": "b4b91146029dadb2"
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "5f550776b5c8d236"
   },
   "ti-presento-i-fotter-2026": {
     "id": "2",
@@ -1358,11 +1374,12 @@
     "firstDate": "2026-11-26",
     "lastDate": "2026-12-02",
     "venues": [
-      "andromeda-river"
+      "andromeda-river",
+      "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "36f66bb6d84cf92d"
+    "changedAt": "2026-11-25T13:48:46.700Z",
+    "hash": "c01f1446aa8c8b36"
   },
   "un-tranquillo-funerale-di-famiglia-2026": {
     "id": "9",

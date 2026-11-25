@@ -306,5 +306,18 @@
   "eandatacosi:": {
     "data": {},
     "retryAt": "2026-11-25T19:18:13.673045+00:00"
+  },
+  "balcanica:": {
+    "data": {
+      "source": "MYmovies",
+      "url": "https://www.mymovies.it/film/2026/balcanica/",
+      "rating": 3.27,
+      "ratingCount": 16,
+      "reviewCount": 14,
+      "criticsRating": 3.04,
+      "releaseDateIT": "2026-10-08",
+      "checkedAt": "2026-11-25T13:48:39.175966+00:00"
+    },
+    "retryAt": "2026-11-26T13:48:39.175966+00:00"
   }
 }

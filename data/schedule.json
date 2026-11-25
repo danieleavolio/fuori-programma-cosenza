@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T05:38:02.613488+00:00",
+  "updatedAt": "2026-11-25T13:48:39.175586+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -318,7 +318,8 @@
       "duration": "1h 46m",
       "tags": [],
       "venueUrls": {
-        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/93844"
+        "andromeda-river": "https://zumpano.andromeda.18tickets.it/film/93844",
+        "cinema-teatro-italia": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580"
       },
       "genres": [
         "Commedia",
@@ -442,6 +443,90 @@
             }
           ],
           "venue": "andromeda-river"
+        },
+        {
+          "date": "26/11/2026",
+          "shows": [
+            {
+              "time": "17:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/49232459-984f-48b6-8fcc-a43ca80519b1#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/a0871f37-62fe-4a76-b43d-47a715695673#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/6566a240-92ce-465e-93e8-8839f47e12c4#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "27/11/2026",
+          "shows": [
+            {
+              "time": "17:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/53acbd5c-475a-423a-8adf-656319c07d2b#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/31b4871e-b53b-4a52-ab7a-421df76b2d12#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/ee118881-0380-407a-93b2-409fea2206ec#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "28/11/2026",
+          "shows": [
+            {
+              "time": "17:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/65576d25-29a4-4009-baae-c10c180272c3#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/5324e4be-6e72-4bf7-9ddf-d192358e48a3#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/9e13baf4-b833-484c-94f6-1c1592722471#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "29/11/2026",
+          "shows": [
+            {
+              "time": "17:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/461aece2-be7a-4690-83da-901ba62b9c03#theater-init"
+            },
+            {
+              "time": "19:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/ba104770-0079-45c0-9662-120e1f3398b8#theater-init"
+            },
+            {
+              "time": "21:30",
+              "room": "",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114580/3ec1c4e9-333e-4e98-a3c8-7eefe25566f0#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
         }
       ],
       "announcedDates": [],
@@ -775,7 +860,44 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "25/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "26/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "27/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "28/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "29/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "30/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "01/12/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "02/12/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
       "external": {
         "source": "MYmovies",
@@ -2504,6 +2626,57 @@
     },
     {
       "id": "15",
+      "title": "BALCANICA",
+      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114581/standard_b81c51cc-96d4-4af0-8c9a-1173af4a3207.jpg",
+      "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114581",
+      "duration": "1h 26m",
+      "tags": [
+        "FILM RASSEGNA"
+      ],
+      "venueUrls": {
+        "cinema-teatro-italia": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114581"
+      },
+      "genres": [],
+      "director": "Nicola Sorcinelli",
+      "year": "",
+      "language": "",
+      "cast": "",
+      "trailer": "",
+      "synopsis": "Greta è una giovane dottoressa che affronta la sua prima missione umanitaria sulla rotta balcanica. L'incontro con Jalil e Nazar, musicisti afghani in fuga verso l'Italia, scuote profondamente le sue certezze, spingendola a un gesto estremo che potrebbe cambiare per sempre il suo destino e quello dei due musicisti.",
+      "shows": [
+        {
+          "date": "30/11/2026",
+          "shows": [
+            {
+              "time": "18:30",
+              "room": "Sala FILM",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114581/2bac06a3-6ea6-43ef-8f46-a796b61bef97#theater-init"
+            },
+            {
+              "time": "20:30",
+              "room": "Sala FILM",
+              "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114581/65837501-a313-4b61-b802-75a81ce68be8#theater-init"
+            }
+          ],
+          "venue": "cinema-teatro-italia"
+        }
+      ],
+      "announcedDates": [],
+      "firstSeenAt": "2026-11-25T13:48:39.175586+00:00",
+      "external": {
+        "source": "MYmovies",
+        "url": "https://www.mymovies.it/film/2026/balcanica/",
+        "rating": 3.27,
+        "ratingCount": 16,
+        "reviewCount": 14,
+        "criticsRating": 3.04,
+        "releaseDateIT": "2026-10-08",
+        "checkedAt": "2026-11-25T13:48:39.175966+00:00"
+      },
+      "releaseDateIT": "2026-10-08"
+    },
+    {
+      "id": "16",
       "title": "LOOK BACK",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
       "url": "https://unical.cosenzacinema.18tickets.it/film/111644",
@@ -2605,11 +2778,44 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "26/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "27/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "28/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "29/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "30/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "01/12/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "02/12/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
-      "id": "16",
+      "id": "17",
       "title": "L'ESSERE AMATO (EL SER QUERIDO)",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111643/standard_a62c8167-f3d6-49cf-b896-242613ea6d39.jpg",
       "url": "https://unical.cosenzacinema.18tickets.it/film/111643",
@@ -2640,11 +2846,16 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "25/11/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
-      "id": "17",
+      "id": "18",
       "title": "SPIDER-MAN: BRAND NEW DAY - V. O.",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
       "url": "https://unical.cosenzacinema.18tickets.it/film/114085",
@@ -2714,7 +2925,7 @@
       "firstSeenAt": "2026-11-24T04:35:01.124406+00:00"
     },
     {
-      "id": "18",
+      "id": "19",
       "title": "DIO RIDE",
       "poster": "https://cdn.cinemagarden.net/dio%20ride.jpg",
       "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=26965",
@@ -2761,7 +2972,7 @@
       "releaseDateIT": "2026-10-29"
     },
     {
-      "id": "19",
+      "id": "20",
       "title": "E' ANDATA COSI'",
       "poster": "https://cdn.cinemagarden.net/E",
       "url": "https://www.anyticket.it/anyticketprod/Web/SchedaEvento.aspx?partner=GARD&IDSpettacolo=27182",
@@ -3076,16 +3287,6 @@
     }
   ],
   "warnings": [
-    {
-      "type": "announced-failed",
-      "venue": "cinema-teatro-italia",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
-    },
-    {
-      "type": "announced-failed",
-      "venue": "unical",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
-    },
     {
       "type": "coming-soon-failed",
       "venue": "garden",
