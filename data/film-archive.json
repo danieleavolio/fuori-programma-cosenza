@@ -144,7 +144,7 @@
     "hash": "ca6ab5855b488988"
   },
   "dio-ride-2026": {
-    "id": "19",
+    "id": "18",
     "title": "Dio Ride",
     "year": "2026",
     "poster": "https://cdn.cinemagarden.net/dio%20ride.jpg",
@@ -162,8 +162,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "480a4d94880a1a19"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "cdeb30fee48246e4"
   },
   "dio-ride-3": {
     "id": "3",
@@ -274,6 +274,19 @@
     "changedAt": "2026-11-04T15:39:52.000Z",
     "hash": "43ad7ae5e522a8fc"
   },
+  "e-andata-cosi-19": {
+    "id": "19",
+    "title": "E' Andata Cosi'",
+    "poster": "https://cdn.cinemagarden.net/E",
+    "firstDate": "2026-11-26",
+    "lastDate": "2026-11-29",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-25T03:19:26.305Z",
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "9d8c562576a998f4"
+  },
   "e-andata-cosi-20": {
     "id": "20",
     "title": "E' Andata Cosi'",
@@ -345,7 +358,7 @@
     "hash": "b5a94e0711cc5dc3"
   },
   "fatherland-2026": {
-    "id": "15",
+    "id": "20",
     "title": "Fatherland",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/112633/standard_f095efba-e7c1-4721-b5a3-73a36eff13cc.jpg",
@@ -361,8 +374,8 @@
       "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-19T22:52:59.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "7501f493294943f1"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "10e23f427b1cf1e3"
   },
   "george-michael-the-faith-tour-10": {
     "id": "10",
@@ -590,8 +603,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "6a42c235eb353442"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "569eae5b1b49f0a0"
   },
   "ice-cream-man-11": {
     "id": "11",
@@ -625,7 +638,7 @@
     "hash": "a552915aaebb6c86"
   },
   "il-fuoco-che-ti-porti-dentro-2026": {
-    "id": "5",
+    "id": "7",
     "title": "Il Fuoco Che Ti Porti Dentro",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
@@ -642,8 +655,8 @@
       "citrigno"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "523c666839536677"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "04b037e2c8676386"
   },
   "il-gatto-col-cappello-11": {
     "id": "11",
@@ -678,7 +691,7 @@
     "hash": "6da1344e155ae4fe"
   },
   "il-gatto-col-cappello-2026": {
-    "id": "8",
+    "id": "4",
     "title": "Il Gatto col Cappello",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/86057/standard_bf9d0048-e5db-450f-b081-eb7554035bc8.jpg",
@@ -700,8 +713,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "447ffbbf5dcc5cb7"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "77a3014926d665b7"
   },
   "il-gatto-col-cappello-3": {
     "id": "3",
@@ -747,7 +760,7 @@
     "hash": "6d5c785c319ba0bd"
   },
   "il-rumore-delle-cose-nuove-2026": {
-    "id": "4",
+    "id": "6",
     "title": "Il Rumore delle Cose Nuove",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/89849/standard_781ef62b-bb64-460e-952f-f681a6176ce4.jpg",
@@ -764,8 +777,8 @@
       "citrigno"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "7e215fdea541e148"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "ec9c86d5ca19d0ad"
   },
   "it-ends-4": {
     "id": "4",
@@ -940,7 +953,7 @@
     "hash": "263835073f2c5b5a"
   },
   "l-essere-amato-el-ser-querido-2026": {
-    "id": "17",
+    "id": "16",
     "title": "L'Essere Amato (El Ser Querido)",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111643/standard_a62c8167-f3d6-49cf-b896-242613ea6d39.jpg",
@@ -956,8 +969,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "32ac70c2cd7651b1"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "6332ea154507a008"
   },
   "la-notte-delle-fragole-2026": {
     "id": "10",
@@ -978,8 +991,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "0863c3b6933fe921"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "3f756e3f447ee286"
   },
   "la-storia-infinita-die-unendliche-geschichte-ried-15": {
     "id": "15",
@@ -1034,7 +1047,7 @@
     "hash": "0ad5605aa69c699c"
   },
   "look-back-2026": {
-    "id": "16",
+    "id": "15",
     "title": "Look Back",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
@@ -1050,8 +1063,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "e4c1e6f7e7f8a3ad"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "b4fdbbd1dc20c1cd"
   },
   "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
     "id": "12",
@@ -1132,7 +1145,7 @@
     "hash": "6fc28b222d98a8ce"
   },
   "scrooge-e-gli-spiriti-del-natale-2026": {
-    "id": "6",
+    "id": "5",
     "title": "Scrooge e gli Spiriti del Natale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
@@ -1151,8 +1164,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "5d107bf2e2ff4908"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "aed01dc338c26814"
   },
   "se-domani-non-torno-12": {
     "id": "12",
@@ -1205,8 +1218,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "fdc5e25778973d1b"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "c3298f5c6d6a22ed"
   },
   "se-domani-non-torno-4": {
     "id": "4",
@@ -1311,7 +1324,7 @@
     "hash": "3bdae79a11b59a04"
   },
   "spider-man-brand-new-day-v-o-2026": {
-    "id": "18",
+    "id": "17",
     "title": "Spider-Man: Brand New Day - V. O.",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
@@ -1327,8 +1340,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-24T04:35:28.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "5f550776b5c8d236"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "b4b91146029dadb2"
   },
   "ti-presento-i-fotter-2026": {
     "id": "2",
@@ -1390,7 +1403,7 @@
     "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
   },
   "un-weekend-artificiale-2026": {
-    "id": "7",
+    "id": "8",
     "title": "Un Weekend Artificiale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90344/standard_74acad47-c983-4eeb-97e2-1c881eedf2e4.jpeg",
@@ -1407,8 +1420,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-24T19:18:21.672Z",
-    "hash": "fc54e245f4f6045e"
+    "changedAt": "2026-11-25T03:19:26.305Z",
+    "hash": "4fa269a5a1c97711"
   },
   "wild-horse-nine-14": {
     "id": "14",
