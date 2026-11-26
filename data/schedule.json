@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T05:20:49.517962+00:00",
+  "updatedAt": "2026-11-26T06:46:54.875054+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -1407,7 +1407,7 @@
         "criticsRating": 3.23,
         "audienceRating": 3.42,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
+        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -1986,7 +1986,7 @@
         "criticsRating": 2.5,
         "audienceRating": 4.4,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
+        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -2066,7 +2066,7 @@
         "criticsRating": 1.33,
         "audienceRating": 1.89,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
+        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -2268,7 +2268,7 @@
         "criticsRating": 3.0,
         "audienceRating": 3.98,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
+        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -2389,7 +2389,7 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
         "releaseDateIT": "2026-12-16",
-        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
+        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
       },
       "releaseDateIT": "2026-12-16"
     },
@@ -2787,13 +2787,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/se-domani-non-torno/",
-        "rating": 3.22,
-        "ratingCount": 28,
+        "rating": 3.24,
+        "ratingCount": 29,
         "reviewCount": 12,
         "criticsRating": 2.82,
-        "audienceRating": 3.85,
+        "audienceRating": 3.89,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-25T05:38:02.613769+00:00"
+        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
       },
       "releaseDateIT": "2026-11-05"
     }
