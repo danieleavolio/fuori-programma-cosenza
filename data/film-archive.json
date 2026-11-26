@@ -323,6 +323,19 @@
     "changedAt": "2026-11-25T23:58:09.226Z",
     "hash": "d99fff6ec317af26"
   },
+  "e-andata-cosi-16": {
+    "id": "16",
+    "title": "E' Andata Cosi'",
+    "poster": "https://cdn.cinemagarden.net/E",
+    "firstDate": "2026-11-27",
+    "lastDate": "2026-11-30",
+    "venues": [
+      "garden"
+    ],
+    "firstSeenAt": "2026-11-26T18:04:08.689Z",
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "e8c155ab454055e2"
+  },
   "e-andata-cosi-19": {
     "id": "19",
     "title": "E' Andata Cosi'",
@@ -540,7 +553,7 @@
     "duration": "2h 15m"
   },
   "hexe-il-regno-delle-streghe-2026": {
-    "id": "3",
+    "id": "8",
     "title": "Hexe: Il Regno delle Streghe",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95592/standard_ebb0c6ff-debe-4e7e-b155-4c43680cc733.jpg",
@@ -562,8 +575,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "a04c1e3492e9a00d"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "62af41c425db5cff"
   },
   "hope-13": {
     "id": "13",
@@ -631,7 +644,7 @@
     "hash": "925e7a677ac0f7ca"
   },
   "hunger-games-l-alba-sulla-mietitura-2026": {
-    "id": "7",
+    "id": "5",
     "title": "Hunger Games l'Alba sulla Mietitura",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92557/standard_638e102f-e18a-423c-8d41-077b7a0a3223.jpg",
@@ -652,8 +665,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "166caba7c78b0281"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "3b937602002b3c62"
   },
   "ice-cream-man-11": {
     "id": "11",
@@ -687,7 +700,7 @@
     "hash": "a552915aaebb6c86"
   },
   "il-fuoco-che-ti-porti-dentro-2026": {
-    "id": "5",
+    "id": "7",
     "title": "Il Fuoco Che Ti Porti Dentro",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
@@ -704,8 +717,8 @@
       "citrigno"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "6d9f55847b6b0b66"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "15252a14c4b15495"
   },
   "il-gatto-col-cappello-11": {
     "id": "11",
@@ -1040,8 +1053,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "71ff33c67dd1fa01"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "d97306b6b0ca9100"
   },
   "la-storia-infinita-die-unendliche-geschichte-ried-15": {
     "id": "15",
@@ -1112,8 +1125,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "eb3f5ec4744f0fdc"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "33cbcf1982b25402"
   },
   "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
     "id": "6",
@@ -1133,8 +1146,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "44afc70deec63b3f"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "928d4bbb97412229"
   },
   "ragione-e-sentimento-18": {
     "id": "18",
@@ -1194,7 +1207,7 @@
     "hash": "6fc28b222d98a8ce"
   },
   "scrooge-e-gli-spiriti-del-natale-2026": {
-    "id": "9",
+    "id": "3",
     "title": "Scrooge e gli Spiriti del Natale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
@@ -1213,8 +1226,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "c4770f5dfb21c31c"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "c82fbed3d367ed15"
   },
   "se-domani-non-torno-12": {
     "id": "12",
@@ -1248,7 +1261,7 @@
     "hash": "c1a2ac5608ed21dd"
   },
   "se-domani-non-torno-2026": {
-    "id": "16",
+    "id": "15",
     "title": "Se Domani Non Torno",
     "year": "2026",
     "poster": "https://cdn.cinemagarden.net/se%20do.jpg",
@@ -1267,8 +1280,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "4de6896d55fedf50"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "f1921ac54ebca0c7"
   },
   "se-domani-non-torno-4": {
     "id": "4",
@@ -1411,8 +1424,8 @@
       "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "ebeeef66d86ef3b6"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "d08b4e1e6666839a"
   },
   "un-tranquillo-funerale-di-famiglia-2026": {
     "id": "9",
@@ -1453,7 +1466,7 @@
     "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
   },
   "un-weekend-artificiale-2026": {
-    "id": "8",
+    "id": "9",
     "title": "Un Weekend Artificiale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90344/standard_74acad47-c983-4eeb-97e2-1c881eedf2e4.jpeg",
@@ -1470,8 +1483,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "2d5a6df0a81401a5"
+    "changedAt": "2026-11-26T18:04:08.689Z",
+    "hash": "1a43f71652ad3b31"
   },
   "wild-horse-nine-14": {
     "id": "14",
