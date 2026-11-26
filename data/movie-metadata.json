@@ -260,18 +260,20 @@
       "rating": 3.0,
       "reviewCount": 1,
       "releaseDateIT": "2026-11-26",
-      "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+      "checkedAt": "2026-11-26T05:20:49.518264+00:00"
     },
-    "retryAt": "2026-11-26T03:19:19.183484+00:00"
+    "retryAt": "2026-11-27T05:20:49.518264+00:00"
   },
   "hexeilregnodellestreghe:2026": {
     "data": {
       "source": "MYmovies",
       "url": "https://www.mymovies.it/film/2026/hexe-il-regno-delle-streghe/",
+      "rating": 3.0,
+      "reviewCount": 1,
       "releaseDateIT": "2026-11-26",
-      "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+      "checkedAt": "2026-11-26T05:20:49.518264+00:00"
     },
-    "retryAt": "2026-11-26T03:19:19.183484+00:00"
+    "retryAt": "2026-11-27T05:20:49.518264+00:00"
   },
   "lanottedellefragole:2026": {
     "data": {
@@ -280,9 +282,9 @@
       "rating": 3.0,
       "reviewCount": 1,
       "releaseDateIT": "2026-11-26",
-      "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+      "checkedAt": "2026-11-26T05:20:49.518264+00:00"
     },
-    "retryAt": "2026-11-26T03:19:19.183484+00:00"
+    "retryAt": "2026-11-27T05:20:49.518264+00:00"
   },
   "lorenzolincredibileavventuradijovanotti:2026": {
     "data": {
@@ -291,9 +293,9 @@
       "rating": 3.0,
       "reviewCount": 1,
       "releaseDateIT": "2026-11-26",
-      "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+      "checkedAt": "2026-11-26T05:20:49.518264+00:00"
     },
-    "retryAt": "2026-11-26T03:19:19.183484+00:00"
+    "retryAt": "2026-11-27T05:20:49.518264+00:00"
   },
   "spidermanbrandnewdayvo:2026": {
     "data": {},

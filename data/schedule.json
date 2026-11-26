@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T23:57:57.665755+00:00",
+  "updatedAt": "2026-11-26T05:20:49.517962+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -558,7 +558,7 @@
         "rating": 3.0,
         "reviewCount": 1,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -845,8 +845,10 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hexe-il-regno-delle-streghe/",
+        "rating": 3.0,
+        "reviewCount": 1,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -1247,7 +1249,7 @@
         "rating": 3.0,
         "reviewCount": 1,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -1664,7 +1666,7 @@
         "rating": 3.0,
         "reviewCount": 1,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-25T03:19:19.183484+00:00"
+        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -2798,42 +2800,6 @@
   ],
   "comingSoon": [
     {
-      "title": "HEXE: IL REGNO DELLE STREGHE",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95592/standard_ebb0c6ff-debe-4e7e-b155-4c43680cc733.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/95592",
-      "venue": "andromeda-river",
-      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
-      "sourceName": "Andromeda River",
-      "localDate": "2026-11-26"
-    },
-    {
-      "title": "LA NOTTE DELLE FRAGOLE",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/94865/standard_466a4413-4611-4b64-ad15-120d3d53c28f.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/94865",
-      "venue": "andromeda-river",
-      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
-      "sourceName": "Andromeda River",
-      "localDate": "2026-11-26"
-    },
-    {
-      "title": "LORENZO - L'INCREDIBILE AVVENTURA DI JOVANOTTI",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93909/standard_9c14f7c1-f312-43e9-8e70-f1bdd2c7ea63.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/93909",
-      "venue": "andromeda-river",
-      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
-      "sourceName": "Andromeda River",
-      "localDate": "2026-11-26"
-    },
-    {
-      "title": "STORIE PARALLELE",
-      "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93875/standard_585b4d61-8233-4d65-a07b-2b9a6d717637.jpg",
-      "url": "https://zumpano.andromeda.18tickets.it/film/93875",
-      "venue": "andromeda-river",
-      "source": "https://zumpano.andromeda.18tickets.it/coming_soon",
-      "sourceName": "Andromeda River",
-      "localDate": "2026-11-26"
-    },
-    {
       "title": "VA' SENTIERO",
       "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90278/standard_3b1ef3c2-e48c-4102-a167-2f10ddff4de6.JPG",
       "url": "https://zumpano.andromeda.18tickets.it/film/90278",
@@ -3032,15 +2998,6 @@
       "localDate": "2026-12-16"
     },
     {
-      "title": "LA NOTTE DELLE FRAGOLE",
-      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/113986/standard_81d98372-b02a-40bf-9d3d-d8dac8cfe1d3.jpg",
-      "url": "https://citrigno.cosenzacinema.18tickets.it/film/113986",
-      "venue": "citrigno",
-      "source": "https://citrigno.cosenzacinema.18tickets.it/coming_soon",
-      "sourceName": "Citrigno",
-      "localDate": "2026-11-26"
-    },
-    {
       "title": "SPIDER-MAN: BRAND NEW DAY - V. O.",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
       "url": "https://citrigno.cosenzacinema.18tickets.it/film/114085",
@@ -3059,15 +3016,6 @@
       "localDate": "2026-12-15"
     },
     {
-      "title": "LA NOTTE DELLE FRAGOLE",
-      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/113986/standard_81d98372-b02a-40bf-9d3d-d8dac8cfe1d3.jpg",
-      "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/113986",
-      "venue": "cinema-teatro-italia",
-      "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/coming_soon",
-      "sourceName": "Cinema Teatro Italia A. Tieri",
-      "localDate": "2026-11-26"
-    },
-    {
       "title": "SPIDER-MAN: BRAND NEW DAY - V. O.",
       "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
       "url": "https://cinemateatroitalia.cosenzacinema.18tickets.it/film/114085",
@@ -3084,24 +3032,6 @@
       "source": "https://cinemateatroitalia.cosenzacinema.18tickets.it/coming_soon",
       "sourceName": "Cinema Teatro Italia A. Tieri",
       "localDate": "2026-12-15"
-    },
-    {
-      "title": "LA NOTTE DELLE FRAGOLE",
-      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/113986/standard_81d98372-b02a-40bf-9d3d-d8dac8cfe1d3.jpg",
-      "url": "https://unical.cosenzacinema.18tickets.it/film/113986",
-      "venue": "unical",
-      "source": "https://unical.cosenzacinema.18tickets.it/coming_soon",
-      "sourceName": "Unical Cinema",
-      "localDate": "2026-11-26"
-    },
-    {
-      "title": "LORENZO - L'INCREDIBILE AVVENTURA DI JOVANOTTI",
-      "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114118/standard_e3152c6d-01a8-471e-8ccb-084340d6eb5a.jpg",
-      "url": "https://unical.cosenzacinema.18tickets.it/film/114118",
-      "venue": "unical",
-      "source": "https://unical.cosenzacinema.18tickets.it/coming_soon",
-      "sourceName": "Unical Cinema",
-      "localDate": "2026-11-26"
     },
     {
       "title": "SPIDER-MAN: BRAND NEW DAY - V. O.",
