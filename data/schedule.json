@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27T05:16:41.258375+00:00",
+  "updatedAt": "2026-11-27T13:25:20.054801+00:00",
   "venues": [
     {
       "id": "andromeda-river",
@@ -7,7 +7,7 @@
       "location": "Zumpano",
       "source": "https://zumpano.andromeda.18tickets.it/",
       "sourceName": "18Tickets",
-      "status": "available"
+      "status": "stale"
     },
     {
       "id": "citrigno",
@@ -492,15 +492,33 @@
           "venue": "cinema-teatro-italia"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "27/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "28/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "29/11/2026",
+          "venue": "cinema-teatro-italia"
+        },
+        {
+          "date": "02/12/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ],
       "firstSeenAt": "2026-11-23T19:45:17.011401+00:00",
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/ti-presento-i-fotter/",
-        "rating": 3.0,
-        "reviewCount": 1,
+        "rating": 3.09,
+        "reviewCount": 4,
+        "criticsRating": 3.17,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -756,9 +774,10 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hexe-il-regno-delle-streghe/",
         "rating": 3.0,
-        "reviewCount": 1,
+        "reviewCount": 4,
+        "criticsRating": 3.0,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -1109,10 +1128,12 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/la-notte-delle-fragole/",
-        "rating": 3.0,
-        "reviewCount": 1,
+        "rating": 2.75,
+        "ratingCount": 6,
+        "reviewCount": 5,
+        "criticsRating": 2.5,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -1242,13 +1263,13 @@
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/il-fuoco-che-ti-porti-dentro/",
-        "rating": 3.55,
-        "ratingCount": 19,
+        "rating": 3.38,
+        "ratingCount": 20,
         "reviewCount": 16,
         "criticsRating": 3.23,
-        "audienceRating": 3.42,
+        "audienceRating": 2.92,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -1438,15 +1459,41 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "27/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "28/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "29/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "30/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "01/12/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "02/12/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-23T19:45:17.011401+00:00",
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/lorenzo-lincredibile-avventura-di-jovanotti/",
         "rating": 3.0,
+        "ratingCount": 2,
         "reviewCount": 1,
         "releaseDateIT": "2026-11-26",
-        "checkedAt": "2026-11-26T05:20:49.518264+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-26"
     },
@@ -1722,18 +1769,43 @@
           "venue": "garden"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "27/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "28/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "29/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "30/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "01/12/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "02/12/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00",
       "external": {
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/hunger-games-lalba-sulla-mietitura/",
-        "rating": 3.3,
-        "ratingCount": 9,
-        "reviewCount": 4,
+        "rating": 3.22,
+        "ratingCount": 12,
+        "reviewCount": 6,
         "criticsRating": 2.5,
-        "audienceRating": 4.4,
+        "audienceRating": 4.17,
         "releaseDateIT": "2026-11-19",
-        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-19"
     },
@@ -1802,7 +1874,7 @@
         "criticsRating": 1.33,
         "audienceRating": 1.89,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -2030,7 +2102,7 @@
         "criticsRating": 3.0,
         "audienceRating": 3.98,
         "releaseDateIT": "2026-11-12",
-        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-12"
     },
@@ -2151,7 +2223,7 @@
         "source": "MYmovies",
         "url": "https://www.mymovies.it/film/2026/dune-parte-tre/",
         "releaseDateIT": "2026-12-16",
-        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-12-16"
     },
@@ -2256,7 +2328,7 @@
         "criticsRating": 2.82,
         "audienceRating": 3.89,
         "releaseDateIT": "2026-11-05",
-        "checkedAt": "2026-11-26T06:46:54.875380+00:00"
+        "checkedAt": "2026-11-27T13:25:20.055103+00:00"
       },
       "releaseDateIT": "2026-11-05"
     },
@@ -2299,7 +2371,12 @@
           "venue": "cinema-teatro-italia"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "30/11/2026",
+          "venue": "cinema-teatro-italia"
+        }
+      ],
       "firstSeenAt": "2026-11-25T13:48:39.175586+00:00",
       "external": {
         "source": "MYmovies",
@@ -2400,7 +2477,32 @@
           "venue": "unical"
         }
       ],
-      "announcedDates": [],
+      "announcedDates": [
+        {
+          "date": "27/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "28/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "29/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "30/11/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "01/12/2026",
+          "venue": "unical"
+        },
+        {
+          "date": "02/12/2026",
+          "venue": "unical"
+        }
+      ],
       "firstSeenAt": "2026-11-17T02:44:49.876541+00:00"
     },
     {
@@ -2839,14 +2941,9 @@
   ],
   "warnings": [
     {
-      "type": "announced-failed",
-      "venue": "cinema-teatro-italia",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-cinema-italia-tieri/"
-    },
-    {
-      "type": "announced-failed",
-      "venue": "unical",
-      "message": "Nessuna data annunciata valida trovata su https://cosenzacinema.it/programmazione-sale-unical/"
+      "type": "source-failed",
+      "venue": "andromeda-river",
+      "message": "[Andromeda River] Errore di rete su https://zumpano.andromeda.18tickets.it/: il browser non ha risposto"
     },
     {
       "type": "coming-soon-failed",
