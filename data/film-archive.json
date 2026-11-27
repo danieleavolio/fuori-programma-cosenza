@@ -80,8 +80,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-10T11:11:32.000Z",
-    "hash": "a6bffc88f7e36616"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "8c5d440a310449a1"
   },
   "balcanica-15": {
     "id": "15",
@@ -100,7 +100,7 @@
     "hash": "8ebabe4539d09911"
   },
   "balcanica-2026": {
-    "id": "12",
+    "id": "13",
     "title": "Balcanica",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114581/standard_b81c51cc-96d4-4af0-8c9a-1173af4a3207.jpg",
@@ -116,8 +116,8 @@
       "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-25T23:58:09.226Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "f8d286690eeeb514"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "39472eb188ca672e"
   },
   "clayface-3": {
     "id": "3",
@@ -328,13 +328,13 @@
     "title": "E' Andata Cosi'",
     "poster": "https://cdn.cinemagarden.net/E",
     "firstDate": "2026-11-27",
-    "lastDate": "2026-11-30",
+    "lastDate": "2026-12-01",
     "venues": [
       "garden"
     ],
     "firstSeenAt": "2026-11-26T18:04:08.689Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "e8c155ab454055e2"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "16bd2b0b889d8b44"
   },
   "e-andata-cosi-19": {
     "id": "19",
@@ -553,7 +553,7 @@
     "duration": "2h 15m"
   },
   "hexe-il-regno-delle-streghe-2026": {
-    "id": "8",
+    "id": "3",
     "title": "Hexe: Il Regno delle Streghe",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/95592/standard_ebb0c6ff-debe-4e7e-b155-4c43680cc733.jpg",
@@ -575,8 +575,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "62af41c425db5cff"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "5927a60129b95aa9"
   },
   "hope-13": {
     "id": "13",
@@ -644,7 +644,7 @@
     "hash": "925e7a677ac0f7ca"
   },
   "hunger-games-l-alba-sulla-mietitura-2026": {
-    "id": "5",
+    "id": "7",
     "title": "Hunger Games l'Alba sulla Mietitura",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/92557/standard_638e102f-e18a-423c-8d41-077b7a0a3223.jpg",
@@ -665,8 +665,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "3b937602002b3c62"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "ebf25dd805037ea3"
   },
   "ice-cream-man-11": {
     "id": "11",
@@ -700,7 +700,7 @@
     "hash": "a552915aaebb6c86"
   },
   "il-fuoco-che-ti-porti-dentro-2026": {
-    "id": "7",
+    "id": "5",
     "title": "Il Fuoco Che Ti Porti Dentro",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/93974/standard_9d9069ee-c953-4a92-b635-67b60ac8c313.jpg",
@@ -717,8 +717,8 @@
       "citrigno"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "15252a14c4b15495"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "7c62838ea06c23e6"
   },
   "il-gatto-col-cappello-11": {
     "id": "11",
@@ -1053,8 +1053,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "d97306b6b0ca9100"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "81901a90130dc567"
   },
   "la-storia-infinita-die-unendliche-geschichte-ried-15": {
     "id": "15",
@@ -1109,7 +1109,7 @@
     "hash": "0ad5605aa69c699c"
   },
   "look-back-2026": {
-    "id": "13",
+    "id": "14",
     "title": "Look Back",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/111644/standard_ea3bb910-ddff-40d0-ba0a-d2a7f547d08f.jpg",
@@ -1125,8 +1125,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "33cbcf1982b25402"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "bbd71294c6aaac06"
   },
   "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
     "id": "6",
@@ -1146,8 +1146,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "928d4bbb97412229"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "8caa2bc7a05b8e0f"
   },
   "ragione-e-sentimento-18": {
     "id": "18",
@@ -1207,7 +1207,7 @@
     "hash": "6fc28b222d98a8ce"
   },
   "scrooge-e-gli-spiriti-del-natale-2026": {
-    "id": "3",
+    "id": "9",
     "title": "Scrooge e gli Spiriti del Natale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/88595/standard_572dcf22-2bf3-4bd1-b76b-d2b5d3a463ce.jpg",
@@ -1226,8 +1226,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "c82fbed3d367ed15"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "0fa8356b742177e3"
   },
   "se-domani-non-torno-12": {
     "id": "12",
@@ -1261,10 +1261,10 @@
     "hash": "c1a2ac5608ed21dd"
   },
   "se-domani-non-torno-2026": {
-    "id": "15",
+    "id": "12",
     "title": "Se Domani Non Torno",
     "year": "2026",
-    "poster": "https://cdn.cinemagarden.net/se%20do.jpg",
+    "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/107122/standard_15589e01-6711-4cea-9183-f250f1d72e5d.jpg",
     "director": "Paola Randi",
     "duration": "1h 46m",
     "genres": [
@@ -1272,7 +1272,7 @@
     ],
     "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
     "firstDate": "2026-11-05",
-    "lastDate": "2026-11-30",
+    "lastDate": "2026-12-01",
     "venues": [
       "andromeda-river",
       "citrigno",
@@ -1280,8 +1280,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "f1921ac54ebca0c7"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "e1eaa6b8dfafa944"
   },
   "se-domani-non-torno-4": {
     "id": "4",
@@ -1386,7 +1386,7 @@
     "hash": "3bdae79a11b59a04"
   },
   "spider-man-brand-new-day-v-o-2026": {
-    "id": "14",
+    "id": "15",
     "title": "Spider-Man: Brand New Day - V. O.",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/greenwich/uploads/film/playbill/114085/standard_dc22895a-9448-4de3-bc12-a295973ae399.jpg",
@@ -1402,8 +1402,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-24T04:35:28.000Z",
-    "changedAt": "2026-11-25T23:58:09.226Z",
-    "hash": "c8864f77b5561fc7"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "dd9dc74912e7f05a"
   },
   "ti-presento-i-fotter-2026": {
     "id": "2",
@@ -1424,8 +1424,8 @@
       "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "d08b4e1e6666839a"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "669360013654ac6e"
   },
   "un-tranquillo-funerale-di-famiglia-2026": {
     "id": "9",
@@ -1466,7 +1466,7 @@
     "synopsis": "Nel giorno del funerale del patriarca della famiglia Mancuso, i due figli Daria e Riccardo si ritrovano a fare i conti con rancori mai sopiti e segreti inconfessati. Quella che dovrebbe essere una solenne cerimonia di commiato si trasforma presto in un imprevedibile susseguirsi di rivelazioni inattese ed equivoci grotteschi, destinati a far emergere tutte le fragilità e le contraddizioni di una famiglia tutt'altro che perfetta."
   },
   "un-weekend-artificiale-2026": {
-    "id": "9",
+    "id": "8",
     "title": "Un Weekend Artificiale",
     "year": "2026",
     "poster": "https://cdn.18tickets.net/ccroma/uploads/film/playbill/90344/standard_74acad47-c983-4eeb-97e2-1c881eedf2e4.jpeg",
@@ -1483,8 +1483,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-26T18:04:08.689Z",
-    "hash": "1a43f71652ad3b31"
+    "changedAt": "2026-11-27T02:37:12.112Z",
+    "hash": "77b5f3f0a34ea213"
   },
   "wild-horse-nine-14": {
     "id": "14",
