@@ -328,13 +328,13 @@
     "title": "E' Andata Cosi'",
     "poster": "https://cdn.cinemagarden.net/E",
     "firstDate": "2026-11-27",
-    "lastDate": "2026-12-01",
+    "lastDate": "2026-12-02",
     "venues": [
       "garden"
     ],
     "firstSeenAt": "2026-11-26T18:04:08.689Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "16bd2b0b889d8b44"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "7723ce2b91097b17"
   },
   "e-andata-cosi-19": {
     "id": "19",
@@ -575,8 +575,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "5927a60129b95aa9"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "438149975d0bea73"
   },
   "hope-13": {
     "id": "13",
@@ -665,8 +665,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "ebf25dd805037ea3"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "8f76888b30935777"
   },
   "ice-cream-man-11": {
     "id": "11",
@@ -717,8 +717,8 @@
       "citrigno"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "7c62838ea06c23e6"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "5bfbfd74d3d359e4"
   },
   "il-gatto-col-cappello-11": {
     "id": "11",
@@ -1053,8 +1053,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "81901a90130dc567"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "a6eeb9afb3787cc0"
   },
   "la-storia-infinita-die-unendliche-geschichte-ried-15": {
     "id": "15",
@@ -1125,8 +1125,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-17T02:45:17.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "bbd71294c6aaac06"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "06cb0af30eb0dfb3"
   },
   "lorenzo-l-incredibile-avventura-di-jovanotti-2026": {
     "id": "6",
@@ -1146,8 +1146,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-27T13:26:04.070Z",
-    "hash": "8caa2bc7a05b8e0f"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "63c36ab362751a12"
   },
   "ragione-e-sentimento-18": {
     "id": "18",
@@ -1226,8 +1226,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "0fa8356b742177e3"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "7970c3de03b42aba"
   },
   "se-domani-non-torno-12": {
     "id": "12",
@@ -1272,7 +1272,7 @@
     ],
     "synopsis": "Giulia è la figlia ideale. Studia, disegna, sogna di vivere in una brughiera, colleziona scatole e regala sorrisi dolcissimi. Poi una sera scompare, inghiottita da una morte assurda: un femminicidio. Travolto dal dolore più atroce che un padre possa sopportare, Gino Cecchettin sceglie di non stare in silenzio, si interroga sugli esiti più efferati di una cultura patriarcale che ancora ci riguarda e trova le parole per ricordare chi era Giulia e cosa ha imparato da lei. In questa lunga lettera scritta insieme a Marco Franzoso, Gino ripercorre la sua storia di padre, i giorni della gioia e quelli del dolore. Commuove e invita a “costruire un’alleanza tra i sessi, anziché consolidare la prevaricazione di uno sull’altro”. Ci esorta ad ascoltare le giovani e i giovani del nostro Paese e a lavorare insieme per costruire relazioni fondate sull’empatia e sul rispetto reciproco.",
     "firstDate": "2026-11-05",
-    "lastDate": "2026-12-01",
+    "lastDate": "2026-12-02",
     "venues": [
       "andromeda-river",
       "citrigno",
@@ -1280,8 +1280,8 @@
       "unical"
     ],
     "firstSeenAt": "2026-11-05T10:37:14.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "e1eaa6b8dfafa944"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "5f33c8db7defbe6a"
   },
   "se-domani-non-torno-4": {
     "id": "4",
@@ -1424,8 +1424,8 @@
       "cinema-teatro-italia"
     ],
     "firstSeenAt": "2026-11-23T19:45:37.000Z",
-    "changedAt": "2026-11-27T13:26:04.070Z",
-    "hash": "669360013654ac6e"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "f13b2a416ad11515"
   },
   "un-tranquillo-funerale-di-famiglia-2026": {
     "id": "9",
@@ -1483,8 +1483,8 @@
       "garden"
     ],
     "firstSeenAt": "2026-11-10T11:11:32.000Z",
-    "changedAt": "2026-11-27T02:37:12.112Z",
-    "hash": "77b5f3f0a34ea213"
+    "changedAt": "2026-11-27T23:53:58.746Z",
+    "hash": "e0176a654bf41904"
   },
   "wild-horse-nine-14": {
     "id": "14",
